@@ -352,11 +352,13 @@ this.callback = function(){
     if(typeof this.data.team_id !== 'undefined'){
   
         this.app.get('teams',{id:this.data.team_id},function(data){
-            if(data.team_scenario !== null){
-                this.data.scenario = data.team_scenario.state || data.scenario.scenario;
-            }else{
+            // TJC 6/29/19 -- Don't use team_scenario is deprcated.
+            // Now using team activity log to playback scenario events
+            // if(data.team_scenario !== null){
+            //     this.data.scenario = data.team_scenario.state || data.scenario.scenario;
+            // }else{
                 this.data.scenario = data.scenario.scenario;
-            }
+            // }
         
             this.data.scenario = scenarioInit(this.data.scenario);
     
@@ -376,7 +378,6 @@ this.callback = function(){
                     tests:_.where(this.data.labs,{category:item}),
                     results:_.where(this.data.scenario.lab_results,{category:item})
             }}.bind(this));
-            debugger;
             readHash.call(this);
             window.onhashchange = readHash.bind(this);
         });
@@ -501,11 +502,27 @@ this.callback = function(){
             }
         }
     }
-    setInterval(function(){ 
-        if(typeof this.data.localVars !== 'undefined'){
-            if(this.data.hashParams.page !== 'form'){
-                this.app.get('teams',{id:this.data.team_id},updateScenario);
-            }
-        }
-    }.bind(this), 20000);
+
+    // TJC 6/29/19 -- Commented this out, replacing with new inteval below
+    // which calls team activity (notes, messages, and events)
+    // setInterval(function(){ 
+    //     if(typeof this.data.localVars !== 'undefined'){
+    //         if(this.data.hashParams.page !== 'form'){
+    //             this.app.get('teams',{id:this.data.team_id},updateScenario);
+    //         }
+    //     }
+    // }.bind(this), 20000);
+
+    this.data.last_activity_id = null;
+    var fetch_activity = function() {
+        this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
+            this.data.last_activity_id = activity.last_activity_id;
+            this.app.update();
+            fetch_messages.call(this,activity.messages);
+            fetch_notes.call(this,activity.notes);
+        });
+    }
+    fetch_activity.call(this);
+    setInterval(fetch_activity.bind(this), 10000);
+
 }

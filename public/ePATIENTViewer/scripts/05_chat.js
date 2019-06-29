@@ -1,6 +1,8 @@
 chat_init = function({team_id, team_name}={}) {
     this.data.chat = {};
-    this.data.chat.team_name = team_name
+    this.data.messages = [];
+    this.data.chat.team_name = team_name;
+    this.app.update();
     // Determine if message is me or someone else
     process_messages = function(messages) {
         for(var i=0;i<messages.length;i++) {
@@ -12,14 +14,10 @@ chat_init = function({team_id, team_name}={}) {
     }
     
     // Fetch All Messages
-    fetch_messages = function(scroll_down=true) {
-        this.app.get('msg_list',{team_id:team_id},function(messages){
-            this.data.messages=process_messages.call(this,messages);
-            this.app.update();
-            if (scroll_down) {
-                $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
-            }
-        })
+    fetch_messages = function(messages){
+        this.data.messages = this.data.messages.concat(process_messages.call(this,messages));
+        this.app.update();
+        $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
     }
     
     // Handle Message Posting
@@ -28,15 +26,14 @@ chat_init = function({team_id, team_name}={}) {
         if(e.which == 13) {
             var msg_text = $(this).val()
             $(this).val('')
-            debugger;
             myappcontext.app.post('msg_submit',{team_id:team_id,message:msg_text,unique_id:myappcontext.data.user.unique_id},function(response){
-                fetch_messages.call(myappcontext)
+                fetch_messages.call(myappcontext,[response])
             })
             e.preventDefault();
         }
     });
     
     // On Init, fetch all messages
-    fetch_messages.call(this)
-    setInterval(fetch_messages.bind(this), 10000);
+    // fetch_messages.call(this)
+    // setInterval(fetch_messages.bind(this), 10000);
 }

@@ -8,6 +8,7 @@ use App\TeamMember;
 use App\TeamMessage;
 use App\TeamNote;
 use App\TeamScenario;
+use App\TeamActivityLog;
 
 use Illuminate\Http\Request;
 
@@ -37,6 +38,38 @@ class TeamController extends Controller
         } else {
             return response('team_id not found', 404);
         }
+    }
+
+    public function activity(Request $request, $team_id,$last_activity_id=null)
+    {
+        if (!is_null($last_activity_id) && $last_activity_id != '') {
+            $ids = json_decode(base64_decode($last_activity_id));
+            $activity = TeamActivityLog::where('team_id',$team_id)
+                ->where('id','>',$ids->activity)
+                ->orderBy('id', 'asc')->with('user')->get();
+            $messages = TeamMessage::where('team_id',$team_id)
+                ->where('id','>',$ids->messages)
+                ->orderBy('id', 'asc')->with('user')->get();
+            $notes = TeamNote::where('team_id',$team_id)
+                ->where('id','>',$ids->notes)
+                ->orderBy('id', 'asc')->get();
+        } else {
+            $ids = (Object) ['activity'=>0,'messages'=>0,'notes'=>0];
+            $activity = TeamActivityLog::where('team_id',$team_id)->with('user')->orderBy('id', 'asc')->get();
+            $messages = TeamMessage::where('team_id',$team_id)->with('user')->orderBy('id', 'asc')->get();
+            $notes = TeamNote::where('team_id',$team_id)->orderBy('id', 'asc')->get();
+        }
+        $ids = [
+            'activity'=>!count($activity)?$ids->activity:$activity->last()->id,
+            'messages'=>!count($messages)?$ids->messages:$messages->last()->id,
+            'notes'=>!count($notes)?$ids->notes:$notes->last()->id
+        ];
+        return [
+            'last_activity_id' => base64_encode(json_encode($ids)),
+            'activity' => $activity,
+            'messages' => $messages,
+            'notes' => $notes,
+        ];
     }
 
     public function edit(Request $request, $team_id)

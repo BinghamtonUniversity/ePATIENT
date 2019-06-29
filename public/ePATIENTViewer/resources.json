@@ -1,5 +1,6 @@
 {
     "teams": "/teams{{#request.id}}/{{request.id}}{{/request.id}}",
+    "team_activity": "/teams/{{request.id}}/activity/{{request.last_activity_id}}",
     "msg_list": "/teams/{{request.team_id}}/messages",
     "msg_submit": "/teams/{{request.team_id}}/messages/{{request.unique_id}}",
     "myteams": "/users/{{user.unique_id}}/teams",

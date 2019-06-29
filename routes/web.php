@@ -29,6 +29,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     //** TEAMS **//
     $router->get('/teams',['uses'=>'TeamController@browse']);
     $router->get('/teams/{team_id}',['uses'=>'TeamController@read']);
+    $router->get('/teams/{team_id}/activity/{last_activity_id?}',['uses'=>'TeamController@activity']);
     $router->put('/teams/{team_id}',['uses'=>'TeamController@edit']);
     $router->post('/teams',['uses'=>'TeamController@add']);
     $router->delete('/teams/{team_id}',['uses'=>'TeamController@delete']);
