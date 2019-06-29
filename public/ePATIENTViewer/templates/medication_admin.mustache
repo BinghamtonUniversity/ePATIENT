@@ -1,0 +1,99 @@
+{{#scenario}}
+
+<h3><a href="#page=medication_admin"><i class="fa fa-pills text-muted"></i> Medication Administration</a></h3>
+<hr>
+{{#if !(hashParams.id )}}
+
+<span style="width:200px;float:right;">{{>filter}}</span><br><br>
+
+
+
+
+<!--Medication -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+    <h3 class="panel-title">Prescription</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover table-fixed sortable">
+            <thead>
+                <tr>
+                    <th>Medication</th>
+                    <th>Route</th>
+                    <th>Frequency</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#prescription_orders.order}}
+                {{#if approved == "Verified"}}
+                {{#if type !== "1"}}
+                <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
+                    <td>{{medication}}</td>
+                    <td>{{route}}</td>
+                    <td>{{frequency}}</td>
+                    <td data-id="{{ @index }}">
+                        {{#medication_admin}}
+                        <div style="padding-bottom:4px">Administered @ {{time}}
+                                            {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
+</div>
+                        {{/medication_admin}}
+                        <div data-action="administer" data-id="{{ @index }}" class="btn btn-success btn-xs"><i class="fa fa-syringe"></i> Administer</div>
+                    </td>
+                </tr>
+                {{/if}}
+                {{/if}}
+                {{/prescription_orders.order}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--Infusion -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Infusion</h3>
+  </div>
+  <div class="panel-body">
+<table class="table table-bordered table-striped table-hover table-fixed sortable">
+    <thead>
+        <tr>
+        <tr>
+            <th>Description</th>
+            <th>Rate</th>
+            <th>Frequency</th>
+                    <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#prescription_orders.order}}
+        {{#if approved == "Verified"}}
+        {{#if type == "1"}}
+        <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
+            <td>{{description}}</td>
+            <td>{{solution_rate}}</td>
+            <td>{{frequency}}</td>
+            <td data-id="{{ @index }}">
+                {{#medication_admin}}
+                <div style="padding-bottom:4px">Administered @ {{time}} 
+                    {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
+                </div>
+                {{/medication_admin}}
+                <div data-action="administer" data-id="{{ @index }}" class="btn btn-success btn-xs"><i class="fa fa-syringe"></i> Administer</div>
+            </td>
+            
+        </tr>
+        {{/if}}
+        {{/if}}
+        {{/prescription_orders.order}}
+    </tbody>
+</table>
+</div></div>
+{{else}}
+<div class="flow-container">
+    <div id="form" class="view well"> </div>
+
+
+
+</div>
+{{/if}}
+{{/scenario}}

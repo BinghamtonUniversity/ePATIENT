@@ -1,0 +1,108 @@
+{
+	"legend": "Genitourinary","enabled":true,
+	"fields": {
+		"General": {"enabled":true,
+			"fields": {
+				"Urinary Symptoms": {
+					"help": "Check all that apply",
+					"type": "check_collection",
+					"options": [
+						"None",
+						"Dysuria",
+						"Frequency",
+						"Urgency",
+						"Oliguria",
+						"Polyuria",
+						"Anuria",
+						"Incontinence, Stress",
+						"Incontinence, Complete",
+						"Hematuria",
+						"Nocturia",
+						"Urinary Retention",
+						"Diffculty Starting Stream",
+						"Hesitancy"
+					]
+				},
+				"Urine Color": {
+				    "default":"Not Visualized",
+					"options": [
+						"Yellow",
+						"Amber",
+						"Orange",
+						"Brown",
+						"Pink",
+						"Green",
+						"Blue"
+					]
+				},
+				"Urine Character": {
+				    "default":"Not Visualized",
+					"options": [
+						"Clear",
+						"Cloudy",
+						"Concentrated",
+						"Dilute",
+						"Sediment",
+						"Bloody",
+						"Clots",
+						"Frothy",
+						"Purulent"
+					]
+				},
+				"Urinary Elimination": {
+				    "default":"Not Visualized",
+					"options": [
+						"Voiding w/o Difficulty",
+						"Voiding with Difficulty",
+						"Indwelling Catheter",
+						"Inability to Void",
+						"Straight Catheter",
+						"Self Catheter",
+						"Condom Catheter",
+						"Surapubic Catheter",
+						"3-way Indwelling Catheter",
+						"Urostomy",
+						"Nephrostomy Tube",
+						"Dialysis"
+					]
+				},
+				"Amount": {},
+				"Catheter":{
+			        "name":"catheter_enabled",
+			        "type":"checkbox"
+			    },
+				"Catheter Details": {
+				    "legend":false,
+					"fields": {
+						"Catheter Size": {
+							"help": "Fr"
+						},
+						"Volume in Balloon": {
+							"help": "mL"
+						},
+						"Site Description": "textarea"
+					},"show":{"matches":{"name":"catheter_enabled","value":true}}
+				},
+				"Genitalia Exam": {
+					"fields": {
+						"genitalia_exam": {
+							"label": false,
+							"type": "textarea"
+						}
+					}
+				},
+				"SANE (Sexual Assault Nurse Examiners) Exam": {
+				    "name": "sane_exam",
+					"fields": {
+						"sane_exam": {
+							"label": false,
+							"type": "textarea"
+						}
+					}
+				}
+			}
+		},
+		"Notes": "textarea",
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+	}
+}

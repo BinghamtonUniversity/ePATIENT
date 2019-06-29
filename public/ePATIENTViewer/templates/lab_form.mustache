@@ -1,0 +1,51 @@
+{{#scenario}}
+
+
+<h3><a href="#page=labs"><i class="fa fa-flask text-muted"></i> Labs</a></h3>
+<hr>
+
+<a data-action="save" class="btn btn-success pull-right"><i class="fa fa-check"></i> Save</a>
+{{#admin}}
+{{#if hashParams.id }}
+<a data-action="delete" data-id="{{ hashParams.id }}" class="btn btn-danger"><i class="fa fa-check"></i> Delete</a>
+{{/if}}
+<br><br>
+<div class="admin-date">
+</div>
+{{/admin}}
+<br><br>
+{{#lab_types}}
+{{#tests.length}}
+<div class="panel panel-default" name="{{name}}">
+    <div class="panel-heading">
+    <h3 class="panel-title">{{name}}</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover table-fixed ">
+            <thead>
+                <tr>
+                    <th>Lab Test</th>
+                    <th>Value <span style="font-weight:300"></span></th>
+                    <th>Unit</th>
+                    {{!--<th>Abnormal Flag</th>--}}
+                    <th>Reference Range</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#tests}}
+                <tr class="filterable">
+                    <td>{{test}}</td>
+                    <td data-inline="{{test}}"></td>
+                    <td>{{unit}}</td>
+                    {{!--<td></td>--}}
+                    <td>{{#range}}{{range}}{{/range}}{{^range}}{{min}}-{{max}} {{unit}}{{/range}}</td>
+                </tr>
+            {{/tests}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/tests.length}}
+{{/lab_types}}
+
+{{/scenario}}

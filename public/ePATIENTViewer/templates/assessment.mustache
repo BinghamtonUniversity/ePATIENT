@@ -1,0 +1,61 @@
+{{#scenario}}
+
+{{#if !(hashParams.id )}}
+
+<h3><a href="#page=assessment"><i class="fa fa-thermometer-half text-muted"></i> Assessments</a></h3>
+<hr>
+
+{{#vitals_sections}}
+<!-- vital signs -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+    <h3 class="panel-title">{{label}}</h3>
+    </div>
+    <div class="panel-body">
+    <a href="#page=form&form={{key}}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
+    <span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+                {{#display}}
+                <th>{{label}}</th>
+                {{/display}}
+                {{#if options.admin == 'true'}}<th style="width:80px"></th>{{/if}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#_.extend([],scenario[key].item).reverse():t}}
+            <tr class="filterable" data-href="#page=assessment&form={{key}}&id={{ @index }}">
+                {{#display}}<td>{{prepend}}{{#calculation}}{{{calculation(_.extend([],scenario[key].item).reverse()[t])}}}{{/calculation}}  {{^sub}}{{_.extend([],scenario[key].item).reverse()[t][name]}}{{/sub}}{{#sub}}{{_.extend([],scenario[key].item).reverse()[t][name][sub]}}{{/sub}}{{append}}</td>{{/display}}
+                {{#if options.admin == 'true'}}<td><a href="#page=form&form={{key}}&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a> 
+                <div data-action="delete" data-form="{{key}}" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>
+                </td>{{/if}}
+            </tr>
+            {{/scenario[key].item}}
+        </tbody>
+    </table>
+    </div>
+</div>
+{{/vitals_sections}}
+
+
+
+
+
+{{else}}
+    <div class="btn-group pull-right btn-group-lg" style="margin-top:-10px" role="group">
+
+        {{#if hashParams.id>0}}<a href="#page=assessment&form={{hashParams.form}}&id={{ hashParams.id -1 }}" class="btn btn-default btn-lg" title="Previous"><i class="fa fa-chevron-left"></i><div style="font-size:12px">Previous</div></a>{{/if}}
+        <a href="#page=form&form={{hashParams.form}}&id={{ hashParams.id}}" class="btn btn-info btn-lg" title="Edit"><i class="fa fa-edit"></i><div style="font-size:12px">Edit</div></a>
+        {{#if hashParams.id<(scenario[hashParams.form].item.length-1)}}<a href="#page=assessment&form={{hashParams.form}}&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
+
+    </div>
+
+<h3><a href="#page=assessment"><i class="fa fa-thermometer-half text-muted"></i> Assessment - {{vital_form}} </a></h3>
+<hr>
+<div class="flow-container">
+    <div id="form" class="view well"> </div>
+
+</div>
+{{/if}}
+{{/scenario}}

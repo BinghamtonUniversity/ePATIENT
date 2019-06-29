@@ -1,0 +1,23 @@
+{"legend": "Skin Assessment","enabled":true, "fields":{
+	"General": {"enabled":true,"fields":{
+		"skin": { "type": "check_collection", "label": false,
+			"options": ["Warm", "Dry", "Intact", "Skin color appropriate for ethnicity", "Yellow", "Dusky", "Pale", "Ruddy", "Cool", "Diaphoretic", "Lesion(s) noted", "Wound(s) noted", "Pressure ulcers noted"]
+		},
+		"Lesions": { 
+			"type": "textarea",
+			"help": "If lesions were noted, document characteristics including color, consistency, measurements and location."
+		},
+		"Wounds": {
+			"type": "textarea",
+			"help": "If wounds were noted, document REEDA, COCA, and location."
+		},
+		"Pressure Ulcers": {
+			"type": "textarea",
+			"help": "If pressure ulcers were noted, document stage, measurements, and location."
+		},
+		"Other": {
+			"type": "textarea"
+		}
+	}},
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+}}

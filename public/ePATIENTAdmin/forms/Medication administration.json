@@ -1,0 +1,29 @@
+{
+	"legend": "Infusion Meds",
+	"fields": {
+		"order": {
+			"multiple": {
+				"duplicate": true
+			},
+			"label": false,
+			"fields": {	
+        		"Date/time": {"type":"date"},
+                "Author": {},
+                "Provider": {},
+                "Description": {"type":"textarea"},
+                "Solution": {"type":"select","options":["Not the Precipitate","Other thing in this list"]},
+                "Solution Volume": {},
+                "Solution Rate": {},
+                "Number of bags": {},
+                "Additive 1": {},
+                "Addition 1 Quantity": {},
+                "Additive 2": {},
+                "Addition 2 Quantity": {},
+                "Order Details": {},
+                "Frequency": {},
+        		"Start on": {"name":"start_time", "type":"date"},
+        		"End on": {"name":"end_time", "type":"date"}
+        	}
+		}
+	}
+}

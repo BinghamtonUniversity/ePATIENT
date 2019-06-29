@@ -1,0 +1,11 @@
+{
+  "fields": [
+    {"label":"Date/time","type":"date"},
+    {"label":"Author"},
+    {"label":"Problem", "type":"textarea"},
+    {"label":"Status","choices":["Active","Inactive", "Resolved", "Removed"],"type":"select"},
+    {"label":"Date of Onset", "name":"onset", "type":"date"},
+    {"label":"Provider"},
+    {"label":"Priority","choices":["High","Medium","Low"],"type":"select"}
+  ]
+}

@@ -1,0 +1,26 @@
+{"legend": "Intake and Output",
+				    "enabled":true, "fields":{
+		"Shift": {"label":false, "type": "custom_radio", "options": ["Day", "Evening", "Night"]},
+		"Date":"",
+		"Intake": {"flatten":false,
+				    "enabled":true,"fields": {
+			"Oral": {"help": "in mLs"},
+			"IV": {"help": "in mLs"},
+			"Blood": {"help": "in mLs"},
+			"Other": {"help": "in mLs"},
+			"Total Input": {}
+		}},
+		"Output": {
+				    "enabled":true,"fields": {
+			"Urine": {"help": "in mLs"},
+			"Stool (liquid)": {"name": "stool","help": "in mLs"},
+			"Blood": {"help": "in mLs"},
+			"Emesis": {"help": "in mLs"},
+			"Gastric Tube": {"help": "in mLs"},
+			"Drainage Tubes": {"help": "in mLs"},
+			"Other": {},
+			"Total Output": {}
+		}},
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+	}
+}

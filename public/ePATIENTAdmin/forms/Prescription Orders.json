@@ -1,0 +1,26 @@
+{
+	"fields": {
+		"order": {
+			"multiple": {
+				"duplicate": true
+			},
+			"label": false,
+			"fields": {	
+        		"Date/time": {"type":"date"},
+                "Author": {},
+                "Provider": {},
+                "Medication": {},
+                "Route": {},
+                "Frequency": {},
+                "Directions": {},
+                "Dispense Quantity": {},
+                "Days Supply": {},
+                "Dispense as Written": {"type":"checkbox"},
+                "Med": {"type":"custom_radio","options":["Home Med", "New Scheduled Med", "New PRN Med"]},
+        		"Start on": {"name":"start_time", "type":"date"},
+        		"End on": {"name":"end_time", "type":"date"},
+                "Refills": {}
+        	}
+		}
+	}
+}

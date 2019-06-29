@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+<div class="col-sm-3 col-md-2 sidebar" style="height:800px;margin-top:-50px">
+    <div style="color:#fff;background:#358;margin:-10px -20px 0;padding:5px 20px"><h3><i class="fa fa-address-book"></i> ePATIENT</h3>
+    ADMIN
+    </div>
+    {{>menu}}
+</div>
+<div style="margin-left:200px;margin-top:10px">
+    <div style="margin:0px">
+        <div style="text-transform:uppercase;z-index:1;height:50px;padding:15px;background:#f8f8f8;border-bottom:solid 1px #e8e8e8;position: fixed;width: 100%;top: 0;left:200px">
+            {{hashParams.page}} - {{hashParams.resource}}
+        </div>
+        <div style="margin:50px -15px 0px">{{>.hashParams.page}}</div>
+    </div>
+</div>

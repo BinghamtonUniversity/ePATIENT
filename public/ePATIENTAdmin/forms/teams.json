@@ -1,0 +1,19 @@
+{
+  "fields": [
+    {
+      "label": "Name",
+      "name": "name"
+    },
+    {
+      "label": "Scenario",
+      "name": "scenario_id",
+      "type": "select",
+      "options": []
+    },
+    {
+      "type": "hidden",
+      "label": "ID",
+      "name": "id"
+    }
+  ]
+}

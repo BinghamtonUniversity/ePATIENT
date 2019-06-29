@@ -1,0 +1,13 @@
+{
+  "fields": [
+    {
+      "label": "Name",
+      "name": "name"
+    },
+    {
+      "type": "hidden",
+      "label": "ID",
+      "name": "id"
+    }
+  ]
+}

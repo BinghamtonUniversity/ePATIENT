@@ -1,0 +1,19 @@
+{
+  "fields": [
+    {
+      "type": "select",
+      "label": "User",
+      "name": "user_id",
+      "label_key": "email",
+      "value_key": "id"
+    },
+    {
+      "type": "select",
+      "label": "Role",
+      "name": "role_id",
+      "label_key": "name",
+      "value_key": "id",
+      "choices":"roles"
+    }
+  ]
+}

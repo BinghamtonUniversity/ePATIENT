@@ -1,0 +1,10 @@
+<ul class="nav nav-sidebar">
+    {{#apps_pages}}
+        <li><a {{^slug}}data-toggle="collapse" href="#group{{ id }}" {{/slug}} {{#slug}}href="#page={{slug}}{{#resource}}&resource={{resource}}{{/resource}}"{{/slug}}><i class="fa fa-{{#icon}}{{icon}}{{/icon}}{{^icon}}file{{/icon}} fa-fw"></i>&nbsp; {{ name }}</a></li>
+        <ul class="collapse"  id="group{{ id }}">
+        {{#pages}}
+                <li><a href="#page={{slug}}{{#resource}}&resource={{resource}}{{/resource}}"><i class="fa fa-{{#icon}}{{icon}}{{/icon}}{{^icon}}file{{/icon}} fa-fw"></i>&nbsp; {{ name }}</a></li>
+        {{/pages}}
+        </ul>
+    {{/apps_pages}}
+  </ul>

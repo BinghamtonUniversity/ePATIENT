@@ -1,0 +1,222 @@
+{{#scenario}}
+
+
+<h3><a href="#page=overview"><i class="fa fa-tachometer-alt text-muted"></i> Overview</a></h3>
+<hr>
+    {{#summary_description}}<h3 class="panel-title">Report to learner</h3>
+<p>{{summary_description}}</p>{{/summary_description}}
+<span style="width:200px;float:right;">{{>filter}}</span><br><br>
+
+<!--Alerts -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Alerts</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Author</th>
+                <th>Alert Type</th>
+                <th>Alert Status</th>
+                <th>Subject</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#alerts.alert}}
+            <tr class="filterable" data-href="#page=alerts&form=alerts&id={{ @index }}">
+                <td>{{ customRender(date) }}</td>
+                <td>{{author}}</td>
+                <td>{{type}}</td>
+                <td>{{status}}</td>
+                <td>{{subject}}</td>
+                <td><a href="#page=form&form=alerts&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
+            </tr>
+            {{/alerts.alert}}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<!--Problems -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Problems</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Date of Onset</th>
+                <th>Provider</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#problems.problem}}
+            <tr class="filterable" data-href="#page=problems&form=problems&id={{ @index }}">
+                <td>{{priority}}</td>
+                <td>{{status}}</td>
+                <td>{{problem}}</td>
+                <td>{{onset}}</td>
+                <td>{{provider}}</td>
+                <td><a href="#page=form&form=problems&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
+            </tr>
+            {{/problems.problem}}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<!--Vitals -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Vitals</h3>
+  </div>
+  <div class="panel-body">
+  </div>
+</div>
+
+{{#vitals_sections}}
+<!-- vital signs -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+    <h3 class="panel-title">{{label}}</h3>
+    </div>
+    <div class="panel-body">
+
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+                {{#display}}
+                <th>{{label}}</th>
+                {{/display}}
+                {{#if options.admin == 'true'}}<th style="width:80px"></th>{{/if}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#_.extend([],scenario[key].item).reverse():t}}
+            <tr class="filterable" data-href="#page=assessment&form={{key}}&id={{ @index }}">
+                {{#display}}<td>{{prepend}}{{#calculation}}{{{calculation(_.extend([],scenario[key].item).reverse()[t])}}}{{/calculation}}  {{^sub}}{{_.extend([],scenario[key].item).reverse()[t][name]}}{{/sub}}{{#sub}}{{_.extend([],scenario[key].item).reverse()[t][name][sub]}}{{/sub}}{{append}}</td>{{/display}}
+                {{#if options.admin == 'true'}}<td><a href="#page=form&form={{key}}&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a> 
+                <div data-action="delete" data-form="{{key}}" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>
+                </td>{{/if}}
+            </tr>
+            {{/scenario[key].item}}
+        </tbody>
+    </table>
+    </div>
+</div>
+{{/vitals_sections}}
+
+
+<!--Diagnostics -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Diagnostic Tests</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Date</th>
+                <th>Note</th>
+                <th>Upload</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#diagnostics}}
+            <tr class="filterable" data-href="#page=diagnostics&form=diagnostics&id={{ @index }}">
+                <td>{{author}}</td>
+                <td>{{date}}</td>
+                <td>{{note}}</td>
+                <td><img src="{{upload}}"></td>
+                <td><a href="#page=form&form=diagnostics&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
+            </tr>
+            {{/diagnostics}}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<!--Labs -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Labs</h3>
+  </div>
+  <div class="panel-body">
+  </div>
+</div>
+
+<!--Orders -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Orders</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Order Item</th>
+                <th>Frequency</th>
+                <th>Start on date/time</th>
+                <th>End on date/time</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#orders.order}}
+            <tr class="filterable" data-href="#page=orders&form=orders&id={{ @index }}">
+                <td>{{category}}</td>
+                <td>{{order_item}}</td>
+                <td>{{frequency}}</td>
+                <td>{{start_time}}</td>
+                <td>{{end_time}}</td>
+                <td><a href="#page=form&form=orders&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
+            </tr>
+            {{/orders.order}}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+<!--Prescription Orders -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Prescription Orders</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered table-striped table-hover table-fixed sortable">
+        <thead>
+            <tr>
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Author</th>
+                <th>Provider</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#prescription_orders.order}}
+            <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
+                <td>{{#if type == "1"}}Prescription{{else}}Infusion Meds{{/if}}</td>
+                <td>{{date}}</td>
+                <td>{{author}}</td>
+            <td>{{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).last_name}}</td>
+                <td><a href="#page=form&form=prescription_orders&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
+            </tr>
+            {{/prescription_orders.order}}
+        </tbody>
+    </table>
+  </div>
+</div>
+{{/scenario}}

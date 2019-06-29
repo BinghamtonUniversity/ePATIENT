@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+
+<div class="col-sm-3 col-md-2 sidebar {{#admin}}config{{/admin}}" style="margin-top:-50px">
+    <div style="color:#fff;background:#358;{{#admin}}background:red;{{/admin}}margin:-10px -20px 0;padding:5px 20px;position: fixed;width: 200px;z-index: 1;"><a href="?" style="color:#fff"><h3 style="color:#fff"><i class="fa fa-address-book"></i> ePATIENT</h3></a>
+    
+    {{#if (team_id && admin)}}<span class="label label-default">TEAM Configuration</span><div>{{chat.team_name}}</div>{{/if}}
+    {{#scenario_id}}{{^local}}<span class="label label-primary">Scenario Configuration</span>{{/local}}{{/scenario_id}}
+    {{#scenario_id}}{{#local}}<span class="label label-primary clear-local">Demo Scenario</span>{{/local}}{{/scenario_id}}
+    <div style="white-space: nowrap;overflow: hidden;">{{name}}</div>
+    </div>
+     
+     {{#if (team_id || scenario_id)}}{{>menu}}{{/if}}
+</div>
+<div class="main-container {{^admin}}live{{/admin}}">
+    <div style="margin:-15px">
+        {{#if (team_id || scenario_id)}}
+        <div class="patient-container">
+            {{>patient}}
+        </div>
+        {{/if}}
+        <!-- not strictly mustache-->
+        <div style="margin:20px">
+        {{#if (team_id || scenario_id)}}{{>.hashParams.page}} {{^hashParams.page}}{{>overview}}{{/hashParams.page}}{{/if}}        
+        {{#if !(team_id || scenario_id)}}
+                {{^scenario_id}}
+
+        <div class="list-group">
+        {{#myteams}}
+          <a href="?team={{id}}" class="list-group-item">{{name}}:{{scenario.name}}</a>
+        {{/myteams}} 
+        </div>
+        {{/scenario_id}}
+
+        {{/if}}</div>
+    </div>
+</div>
+{{#if (team_id || local)}}{{>chat}}{{>advisor_notes}}{{/if}}

@@ -1,0 +1,41 @@
+<div class="row" id="chat-window">
+    <div class="col-sm-offset-8 col-sm-4">
+        <div class="panel panel-default chat-panel">
+            <div class="panel-heading">
+                <h3 class="panel-title collapsed" data-toggle="collapse" href="#chat_collapse_1">
+                    <i class="fa fa-minus pull-right"></i>
+                    {{chat.team_name}} Team Chat
+                </h3>
+            </div>
+            <div class="panel-body panel-collapse collapse" id="chat_collapse_1">
+                <div class="chat-messages">
+                {{#messages}}
+                    {{#me}}
+                        <div class="alert alert-info">
+                            <div class="badge pull-right">{{created_at}}</div>
+                            <a href="mailto:{{user.email}}">{{user.first_name}} {{user.last_name}}</a>:
+                            {{message}}
+                        </div>
+                    {{/me}}
+                    {{^me}}
+                        <div class="alert alert-success">
+                            <div class="badge pull-right">{{created_at}}</div>
+                            <a href="mailto:{{user.email}}">{{user.first_name}} {{user.last_name}}</a>:
+                            {{message}}
+                        </div>
+                    {{/me}}
+                    
+                {{/messages}}
+                {{^messages}}
+                    <div class="alert alert-warning">
+                        No team messages yet.  Be the first to send a message!
+                    </div>
+                {{/messages}}
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control chat-textarea" rows="2" id="message" placeholder="Send message ..."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{"legend": "IV", "fields":{
+
+	"General": {"fields":{
+		"IV Access?": { "type": "custom_radio",
+			"options": ["Yes", "No"]
+		}
+	}},
+	"IV Site": {"multiple":{"duplicate": true},"fields":{
+		"Type": { "type": "radio",
+			"options": ["Saline Lock", "Peripheral IV", "PICC", "Central Venous Catheter", "Port-a-Cath"]
+		},
+		"Location": { "type": "radio_collection",
+			"options": ["Yes", "No"],
+			"labels": [{"name":"Hand"}, {"name":"Forearm"}, {"name":"Antecube"}, {"name":"Upper arm"}, {"name":"Femoral"}, {"name":"Saphenous"}, {"name":"Subclavian"}, {"name":"Jugular"}]
+		},
+		"Assessment": { "type": "check_collection",
+			"options": [" Dressing clean and dry", "Assessed every hour", "Infusing well", "Errythema", "Edema", "Drainage", "Eccymotic", "Necrotic", "Discontinued", "Physician notified", "Warm compress", "Cold compress", "Dressing changed", "Tubing changed", "New site"]
+		},
+		"If new site, document catheter gauge and time initiated.":{}
+	}},
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+}}

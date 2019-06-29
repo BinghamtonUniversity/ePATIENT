@@ -1,0 +1,15 @@
+{
+	"fields": [
+		{"label": "Test","name":"test"},
+		{"label": "Full name","name":"label"},
+		{"label": "Unit","name":"unit"},
+		{"label": "Abnormal Calculation","name":"ab_calc","options":["None","Range","Other"],"type":"select"},
+		{"label": "Min","name":"min","show":{"matches":{"name":"ab_calc","value":"Range"}}},
+		{"label": "Max","name":"max","show":{"matches":{"name":"ab_calc","value":"Range"}}},
+		{"label": "Reference Range","name":"range","show":{"not_matches":{"name":"ab_calc","value":"None"}}},
+		{"label": "Category","name":"category","options":
+		    ["other","abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"]
+		,"type":"select"},
+        {"name": "id","type": "hidden"}
+	]
+}

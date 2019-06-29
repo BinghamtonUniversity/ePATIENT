@@ -1,0 +1,20 @@
+{
+  "fields": [
+    {
+      "type": "checkbox",
+      "label": "Admin",
+      "container": "span",
+      "name": "admin"
+    },
+    {
+      "type": "checkbox",
+      "label": "Local",
+      "container": "span",
+      "name": "local"
+    },
+    {
+      "label": "Scenario",
+      "name": "scenario_id"
+    }
+  ]
+}

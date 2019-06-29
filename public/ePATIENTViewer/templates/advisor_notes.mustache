@@ -1,0 +1,32 @@
+<!-- Advisor Notes Modal -->
+<div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="notes-modal-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="notes-modal-label">{{team_name}} Team Notes</h4>
+      </div>
+      <div class="modal-body">
+        {{#notes}}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="pull-right badge">{{created_at}}</div>
+                <h3 class="panel-title">
+                    {{#isnew}}
+                        <span class="label label-primary">New!</span>
+                    {{/isnew}}
+                    {{user.first_name}} {{user.last_name}}
+                </h3>
+            </div>
+            <div class="panel-body">
+                {{note}}
+            </div>
+        </div>
+        {{/notes}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

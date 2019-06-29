@@ -1,0 +1,25 @@
+{
+  "fields": [
+    {
+      "label": "First Name",
+      "name": "first_name"
+    },
+    {
+      "label": "Last Name",
+      "name": "last_name"
+    },
+    {
+      "label": "Email",
+      "name": "email"
+    },
+    {
+      "label": "ID",
+      "name": "unique_id"
+    },
+    {
+      "type": "hidden",
+      "label": "ID",
+      "name": "id"
+    }
+  ]
+}

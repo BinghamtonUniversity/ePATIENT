@@ -1,0 +1,28 @@
+{"legend": "Pain", "enabled":true,"fields":{
+	"General": {"enabled":true,"fields":{
+		"Site": {},
+		"Quantity": {"min": 0, "max": 10, "type": "scale", "low": "No Pain", "high": "Worst Pain Imaginable"},
+		"Aggravating Factors": { "type": "check_collection",
+			"options": ["Movement","Coughing","Breathing","Eating"]
+		},
+		"Alleviating Factors": { "type": "check_collection",
+			"options": ["Rest", "Compression", "Medication", "Ice", "Immobility"]
+		},
+		"Quality Of Pain": { "type": "check_collection",
+			"options": ["Aching", "Throbbing", "Dull", "Stabbing", "Burning", "Piercing", "Sore", "Crushing"]
+		},
+		"Periodicity": { "type": "radio",
+			"options": ["Constant", "Intermittent "]
+		},
+		"Duration": {},
+		"Classification": { "type": "custom_radio",
+			"options": ["Chronic", "Acute"]
+		},
+		"Radiation": { "type": "custom_radio",
+			"options": ["Yes", "No"]
+		},
+		"Notes": "textarea",
+		"Reassessment": {"min": 0, "max": 10, "type": "scale", "low": "No Pain", "high": "Worst Pain Imaginable"}
+	}},
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+}}

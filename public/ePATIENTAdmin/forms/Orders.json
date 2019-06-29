@@ -1,0 +1,32 @@
+{
+	"legend": "Orders",
+	"fields": {
+		"order": {
+			"multiple": {
+				"duplicate": true
+			},
+			"label": false,
+			"fields": {	
+        	    "Category": {"options":[
+            	    "Laboratory",
+                    "Diagnostics",
+                    "Dietetics",
+                    "Consult",
+                    "Procedure",
+                    "Supply/Device",
+                    "Care",
+                    "Specialty Department",
+                    "Screening/Measurements",
+                    "Therapy"
+        	    ]},
+        		"Date/time": {"type":"date"},
+        		"Author": {},
+        		"Order Item ": {},
+        		"Order Details": {"type":"textarea"},
+        		"Frequency": {},
+        		"Start on": {"name":"start_time", "type":"date"},
+        		"End on": {"name":"end_time", "type":"date"}
+        	}
+		}
+	}
+}

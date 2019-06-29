@@ -1,0 +1,11 @@
+{
+	"fields": [
+		{"label": "First Name","name":"first_name"},
+		{"label": "Last Name","name":"last_name"},
+		{"label": "Address","name":"address"},
+		{"label": "Phone","name":"phone"},
+		{"label": "DEA","name":"dea"},
+		{"label": "NPI","name":"npi"},
+        {"name": "id","type": "hidden"} 
+	]
+}

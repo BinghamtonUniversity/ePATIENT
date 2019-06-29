@@ -1,0 +1,39 @@
+{{#scenario}}
+
+<h3><a href="#page=medication_profile"><i class="fa fa-file-prescription text-muted"></i> Medication Profile</a></h3>
+<hr>
+{{#if !(hashParams.id )}}
+
+<span style="width:200px;float:right;">{{>filter}}</span><br><br>
+<table class="table table-bordered table-striped table-hover table-fixed sortable">
+    <thead>
+        <tr>
+        <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Author</th>
+            <th>Provider</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#prescription_orders.order}}
+        {{#if approved == "Verified"}}
+        <tr class="filterable" data-href="#page=medication_profile&form=prescription_orders&id={{ @index }}">
+            <td>{{#if type == "1"}}Prescription{{else}}Infusion Meds{{/if}}</td>
+            <td>{{ customRender(date) }}</td>
+            <td>{{author}}</td>
+            <td>{{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).last_name}}</td>
+        </tr>
+        {{/if}}
+        {{/prescription_orders.order}}
+    </tbody>
+</table>
+{{else}}
+<div class="flow-container">
+    <div id="form" class="view well"> </div>
+
+
+
+</div>
+{{/if}}
+{{/scenario}}

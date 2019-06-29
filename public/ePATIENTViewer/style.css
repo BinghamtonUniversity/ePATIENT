@@ -1,0 +1,247 @@
+#page_layout.row{margin-right:0 ;margin-left:0;}
+.widget>.panel{border:none;}
+
+.text-primary{color:#358}
+
+.nav-sidebar.nav li>a {
+    position: relative;
+    display: block;
+    padding: 15px;
+}
+.nav-sidebar.nav li{border:0;}
+
+.nav-sidebar .active > a,
+.nav-sidebar .active > a:hover,
+.nav-sidebar .active > a:focus {
+  border-left:solid #358;
+  color: #fff;
+  background-color:rgba(0,0,0,0.4);
+}
+
+.config .nav-sidebar .active > a,
+.config .nav-sidebar .active > a:hover,
+.config .nav-sidebar .active > a:focus {
+  border-left:solid red;
+  color: #fff;
+  background-color:rgba(0,0,0,0.4);
+}
+
+.nav-sidebar {
+    margin: 15px -21px 20px -20px;
+}
+.main-container{margin-left:200px;margin-top:120px}
+.patient-container{
+    z-index:3;height:100px;padding:15px;background:#f8f8f8;border-bottom:solid 1px #e8e8e8;position: fixed;right: 0;top: 0;left:200px
+}
+
+@media (max-width: 768px) {
+
+.patient-container{left:0;}
+.main-container{margin-left:0;}
+}
+.badge-notify{
+   background:red;
+   position:relative;
+   top: -20px;
+   left: -35px;
+  }
+
+.view [readonly]{
+    background: none !important;
+    /* outline: none; */
+    border: none;
+    box-shadow: none;
+        cursor: default !important;
+      -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.view [readonly]:focus{
+border-color: #fff;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.view .form-horizontal .form-group{
+    border-bottom:solid 1px #ccc;
+}
+.flow-container{
+    position: fixed;
+    left: 220px;
+    right: 20px;
+    bottom: 0px;
+    padding: 0 72px;
+    top: 200px;
+    overflow: scroll
+}
+.btn-group-lg .btn-lg{
+    width: 70px;
+    padding: 5px 0;
+}
+.slice-actions{display:none}
+
+
+td .form-group{margin-bottom:0}
+#chat-window .chat-messages {
+    max-height:200px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#chat-window {
+    position:fixed;
+    width:100%;
+    bottom:0px;
+    left:15px;
+        z-index: 10;
+    pointer-events:none;
+}
+
+#chat-window .panel {
+    margin-bottom:0px;
+}
+
+#chat-window .alert {
+    margin-bottom:5px;
+    padding:5px;
+}
+
+#chat-window .form-group {
+    margin: 10px 0px 0px 0px;
+}
+
+#chat-window .chat-panel {
+    pointer-events:auto;
+}
+
+
+
+/**
+ * adding sorting ability to HTML tables with Bootstrap styling
+ * @summary HTML tables sorting ability
+ * @version 2.0.0
+ * @requires tinysort, moment.js, jQuery
+ * @license MIT
+ * @author Matus Brlit (drvic10k)
+ * @copyright Matus Brlit (drvic10k), bootstrap-sortable contributors
+ */
+
+table.sortable span.sign {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    font-size: 12px;
+    margin-top: -10px;
+    color: #bfbfc1;
+}
+
+table.sortable th:after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    font-size: 12px;
+    margin-top: -10px;
+    color: #bfbfc1;
+}
+
+table.sortable th.arrow:after {
+    content: '';
+}
+
+table.sortable span.arrow, span.reversed, th.arrow.down:after, th.reversedarrow.down:after, th.arrow.up:after, th.reversedarrow.up:after {
+    border-style: solid;
+    border-width: 5px;
+    font-size: 0;
+    border-color: #ccc transparent transparent transparent;
+    line-height: 0;
+    height: 0;
+    width: 0;
+    margin-top: -2px;
+}
+
+    table.sortable span.arrow.up, th.arrow.up:after {
+        border-color: transparent transparent #ccc transparent;
+        margin-top: -7px;
+    }
+
+table.sortable span.reversed, th.reversedarrow.down:after {
+    border-color: transparent transparent #ccc transparent;
+    margin-top: -7px;
+}
+
+    table.sortable span.reversed.up, th.reversedarrow.up:after {
+        border-color: #ccc transparent transparent transparent;
+        margin-top: -2px;
+    }
+
+table.sortable span.az:before, th.az.down:after {
+    content: "a .. z";
+}
+
+table.sortable span.az.up:before, th.az.up:after {
+    content: "z .. a";
+}
+
+table.sortable th.az.nosort:after, th.AZ.nosort:after, th._19.nosort:after, th.month.nosort:after {
+    content: "..";
+}
+
+table.sortable span.AZ:before, th.AZ.down:after {
+    content: "A .. Z";
+}
+
+table.sortable span.AZ.up:before, th.AZ.up:after {
+    content: "Z .. A";
+}
+
+table.sortable span._19:before, th._19.down:after {
+    content: "1 .. 9";
+}
+
+table.sortable span._19.up:before, th._19.up:after {
+    content: "9 .. 1";
+}
+
+table.sortable span.month:before, th.month.down:after {
+    content: "jan .. dec";
+}
+
+table.sortable span.month.up:before, th.month.up:after {
+    content: "dec .. jan";
+}
+
+table.sortable>thead th:not([data-defaultsort=disabled]) {
+    cursor: pointer;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+table.sortable>thead th:hover:not([data-defaultsort=disabled]) {
+    background: #efefef;
+}
+
+table.sortable>thead th div.mozilla {
+    position: relative;
+}
+
+
+
+.live #form.well .table-striped [type=radio]:checked{
+    -webkit-appearance: radio;
+}
+.live #form.well [type=checkbox]:not(:checked) ,.live #form.well .radio [type=radio]:not(:checked), .live #form.well [data-type="custom_radio"] .btn-default {
+    display: none;
+}
+#notes textarea{
+    height:1000px !important;
+    min-height:100px !important;
+}
+                        
+.toast-top-left{margin-left:200px}
+                        
+                        
+                        

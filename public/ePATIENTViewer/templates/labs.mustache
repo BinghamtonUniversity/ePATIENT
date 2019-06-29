@@ -1,0 +1,76 @@
+{{#scenario}}
+
+{{#if !(hashParams.id )}}
+
+<h3><a href="#page=labs"><i class="fa fa-tint text-muted"></i> Labs</a></h3>
+<hr>
+<a href="#page=lab_form" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
+<span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
+{{#lab_types}}
+{{#results.length}}
+<div class="panel panel-default">
+    <div class="panel-heading">
+    <h3 class="panel-title">{{_.findWhere(Berry.collection.get('lab_types'),{name:name}).label}}</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-hover table-fixed ">
+            <thead>
+                <tr>
+                <tr>
+                    <th>Lab Test</th>
+                    {{#results}}<th><span style="font-weight:300">({{#admin}}<a href="#page=lab_form&id={{id}}">{{date}}</a>{{/admin}}{{^admin}}{{date}}{{/admin}})</span></th>{{/results}}
+                    <th>Unit</th>
+                    {{!--<th>Abnormal Flag</th>--}}
+                    <th>Reference Range</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#tests}}
+                <tr class="filterable">
+                    <td>{{test}}</td>
+                        {{#results}}
+                        {{#result}}
+                        {{#if test == test_name}}
+                            <td>{{value}}
+                            
+                            <span style="color:red">{{#max}}{{#if parseInt(value) > max}}HIGH{{/if}}{{/max}}{{#min}}{{#if parseInt(value) < min}}LOW{{/if}}{{/min}}</span>
+                            </td>
+                        {{/if}}
+                        
+                        {{/result}}
+                        {{/results}}
+
+                    <td>{{unit}}</td>
+                    {{!--<td></td>--}}
+                    <td>{{#range}}{{range}}{{/range}}{{^range}}{{min}}-{{max}} {{unit}}{{/range}}</td>
+                </tr>
+            {{/tests}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/results.length}}
+{{/lab_types}}
+
+
+
+
+
+
+{{else}}
+    <div class="btn-group pull-right btn-group-lg" style="margin-top:-10px" role="group">
+
+        {{#if hashParams.id>0}}<a href="#page=orders&form=orders&id={{ hashParams.id -1 }}" class="btn btn-default btn-lg" title="Previous"><i class="fa fa-chevron-left"></i><div style="font-size:12px">Previous</div></a>{{/if}}
+        <a href="#page=form&form=orders&id={{ hashParams.id}}" class="btn btn-info btn-lg" title="Edit"><i class="fa fa-edit"></i><div style="font-size:12px">Edit</div></a>
+        {{#if hashParams.id<(orders.order.length-1)}}<a href="#page=orders&form=orders&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
+
+    </div>
+                
+<h3><a href="#page=orders"><i class="fa fa-th-list text-muted"></i> Order</a></h3>
+<hr>
+<div class="flow-container">
+    <div id="form" class="view well"> </div>
+
+</div>
+{{/if}}
+{{/scenario}}

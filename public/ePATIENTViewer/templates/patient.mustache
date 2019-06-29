@@ -1,0 +1,23 @@
+{{#scenario.patient_info}}
+{{^admin}}
+<div style="position:absolute;top:5px;right:25px;    z-index: 1;">
+  <button class="btn btn-default btn-lg btn-link" style="font-size:30px;" data-toggle="modal" data-target="#notes-modal">
+    <span class="glyphicon glyphicon-comment"></span>
+  </button>
+    <span class="badge badge-notify">
+        {{#newnotes}}{{newnotes}}{{/newnotes}}
+    </span>
+</div>
+{{/admin}}
+<div class="col-xs-6">
+    <div><b>Patient:</b> {{first_name}} {{middle_name}} {{last_name}}</div>
+    <div><b>DOB:</b> {{ customRender(dob) }}</div>
+    <div><b>MR#:</b> {{medical_record_number}}</div>
+</div>
+<div class="col-xs-6">
+    <div><b>Height (cm):</b> {{height}} </div>
+    <div><b>Weight (kg):</b> {{ weight }}</div>
+    <div><b>BMI:</b> {{((weight/(height*height))*10000).toFixed(1)}}</div>
+</div>
+
+{{/scenario.patient_info}}

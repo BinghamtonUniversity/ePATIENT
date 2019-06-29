@@ -1,0 +1,65 @@
+{{#scenario}}
+
+{{#if (hashParams.id )}}
+    <div class="btn-group pull-right btn-group-lg" style="margin-top:-10px" role="group">
+
+        <span data-action="approve" data-id="{{ hashParams.id}}" class="btn btn-success btn-lg" title="Verify"><i class="fa fa-check"></i><div style="font-size:12px">Verify</div></span>
+        <span data-action="reject" data-id="{{ hashParams.id}}" class="btn btn-danger btn-lg" title="Decline"><i class="fa fa-times"></i><div style="font-size:12px">Decline</div></span>
+
+    </div>
+
+{{/if}}
+<h3><a href="#page=pharmacist_verification"><i class="fa fa-clipboard-check text-muted"></i> Medication Verification</a></h3>
+<hr>
+{{#if !(hashParams.id )}}
+
+<a href="#page=form&form=pharmacist_verification" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
+<span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
+<table class="table table-bordered table-striped table-hover table-fixed sortable">
+    <thead>
+        <tr>
+        <tr>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Author</th>
+            <th>Provider</th>
+            <th>Medication/Description</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#prescription_orders.order}}
+        {{!#if (typeof approved == "undefined")}}
+        <tr class="filterable" data-href="#page=pharmacist_verification&form=prescription_orders&id={{ @index }}">
+            <td>{{#if type == "0"}}Prescription{{else}}Infusion Meds{{/if}}</td>
+            <td>{{ customRender(date) }}</td>
+            <td>{{author}}</td>
+            <td>{{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).last_name}}</td>
+    
+            <td>{{medication}}{{description}}</td>
+            <td>{{approved}}</td>
+            <td>
+                <div class="btn-group" role="group">
+
+                <a href="#page=form&form=prescription_orders&id={{ @index }}" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
+                <!--span data-action="approve" data-id="{{ @index }}" class="btn btn-success btn-xs" title="Verify"><i class="fa fa-check"></i></span-->
+                <span data-action="reject" data-id="{{ @index }}" class="btn btn-danger btn-xs" title="Decline"><i class="fa fa-times"></i></span>
+                </div>
+            </td>
+        </tr>
+        {{!/if}}
+        {{/prescription_orders.order}}
+    </tbody>
+</table>
+{{else}}
+
+<div class="flow-container">
+    
+    <div id="form" class="view well"> </div>
+
+
+
+</div>
+{{/if}}
+{{/scenario}}

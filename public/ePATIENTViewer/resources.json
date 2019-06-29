@@ -1,0 +1,13 @@
+{
+    "teams": "/teams{{#request.id}}/{{request.id}}{{/request.id}}",
+    "msg_list": "/teams/{{request.team_id}}/messages",
+    "msg_submit": "/teams/{{request.team_id}}/messages/{{request.unique_id}}",
+    "myteams": "/users/{{user.unique_id}}/teams",
+    "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{request.unique_id}}",
+    "notes_list": "/teams/{{request.team_id}}/notes",
+    "providers": "/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
+    "products": "/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
+    "solutions": "/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
+    "labs": "/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
+    "scenarios": "/scenarios{{#request.id}}/{{request.id}}{{/request.id}}"
+}
