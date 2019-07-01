@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+$router->group(['middleware'=>['custom.auth']], function () use ($router) {
 $router->get('/', ['uses'=>'AppController@getViewerApp']);
 $router->get('/admin', ['uses'=>'AppController@getAdminApp']);
+});
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     //** APP Init **//
