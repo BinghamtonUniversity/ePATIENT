@@ -152,7 +152,7 @@ class TeamController extends Controller
         if (!is_null($team) && !is_null($user)) {
             $team_message = new TeamMessage(['user_id'=>$user->id,'team_id'=>$team_id,'message'=>$request->message]);
             $team_message->save();
-            return $team_message;
+            return TeamMessage::where('id',$team_message->id)->with('user')->first();
         } else {
             return response('team_id or user_id not found', 404);
         }

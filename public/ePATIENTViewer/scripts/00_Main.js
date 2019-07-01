@@ -328,6 +328,17 @@ updateScenario = function(data){
             }}.bind(this));
 // readHash.call(this);
         }
+
+this.data.last_activity_id = null;
+var fetch_activity = function() {
+    this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
+        this.data.last_activity_id = activity.last_activity_id;
+        this.app.update();
+        chat_add_messages.call(this,activity.messages);
+        notes_add_notes.call(this,activity.notes);
+    });
+}
+    
 this.callback = function(){
     this.app.$el.on( "click", "[data-href]", function(e) {
         window.location = $(e.currentTarget).data("href");
@@ -383,8 +394,11 @@ this.callback = function(){
         });
             
         
-        chat_init.call(this,{team_id:this.data.team_id,team_name:data.name});
-        notes_init.call(this,{team_id:this.data.team_id,team_name:data.name});
+        chat_init.call(this);
+        notes_init.call(this);
+        fetch_activity.call(this);
+        setInterval(fetch_activity.bind(this), 5000);
+
 
     }else{
         if((this.data.admin||this.data.local) && this.data.scenario_id){
@@ -513,16 +527,5 @@ this.callback = function(){
     //     }
     // }.bind(this), 20000);
 
-    this.data.last_activity_id = null;
-    var fetch_activity = function() {
-        this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
-            this.data.last_activity_id = activity.last_activity_id;
-            this.app.update();
-            fetch_messages.call(this,activity.messages);
-            fetch_notes.call(this,activity.notes);
-        });
-    }
-    fetch_activity.call(this);
-    setInterval(fetch_activity.bind(this), 10000);
 
 }

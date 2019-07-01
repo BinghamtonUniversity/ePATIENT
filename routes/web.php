@@ -70,10 +70,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('/library/{library_type}/{library_id}',['uses'=>'LibraryController@edit']);
     $router->post('/library/{library_type}',['uses'=>'LibraryController@add']);
     $router->delete('/library/{library_type}/{library_id}',['uses'=>'LibraryController@delete']);
-
 });
-
-
 
 Auth::routes();
 

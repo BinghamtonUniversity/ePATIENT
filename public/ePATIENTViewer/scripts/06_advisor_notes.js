@@ -1,42 +1,37 @@
-notes_init = function({team_id, team_name}={}) {
-    this.data.localStorageNotesVar = 'epatient_notes_read_'
-    this.data.notes = [];
-    this.data.team_name = team_name
-    this.data.newnotes = 0;
-    
+this.data.notes = [];
+this.data.newnotes = 0;
+this.data.localStorageNotesVar = 'epatient_notes_read_'
+
+notes_init = function() {
     $('#notes-modal').on('show.bs.modal', function (event) {
-        fetch_notes.call(this,[],function() {
-            if (typeof this.data.notes[0] !== 'undefined') {
-                var maxId = this.data.notes[0].id;
-            } else {
-                maxId = null;
-            }
-            localStorage.setItem(this.data.localStorageNotesVar+this.data.team_id,maxId);
-        });
+        if (typeof this.data.notes[0] !== 'undefined') {
+            var maxId = this.data.notes[0].id;
+        } else {
+            maxId = null;
+        }
+        localStorage.setItem(this.data.localStorageNotesVar+this.data.team_id,maxId);
     }.bind(this))
     
     $('#notes-modal').on('hide.bs.modal', function (event) {
         this.data.newnotes = 0;
+        _.forEach(this.data.notes, function (obj) { obj.isnew = false });
         this.app.update();
-    }.bind(this))
-    
-    // fetch_notes.call(this);
-    // setInterval(fetch_notes.bind(this), 60000);
+    }.bind(this))    
 }
-var fetch_notes = function(notes,callback) {
-    notes = this.data.notes.concat(notes)
-    var maxId = localStorage.getItem(this.data.localStorageNotesVar+this.data.team_id);
-    notes = _.sortBy(notes, 'updated_at').reverse();
-    this.data.newnotes = false
-    for(var i=0;i<notes.length;i++) {
-        if (notes[i].id > maxId) {
-            notes[i].isnew = true;
-            this.data.newnotes+=1;
+
+notes_add_notes = function(notes) {
+    if (notes.length > 0) {
+        notes = this.data.notes.concat(notes)
+        var maxId = localStorage.getItem(this.data.localStorageNotesVar+this.data.team_id);
+        notes = _.sortBy(notes, 'updated_at').reverse();
+        this.data.newnotes = 0
+        for(var i=0;i<notes.length;i++) {
+            if (notes[i].id > maxId) {
+                notes[i].isnew = true;
+                this.data.newnotes+=1;
+            }
         }
-    }
-    this.data.notes = notes;
-    this.app.update();
-    if (typeof callback !== 'undefined') {
-        callback.call(this);
+        this.data.notes = notes;
+        this.app.update();
     }
 }
