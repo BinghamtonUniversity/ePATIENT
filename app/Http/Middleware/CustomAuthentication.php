@@ -7,35 +7,22 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Site;
-use App\Libraries\CustomAuth;
+use App\Libraries\SAML2AuthWrapper;
 
 class CustomAuthentication
 {
-
-    protected $auth;
-    protected $cas;
+    protected $saml2;
 
     public function __construct(Guard $auth)
     {
-        $this->auth = $auth;
-        $this->customAuth = new CustomAuth();
+        $this->saml2 = new SAML2AuthWrapper();
     }
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
         if(!Auth::user()){           
-            $return = $this->customAuth->authenticate($request);
-            if(isset($return)){
-                return $return;
-            }
-        }   
+            return $this->saml2->authenticate();
+        }
         return $next($request);
     }
 }

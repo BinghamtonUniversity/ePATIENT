@@ -209,7 +209,7 @@ class TeamController extends Controller
 
     public function add_scenario_log(Request $request, $team_id, $user_id)
     {
-        $this->validate($request,['state'=>['required']]);
+        // $this->validate($request,['state'=>['required']]);
         $team = Team::where('id',$team_id)->first();
         $user = User::where('id',$user_id)->orWhere('unique_id',$user_id)->first();
 

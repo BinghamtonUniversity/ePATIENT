@@ -10,9 +10,18 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-$router->group(['middleware'=>[/*'custom.auth'*/]], function () use ($router) {
+$router->group(['middleware'=>['custom.auth']], function () use ($router) {
+    $router->get('/sso', function() {
+        return "Welcome ".Auth::user()->first_name."!";
+    });
+});
+
+$router->group(['middleware'=>[]], function () use ($router) {
     $router->get('/', ['uses'=>'AppController@getViewerApp']);
     $router->get('/admin', ['uses'=>'AppController@getAdminApp']);
+    $router->get('/logout', function() {
+        Auth::logout();
+    });
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
@@ -73,6 +82,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->delete('/library/{library_type}/{library_id}',['uses'=>'LibraryController@delete']);
 });
 
-Auth::routes();
+// Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

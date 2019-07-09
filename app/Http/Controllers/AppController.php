@@ -79,8 +79,8 @@ class AppController extends Controller
 
         /* Get Current User */
         $user = User::where('id',1)->first();
-        Auth::login($user, true);
-        $user = Auth::user();
+        // Auth::login($user, true);
+        // $user = Auth::user();
         $response['user'] = $user;
 
         /* Get Teams */

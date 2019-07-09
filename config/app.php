@@ -202,6 +202,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Aacotroneo\Saml2\Saml2ServiceProvider::class,
     ],
 
     /*
@@ -216,7 +217,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -252,7 +252,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Saml2' => Aacotroneo\Saml2\Facades\Saml2Auth::class,
     ],
 
 ];

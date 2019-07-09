@@ -9,8 +9,9 @@ use App\User;
 use App\Site;
 use App\Libraries\HTTPHelper;
 use Aacotroneo\Saml2\Events\Saml2LoginEvent;
+use Aacotroneo\Saml2\Facades\Saml2Auth;
 
-class SAML2Auth
+class SAML2AuthWrapper
 {
     protected $auth;
     protected $cas;
@@ -94,9 +95,7 @@ class SAML2Auth
         Auth::login($user, true);
     }
 
-    public function authenticate($skip = false) {
-        if (!Auth::check() && !$skip){  
-            return \Aacotroneo\Saml2\Facades\Saml2Auth::login();
-        }
+    public function authenticate() {
+        return Saml2Auth::login();
     }
 }
