@@ -10,7 +10,6 @@ use App\Team;
 use App\Scenario;
 use App\Role;
 
-
 class AppController extends Controller
 {
     /**
@@ -101,6 +100,7 @@ class AppController extends Controller
             'scenarios' => Scenario::all(),
             'roles' => Role::all(),
             'users' => User::all(),
+            'user' => Auth::user(),
         ];
         return $response;
     }

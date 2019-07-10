@@ -10,7 +10,7 @@
     <div style="white-space: nowrap;overflow: hidden;">{{name}}</div>
     </div>
      
-     {{#if (team_id || scenario_id)}}{{>menu}}{{/if}}
+    {{>menu}}
 </div>
 <div class="main-container {{^admin}}live{{/admin}}">
     <div style="margin:-15px">
@@ -24,7 +24,7 @@
         {{#if (team_id || scenario_id)}}{{>.hashParams.page}} {{^hashParams.page}}{{>overview}}{{/hashParams.page}}{{/if}}        
         {{#if !(team_id || scenario_id)}}
                 {{^scenario_id}}
-
+        <h3>Please Select a Team/Scenario:</h3>
         <div class="list-group">
         {{#myteams}}
           <a href="?team={{id}}" class="list-group-item">{{name}}:{{scenario.name}}</a>
