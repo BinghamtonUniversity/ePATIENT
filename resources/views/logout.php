@@ -26,17 +26,17 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-            <h1>ePATIENT WAYF (Where are you from?)</h1>
+            <h1 style="text-align:center;">ePATIENT Logout</h1>
         </div>
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-4">
-                <ul class="list-group">
-                    <?php 
-                      foreach(config('saml2_settings.idps') as $school => $configuration) {
-                        echo '<a href="/saml2/wayf/'.$school.'" class="list-group-item">'.$configuration['name'].'</a>'."\n";
-                      } 
-                    ?>
-                </ul>
+            <div class="col-sm-8 col-sm-offset-2">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  You are logged out of this application, but you are not logged out of the IDP
+                  so you can probably log back in really easily.  I guess turn off your computer
+                  or something?  I don't know.
+                </div>
+              </div>
             </div>
         </div>
     </div>

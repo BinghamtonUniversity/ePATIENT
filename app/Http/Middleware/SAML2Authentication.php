@@ -5,21 +5,19 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
-use App\Libraries\SAML2AuthWrapper;
+use Illuminate\Support\Facades\URL;
 
-class CustomAuthentication
+class SAML2Authentication
 {
     protected $saml2;
 
-    public function __construct(Guard $auth)
-    {
-        $this->saml2 = new SAML2AuthWrapper();
+    public function __construct(Guard $auth) {
     }
 
     public function handle($request, Closure $next)
     {
         if(!Auth::user()){    
-            return redirect('saml2/wayf');
+            return redirect(URL::route('saml_wayf'));
         }
         return $next($request);
     }

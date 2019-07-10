@@ -9,6 +9,7 @@ use App\TeamMessage;
 use App\TeamNote;
 use App\TeamScenario;
 use App\TeamActivityLog;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -143,11 +144,11 @@ class TeamController extends Controller
         }
     }
 
-    public function add_message(Request $request, $team_id, $user_id)
+    public function add_message(Request $request, $team_id)
     {
         $this->validate($request,['message'=>['required']]);
         $team = Team::where('id',$team_id)->first();
-        $user = User::where('id',$user_id)->orWhere('unique_id',$user_id)->first();
+        $user = Auth::user();
 
         if (!is_null($team) && !is_null($user)) {
             $team_message = new TeamMessage(['user_id'=>$user->id,'team_id'=>$team_id,'message'=>$request->message]);
@@ -207,11 +208,11 @@ class TeamController extends Controller
         }
     }
 
-    public function add_scenario_log(Request $request, $team_id, $user_id)
+    public function add_scenario_log(Request $request, $team_id)
     {
         // $this->validate($request,['state'=>['required']]);
         $team = Team::where('id',$team_id)->first();
-        $user = User::where('id',$user_id)->orWhere('unique_id',$user_id)->first();
+        $user = Auth::user();
 
         if (!is_null($team) && !is_null($user)) {
             $team_scenario = new TeamScenario(['user_id'=>$user->id,'team_id'=>$team_id,'state'=>$request->state]);

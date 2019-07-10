@@ -227,32 +227,109 @@ return [
    'wantAssertionsEncrypted' => true, // MUST be enabled if SSL/HTTPs is disabled
    'wantNameIdEncrypted' => false,
 */
+    /* Default IDP -- Overwritten by school IDPs below during processing */
+    'idp' => [
+        'name' => 'Default',
+        'entityId' => 'https://example.com/idp/shibboleth',
+        'singleSignOnService' => [
+            'url' => 'https://example.com/idp/profile/SAML2/Redirect/SSO',
+        ],
+        'x509cert' => 'MIIDTzCCAjegAwIBAgIUIxgMuKdj85wizYHJ1HH1eZfn3IowDQYJKoZIhvcNAQEL BQAwJDEiMCAGA1UEAwwZaWRwLWRldi5jYy5iaW5naGFtdG9uLmVkdTAeFw0xOTA2 MTEyMDQ1NDdaFw0zOTA2MTEyMDQ1NDdaMCQxIjAgBgNVBAMMGWlkcC1kZXYuY2Mu YmluZ2hhbXRvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCI CsFPx2RqtHWIzT5FV0aNACv+y7K3dZxBlISnRa5a0OHrVL6jr6igvuhjB+4apF5o IJTo/Dr/QoF61MsOxPucY9mhyve/wJ7SHQHgRjyYzxzdFhyq26TodAwLaPBZVEzC NYyPFxwcMwd/ka57tXKy4b2ZeiK6zhLTLkXbvl7pNHjAl6dLSQk+tI80ZW4RSPu7 /UhmtzP+UxK9hFIHsEZpt0HFbsLFcdrQs0EBXHVTyzUFqt2s0RVN2oCIupo7pQ0T Ny6qapwafkGq/3bWzsBZWX/zECnC1jWSFusKGk+MlSkSVYGffOnjcV0JiMqg7UHO XZ0+4bC3jzi44cqJU1eDAgMBAAGjeTB3MB0GA1UdDgQWBBRJmhUbP6ZR1XxOOAc2 zQuoIh4x9jBWBgNVHREETzBNghlpZHAtZGV2LmNjLmJpbmdoYW10b24uZWR1hjBo dHRwczovL2lkcC1kZXYuY2MuYmluZ2hhbXRvbi5lZHUvaWRwL3NoaWJib2xldGgw DQYJKoZIhvcNAQELBQADggEBAEYSU3NDFFTerdVl9fqN9kJWBBp3gyCP38EuVZgK dqqUsq84rRqp/EgI1PrnjDF8TP6CmY2lgMSqdMk5TDmV66MOctjT8W5MLm8dzX38 TSNPD8LMyiYVdMGOxssjsZwwY4udhuLQabGxh2tkhmREdaoi53ToBCZNvbw4l7YW 9ZB4u9sGdpg1hHwizPJd1eLyuJvvtWjDtxp3cGwydIHwgzUQ9yd8CVg39MhaeS12 t5fgGtDYTFnl9lUIc8+Ecu32QWksNmKOJdvs4pzu/NZ131l+TeTLFN/UmgzFWqC9 ad4IZdkOC/S09AD4yeQPFblvQo+tw6Y/drgW8+WxEsC3xR0=',
+    ],
 
-    // Identity Provider Data that we want connect with our SP
-    'idp' => array(
-        // Identifier of the IdP entity  (must be a URI)
-        'entityId' => env('SAML2_IDP_ENTITYID', $idp_host . '/idp/shibboleth'),
-        // SSO endpoint info of the IdP. (Authentication Request protocol)
-        'singleSignOnService' => array(
-            // URL Target of the IdP where the SP will send the Authentication Request Message,
-            // using HTTP-Redirect binding.
-            'url' => $idp_host . '/idp/profile/SAML2/Redirect/SSO',
-        ),
-        // SLO endpoint info of the IdP.
-        'singleLogoutService' => array(
-            // URL Location of the IdP where the SP will send the SLO Request,
-            // using HTTP-Redirect binding.
-            'url' => $idp_host . '/idp/profile/SAML2/Redirect/SLO',
-        ),
-        // Public x509 certificate of the IdP
-        'x509cert' => env('SAML2_IDP_x509', '
-        MIIDTzCCAjegAwIBAgIUIxgMuKdj85wizYHJ1HH1eZfn3IowDQYJKoZIhvcNAQEL BQAwJDEiMCAGA1UEAwwZaWRwLWRldi5jYy5iaW5naGFtdG9uLmVkdTAeFw0xOTA2 MTEyMDQ1NDdaFw0zOTA2MTEyMDQ1NDdaMCQxIjAgBgNVBAMMGWlkcC1kZXYuY2Mu YmluZ2hhbXRvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCI CsFPx2RqtHWIzT5FV0aNACv+y7K3dZxBlISnRa5a0OHrVL6jr6igvuhjB+4apF5o IJTo/Dr/QoF61MsOxPucY9mhyve/wJ7SHQHgRjyYzxzdFhyq26TodAwLaPBZVEzC NYyPFxwcMwd/ka57tXKy4b2ZeiK6zhLTLkXbvl7pNHjAl6dLSQk+tI80ZW4RSPu7 /UhmtzP+UxK9hFIHsEZpt0HFbsLFcdrQs0EBXHVTyzUFqt2s0RVN2oCIupo7pQ0T Ny6qapwafkGq/3bWzsBZWX/zECnC1jWSFusKGk+MlSkSVYGffOnjcV0JiMqg7UHO XZ0+4bC3jzi44cqJU1eDAgMBAAGjeTB3MB0GA1UdDgQWBBRJmhUbP6ZR1XxOOAc2 zQuoIh4x9jBWBgNVHREETzBNghlpZHAtZGV2LmNjLmJpbmdoYW10b24uZWR1hjBo dHRwczovL2lkcC1kZXYuY2MuYmluZ2hhbXRvbi5lZHUvaWRwL3NoaWJib2xldGgw DQYJKoZIhvcNAQELBQADggEBAEYSU3NDFFTerdVl9fqN9kJWBBp3gyCP38EuVZgK dqqUsq84rRqp/EgI1PrnjDF8TP6CmY2lgMSqdMk5TDmV66MOctjT8W5MLm8dzX38 TSNPD8LMyiYVdMGOxssjsZwwY4udhuLQabGxh2tkhmREdaoi53ToBCZNvbw4l7YW 9ZB4u9sGdpg1hHwizPJd1eLyuJvvtWjDtxp3cGwydIHwgzUQ9yd8CVg39MhaeS12 t5fgGtDYTFnl9lUIc8+Ecu32QWksNmKOJdvs4pzu/NZ131l+TeTLFN/UmgzFWqC9 ad4IZdkOC/S09AD4yeQPFblvQo+tw6Y/drgW8+WxEsC3xR0=
-        '),
-        /*
-            *  Instead of use the whole x509cert you can use a fingerprint
-            *  (openssl x509 -noout -fingerprint -in "idp.crt" to generate it)
-            */
-        // 'certFingerprint' => '',
-    ),
-    
+    'idps'=>[
+        'binghamton' => [
+            'name' => 'Binghamton University',
+            // Identifier of the IdP entity  (must be a URI)
+            'entityId' => env('SAML2_IDP_ENTITYID', 'https://idp-dev.cc.binghamton.edu/idp/shibboleth'),
+            // SSO endpoint info of the IdP. (Authentication Request protocol)
+            'singleSignOnService' => array(
+                // URL Target of the IdP where the SP will send the Authentication Request Message,
+                // using HTTP-Redirect binding.
+                'url' => 'https://idp-dev.cc.binghamton.edu/idp/profile/SAML2/Redirect/SSO',
+            ),
+            // SLO endpoint info of the IdP.
+            'singleLogoutService' => array(
+                // URL Location of the IdP where the SP will send the SLO Request,
+                // using HTTP-Redirect binding.
+                'url' => 'https://idp-dev.cc.binghamton.edu/idp/profile/SAML2/Redirect/SLO',
+            ),
+            // Public x509 certificate of the IdP
+            'x509cert' => env('SAML2_IDP_x509', '
+            MIIDTzCCAjegAwIBAgIUIxgMuKdj85wizYHJ1HH1eZfn3IowDQYJKoZIhvcNAQEL BQAwJDEiMCAGA1UEAwwZaWRwLWRldi5jYy5iaW5naGFtdG9uLmVkdTAeFw0xOTA2 MTEyMDQ1NDdaFw0zOTA2MTEyMDQ1NDdaMCQxIjAgBgNVBAMMGWlkcC1kZXYuY2Mu YmluZ2hhbXRvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCI CsFPx2RqtHWIzT5FV0aNACv+y7K3dZxBlISnRa5a0OHrVL6jr6igvuhjB+4apF5o IJTo/Dr/QoF61MsOxPucY9mhyve/wJ7SHQHgRjyYzxzdFhyq26TodAwLaPBZVEzC NYyPFxwcMwd/ka57tXKy4b2ZeiK6zhLTLkXbvl7pNHjAl6dLSQk+tI80ZW4RSPu7 /UhmtzP+UxK9hFIHsEZpt0HFbsLFcdrQs0EBXHVTyzUFqt2s0RVN2oCIupo7pQ0T Ny6qapwafkGq/3bWzsBZWX/zECnC1jWSFusKGk+MlSkSVYGffOnjcV0JiMqg7UHO XZ0+4bC3jzi44cqJU1eDAgMBAAGjeTB3MB0GA1UdDgQWBBRJmhUbP6ZR1XxOOAc2 zQuoIh4x9jBWBgNVHREETzBNghlpZHAtZGV2LmNjLmJpbmdoYW10b24uZWR1hjBo dHRwczovL2lkcC1kZXYuY2MuYmluZ2hhbXRvbi5lZHUvaWRwL3NoaWJib2xldGgw DQYJKoZIhvcNAQELBQADggEBAEYSU3NDFFTerdVl9fqN9kJWBBp3gyCP38EuVZgK dqqUsq84rRqp/EgI1PrnjDF8TP6CmY2lgMSqdMk5TDmV66MOctjT8W5MLm8dzX38 TSNPD8LMyiYVdMGOxssjsZwwY4udhuLQabGxh2tkhmREdaoi53ToBCZNvbw4l7YW 9ZB4u9sGdpg1hHwizPJd1eLyuJvvtWjDtxp3cGwydIHwgzUQ9yd8CVg39MhaeS12 t5fgGtDYTFnl9lUIc8+Ecu32QWksNmKOJdvs4pzu/NZ131l+TeTLFN/UmgzFWqC9 ad4IZdkOC/S09AD4yeQPFblvQo+tw6Y/drgW8+WxEsC3xR0=
+            '),
+            /*
+                *  Instead of use the whole x509cert you can use a fingerprint
+                *  (openssl x509 -noout -fingerprint -in "idp.crt" to generate it)
+                */
+            // 'certFingerprint' => '',
+            'data_map' => [
+                'unique_id' => '{{bnumber}}',
+                'first_name' => '{{givenName}}',
+                'last_name' => '{{sn}}',
+                'email' => '{{mail}}',
+            ],
+        ],
+        'buffalo' => [
+            'name' => 'SUNY Buffalo',
+            // Identifier of the IdP entity  (must be a URI)
+            'entityId' => env('SAML2_IDP_ENTITYID', 'https://shibboleth.buffalo.edu/idp/shibboleth'),
+            // SSO endpoint info of the IdP. (Authentication Request protocol)
+            'singleSignOnService' => array(
+                // URL Target of the IdP where the SP will send the Authentication Request Message,
+                // using HTTP-Redirect binding.
+                'url' => 'https://shibboleth.buffalo.edu/idp/profile/SAML2/Redirect/SSO',
+            ),
+            // SLO endpoint info of the IdP.
+            'singleLogoutService' => array(
+                // URL Location of the IdP where the SP will send the SLO Request,
+                // using HTTP-Redirect binding.
+                'url' => 'https://shibboleth.buffalo.edu/idp/profile/SAML2/Redirect/SLO',
+            ),
+            // Public x509 certificate of the IdP
+            'x509cert' => env('SAML2_IDP_x509', '
+            MIIGiDCCBXCgAwIBAgIRAPhtlvy0TuFvgXffz2JAt+wwDQYJKoZIhvcNAQELBQAw
+            djELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAk1JMRIwEAYDVQQHEwlBbm4gQXJib3Ix
+            EjAQBgNVBAoTCUludGVybmV0MjERMA8GA1UECxMISW5Db21tb24xHzAdBgNVBAMT
+            FkluQ29tbW9uIFJTQSBTZXJ2ZXIgQ0EwHhcNMTgwNzE2MDAwMDAwWhcNMTkwNzE2
+            MjM1OTU5WjCBsTELMAkGA1UEBhMCVVMxDjAMBgNVBBETBTE0MjYwMQswCQYDVQQI
+            EwJOWTEQMA4GA1UEBxMHQnVmZmFsbzEXMBUGA1UECRMONTAxIENhcGVuIEhhbGwx
+            JDAiBgNVBAoTG1NVTlksIFVuaXZlcnNpdHkgYXQgQnVmZmFsbzETMBEGA1UECxMK
+            c2hpYmJvbGV0aDEfMB0GA1UEAxMWc2hpYmJvbGV0aC5idWZmYWxvLmVkdTCCASIw
+            DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMrK92tQ933kjE8h/XjtCOOb6QQG
+            x9p+h7kjlkBLB9jw4fswBYQtS6yVM7/2+DeJfTPc+FKuBjLUhR9OqNxpExGO2kwv
+            HkQWcUtrnPv+1duzIvcjeerMTo6qH3TqcpMQrHaljYfl4pKhrIK/D/CFer/apOUD
+            TUO1/Uc09tLqEZlqhNfSdA9AkpfDqj5dNk3mQ4zIyTy2TVdGq6Fm+qeQEhDC6xic
+            a+5J+NditOzcDxaMxGmpyxFJYX66rQdmOQWNbuDokVU/RH2YMibFV+HC5iazh5ms
+            FHGmw+FM6oTQUygdfdy03HO588nbaNcZ+y//UERGsilx4aJnpcKmCl9q3qkCAwEA
+            AaOCAtMwggLPMB8GA1UdIwQYMBaAFB4Fo3ePbJbiW4dLprSGrHEADOc4MB0GA1Ud
+            DgQWBBSum7CFjeruelx71gYaXFUlRNIgyzAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0T
+            AQH/BAIwADAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwZwYDVR0gBGAw
+            XjBSBgwrBgEEAa4jAQQDAQEwQjBABggrBgEFBQcCARY0aHR0cHM6Ly93d3cuaW5j
+            b21tb24ub3JnL2NlcnQvcmVwb3NpdG9yeS9jcHNfc3NsLnBkZjAIBgZngQwBAgIw
+            RAYDVR0fBD0wOzA5oDegNYYzaHR0cDovL2NybC5pbmNvbW1vbi1yc2Eub3JnL0lu
+            Q29tbW9uUlNBU2VydmVyQ0EuY3JsMHUGCCsGAQUFBwEBBGkwZzA+BggrBgEFBQcw
+            AoYyaHR0cDovL2NydC51c2VydHJ1c3QuY29tL0luQ29tbW9uUlNBU2VydmVyQ0Ff
+            Mi5jcnQwJQYIKwYBBQUHMAGGGWh0dHA6Ly9vY3NwLnVzZXJ0cnVzdC5jb20wIQYD
+            VR0RBBowGIIWc2hpYmJvbGV0aC5idWZmYWxvLmVkdTCCAQUGCisGAQQB1nkCBAIE
+            gfYEgfMA8QB2AO5Lvbd1zmC64UJpH6vhnmajD35fsHLYgwDEe4l6qP3LAAABZKQ/
+            aa8AAAQDAEcwRQIgXJW5jyo7b/vmzTAHaAcdpSjTdf3mhgD6U3Ic4Lg5FhwCIQCN
+            oCGURhiCxOdbY9dyJGj54v2ZcAR6STFCe+47RQDqmwB3AHR+2oMxrTMQkSGcziVP
+            QnDCv/1eQiAIxjc1eeYQe8xWAAABZKQ/bCUAAAQDAEgwRgIhAIWkDWn2SXXCphLF
+            Nwk4kYTSP7g99uLG556jdjc8EGOqAiEAiVOqSfEzC+9X1HlPhNc3ZXFuvWkjyghC
+            G9svSBdp43owDQYJKoZIhvcNAQELBQADggEBAFfOEcxaHgturAna2KrjYcCaUlF1
+            2d0elyRojp1KqaOy1QqD3SaYexQYxm1sm+xYekN5QsKOcUdynrTh5/YBVYe3OdNT
+            7Ztf2gkz9tffE456DCsSL1qo09CFPagTiOrOHNLw3KtA8ir4q3Es/KML6VqV/Rbd
+            bdLVQxUEHSAXl4GquQ4pawR6eoBJmSn2YL8rK24/TAVjGrFpVXMFxEx73g+6vn2L
+            ca8qV6BzmUtwnA7UTCeL/eIaM41vwKuiRGamhGT5qR++fibr0qFtXn1k436M5rD+
+            DhluZZ0sGI/0bkISU4g/vGZTu8xwTnCifQKAXf4VfP35h/VeHbQyv5922JU=
+            '),
+            'data_map' => [
+                'unique_id' => '{{bnumber}}',
+                'first_name' => '{{givenName}}',
+                'last_name' => '{{sn}}',
+                'email' => '{{mail}}',
+            ],
+        ],
+    ]
 ];

@@ -64,7 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'custom.auth'=>  \App\Http\Middleware\CustomAuthentication::class,
+        'saml2.auth'=>  \App\Http\Middleware\SAML2Authentication::class,
         'no.save.session'=>  \App\Http\Middleware\NoSaveSession::class,
     ];
 

@@ -10,45 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::group(['middleware'=>['custom.auth']], function () use ($router) {
-//     Route::get('/sso', function() {
-//         return "Welcome ".Auth::user()->first_name."!";
-//     });
-// });
-Route::get('/logout', function() {
-    Auth::logout();
-    Session::save();
-});
 
-Route::group([
-    'prefix' => config('saml2_settings.routesPrefix'),
-    'middleware' => config('saml2_settings.routesMiddleware'),
-], function () {
-    Route::any('/acs', ['uses' => 'CustomSaml2Controller@acs']);
-
-    Route::get('/wayf', function() {
-        return view('wayf');
-    });
-    Route::get('/wayf/{site}', function($site) {
-        if(!Auth::user()){
-            // config(['saml2_settings.idp' => config('saml2_settings.'.$site.'_idp')]);
-            $saml2 = new \App\Libraries\SAML2AuthWrapper();
-            $saml2->authenticate();
-        } else {
-            return redirect('/');
-        }
-    });
-});
-
-
-
-
-
-
-Route::group(['middleware'=>['custom.auth']], function () use ($router) {
+/* GENERIC STUFF */
+Route::group(['middleware'=>['saml2.auth']], function () use ($router) {
     Route::get('/', ['uses'=>'AppController@getViewerApp']);
     Route::get('/admin', ['uses'=>'AppController@getAdminApp']);
 });
+Route::get('/logout', ['as' => 'saml_logout','uses' => 'Saml2Controller@logout']);
+/* SAML Stuff */
+Route::group(['prefix' => 'saml2','middleware' => ['saml']], function () {
+    Route::get('/metadata',['as' => 'saml_metadata','uses' => 'Saml2Controller@metadata']);
+    Route::post('/acs',['as' => 'saml_acs','uses' => 'Saml2Controller@acs']);
+    Route::get('/sls',['as' => 'saml_sls','uses' => 'Saml2Controller@sls']);
+    Route::get('/wayf/{site?}', ['as' => 'saml_wayf','uses' => 'Saml2Controller@wayf']);
+});
+
+/* API STUFF */
 
 Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () use ($router) {
     //** APP Init **//
@@ -75,15 +52,15 @@ Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () 
     Route::delete('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@remove_member']);
 
     Route::get('/teams/{team_id}/messages',['uses'=>'TeamController@list_messages']);
-    Route::post('/teams/{team_id}/messages/{user_id}',['uses'=>'TeamController@add_message']);
-    Route::delete('/teams/{team_id}/messages/{user_id}',['uses'=>'TeamController@remove_message']);
+    Route::post('/teams/{team_id}/messages/{user_id?}',['uses'=>'TeamController@add_message']);
+    Route::delete('/teams/{team_id}/messages/{message_id}',['uses'=>'TeamController@remove_message']);
 
     Route::get('/teams/{team_id}/notes',['uses'=>'TeamController@list_notes']);
     Route::post('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@add_note']);
-    Route::delete('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@remove_note']);
+    Route::delete('/teams/{team_id}/notes/{note_id}',['uses'=>'TeamController@remove_note']);
 
     Route::get('/teams/{team_id}/scenario_logs',['uses'=>'TeamController@list_scenario_logs']);
-    Route::post('/teams/{team_id}/scenario_logs/{user_id}',['uses'=>'TeamController@add_scenario_log']);
+    Route::post('/teams/{team_id}/scenario_logs/{user_id?}',['uses'=>'TeamController@add_scenario_log']);
 
     //** ROLES **//
     Route::get('/roles',['uses'=>'RoleController@browse']);
