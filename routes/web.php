@@ -10,78 +10,100 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-$router->group(['middleware'=>['custom.auth']], function () use ($router) {
-    $router->get('/sso', function() {
-        return "Welcome ".Auth::user()->first_name."!";
+// Route::group(['middleware'=>['custom.auth']], function () use ($router) {
+//     Route::get('/sso', function() {
+//         return "Welcome ".Auth::user()->first_name."!";
+//     });
+// });
+Route::get('/logout', function() {
+    Auth::logout();
+    Session::save();
+});
+
+Route::group([
+    'prefix' => config('saml2_settings.routesPrefix'),
+    'middleware' => config('saml2_settings.routesMiddleware'),
+], function () {
+    Route::any('/acs', ['uses' => 'CustomSaml2Controller@acs']);
+
+    Route::get('/wayf', function() {
+        return view('wayf');
+    });
+    Route::get('/wayf/{site}', function($site) {
+        if(!Auth::user()){
+            // config(['saml2_settings.idp' => config('saml2_settings.'.$site.'_idp')]);
+            $saml2 = new \App\Libraries\SAML2AuthWrapper();
+            $saml2->authenticate();
+        } else {
+            return redirect('/');
+        }
     });
 });
 
-$router->group(['middleware'=>[]], function () use ($router) {
-    $router->get('/', ['uses'=>'AppController@getViewerApp']);
-    $router->get('/admin', ['uses'=>'AppController@getAdminApp']);
-    $router->get('/logout', function() {
-        Auth::logout();
-    });
+
+
+
+
+
+Route::group(['middleware'=>['custom.auth']], function () use ($router) {
+    Route::get('/', ['uses'=>'AppController@getViewerApp']);
+    Route::get('/admin', ['uses'=>'AppController@getAdminApp']);
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () use ($router) {
     //** APP Init **//
-    $router->post('/init/{app_id}',['uses'=>'AppController@initData']);
+    Route::post('/init/{app_id}',['uses'=>'AppController@initData']);
 
     //** USERS **//
-    $router->get('/users',['uses'=>'UserController@browse']);
-    $router->get('/users/{user_id}',['uses'=>'UserController@read']);
-    $router->put('/users/{user_id}',['uses'=>'UserController@edit']);
-    $router->post('/users',['uses'=>'UserController@add']);
-    $router->delete('/users/{user_id}',['uses'=>'UserController@delete']);
-    $router->get('/users/{user_id}/teams',['uses'=>'UserController@user_teams']);
+    Route::get('/users',['uses'=>'UserController@browse']);
+    Route::get('/users/{user_id}',['uses'=>'UserController@read']);
+    Route::put('/users/{user_id}',['uses'=>'UserController@edit']);
+    Route::post('/users',['uses'=>'UserController@add']);
+    Route::delete('/users/{user_id}',['uses'=>'UserController@delete']);
+    Route::get('/users/{user_id}/teams',['uses'=>'UserController@user_teams']);
 
     //** TEAMS **//
-    $router->get('/teams',['uses'=>'TeamController@browse']);
-    $router->get('/teams/{team_id}',['uses'=>'TeamController@read']);
-    $router->get('/teams/{team_id}/activity/{last_activity_id?}',['uses'=>'TeamController@activity']);
-    $router->put('/teams/{team_id}',['uses'=>'TeamController@edit']);
-    $router->post('/teams',['uses'=>'TeamController@add']);
-    $router->delete('/teams/{team_id}',['uses'=>'TeamController@delete']);
+    Route::get('/teams',['uses'=>'TeamController@browse']);
+    Route::get('/teams/{team_id}',['uses'=>'TeamController@read']);
+    Route::get('/teams/{team_id}/activity/{last_activity_id?}',['uses'=>'TeamController@activity']);
+    Route::put('/teams/{team_id}',['uses'=>'TeamController@edit']);
+    Route::post('/teams',['uses'=>'TeamController@add']);
+    Route::delete('/teams/{team_id}',['uses'=>'TeamController@delete']);
 
-    $router->get('/teams/{team_id}/members',['uses'=>'TeamController@list_members']);
-    $router->post('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@add_member']);
-    $router->delete('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@remove_member']);
+    Route::get('/teams/{team_id}/members',['uses'=>'TeamController@list_members']);
+    Route::post('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@add_member']);
+    Route::delete('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@remove_member']);
 
-    $router->get('/teams/{team_id}/messages',['uses'=>'TeamController@list_messages']);
-    $router->post('/teams/{team_id}/messages/{user_id}',['uses'=>'TeamController@add_message']);
-    $router->delete('/teams/{team_id}/messages/{user_id}',['uses'=>'TeamController@remove_message']);
+    Route::get('/teams/{team_id}/messages',['uses'=>'TeamController@list_messages']);
+    Route::post('/teams/{team_id}/messages/{user_id}',['uses'=>'TeamController@add_message']);
+    Route::delete('/teams/{team_id}/messages/{user_id}',['uses'=>'TeamController@remove_message']);
 
-    $router->get('/teams/{team_id}/notes',['uses'=>'TeamController@list_notes']);
-    $router->post('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@add_note']);
-    $router->delete('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@remove_note']);
+    Route::get('/teams/{team_id}/notes',['uses'=>'TeamController@list_notes']);
+    Route::post('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@add_note']);
+    Route::delete('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@remove_note']);
 
-    $router->get('/teams/{team_id}/scenario_logs',['uses'=>'TeamController@list_scenario_logs']);
-    $router->post('/teams/{team_id}/scenario_logs/{user_id}',['uses'=>'TeamController@add_scenario_log']);
+    Route::get('/teams/{team_id}/scenario_logs',['uses'=>'TeamController@list_scenario_logs']);
+    Route::post('/teams/{team_id}/scenario_logs/{user_id}',['uses'=>'TeamController@add_scenario_log']);
 
     //** ROLES **//
-    $router->get('/roles',['uses'=>'RoleController@browse']);
-    $router->get('/roles/{user_id}',['uses'=>'RoleController@read']);
-    $router->put('/roles/{user_id}',['uses'=>'RoleController@edit']);
-    $router->post('/roles',['uses'=>'RoleController@add']);
-    $router->delete('/roles/{user_id}',['uses'=>'RoleController@delete']);
+    Route::get('/roles',['uses'=>'RoleController@browse']);
+    Route::get('/roles/{user_id}',['uses'=>'RoleController@read']);
+    Route::put('/roles/{user_id}',['uses'=>'RoleController@edit']);
+    Route::post('/roles',['uses'=>'RoleController@add']);
+    Route::delete('/roles/{user_id}',['uses'=>'RoleController@delete']);
 
     //** SCENARIOS **//
-    $router->get('/scenarios',['uses'=>'ScenarioController@browse']);
-    $router->get('/scenarios/{scenario_id}',['uses'=>'ScenarioController@read']);
-    $router->put('/scenarios/{scenario_id}',['uses'=>'ScenarioController@edit']);
-    $router->post('/scenarios',['uses'=>'ScenarioController@add']);
-    $router->delete('/scenarios/{scenario_id}',['uses'=>'ScenarioController@delete']);
+    Route::get('/scenarios',['uses'=>'ScenarioController@browse']);
+    Route::get('/scenarios/{scenario_id}',['uses'=>'ScenarioController@read']);
+    Route::put('/scenarios/{scenario_id}',['uses'=>'ScenarioController@edit']);
+    Route::post('/scenarios',['uses'=>'ScenarioController@add']);
+    Route::delete('/scenarios/{scenario_id}',['uses'=>'ScenarioController@delete']);
 
     //** Libraries **//
-    $router->get('/library',['uses'=>'LibraryController@browse_all']);
-    $router->get('/library/{library_type}',['uses'=>'LibraryController@browse']);
-    $router->get('/library/{library_type}/{library_id}',['uses'=>'LibraryController@read']);
-    $router->put('/library/{library_type}/{library_id}',['uses'=>'LibraryController@edit']);
-    $router->post('/library/{library_type}',['uses'=>'LibraryController@add']);
-    $router->delete('/library/{library_type}/{library_id}',['uses'=>'LibraryController@delete']);
+    Route::get('/library',['uses'=>'LibraryController@browse_all']);
+    Route::get('/library/{library_type}',['uses'=>'LibraryController@browse']);
+    Route::get('/library/{library_type}/{library_id}',['uses'=>'LibraryController@read']);
+    Route::put('/library/{library_type}/{library_id}',['uses'=>'LibraryController@edit']);
+    Route::post('/library/{library_type}',['uses'=>'LibraryController@add']);
+    Route::delete('/library/{library_type}/{library_id}',['uses'=>'LibraryController@delete']);
 });
-
-// Auth::routes(['register' => false]);
-
-Route::get('/home', 'HomeController@index')->name('home');

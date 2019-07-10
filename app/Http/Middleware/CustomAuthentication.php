@@ -5,8 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Site;
 use App\Libraries\SAML2AuthWrapper;
 
 class CustomAuthentication
@@ -20,8 +18,8 @@ class CustomAuthentication
 
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()){           
-            return $this->saml2->authenticate();
+        if(!Auth::user()){    
+            return redirect('saml2/wayf');
         }
         return $next($request);
     }

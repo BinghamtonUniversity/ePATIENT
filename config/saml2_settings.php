@@ -3,7 +3,7 @@
 //This is variable is an example - Just make sure that the urls in the 'idp' config are ok.
 $idp_host = env('SAML2_IDP_HOST', 'https://idp-dev.cc.binghamton.edu');
 
-return $settings = array(
+return [
 
     /**
      * If 'useRoutes' is set to true, the package defines five new routes:
@@ -138,32 +138,6 @@ return $settings = array(
         ),
     ),
 
-    // Identity Provider Data that we want connect with our SP
-    'idp' => array(
-        // Identifier of the IdP entity  (must be a URI)
-        'entityId' => env('SAML2_IDP_ENTITYID', $idp_host . '/idp/shibboleth'),
-        // SSO endpoint info of the IdP. (Authentication Request protocol)
-        'singleSignOnService' => array(
-            // URL Target of the IdP where the SP will send the Authentication Request Message,
-            // using HTTP-Redirect binding.
-            'url' => $idp_host . '/idp/profile/SAML2/Redirect/SSO',
-        ),
-        // SLO endpoint info of the IdP.
-        'singleLogoutService' => array(
-            // URL Location of the IdP where the SP will send the SLO Request,
-            // using HTTP-Redirect binding.
-            'url' => $idp_host . '/idp/profile/SAML2/Redirect/SLO',
-        ),
-        // Public x509 certificate of the IdP
-        'x509cert' => env('SAML2_IDP_x509', '
-        MIIDTzCCAjegAwIBAgIUIxgMuKdj85wizYHJ1HH1eZfn3IowDQYJKoZIhvcNAQEL BQAwJDEiMCAGA1UEAwwZaWRwLWRldi5jYy5iaW5naGFtdG9uLmVkdTAeFw0xOTA2 MTEyMDQ1NDdaFw0zOTA2MTEyMDQ1NDdaMCQxIjAgBgNVBAMMGWlkcC1kZXYuY2Mu YmluZ2hhbXRvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCI CsFPx2RqtHWIzT5FV0aNACv+y7K3dZxBlISnRa5a0OHrVL6jr6igvuhjB+4apF5o IJTo/Dr/QoF61MsOxPucY9mhyve/wJ7SHQHgRjyYzxzdFhyq26TodAwLaPBZVEzC NYyPFxwcMwd/ka57tXKy4b2ZeiK6zhLTLkXbvl7pNHjAl6dLSQk+tI80ZW4RSPu7 /UhmtzP+UxK9hFIHsEZpt0HFbsLFcdrQs0EBXHVTyzUFqt2s0RVN2oCIupo7pQ0T Ny6qapwafkGq/3bWzsBZWX/zECnC1jWSFusKGk+MlSkSVYGffOnjcV0JiMqg7UHO XZ0+4bC3jzi44cqJU1eDAgMBAAGjeTB3MB0GA1UdDgQWBBRJmhUbP6ZR1XxOOAc2 zQuoIh4x9jBWBgNVHREETzBNghlpZHAtZGV2LmNjLmJpbmdoYW10b24uZWR1hjBo dHRwczovL2lkcC1kZXYuY2MuYmluZ2hhbXRvbi5lZHUvaWRwL3NoaWJib2xldGgw DQYJKoZIhvcNAQELBQADggEBAEYSU3NDFFTerdVl9fqN9kJWBBp3gyCP38EuVZgK dqqUsq84rRqp/EgI1PrnjDF8TP6CmY2lgMSqdMk5TDmV66MOctjT8W5MLm8dzX38 TSNPD8LMyiYVdMGOxssjsZwwY4udhuLQabGxh2tkhmREdaoi53ToBCZNvbw4l7YW 9ZB4u9sGdpg1hHwizPJd1eLyuJvvtWjDtxp3cGwydIHwgzUQ9yd8CVg39MhaeS12 t5fgGtDYTFnl9lUIc8+Ecu32QWksNmKOJdvs4pzu/NZ131l+TeTLFN/UmgzFWqC9 ad4IZdkOC/S09AD4yeQPFblvQo+tw6Y/drgW8+WxEsC3xR0=
-        '),
-        /*
-         *  Instead of use the whole x509cert you can use a fingerprint
-         *  (openssl x509 -noout -fingerprint -in "idp.crt" to generate it)
-         */
-        // 'certFingerprint' => '',
-    ),
 
 
 
@@ -254,4 +228,31 @@ return $settings = array(
    'wantNameIdEncrypted' => false,
 */
 
-);
+    // Identity Provider Data that we want connect with our SP
+    'idp' => array(
+        // Identifier of the IdP entity  (must be a URI)
+        'entityId' => env('SAML2_IDP_ENTITYID', $idp_host . '/idp/shibboleth'),
+        // SSO endpoint info of the IdP. (Authentication Request protocol)
+        'singleSignOnService' => array(
+            // URL Target of the IdP where the SP will send the Authentication Request Message,
+            // using HTTP-Redirect binding.
+            'url' => $idp_host . '/idp/profile/SAML2/Redirect/SSO',
+        ),
+        // SLO endpoint info of the IdP.
+        'singleLogoutService' => array(
+            // URL Location of the IdP where the SP will send the SLO Request,
+            // using HTTP-Redirect binding.
+            'url' => $idp_host . '/idp/profile/SAML2/Redirect/SLO',
+        ),
+        // Public x509 certificate of the IdP
+        'x509cert' => env('SAML2_IDP_x509', '
+        MIIDTzCCAjegAwIBAgIUIxgMuKdj85wizYHJ1HH1eZfn3IowDQYJKoZIhvcNAQEL BQAwJDEiMCAGA1UEAwwZaWRwLWRldi5jYy5iaW5naGFtdG9uLmVkdTAeFw0xOTA2 MTEyMDQ1NDdaFw0zOTA2MTEyMDQ1NDdaMCQxIjAgBgNVBAMMGWlkcC1kZXYuY2Mu YmluZ2hhbXRvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCI CsFPx2RqtHWIzT5FV0aNACv+y7K3dZxBlISnRa5a0OHrVL6jr6igvuhjB+4apF5o IJTo/Dr/QoF61MsOxPucY9mhyve/wJ7SHQHgRjyYzxzdFhyq26TodAwLaPBZVEzC NYyPFxwcMwd/ka57tXKy4b2ZeiK6zhLTLkXbvl7pNHjAl6dLSQk+tI80ZW4RSPu7 /UhmtzP+UxK9hFIHsEZpt0HFbsLFcdrQs0EBXHVTyzUFqt2s0RVN2oCIupo7pQ0T Ny6qapwafkGq/3bWzsBZWX/zECnC1jWSFusKGk+MlSkSVYGffOnjcV0JiMqg7UHO XZ0+4bC3jzi44cqJU1eDAgMBAAGjeTB3MB0GA1UdDgQWBBRJmhUbP6ZR1XxOOAc2 zQuoIh4x9jBWBgNVHREETzBNghlpZHAtZGV2LmNjLmJpbmdoYW10b24uZWR1hjBo dHRwczovL2lkcC1kZXYuY2MuYmluZ2hhbXRvbi5lZHUvaWRwL3NoaWJib2xldGgw DQYJKoZIhvcNAQELBQADggEBAEYSU3NDFFTerdVl9fqN9kJWBBp3gyCP38EuVZgK dqqUsq84rRqp/EgI1PrnjDF8TP6CmY2lgMSqdMk5TDmV66MOctjT8W5MLm8dzX38 TSNPD8LMyiYVdMGOxssjsZwwY4udhuLQabGxh2tkhmREdaoi53ToBCZNvbw4l7YW 9ZB4u9sGdpg1hHwizPJd1eLyuJvvtWjDtxp3cGwydIHwgzUQ9yd8CVg39MhaeS12 t5fgGtDYTFnl9lUIc8+Ecu32QWksNmKOJdvs4pzu/NZ131l+TeTLFN/UmgzFWqC9 ad4IZdkOC/S09AD4yeQPFblvQo+tw6Y/drgW8+WxEsC3xR0=
+        '),
+        /*
+            *  Instead of use the whole x509cert you can use a fingerprint
+            *  (openssl x509 -noout -fingerprint -in "idp.crt" to generate it)
+            */
+        // 'certFingerprint' => '',
+    ),
+    
+];

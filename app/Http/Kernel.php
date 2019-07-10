@@ -41,9 +41,9 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'saml' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
+            // \App\Http\Middleware\EncryptCookies::class,
+            // \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            // \Illuminate\Session\Middleware\StartSession::class,
         ],
     ];
 
@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'custom.auth'=>  \App\Http\Middleware\CustomAuthentication::class,
+        'no.save.session'=>  \App\Http\Middleware\NoSaveSession::class,
     ];
 
     /**

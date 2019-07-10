@@ -41,9 +41,8 @@ class EventServiceProvider extends ServiceProvider
                     $saml_attributes[$attribute_name] = $attribute_value[0];
                 }
             }
-            dd($saml_attributes);
             $mySAML2Auth = new SAML2AuthWrapper();
-            return $mySAML2Auth->handle($saml_attributes);
+            return $mySAML2Auth->login($saml_attributes);
         });
 
         Event::listen('Aacotroneo\Saml2\Events\Saml2LogoutEvent', function ($event) {
