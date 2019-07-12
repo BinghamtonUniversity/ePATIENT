@@ -5,13 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Role extends Model
+class UserPermission extends Model
 {
-    protected $fillable = ['name'];
-
-    public function team_members() {
-      return $this->hasMany(TeamMember::class);
-    }
+    protected $fillable = ['user_id', 'permission'];
 
     public function user() {
         return $this->belongsTo(User::class);

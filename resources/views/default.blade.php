@@ -21,6 +21,11 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+            background-color: rgb(35, 57, 90);
+        }
+    </style>
   </head>
   <body style="margin-top:70px;">
     <nav class="navbar navbar-default navbar-fixed-top" style="background: rgb(51, 85, 136);color:white;">
@@ -41,10 +46,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" style="color:white;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome! <span class="caret"></span></a>
+              <a href="#" style="color:white;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@if(!is_null(Auth::user())) Welcome {{Auth::user()->first_name}} {{Auth::user()->last_name}}! <span class="caret"></span>@else Welcome! @endif</a>
+              @if(!is_null(Auth::user()))
               <ul class="dropdown-menu">
-                <li  style="color:white;" ><a href="/logout">Logout</a></li>
+              <li  style="color:white;" ><a href="/admin"><i class="fa fa-user-shield fa-fw"></i> Admin</a></li>
+                <li  style="color:white;" ><a href="/logout"><i class="fa fa-times-circle fa-fw"></i> Logout</a></li>
               </ul>
+              @endif
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->

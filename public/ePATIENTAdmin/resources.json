@@ -7,5 +7,6 @@
     "prescribers": "/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
     "solutions": "/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
     "labs": "/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
-    "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}"
+    "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
+    "update_permissions": "/users/{{request.user_id}}/permissions"
 }

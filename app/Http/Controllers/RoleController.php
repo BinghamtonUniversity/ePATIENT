@@ -14,40 +14,12 @@ class RoleController extends Controller
 
     public function browse()
     {
-        $roles = Role::all();
-        return $roles;
+        return array_values(config('role_permissions.roles'));
     }
 
     public function read($role_id)
     {
-        $role = Role::where('id',$role_id)->first();
-        if (!is_null($role)) {
-            return $role;
-        } else {
-            return response('role_id not found', 404);
-        }
-    }
-
-    public function edit(Request $request, $role_id)
-    {
-        $role = Role::where('id',$role_id)->first();
-        $role->update($request->all());
-        return $role;
-    }
-
-    public function add(Request $request)
-    {
-        $this->validate($request,['name'=>['required']]);
-        $role = new Role($request->all());
-        $role->save();
-        return $role;
-    }
-
-    public function delete($role_id)
-    {
-        if ( Role::where('id',$role_id)->delete() ) {
-            return [true];
-        }
+        return config('role_permissions.roles.'.$role_id);
     }
 
 }

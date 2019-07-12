@@ -1,16 +1,21 @@
 <ul class="nav nav-sidebar">
     <li><a data-toggle="collapse" href="#group-user"><i class="fa fa-user fa-fw"></i>&nbsp; Welcome, {{user.first_name}}!</a></li>
     <ul class="collapse"  aria-expanded="true" id="group-user">
+      <li class="" style="background:#33373a" ><a href="/"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
       <li class="" style="background:#33373a" ><a href="/logout"><i class="fa fa-times-circle fa-fw"></i>&nbsp; Logout</a></li>
-      <li class="" style="background:#33373a" ><a href="/"><i class="fa fa-arrow-circle-left fa-fw"></i>&nbsp; Viewer</a></li>
     </ul>
-
     {{#apps_pages}}
-        <li><a {{^slug}}data-toggle="collapse" href="#group{{ id }}" {{/slug}} {{#slug}}href="#page={{slug}}{{#resource}}&resource={{resource}}{{/resource}}"{{/slug}}><i class="fa fa-{{#icon}}{{icon}}{{/icon}}{{^icon}}file{{/icon}} fa-fw"></i>&nbsp; {{ name }}</a></li>
-        <ul class="collapse"  id="group{{ id }}">
+        <li>
+            <a {{^slug}}data-toggle="collapse" href="#group{{ id }}" {{/slug}} {{#slug}}href="#page={{slug}}{{#resource}}&resource={{resource}}{{/resource}}"{{/slug}}>
+            <i class="fa fa-{{#icon}}{{icon}}{{/icon}}{{^icon}}file{{/icon}} fa-fw"></i>&nbsp; {{ name }}</a>
+        </li>
+        <ul class="collapse in" id="group{{ id }}">
         {{#pages}}
-                <li><a href="#page={{slug}}{{#resource}}&resource={{resource}}{{/resource}}"><i class="fa fa-{{#icon}}{{icon}}{{/icon}}{{^icon}}file{{/icon}} fa-fw"></i>&nbsp; {{ name }}</a></li>
+                <li>
+                    <a href="#page={{slug}}{{#resource}}&resource={{resource}}{{/resource}}">
+                    <i class="fa fa-{{#icon}}{{icon}}{{/icon}}{{^icon}}file{{/icon}} fa-fw"></i>&nbsp; {{ name }}</a>
+                </li>
         {{/pages}}
         </ul>
     {{/apps_pages}}
-  </ul>
+</ul>

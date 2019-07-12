@@ -18,19 +18,13 @@ class ScenarioController extends Controller
         return $scenarios;
     }
 
-    public function read($scenario_id)
+    public function read(Scenario $scenario)
     {
-        $scenario = Scenario::where('id',$scenario_id)->first();
-        if (!is_null($scenario)) {
-            return $scenario;
-        } else {
-            return response('scenario_id not found', 404);
-        }
+        return $scenario;
     }
 
-    public function edit(Request $request, $scenario_id)
+    public function edit(Request $request, Scenario $scenario)
     {
-        $scenario = Scenario::where('id',$scenario_id)->first();
         $scenario->update($request->all());
         return $scenario;
     }
@@ -43,9 +37,9 @@ class ScenarioController extends Controller
         return $scenario;
     }
 
-    public function delete($scenario_id)
+    public function delete(Scenario $scenario)
     {
-        if ( Scenario::where('id',$scenario_id)->delete() ) {
+        if ( $scenario->delete() ) {
             return [true];
         }
     }

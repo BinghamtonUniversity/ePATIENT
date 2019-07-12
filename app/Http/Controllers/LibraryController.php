@@ -12,7 +12,7 @@ class LibraryController extends Controller
         //
     }
 
-    private function flatten($library) {
+    private function flatten(Library $library) {
         $library_arr = [
             'id'=>$library->id,
             'created_at'=>$library->created_at->toDateTimeString(),
@@ -42,19 +42,13 @@ class LibraryController extends Controller
         return $libraries_arr;
     }
 
-    public function read($library_type, $library_id)
+    public function read($library_type, Library $library)
     {
-        $library = Library::where('id',$library_id)->first();
-        if (!is_null($library)) {
-            return self::flatten($library);
-        } else {
-            return response('library_id not found', 404);
-        }
+        return $library;
     }
 
-    public function edit(Request $request, $library_type, $library_id)
+    public function edit(Request $request, $library_type, Library $library)
     {
-        $library = Library::where('id',$library_id)->first();
         $library->update(['data'=>$request->except(['created_at','updated_at','id','type'])]);
         return self::flatten($library);
     }
@@ -66,9 +60,9 @@ class LibraryController extends Controller
         return self::flatten($library);
     }
 
-    public function delete($library_type, $library_id)
+    public function delete($library_type, Library $library)
     {
-        if ( Library::where('id',$library_id)->delete() ) {
+        if ( $library->delete() ) {
             return [true];
         }
     }

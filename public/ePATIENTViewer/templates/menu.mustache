@@ -1,8 +1,9 @@
   <ul class="nav nav-sidebar" style="position:relative;top:50px;{{#local}}top:90px;{{/local}}{{#admin}}top:90px;{{/admin}}">
     <li><a data-toggle="collapse" href="#group-user"><i class="fa fa-user fa-fw"></i>&nbsp; Welcome, {{user.first_name}}!</a></li>
     <ul class="collapse"  aria-expanded="true" id="group-user">
-      <li class="" style="background:#33373a" ><a href="/logout"><i class="fa fa-times-circle fa-fw"></i>&nbsp; Logout</a></li>
+      <li class="" style="background:#33373a" ><a href="/"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a></li>
       <li class="" style="background:#33373a" ><a href="/admin"><i class="fa fa-user-shield fa-fw"></i>&nbsp; Admin</a></li>
+      <li class="" style="background:#33373a" ><a href="/logout"><i class="fa fa-times-circle fa-fw"></i>&nbsp; Logout</a></li>
     </ul>
 
     {{#if (team_id || scenario_id)}}

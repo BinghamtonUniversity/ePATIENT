@@ -8,7 +8,6 @@ use App\Library;
 use App\User;
 use App\Team;
 use App\Scenario;
-use App\Role;
 
 class AppController extends Controller
 {
@@ -27,8 +26,6 @@ class AppController extends Controller
             'id'=>$app_name,
             'name'=>$app_name,
             'slug'=>$app_name,
-            'options'=>['admin'=>false],
-            'user_options'=>null,
             'app'=>[
                 'id'=>$app_name,
                 'name'=>$app_name,
@@ -82,11 +79,11 @@ class AppController extends Controller
 
         /* Get Teams */
         $teams = Team::whereHas('team_members',function($query) use ($user) {
-            $query->where('user_id', $user->id)->orWhereHas('user',function($query) use ($user) {
-                $query->where('unique_id', $user->id);
-            });
+            $query->where('user_id', $user->id);
         })->with(['scenario'=>function($query){
             $query->select('id','name');
+        }])->with(['team_members'=>function($query) use ($user) {
+            $query->where('user_id',$user->id);
         }])->get();
         $response['myteams'] = $teams;
 
@@ -98,7 +95,7 @@ class AppController extends Controller
     public function getAdminInitData() {
         $response = [
             'scenarios' => Scenario::all(),
-            'roles' => Role::all(),
+            'roles' => array_values(config('role_permissions.roles')),
             'users' => User::all(),
             'user' => Auth::user(),
         ];
@@ -112,6 +109,16 @@ class AppController extends Controller
         } else if ($app_name === 'ePATIENTAdmin') {
             return $this->getAdminInitData();
         }
+    }
+
+    public function home(Request $request) {
+        $teams = Team::whereHas('team_members',function($query) {
+            $query->where('user_id', Auth::user()->id);
+        })->with(['scenario'=>function($query){
+            $query->select('id','name');
+        }])->get();
+
+        return view('home',['teams'=>$teams,'user'=>Auth::user()]);
     }
 
 }

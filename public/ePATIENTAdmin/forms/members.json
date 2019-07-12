@@ -11,9 +11,14 @@
       "type": "select",
       "label": "Role",
       "name": "role_id",
-      "label_key": "name",
+      "label_key": "title",
       "value_key": "id",
       "choices":"roles"
+    },
+    {
+      "type": "checkbox",
+      "label": "Team Admin",
+      "name": "admin"
     }
   ]
 }

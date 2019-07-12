@@ -13,7 +13,9 @@
 
 /* GENERIC STUFF */
 Route::group(['middleware'=>['saml2.auth']], function () use ($router) {
-    Route::get('/', ['uses'=>'AppController@getViewerApp']);
+    Route::get('/', ['uses'=>'AppController@home']);
+    Route::get('/viewer', ['uses'=>'AppController@getViewerApp']);
+    Route::get('/configuration', ['uses'=>'AppController@getViewerAppConfiguration']);
     Route::get('/admin', ['uses'=>'AppController@getAdminApp']);
 });
 Route::get('/logout', ['as' => 'saml_logout','uses' => 'Saml2Controller@logout']);
@@ -32,55 +34,54 @@ Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () 
     Route::post('/init/{app_id}',['uses'=>'AppController@initData']);
 
     //** USERS **//
-    Route::get('/users',['uses'=>'UserController@browse']);
-    Route::get('/users/{user_id}',['uses'=>'UserController@read']);
-    Route::put('/users/{user_id}',['uses'=>'UserController@edit']);
-    Route::post('/users',['uses'=>'UserController@add']);
-    Route::delete('/users/{user_id}',['uses'=>'UserController@delete']);
-    Route::get('/users/{user_id}/teams',['uses'=>'UserController@user_teams']);
+    Route::get('/users',['uses'=>'UserController@browse'])->middleware('can:browse,App\User');
+    Route::get('/users/{user}',['uses'=>'UserController@read'])->middleware('can:view,user');
+    Route::put('/users/{user}',['uses'=>'UserController@edit'])->middleware('can:manage,App\User');
+    Route::post('/users',['uses'=>'UserController@add'])->middleware('can:manage,App\User');
+    Route::delete('/users/{user}',['uses'=>'UserController@delete'])->middleware('can:manage,App\User');
+    Route::get('/users/{user}/teams',['uses'=>'UserController@user_teams'])->middleware('can:view,user');
+    Route::post('/users/{user}/permissions',['uses'=>'UserController@update_permissions'])->middleware('can:manage_permissions,App\User');;
 
     //** TEAMS **//
-    Route::get('/teams',['uses'=>'TeamController@browse']);
-    Route::get('/teams/{team_id}',['uses'=>'TeamController@read']);
-    Route::get('/teams/{team_id}/activity/{last_activity_id?}',['uses'=>'TeamController@activity']);
-    Route::put('/teams/{team_id}',['uses'=>'TeamController@edit']);
-    Route::post('/teams',['uses'=>'TeamController@add']);
-    Route::delete('/teams/{team_id}',['uses'=>'TeamController@delete']);
+    Route::get('/teams',['uses'=>'TeamController@browse'])->middleware('can:browse,App\Team');
+    Route::get('/teams/{team}',['uses'=>'TeamController@read'])->middleware('can:view,team');
+    Route::get('/teams/{team}/activity/{last_activity_id?}',['uses'=>'TeamController@activity']);
+    Route::put('/teams/{team}',['uses'=>'TeamController@edit'])->middleware('can:manage,team');
+    Route::post('/teams',['uses'=>'TeamController@add'])->middleware('can:manage,App\Team');
+    Route::delete('/teams/{team}',['uses'=>'TeamController@delete'])->middleware('can:manage,team');
 
-    Route::get('/teams/{team_id}/members',['uses'=>'TeamController@list_members']);
-    Route::post('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@add_member']);
-    Route::delete('/teams/{team_id}/members/{user_id}',['uses'=>'TeamController@remove_member']);
+    Route::get('/teams/{team}/members',['uses'=>'TeamController@list_members'])->middleware('can:manage,App\User');
+    Route::post('/teams/{team}/members/{user}',['uses'=>'TeamController@add_member'])->middleware('can:manage,App\User');
+    Route::delete('/teams/{team}/members/{user}',['uses'=>'TeamController@remove_member'])->middleware('can:manage,App\User');
+    Route::put('/teams/{team}/members/{user}',['uses'=>'TeamController@update_member'])->middleware('can:manage,App\User');
 
-    Route::get('/teams/{team_id}/messages',['uses'=>'TeamController@list_messages']);
-    Route::post('/teams/{team_id}/messages/{user_id?}',['uses'=>'TeamController@add_message']);
-    Route::delete('/teams/{team_id}/messages/{message_id}',['uses'=>'TeamController@remove_message']);
+    Route::get('/teams/{team}/messages',['uses'=>'TeamController@list_messages'])->middleware('can:view,team');
+    Route::post('/teams/{team}/messages/{user?}',['uses'=>'TeamController@add_message'])->middleware('can:view,team');
+    Route::delete('/teams/{team}/messages/{message}',['uses'=>'TeamController@remove_message'])->middleware('can:manage,App\User');
 
-    Route::get('/teams/{team_id}/notes',['uses'=>'TeamController@list_notes']);
-    Route::post('/teams/{team_id}/notes/{user_id}',['uses'=>'TeamController@add_note']);
-    Route::delete('/teams/{team_id}/notes/{note_id}',['uses'=>'TeamController@remove_note']);
+    Route::get('/teams/{team}/notes',['uses'=>'TeamController@list_notes'])->middleware('can:view,team');
+    Route::post('/teams/{team}/notes/{user}',['uses'=>'TeamController@add_note'])->middleware('can:manage,team');
+    Route::delete('/teams/{team}/notes/{note}',['uses'=>'TeamController@remove_note'])->middleware('can:manage,team');
 
-    Route::get('/teams/{team_id}/scenario_logs',['uses'=>'TeamController@list_scenario_logs']);
-    Route::post('/teams/{team_id}/scenario_logs/{user_id?}',['uses'=>'TeamController@add_scenario_log']);
+    Route::get('/teams/{team}/scenario_logs',['uses'=>'TeamController@list_scenario_logs'])->middleware('can:view,team');
+    Route::post('/teams/{team}/scenario_logs/{user?}',['uses'=>'TeamController@add_scenario_log'])->middleware('can:view,team');
 
     //** ROLES **//
     Route::get('/roles',['uses'=>'RoleController@browse']);
-    Route::get('/roles/{user_id}',['uses'=>'RoleController@read']);
-    Route::put('/roles/{user_id}',['uses'=>'RoleController@edit']);
-    Route::post('/roles',['uses'=>'RoleController@add']);
-    Route::delete('/roles/{user_id}',['uses'=>'RoleController@delete']);
+    Route::get('/roles/{role_id}',['uses'=>'RoleController@read']);
 
     //** SCENARIOS **//
     Route::get('/scenarios',['uses'=>'ScenarioController@browse']);
-    Route::get('/scenarios/{scenario_id}',['uses'=>'ScenarioController@read']);
-    Route::put('/scenarios/{scenario_id}',['uses'=>'ScenarioController@edit']);
-    Route::post('/scenarios',['uses'=>'ScenarioController@add']);
-    Route::delete('/scenarios/{scenario_id}',['uses'=>'ScenarioController@delete']);
+    Route::get('/scenarios/{scenario}',['uses'=>'ScenarioController@read']);
+    Route::put('/scenarios/{scenario}',['uses'=>'ScenarioController@edit'])->middleware('can:manage,App\scenario');
+    Route::post('/scenarios',['uses'=>'ScenarioController@add'])->middleware('can:manage,App\scenario');
+    Route::delete('/scenarios/{scenario}',['uses'=>'ScenarioController@delete'])->middleware('can:manage,App\scenario');
 
     //** Libraries **//
     Route::get('/library',['uses'=>'LibraryController@browse_all']);
     Route::get('/library/{library_type}',['uses'=>'LibraryController@browse']);
-    Route::get('/library/{library_type}/{library_id}',['uses'=>'LibraryController@read']);
-    Route::put('/library/{library_type}/{library_id}',['uses'=>'LibraryController@edit']);
-    Route::post('/library/{library_type}',['uses'=>'LibraryController@add']);
-    Route::delete('/library/{library_type}/{library_id}',['uses'=>'LibraryController@delete']);
+    Route::get('/library/{library_type}/{library}',['uses'=>'LibraryController@read']);
+    Route::put('/library/{library_type}/{library}',['uses'=>'LibraryController@edit'])->middleware('can:manage,App\library');
+    Route::post('/library/{library_type}',['uses'=>'LibraryController@add'])->middleware('can:manage,App\library');
+    Route::delete('/library/{library_type}/{library}',['uses'=>'LibraryController@delete'])->middleware('can:manage,App\library');
 });

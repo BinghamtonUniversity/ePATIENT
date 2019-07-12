@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Team;
+use App\UserPermission;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -19,19 +20,13 @@ class UserController extends Controller
         return $users;
     }
 
-    public function read($user_id)
+    public function read(User $user)
     {
-        $user = User::where('id',$user_id)->first();
-        if (!is_null($user)) {
-            return $user;
-        } else {
-            return response('user_id not found', 404);
-        }
+        return $user;
     }
 
-    public function edit(Request $request, $user_id)
+    public function edit(Request $request, User $user)
     {
-        $user = User::where('id',$user_id)->first();
         $user->update($request->all());
         return $user;
     }
@@ -44,22 +39,32 @@ class UserController extends Controller
         return $user;
     }
 
-    public function delete($user_id)
+    public function delete(User $user)
     {
-        if ( User::where('id',$user_id)->delete() ) {
+        if ( User::where('id',$user->id)->delete() ) {
             return [true];
         }
     }
 
-    public function user_teams($user_id) {
-        $teams = Team::whereHas('team_members',function($query) use ($user_id) {
-            $query->where('user_id', $user_id)->orWhereHas('user',function($query) use ($user_id) {
-                $query->where('unique_id', $user_id);
+    public function user_teams(User $user) {
+        $teams = Team::whereHas('team_members',function($query) use ($user) {
+            $query->where('user_id', $user->id)->orWhereHas('user',function($query) use ($user) {
+                $query->where('unique_id', $user->id);
             });
         })->with(['scenario'=>function($query){
             $query->select('id','name');
         }])->get();
         return $teams;
+    }
+
+    public function update_permissions(Request $request, User $user) {
+        UserPermission::where('user_id',$user->id)->delete();
+
+        foreach($request->permissions as $permission) {
+            $permission = new UserPermission(['user_id'=>$user->id,'permission'=>$permission]);
+            $permission->save();
+        }
+        return User::where('id',$user->id)->first();
     }
 
 }

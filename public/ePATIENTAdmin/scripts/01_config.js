@@ -3,38 +3,40 @@ this.data.apps_pages = [
         "name":"Users",
         "icon":"user",
         "slug":"table",
-        "resource":"users"
-    },
-    {
-        "name":"Roles",        
-        "icon":"id-badge",
-        "slug":"table",
-        "resource":"roles"
+        "resource":"users",
+        "permission":"manage_users"
     },
     {
         "name":"Teams",        
         "icon":"users",
         "slug":"table",
-        "resource":"teams"
+        "resource":"teams",
+        "permission":"manage_teams"
     },
     {
         "name":"Scenarios",        
         "icon":"notes-medical",
         "slug":"table",
-        "resource":"scenarios"
+        "resource":"scenarios",
+        "permission":"manage_scenarios"
     },
     {
         "name":"Library",
         "icon":"book",
         "id":1,
         "pages":[
-            {name:'Products',icon:"pills",slug:'table',"resource":"products"},
-            {name:'Prescribers',icon:"user-md",slug:'table',"resource":"prescribers"},
-            {name:'Solutions',icon:"user-md",slug:'table',"resource":"solutions"},
-            {name:'Labs',icon:"flask",slug:'table',"resource":"labs"},
+            {name:'Products',icon:"pills",slug:'table',"resource":"products","permission":"manage_products"},
+            {name:'Prescribers',icon:"user-md",slug:'table',"resource":"prescribers","permission":"manage_prescribers"},
+            {name:'Solutions',icon:"user-md",slug:'table',"resource":"solutions","permission":"manage_solutions"},
+            {name:'Labs',icon:"flask",slug:'table',"resource":"labs","permission":"manage_labs"},
         ]
     }
 ];
+
+/* Remove pages that the current user does not have permissions to see */
+// _.remove(this.data.apps_pages, function(obj) {
+//     return !this.data.user.permissions[obj.permission];
+// }.bind(this));
     
 this.data.tables = {
     teams: {

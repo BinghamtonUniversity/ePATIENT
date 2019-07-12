@@ -12,6 +12,7 @@ class TeamMember extends Model
     protected $casts = [
         'admin' => 'bool',
     ];
+    protected $appends = ['role_title','role_permissions'];
 
     public function team() {
       return $this->belongsTo(TeamMember::class);
@@ -21,8 +22,13 @@ class TeamMember extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function role() {
-        return $this->belongsTo(Role::class);
+    public function getRoleTitleAttribute() {
+        return config('role_permissions.roles.'.$this->role_id.'.title');
     }
+
+    public function getRolePermissionsAttribute() {
+        return config('role_permissions.permissions.'.config('role_permissions.roles.'.$this->role_id.'.permissions'));
+    }
+
 
 }

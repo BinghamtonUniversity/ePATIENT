@@ -37,13 +37,21 @@ Cobler.types.uApp = function(container){
       $.ajax({
           url: '/api/init/'+this.get().app_id,
           dataType : 'json',
-					type: 'POST',
-          data: {options:{}},
+          type: 'POST',
+          data:JSON.stringify({options:{}}),
+          contentType: "application/json",
 					success  : function(data){
             var opts = {
               template: this.get().template || 'dashboard',
               $el: $(el).find('.collapsible'),
               crud: function(name, data, callback, verb){
+                if (verb === 'GET') {
+                  var content_type = 'application/x-www-form-urlencoded; charset=UTF-8'
+                  var data_to_send = data;
+                } else {
+                  var content_type = 'application/json'
+                  var data_to_send = JSON.stringify(data);
+                }
                 send_data = {request:data}
                 // I'm sure there's a way better to get the app resources, but whatever
                 app_resources = apps[0].app.code.resources;
@@ -51,7 +59,8 @@ Cobler.types.uApp = function(container){
                 $.ajax({
                 url: url,
                 type: verb,
-                data: data,
+                data:data_to_send,
+                contentType: content_type,
                 error: function (data) {
                   toastr.error(data.statusText, 'ERROR')
                 }.bind(this),
@@ -78,7 +87,8 @@ Cobler.types.uApp = function(container){
                 $.ajax({
                   type: 'POST',
                   url:'/api/fetch/'+this.get().app_id,
-                  data:options,
+                  data:JSON.stringify(options),
+                  contentType: "application/json",
                   success:function(data){
                       if(typeof data.user.id == 'undefined') {
                         var url = '/api/apps/instances/'+this.get().app_id+'/user_options';

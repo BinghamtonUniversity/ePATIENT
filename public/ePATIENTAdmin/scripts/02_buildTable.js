@@ -91,6 +91,38 @@ build_table = function(resource, options) {
     		]
         }
     }    
+
+    if(resource == 'users'){
+        appcontext = this.app;
+        options.events = [
+            {'name': 'change_permissions', 'label': '<i class="fa fa-lock"></i> Change Permissions', callback: function(model){
+                permissions_form = $().berry({
+                    legend: 'Change Permissions',
+                    name: 'permissions_form', 
+                    inline:true,                
+                    attributes: {user_id:model.attributes.id,permissions:Object.keys(model.attributes.permissions)},
+                    fields: [{
+                        type:'hidden',
+                        value:model.attributes.id,
+                        name:'user_id',
+                        },{
+                        label: 'Permissions',
+                        type:"check_collection",
+                        options:[
+                            'manage_users','manage_user_permissions','manage_roles','manage_teams','manage_scenarios','manage_products','manage_prescribers','manage_solutions','manage_labs'
+                        ],
+                    }], actions: ['save']}).on('save', function() {
+                        appcontext.post('update_permissions',permissions_form.toJSON(),function(data) {
+                            this.set(data);
+                            this.owner.draw();
+                            toastr.success('', 'Successfully Updated Permissions');
+                            permissions_form.destroy();
+                        }.bind(this))
+                    },model);
+            }.bind(this), multiEdit: false}
+        ]
+    }    
+
     if(resource == 'scenarios'){
 
         options.events = [

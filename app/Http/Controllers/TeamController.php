@@ -22,43 +22,44 @@ class TeamController extends Controller
 
     public function browse()
     {
-        $teams = Team::all();
+        if (isset(Auth::user()->permissions['manage_teams'])) {
+            $teams = Team::all();
+            return $teams;
+        } else {
+            $teams = Team::whereHas('team_members',function($query) {
+                $query->where('user_id',Auth::user()->id)->where('admin',true);
+            })->get();
+        }
         return $teams;
     }
 
-    public function read($team_id)
+    public function read(Team $team)
     {
-        $team = Team::where('id',$team_id)
+        return Team::where('id',$team->id)
             ->with('scenario')
             ->with('team_scenario')
             ->with('team_members.user')
-            ->with('team_members.role')
             ->first();
-        if (!is_null($team)) {
-            return $team;
-        } else {
-            return response('team_id not found', 404);
-        }
     }
 
-    public function activity(Request $request, $team_id,$last_activity_id=null)
+    public function activity(Request $request,Team $team,$last_activity_id=null)
     {
         if (!is_null($last_activity_id) && $last_activity_id != '') {
             $ids = json_decode(base64_decode($last_activity_id));
-            $activity = TeamActivityLog::where('team_id',$team_id)
+            $activity = TeamActivityLog::where('team_id',$team->id)
                 ->where('id','>',$ids->activity)
                 ->orderBy('id', 'asc')->with('user')->get();
-            $messages = TeamMessage::where('team_id',$team_id)
+            $messages = TeamMessage::where('team_id',$team->id)
                 ->where('id','>',$ids->messages)
                 ->orderBy('id', 'asc')->with('user')->get();
-            $notes = TeamNote::where('team_id',$team_id)
+            $notes = TeamNote::where('team_id',$team->id)
                 ->where('id','>',$ids->notes)
                 ->orderBy('id', 'asc')->get();
         } else {
             $ids = (Object) ['activity'=>0,'messages'=>0,'notes'=>0];
-            $activity = TeamActivityLog::where('team_id',$team_id)->with('user')->orderBy('id', 'asc')->get();
-            $messages = TeamMessage::where('team_id',$team_id)->with('user')->orderBy('id', 'asc')->get();
-            $notes = TeamNote::where('team_id',$team_id)->orderBy('id', 'asc')->get();
+            $activity = TeamActivityLog::where('team_id',$team->id)->with('user')->orderBy('id', 'asc')->get();
+            $messages = TeamMessage::where('team_id',$team->id)->with('user')->orderBy('id', 'asc')->get();
+            $notes = TeamNote::where('team_id',$team->id)->orderBy('id', 'asc')->get();
         }
         $ids = [
             'activity'=>!count($activity)?$ids->activity:$activity->last()->id,
@@ -73,9 +74,8 @@ class TeamController extends Controller
         ];
     }
 
-    public function edit(Request $request, $team_id)
+    public function edit(Request $request, Team $team)
     {
-        $team = Team::where('id',$team_id)->first();
         $team->update($request->all());
         return $team;
     }
@@ -83,146 +83,114 @@ class TeamController extends Controller
     public function add(Request $request)
     {
         $team = new Team($request->all());
-        $team_scenario = new TeamScenario();
+        $team->save();
+        $team_scenario = new TeamScenario(['team_id'=>$team->id,'user_id'=>Auth::user()->id]);
         $team_scenario->save();
         $team->team_scenario_id = $team_scenario->id;
         $team->save();
         return $team;
     }
 
-    public function delete($team_id)
+    public function delete(Team $team)
     {
-        if ( Team::where('id',$team_id)->delete() ) {
+        if ( Team::where('id',$team->id)->delete() ) {
             return [true];
         }
     }
 
-    public function list_members($team_id)
+    public function list_members(Team $team)
     {
-        $team = TeamMember::where('team_id',$team_id)->with('user')->with('role')->get();
-        if (!is_null($team)) {
-            return $team;
-        } else {
-            return response('team_id not found', 404);
-        }
+        return TeamMember::where('team_id',$team->id)->with('user')->get();
     }
 
-    public function add_member(Request $request, $team_id, $user_id)
+    public function add_member(Request $request, Team $team, User $user)
     {
-        $team = Team::where('id',$team_id)->first();
-        $user = User::where('id',$user_id)->orWhere('unique_id',$user_id)->first();
-
-        if (!is_null($team) && !is_null($user)) {
-            $team_member = new TeamMember(['user_id'=>$user_id,'team_id'=>$team_id]);
-            if ($request->has('role_id')) {
-                $team_member->role_id = $request->role_id;
-            }
-            if ($request->has('admin')) {
-                $team_member->admin = $request->admin;
-            }
-            $team_member->save();
-            return TeamMember::where('team_id',$team_id)->where('user_id',$user_id)->with('user')->first();
-        } else {
-            return response('team_id not found', 404);
+        $team_member = new TeamMember(['user_id'=>$user->id,'team_id'=>$team->id]);
+        if ($request->has('role_id')) {
+            $team_member->role_id = $request->role_id;
         }
+        if ($request->has('admin')) {
+            if ($request->admin === true || $request->admin === 'true') {
+                $team_member->admin = true;
+            } else {
+                $team_member->admin = false;
+            }
+        }
+        $team_member->save();
+        return TeamMember::where('team_id',$team->id)->where('user_id',$user->id)->with('user')->first();
     }
 
-    public function remove_member($team_id, $user_id)
+    public function remove_member(Request $request, Team $team, User $user)
     {
-        if ( TeamMember::where('team_id',$team_id)->where('user_id',$user_id)->delete() ) {
+        if ( TeamMember::where('team_id',$team->id)->where('user_id',$user->id)->delete() ) {
             return [true];
         }
     }
 
-    public function list_messages($team_id)
+    public function update_member(Request $request, Team $team, User $user)
     {
-        $team = TeamMessage::where('team_id',$team_id)->with('user')->get();
-        if (!is_null($team)) {
-            return $team;
-        } else {
-            return response('team_id not found', 404);
-        }
+        $this->remove_member($request, $team, $user);
+        return $this->add_member($request, $team, $user);
     }
 
-    public function add_message(Request $request, $team_id)
+    public function list_messages(Team $team)
+    {
+        return  TeamMessage::where('team_id',$team->id)->with('user')->get();
+    }
+
+    public function add_message(Request $request, Team $team)
     {
         $this->validate($request,['message'=>['required']]);
-        $team = Team::where('id',$team_id)->first();
         $user = Auth::user();
 
-        if (!is_null($team) && !is_null($user)) {
-            $team_message = new TeamMessage(['user_id'=>$user->id,'team_id'=>$team_id,'message'=>$request->message]);
-            $team_message->save();
-            return TeamMessage::where('id',$team_message->id)->with('user')->first();
-        } else {
-            return response('team_id or user_id not found', 404);
-        }
+        $team_message = new TeamMessage(['user_id'=>$user->id,'team_id'=>$team->id,'message'=>$request->message]);
+        $team_message->save();
+        return TeamMessage::where('id',$team_message->id)->with('user')->first();
     }
 
-    public function remove_message($team_id, $message_id)
+    public function remove_message(Team $team, TeamMessage $team_message)
     {
-        if ( TeamMessage::where('team_id',$team_id)->where('message_id',$message_id)->delete() ) {
+        if ( $team_message->delete() ) {
             return [true];
         }
     }
 
-    public function list_notes($team_id)
+    public function list_notes(Team $team)
     {
-        $team = TeamNote::where('team_id',$team_id)->with('user')->get();
-        if (!is_null($team)) {
-            return $team;
-        } else {
-            return response('team_id not found', 404);
-        }
+        return TeamNote::where('team_id',$team->id)->with('user')->get();
     }
 
-    public function add_note(Request $request, $team_id, $user_id)
+    public function add_note(Request $request, Team $team)
     {
         $this->validate($request,['note'=>['required']]);
-        $team = Team::where('id',$team_id)->first();
-        $user = User::where('id',$user_id)->orWhere('unique_id',$user_id)->first();
+        $user = Auth::user();
 
-        if (!is_null($team) && !is_null($user)) {
-            $team_note = new TeamNote(['user_id'=>$user->id,'team_id'=>$team_id,'note'=>$request->note]);
-            $team_note->save();
-            return $team_note;
-        } else {
-            return response('team_id or user_id not found', 404);
-        }
+        $team_note = new TeamNote(['user_id'=>$user->id,'team_id'=>$team->id,'note'=>$request->note]);
+        $team_note->save();
+        return $team_note;
     }
 
-    public function remove_note($team_id, $note_id)
+    public function remove_note(Team $team, TeamNote $team_note)
     {
-        if ( TeamNote::where('team_id',$team_id)->where('note_id',$note_id)->delete() ) {
+        if ( $team_note->delete() ) {
             return [true];
         }
     }
 
-    public function list_scenario_logs($team_id)
+    public function list_scenario_logs(Team $team)
     {
-        $team_scenario = TeamScenario::where('team_id',$team_id)->with('user')->get();
-        if (!is_null($team_scenario)) {
-            return $team_scenario;
-        } else {
-            return response('team_id not found', 404);
-        }
+        return TeamScenario::where('team_id',$team->id)->with('user')->get();
     }
 
-    public function add_scenario_log(Request $request, $team_id)
+    public function add_scenario_log(Request $request, Team $team)
     {
-        // $this->validate($request,['state'=>['required']]);
-        $team = Team::where('id',$team_id)->first();
         $user = Auth::user();
 
-        if (!is_null($team) && !is_null($user)) {
-            $team_scenario = new TeamScenario(['user_id'=>$user->id,'team_id'=>$team_id,'state'=>$request->state]);
-            $team_scenario->save();
-            $team->team_scenario_id = $team_scenario->id;
-            $team->save();
-            return $team_scenario;
-        } else {
-            return response('team_id or user_id not found', 404);
-        }
+        $team_scenario = new TeamScenario(['user_id'=>$user->id,'team_id'=>$team->id,'state'=>$request->state]);
+        $team_scenario->save();
+        $team->team_scenario_id = $team_scenario->id;
+        $team->save();
+        return $team_scenario;
     }
 
 
