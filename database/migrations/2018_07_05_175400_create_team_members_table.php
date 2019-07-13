@@ -16,7 +16,7 @@ class CreateTeamMembersTable extends Migration
         Schema::create('team_members', function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->index();
             $table->integer('team_id')->unsigned()->index();
-            $table->string('role_id',10)->unsigned()->index();
+            $table->string('role_id',10)->default('')->index();
             $table->boolean('admin')->default(false);
             $table->timestamps();
             $table->unique(['user_id','team_id']);
