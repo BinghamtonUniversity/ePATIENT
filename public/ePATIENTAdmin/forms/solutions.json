@@ -1,8 +1,0 @@
-{
-	"fields": [
-		{"label": "Abbreviation","name":"abbreviation"},
-		{"label": "Solution Name/Strength","name":"name"},
-		{"label": "Volume","name":"volume"},
-        {"name": "id","type": "hidden"} 
-	]
-}

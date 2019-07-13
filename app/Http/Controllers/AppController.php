@@ -45,7 +45,7 @@ class AppController extends Controller
                 ];
             }
         }
-        return view('main',[
+        return view('uapp_engine.main',[
             'app_data' => json_encode($app_data),
             'name'=>$app_name
         ]);
@@ -53,9 +53,6 @@ class AppController extends Controller
 
     public function getViewerApp(Request $request) {
         return $this->getApp('ePATIENTViewer');
-    }
-    public function getAdminApp(Request $request) {
-        return $this->getApp('ePATIENTAdmin');
     }
     public function getViewerInitData() {
         $libraries = ['labs','solutions','products','providers'];
@@ -92,22 +89,11 @@ class AppController extends Controller
 
         return $response;
     }
-    public function getAdminInitData() {
-        $response = [
-            'scenarios' => Scenario::all(),
-            'roles' => array_values(config('role_permissions.roles')),
-            'users' => User::all(),
-            'user' => Auth::user(),
-        ];
-        return $response;
-    }
 
     public function initData(Request $request, $app_name)
     {
         if ($app_name === 'ePATIENTViewer') {
             return $this->getViewerInitData();
-        } else if ($app_name === 'ePATIENTAdmin') {
-            return $this->getAdminInitData();
         }
     }
 
