@@ -11,6 +11,7 @@
     <title>@yield('title') | ePATIENT EMR</title>
     <!-- Bootstrap -->
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/epatient.css" rel="stylesheet">
     <!-- Font Awesome -->
     <!-- <link href="/assets/css/font-awesome.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -23,14 +24,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-        .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-            background-color: rgb(35, 57, 90);
-        }
-    </style>
   </head>
-  <body style="margin-top:70px;">
-    <nav class="navbar navbar-default navbar-fixed-top" style="background: rgb(51, 85, 136);color:white;">
+  <body>
+    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" style="background-color:#333;border-width:0px">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -40,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/" style="margin: 0px; padding: 0px;">
+          <a class="navbar-brand" href="/" style="background: rgb(51, 85, 136);color:white;padding: 0px 0px 0px 25px;">
             <h3 style="color:#fff;margin-top:12px;"><i class="fa fa-address-book"></i> ePATIENT</h3>
           </a>
         </div>
@@ -48,11 +44,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" style="color:white;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@if(!is_null(Auth::user())) Welcome {{Auth::user()->first_name}} {{Auth::user()->last_name}}! <span class="caret"></span>@else Welcome! @endif</a>
+                <a href="#" style="color:#ccc;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                @if(!is_null(Auth::user()))
+                    <img class="gravatar" src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}?d=mm" /> 
+                    {{Auth::user()->first_name}} {{Auth::user()->last_name}} <span class="caret"></span>
+                @else Welcome! @endif
+                </a>
               @if(!is_null(Auth::user()))
               <ul class="dropdown-menu">
-              <li  style="color:white;" ><a href="/admin"><i class="fa fa-user-shield fa-fw"></i> Admin</a></li>
-                <li  style="color:white;" ><a href="/logout"><i class="fa fa-times-circle fa-fw"></i> Logout</a></li>
+              <li  style="color:#ccc;" ><a href="/admin"><i class="fa fa-user-shield fa-fw"></i> Admin</a></li>
+                <li  style="color:#ccc;" ><a href="/logout"><i class="fa fa-times-circle fa-fw"></i> Logout</a></li>
               </ul>
               @endif
             </li>
