@@ -7,12 +7,13 @@
 <center><h1 style="text-align:center;">Welcome to ePATIENT!</h1></center>
 <center><h3 style="text-align:center;">To Login, Please Select Your School From The List Below:</h1></center>
     <div class="col-sm-4 col-sm-offset-4">
-        <ul class="list-group">
-            <?php 
-              foreach(config('saml2_settings.idps') as $school => $configuration) {
-                echo '<a href="/saml2/wayf/'.$school.'" class="list-group-item">'.$configuration['name'].'</a>'."\n";
-              } 
-            ?>
+        <ul class="list-group"> 
+              @foreach(config('saml2_settings.idps') as $school => $configuration)
+                <a href="/saml2/wayf/{{$school}}" class="list-group-item">{{$configuration['name']}}</a>
+              @endforeach
+              @if(config('app.demo.enabled'))
+                <a href="/demo" class="list-group-item">Demo (Guest) Login</a>
+              @endif
         </ul>
     </div>
 </div>

@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'saml2.auth'=>  \App\Http\Middleware\SAML2Authentication::class,
         'no.save.session'=>  \App\Http\Middleware\NoSaveSession::class,
+        'public.api.auth'=>  \App\Http\Middleware\PublicAPIAuth::class,
     ];
 
     /**

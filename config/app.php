@@ -2,32 +2,32 @@
 
 return [
 
-    'site' => [
-        'auth' => 'SAML2',
-        'auth_config'=> [
-            "cas_uri" => "/cas",
-            "cas_port"=> "443",
-            "cas_data_map"=> [
-                "default"=> [
-                    "email"=> "{{username}}@binghamton.edu", 
-                    "last_name"=> "", 
-                    "unique_id"=> "{{username}}", 
-                    "first_name"=> "",
-                ],
-                "additional"=> [""]
-            ], 
-            "cas_hostname"=> "securetest.binghamton.edu", 
-            "cas_login_url"=> "", 
-            "cas_logout_url"=> "", 
-            "cas_real_hosts"=> "securetest.binghamton.edu", 
-            "cas_enable_saml"=> "false", 
-            "external_user_lookup"=> [
-                "url"=> "https://mercurydev.binghamton.edu/banner/person/basic/", 
-                "verb"=> "GET", 
-                "enabled"=> "false",
-            ],
-        ],
-    ],
+    // 'site' => [
+    //     'auth' => 'SAML2',
+    //     'auth_config'=> [
+    //         "cas_uri" => "/cas",
+    //         "cas_port"=> "443",
+    //         "cas_data_map"=> [
+    //             "default"=> [
+    //                 "email"=> "{{username}}@binghamton.edu", 
+    //                 "last_name"=> "", 
+    //                 "unique_id"=> "{{username}}", 
+    //                 "first_name"=> "",
+    //             ],
+    //             "additional"=> [""]
+    //         ], 
+    //         "cas_hostname"=> "securetest.binghamton.edu", 
+    //         "cas_login_url"=> "", 
+    //         "cas_logout_url"=> "", 
+    //         "cas_real_hosts"=> "securetest.binghamton.edu", 
+    //         "cas_enable_saml"=> "false", 
+    //         "external_user_lookup"=> [
+    //             "url"=> "https://mercurydev.binghamton.edu/banner/person/basic/", 
+    //             "verb"=> "GET", 
+    //             "enabled"=> "false",
+    //         ],
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +41,14 @@ return [
     */
 
     'name' => env('APP_NAME', 'ePATIENT'),
-
+    'demo' => [
+        'enabled' => env('DEMO_ENABLED',true),
+        'credentials' => [
+            'username' => env('DEMO_USER','epatient'),
+            'password' => env('DEMO_PASS','demo'),
+        ],
+    ],
+ 
     /*
     |--------------------------------------------------------------------------
     | Application Environment
