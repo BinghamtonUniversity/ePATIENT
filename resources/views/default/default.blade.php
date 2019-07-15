@@ -74,6 +74,7 @@
     left: 0px;
     background-color: #ddd; color:#555;
     padding: 5px 20px;">
+    <i class="far fa-copyright fa-fw"></i> {{ now()->year }} Binghamton University</a>&nbsp;|
     <a style="color:#555;" href="https://github.com/BinghamtonUniversity/ePATIENT"><i class="fab fa-github fa-lg fa-fw"></i>&nbsp;Github</a>&nbsp;|
     <a style="color:#555;" href="mailto:epatient@binghamton.edu"><i class="fa fa-envelope fa-lg fa-fw"></i>&nbsp;Contact</a>
     </div>
