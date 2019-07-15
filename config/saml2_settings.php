@@ -236,10 +236,41 @@ return [
         ],
         'x509cert' => 'MIIDTzCCAjegAwIBAgIUIxgMuKdj85wizYHJ1HH1eZfn3IowDQYJKoZIhvcNAQEL BQAwJDEiMCAGA1UEAwwZaWRwLWRldi5jYy5iaW5naGFtdG9uLmVkdTAeFw0xOTA2 MTEyMDQ1NDdaFw0zOTA2MTEyMDQ1NDdaMCQxIjAgBgNVBAMMGWlkcC1kZXYuY2Mu YmluZ2hhbXRvbi5lZHUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCI CsFPx2RqtHWIzT5FV0aNACv+y7K3dZxBlISnRa5a0OHrVL6jr6igvuhjB+4apF5o IJTo/Dr/QoF61MsOxPucY9mhyve/wJ7SHQHgRjyYzxzdFhyq26TodAwLaPBZVEzC NYyPFxwcMwd/ka57tXKy4b2ZeiK6zhLTLkXbvl7pNHjAl6dLSQk+tI80ZW4RSPu7 /UhmtzP+UxK9hFIHsEZpt0HFbsLFcdrQs0EBXHVTyzUFqt2s0RVN2oCIupo7pQ0T Ny6qapwafkGq/3bWzsBZWX/zECnC1jWSFusKGk+MlSkSVYGffOnjcV0JiMqg7UHO XZ0+4bC3jzi44cqJU1eDAgMBAAGjeTB3MB0GA1UdDgQWBBRJmhUbP6ZR1XxOOAc2 zQuoIh4x9jBWBgNVHREETzBNghlpZHAtZGV2LmNjLmJpbmdoYW10b24uZWR1hjBo dHRwczovL2lkcC1kZXYuY2MuYmluZ2hhbXRvbi5lZHUvaWRwL3NoaWJib2xldGgw DQYJKoZIhvcNAQELBQADggEBAEYSU3NDFFTerdVl9fqN9kJWBBp3gyCP38EuVZgK dqqUsq84rRqp/EgI1PrnjDF8TP6CmY2lgMSqdMk5TDmV66MOctjT8W5MLm8dzX38 TSNPD8LMyiYVdMGOxssjsZwwY4udhuLQabGxh2tkhmREdaoi53ToBCZNvbw4l7YW 9ZB4u9sGdpg1hHwizPJd1eLyuJvvtWjDtxp3cGwydIHwgzUQ9yd8CVg39MhaeS12 t5fgGtDYTFnl9lUIc8+Ecu32QWksNmKOJdvs4pzu/NZ131l+TeTLFN/UmgzFWqC9 ad4IZdkOC/S09AD4yeQPFblvQo+tw6Y/drgW8+WxEsC3xR0=',
     ],
-
     'idps'=>[
         'binghamton' => [
             'name' => 'Binghamton University',
+            // Identifier of the IdP entity  (must be a URI)
+            'entityId' => env('SAML2_IDP_ENTITYID', 'https://idp.cc.binghamton.edu/idp/shibboleth'),
+            // SSO endpoint info of the IdP. (Authentication Request protocol)
+            'singleSignOnService' => array(
+                // URL Target of the IdP where the SP will send the Authentication Request Message,
+                // using HTTP-Redirect binding.
+                'url' => 'https://idp.cc.binghamton.edu/idp/profile/SAML2/Redirect/SSO',
+            ),
+            // SLO endpoint info of the IdP.
+            'singleLogoutService' => array(
+                // URL Location of the IdP where the SP will send the SLO Request,
+                // using HTTP-Redirect binding.
+                'url' => 'https://idp.cc.binghamton.edu/idp/profile/SAML2/Redirect/SLO',
+            ),
+            // Public x509 certificate of the IdP
+            'x509cert' => env('SAML2_IDP_x509', '
+            MIIDPzCCAiegAwIBAgIUNGqshJMfDRUUamC/0judzWfXRzMwDQYJKoZIhvcNAQEL BQAwIDEeMBwGA1UEAwwVaWRwLmNjLmJpbmdoYW10b24uZWR1MB4XDTE2MDExNzAx NDk1NloXDTM2MDExNzAxNDk1NlowIDEeMBwGA1UEAwwVaWRwLmNjLmJpbmdoYW10 b24uZWR1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmHJJsNq34KLb eCFXoLuyWFE8WeCRfagWHcU9cJhA26IoscpS031mgj+KdnZIGKBG8Qvm2ob8giNR C9A6dblsbmMgGbEXgugFXHzh7BL4THE/5vCoVXyT8cEcpneA51Cy1OK3hqv2OKD6 QgIRgbovElJeJB/M2V/2cpD9eq7klxkHgvSdm0/QYhpqx50cFcB0WHXE8Mpr2tne Hkl9tyBjbcXTYU3Bl6IfgJMFJ+DF70gVSu/hQz6eOzV1ZGTKd+k2iqyZqQaCfIL+ c1suMSFtk4wKLkBQDP9JsSayvyKngLcbmc4/V3fV/HquxNpxuAjHUv8LUbDgAN3q 0OWbuy4OIwIDAQABo3EwbzAdBgNVHQ4EFgQURTv5CG3wzpfj/BDoWcL3UncfFWAw TgYDVR0RBEcwRYIVaWRwLmNjLmJpbmdoYW10b24uZWR1hixodHRwczovL2lkcC5j Yy5iaW5naGFtdG9uLmVkdS9pZHAvc2hpYmJvbGV0aDANBgkqhkiG9w0BAQsFAAOC AQEAiCk13WUgaVpymalSbihawWqgkIxiiMclpWaWSY807rZFuIEUWJbnopgedt6H +BSIxX7A7w+GJfF4fS13mRRlEL2h9ONj4EwbznDNprCxcs+EG7FBpW6VKJd/gnj/ VDss4JT6ZOLQodl3wQ5LvwZ1zEeu811FQxSQaEpf69GyaQ/FCs57MDOHqMiAWGux 6mhUpGwo9S0bk2C8D6SapD1ZGWmqcyxudsabKDupSUKU2cwslxj8XVinRTx8zZuc 6VkzTV9Rc4vzes6atMo8AD8L2+As/e7vxBbR8pu40t9LlPe7f2MalA8yCCxPOlEn ljahXnbPNzvZc18kx0CUWRMMJQ==
+            '),
+            /*
+                *  Instead of use the whole x509cert you can use a fingerprint
+                *  (openssl x509 -noout -fingerprint -in "idp.crt" to generate it)
+                */
+            // 'certFingerprint' => '',
+            'data_map' => [
+                'unique_id' => '{{bnumber}}',
+                'first_name' => '{{givenName}}',
+                'last_name' => '{{sn}}',
+                'email' => '{{mail}}',
+            ],
+        ],
+        'binghamton-dev' => [
+            'name' => 'Binghamton University (IDP-DEV)',
             // Identifier of the IdP entity  (must be a URI)
             'entityId' => env('SAML2_IDP_ENTITYID', 'https://idp-dev.cc.binghamton.edu/idp/shibboleth'),
             // SSO endpoint info of the IdP. (Authentication Request protocol)
