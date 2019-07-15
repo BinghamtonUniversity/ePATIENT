@@ -205,8 +205,8 @@ return [
             'emailAddress' => 'tcortesi@binghamton.edu'
         ),
         'support' => array(
-            'givenName' => 'Tim Cortesi',
-            'emailAddress' => 'tcortesi@binghamton.edu'
+            'givenName' => 'Sarah Lynch',
+            'emailAddress' => 'selynch@binghamton.edu'
         ),
     ),
 

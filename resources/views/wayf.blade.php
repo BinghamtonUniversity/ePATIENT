@@ -22,10 +22,17 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
       <div class="alert alert-info">
-        ePATIENT is an educational EMR to aid in asynchronous interprofessional healthcare training. 
-        ePATIENT allows multiple student professions, from different campuses, to simultaneously access 
-        "virtual patient" records in real-time allowing them to respond to notes, orders, and comments 
-        from other members of the team as clinical professionals do in real-world clinical environments. 
+        <p>
+            ePATIENT is an educational EMR to aid in asynchronous interprofessional healthcare training. 
+            ePATIENT allows multiple student professions, from different campuses, to simultaneously access 
+            "virtual patient" records in real-time allowing them to respond to notes, orders, and comments 
+            from other members of the team as clinical professionals do in real-world clinical environments. 
+        </p>
+        <p style="margin-top:20px;">
+            For more information about the ePATIENT Application and how to get your campus involved, 
+            please contact 
+            <a href="mailto:epatient@binghamton.edu">epatient@binghamton.edu</a>.
+        </p>
       </div>
     </div>
 </div>

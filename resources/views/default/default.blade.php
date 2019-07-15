@@ -65,6 +65,21 @@
     <div class="container-fluid">
         @yield('content')
     </div>
+
+    <!-- Footer -->
+    <footer style=" position: fixed;
+    text-align: center;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: #ddd; color:#555;
+    padding: 5px 20px;">
+    <a style="color:#555;" href="https://github.com/BinghamtonUniversity/ePATIENT"><i class="fab fa-github fa-lg fa-fw"></i>&nbsp;Github</a>&nbsp;|
+    <a style="color:#555;" href="mailto:epatient@binghamton.edu"><i class="fa fa-envelope fa-lg fa-fw"></i>&nbsp;Contact</a>
+    </div>
+    </footer>
+    <!-- Footer -->
+
     <script src='/assets/js/vendor/jquery.min.js'></script>
     <script src="/assets/js/vendor/bootstrap.min.js"></script>
   </body>
