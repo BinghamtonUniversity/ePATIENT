@@ -10,11 +10,11 @@
         <ul class="list-group"> 
               @foreach(config('saml2_settings.idps') as $school => $configuration)
                 @if (in_array($school, $enabled_idps))
-                    <a href="/saml2/wayf/{{$school}}" class="list-group-item">{{$configuration['name']}}</a>
+                    <a href="/saml2/wayf/{{$school}}" class="list-group-item"><i style="margin-top: 4px;" class="fa fa-lock fa-lg fa-fw pull-right"></i>{{$configuration['name']}}</a>
                 @endif
               @endforeach
               @if(config('app.demo.enabled'))
-                <a href="/demo" class="list-group-item">Demo (Guest) Login</a>
+                <a href="/demo" class="list-group-item"><i style="margin-top: 4px;" class="fa fa-lock fa-lg fa-fw pull-right"></i>Demo (Guest) Login</a>
               @endif
         </ul>
     </div>
