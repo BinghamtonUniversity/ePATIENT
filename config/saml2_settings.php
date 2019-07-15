@@ -202,20 +202,20 @@ return [
     'contactPerson' => array(
         'technical' => array(
             'givenName' => 'Tim Cortesi',
-            'emailAddress' => 'tim@escherlabs.com'
+            'emailAddress' => 'tcortesi@binghamton.edu'
         ),
         'support' => array(
             'givenName' => 'Tim Cortesi',
-            'emailAddress' => 'tim@escherlabs.com'
+            'emailAddress' => 'tcortesi@binghamton.edu'
         ),
     ),
 
     // Organization information template, the info in en_US lang is recomended, add more if required
     'organization' => array(
         'en-US' => array(
-            'name' => 'Escher Labs, Inc',
-            'displayname' => 'Escher Labs, Inc',
-            'url' => 'https://www.escherlabs.com'
+            'name' => 'Binghamton University',
+            'displayname' => 'Binghamton University',
+            'url' => 'https://www.binghamton.edu'
         ),
     ),
 
