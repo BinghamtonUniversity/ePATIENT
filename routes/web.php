@@ -16,6 +16,8 @@ Route::group(['middleware'=>['saml2.auth']], function () use ($router) {
     Route::get('/', ['uses'=>'AppController@home']);
     Route::get('/viewer', ['uses'=>'AppController@getViewerApp']);
     Route::get('/configuration', ['uses'=>'AppController@getViewerAppConfiguration']);
+    Route::get('/admin/teams/{team?}/configuration', ['uses'=>'AppController@getViewerApp']);
+    Route::get('/admin/scenarios/{scenario?}/configuration', ['uses'=>'AppController@getViewerApp']);
     Route::get('/admin/teams/{team?}/{type?}', ['uses'=>'AdminController@admin_teams']);
     Route::get('/admin/{page?}', ['uses'=>'AdminController@admin']);
 });

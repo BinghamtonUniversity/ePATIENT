@@ -74,6 +74,18 @@ build_table = function(resource, options) {
 
     if(resource === 'teams'){
         options.events = [
+            {'name': 'members', 'label': '<i class="fa fa-users"></i> Members', callback: function(model){
+                window.location.href = "/admin/teams/"+model.attributes.id+'/members';
+            }, multiEdit: false},
+            {'name': 'messages', 'label': '<i class="fa fa-comments"></i> Messages', callback: function(model){
+                window.location.href = "/admin/teams/"+model.attributes.id+'/messages';
+			}, multiEdit: false},
+            {'name': 'notes', 'label': '<i class="fa fa-file"></i> Notes', callback: function(model){
+                window.location.href = "/admin/teams/"+model.attributes.id+'/notes';
+            }, multiEdit: false},
+            {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Configuration', callback: function(model){
+                window.open("/admin/teams/"+model.attributes.id+"/configuration?team="+model.attributes.id,'_blank');
+            }, multiEdit: false},
             {'name': 'reset', 'label': '<i class="fa fa-times"></i> Reset', callback: function(model){
                 this.app.post(
                     'scenario_log', 
@@ -83,15 +95,6 @@ build_table = function(resource, options) {
                     }
                 );
             }.bind(this), multiEdit: false},
-            {'name': 'members', 'label': '<i class="fa fa-users"></i> Members', callback: function(model){
-                window.location.href = "/admin/teams/"+model.attributes.id+'/members';
-            }, multiEdit: false},
-            {'name': 'messages', 'label': '<i class="fa fa-comments"></i> Messages', callback: function(model){
-                window.location.href = "/admin/teams/"+model.attributes.id+'/messages';
-			}, multiEdit: false},
-            {'name': 'notes', 'label': '<i class="fa fa-file"></i> Notes', callback: function(model){
-                window.location.href = "/admin/teams/"+model.attributes.id+'/notes';
-			}, multiEdit: false},
         ]
     }    
 
@@ -129,7 +132,7 @@ build_table = function(resource, options) {
     if(resource == 'scenarios'){
         options.events = [
             {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Configuration', callback: function(model){
-                window.open("/ar/emr/epatient/configuration?scenario="+model.attributes.id,'_blank');
+                window.open("/admin/scenarios/"+model.attributes.id+"/configuration?scenario="+model.attributes.id,'_blank');
 			}, multiEdit: false},
 		    {'name': 'duplicate', 'label': '<i class="fa fa-copy"></i> Duplicate', callback: function(model){
                 $().berry({
