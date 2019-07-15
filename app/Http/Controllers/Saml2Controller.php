@@ -26,7 +26,8 @@ class Saml2Controller extends Controller
     public function wayf($site = null) {
         if(!Auth::user()){
             if (is_null($site)) {
-                return view('wayf');
+                $enabled_idps = explode(',',config('saml2_settings.enabled_idps'));
+                return view('wayf',['enabled_idps'=>$enabled_idps]);
             } else {
                 config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
                 $this->saml2Auth->configure();
@@ -57,7 +58,11 @@ class Saml2Controller extends Controller
         config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
         $this->saml2Auth->configure();
 
-        $errors = $this->saml2Auth->acs();
+        try {
+            $errors = $this->saml2Auth->acs();
+        } catch(\Exception $e) {
+            // continue?
+        }
 
         if (!empty($errors)) {
             logger()->error('Saml2 error_detail', ['error' => $this->saml2Auth->getLastErrorReason()]);
@@ -67,6 +72,7 @@ class Saml2Controller extends Controller
             session()->flash('saml2_error', $errors);
             return redirect(config('saml2_settings.errorRoute'));
         }
+        
         $saml2user = $this->saml2Auth->getSaml2User();
 
         $messageId = $this->saml2Auth->getLastMessageId();
@@ -76,6 +82,15 @@ class Saml2Controller extends Controller
             if (isset($attribute_value[0])) {
                 $saml_attributes[$attribute_name] = $attribute_value[0];
             }
+        }
+        if (env('IDP_DEBUG_'.$site,false)) {
+            echo '<h3>SAML Attributes</h3>';
+            echo '<pre>'.print_r($saml_attributes,true).'</pre>';
+            echo '<h3>SAML2 User</h3>';
+            echo '<pre>'.print_r($saml2user,true).'</pre>';
+            echo '<h3>SAML Last Message</h3>';
+            echo '<pre>'.print_r($messageId,true).'</pre>';
+            exit();
         }
         $data_map = config('saml2_settings.idp.data_map');
         $m = new \Mustache_Engine;                                    
@@ -96,7 +111,6 @@ class Saml2Controller extends Controller
         if ($redirectUrl !== null) {
             return redirect($redirectUrl);
         } else {
-
             return redirect(config('saml2_settings.loginRoute'));
         }
     }
