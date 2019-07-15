@@ -83,7 +83,7 @@ build_table = function(resource, options) {
             {'name': 'notes', 'label': '<i class="fa fa-file"></i> Notes', callback: function(model){
                 window.location.href = "/admin/teams/"+model.attributes.id+'/notes';
             }, multiEdit: false},
-            {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Configuration', callback: function(model){
+            {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Config', callback: function(model){
                 window.open("/admin/teams/"+model.attributes.id+"/configuration?team="+model.attributes.id,'_blank');
             }, multiEdit: false},
             {'name': 'reset', 'label': '<i class="fa fa-times"></i> Reset', callback: function(model){
