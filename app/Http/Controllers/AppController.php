@@ -85,7 +85,7 @@ class AppController extends Controller
         $response['myteams'] = $teams;
 
         /* Get Options */
-        $response['options'] = ['admin'=>false];
+        $response['options'] = ['admin'=>"false"];
 
         return $response;
     }
