@@ -459,6 +459,6 @@ function editMobileOrder(){
 			}
 		</script>
 
-		<script src="/assets/js/resources/creators.js"></script>
+		<!-- <script src="/assets/js/resources/creators.js"></script> -->
 
     <!-- End core_engine -->

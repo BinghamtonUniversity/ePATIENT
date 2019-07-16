@@ -7,7 +7,7 @@ chat_init = function() {
         if(e.which == 13) {
             var msg_text = $(this).val()
             $(this).val('')
-            myappcontext.app.post('msg_submit',{team_id:myappcontext.data.team_id,message:msg_text,unique_id:myappcontext.data.user.unique_id},function(response){
+            myappcontext.app.post('msg_submit',{team_id:myappcontext.data.team_id,message:msg_text},function(response){
                 chat_add_messages.call(myappcontext,[response])
             })
             e.preventDefault();
