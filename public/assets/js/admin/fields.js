@@ -126,14 +126,6 @@ adminFormFields = {
         }
       ],
       "messages":[
-        {
-            "type": "select",
-            "label": "User",
-            "name": "user_id",
-            "label_key": "email",
-            "value_key": "id",
-            "choices":"/api/users"
-          },
           {
             "label": "Message",
             "name": "message"

@@ -1,10 +1,11 @@
-this.data.team_id = QueryStringToHash(window.location.search.substr(1)).team;
+// TJC -- These are now pushed down as part of the initial data load
+// this.data.team_id = QueryStringToHash(window.location.search.substr(1)).team;
+// this.data.scenario_id = this.data.options.scenario_id || QueryStringToHash(window.location.search.substr(1)).scenario;
+// this.data.admin = (this.data.options.admin == "true");
 
-this.data.scenario_id = this.data.options.scenario_id || QueryStringToHash(window.location.search.substr(1)).scenario;
 this.data.hashParams = {page:""};
 this.data.vital_form = "";
-this.data.admin = (this.data.options.admin == "true");
-this.data.local = (this.data.options.local == "true");
+this.data.local = false;
 if(typeof this.data.myteams == 'string'){
     this.data.myteams = [];
 }

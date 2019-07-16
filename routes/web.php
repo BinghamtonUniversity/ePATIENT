@@ -14,10 +14,9 @@
 /* GENERIC STUFF */
 Route::group(['middleware'=>['saml2.auth']], function () use ($router) {
     Route::get('/', ['uses'=>'AppController@home']);
-    Route::get('/viewer', ['uses'=>'AppController@getViewerApp']);
-    Route::get('/configuration', ['uses'=>'AppController@getViewerAppConfiguration']);
-    Route::get('/admin/teams/{team?}/configuration', ['uses'=>'AppController@getViewerApp']);
-    Route::get('/admin/scenarios/{scenario?}/configuration', ['uses'=>'AppController@getViewerApp']);
+    Route::get('/team/{team_id}', ['uses'=>'AppController@getViewer']);
+    Route::get('/admin/teams/{team_id}/configuration', ['uses'=>'AppController@getTeamConfig']);
+    Route::get('/admin/scenarios/{scenario_id}/configuration', ['uses'=>'AppController@getScenarioConfig']);
     Route::get('/admin/teams/{team?}/{type?}', ['uses'=>'AdminController@admin_teams']);
     Route::get('/admin/{page?}', ['uses'=>'AdminController@admin']);
 });
@@ -37,9 +36,6 @@ Route::group(['prefix' => 'saml2','middleware' => ['saml']], function () {
 /* API STUFF */
 
 Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () use ($router) {
-    //** APP Init **//
-    Route::post('/init/{app_id}',['uses'=>'AppController@initData']);
-
     //** USERS **//
     Route::get('/users',['uses'=>'UserController@browse'])->middleware('can:browse,App\User');
     Route::get('/users/{user}',['uses'=>'UserController@read'])->middleware('can:view,user');

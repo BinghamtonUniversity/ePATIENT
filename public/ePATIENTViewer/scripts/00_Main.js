@@ -125,21 +125,21 @@ toastr.options = {
 };
 
 function save(state,callback){
-if(this.data.admin && this.data.scenario_id){
-    this.app.put('scenarios', {name:state.name,id:this.data.scenario_id, scenario:state}, callback||function(){
-        toastr.warning('Saved Configuration Successfully');
-    });
-}else{
-    if(this.data.team_id){
-        this.app.post('scenario_log', {team_id:this.data.team_id, state:state, unique_id:this.data.user.unique_id}, callback||function(){
-            toastr.success('Saved Team status Successfully');
+    if(this.data.admin && this.data.scenario_id){
+        this.app.put('scenarios', {name:state.name,id:this.data.scenario_id, scenario:state}, callback||function(){
+            toastr.warning('Saved Configuration Successfully');
         });
     }else{
-        if(this.data.scenario_id && this.data.local && !this.data.team_id){
-            Lockr.set('_'+this.data.scenario_id,state||{});
+        if(this.data.team_id){
+            this.app.post('scenario_log', {team_id:this.data.team_id, state:state, unique_id:this.data.user.unique_id}, callback||function(){
+                toastr.success('Saved Team status Successfully');
+            });
+        }else{
+            if(this.data.scenario_id && this.data.local && !this.data.team_id){
+                Lockr.set('_'+this.data.scenario_id,state||{});
+            }
         }
     }
-}
 }
 function readHash(){
     this.app.click('.clear-local', function(){
@@ -359,7 +359,6 @@ this.callback = function(){
         // e.stopPropagation();
         // window.location = $(e.currentTarget).data("href");
     // });
-    
     if(typeof this.data.team_id !== 'undefined'){
   
         this.app.get('teams',{id:this.data.team_id},function(data){
@@ -450,7 +449,6 @@ this.callback = function(){
 
             if(typeof this.data.scenario !== 'object'){
             this.app.get('scenarios',{id:this.data.scenario_id},function(data){
-                debugger;
                 // if(data.team_scenario !== null){
                 //     this.data.scenario = data.team_scenario.state || data.scenario.scenario;
                 // }else{
