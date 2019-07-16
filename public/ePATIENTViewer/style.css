@@ -21,7 +21,7 @@
 .config .nav-sidebar .active > a,
 .config .nav-sidebar .active > a:hover,
 .config .nav-sidebar .active > a:focus {
-  border-left:solid red;
+  border-left:solid rgb(217, 83, 79);
   color: #fff;
   background-color:rgba(0,0,0,0.4);
 }
