@@ -303,7 +303,7 @@ return [
             ],
         ],
         'buffalo' => [
-            'name' => 'SUNY Buffalo',
+            'name' => 'University at Buffalo',
             // Identifier of the IdP entity  (must be a URI)
             'entityId' => env('SAML2_IDP_ENTITYID', 'https://shibboleth.buffalo.edu/idp/shibboleth'),
             // SSO endpoint info of the IdP. (Authentication Request protocol)

@@ -34,13 +34,7 @@ Cobler.types.uApp = function(container){
           $(el).find('.widget').toggleClass('cob-collapsed',collapsed)
       }
 
-      $.ajax({
-          url: '/api/init/'+this.get().app_id,
-          dataType : 'json',
-          type: 'POST',
-          data:JSON.stringify({options:{}}),
-          contentType: "application/json",
-					success  : function(data){
+            data = this.get().init_data;
             var opts = {
               template: this.get().template || 'dashboard',
               $el: $(el).find('.collapsible'),
@@ -107,8 +101,6 @@ Cobler.types.uApp = function(container){
             
 
 
-          }.bind(this)
-      })
 		}
 	}
 }

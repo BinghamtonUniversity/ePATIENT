@@ -84,7 +84,7 @@ build_table = function(resource, options) {
                 window.location.href = "/admin/teams/"+model.attributes.id+'/notes';
             }, multiEdit: false},
             {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Config', callback: function(model){
-                window.open("/admin/teams/"+model.attributes.id+"/configuration?team="+model.attributes.id,'_blank');
+                window.open("/admin/teams/"+model.attributes.id+"/configuration",'_blank');
             }, multiEdit: false},
             {'name': 'reset', 'label': '<i class="fa fa-times"></i> Reset', callback: function(model){
                 this.app.post(
@@ -132,7 +132,7 @@ build_table = function(resource, options) {
     if(resource == 'scenarios'){
         options.events = [
             {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Configuration', callback: function(model){
-                window.open("/admin/scenarios/"+model.attributes.id+"/configuration?scenario="+model.attributes.id,'_blank');
+                window.open("/admin/scenarios/"+model.attributes.id+"/configuration",'_blank');
 			}, multiEdit: false},
 		    {'name': 'duplicate', 'label': '<i class="fa fa-copy"></i> Duplicate', callback: function(model){
                 $().berry({

@@ -21,40 +21,7 @@ class AppController extends Controller
         //
     }
 
-    private function getApp($app_name) {
-        $app_data = [
-            'id'=>$app_name,
-            'name'=>$app_name,
-            'slug'=>$app_name,
-            'app'=>[
-                'id'=>$app_name,
-                'name'=>$app_name,
-                'code'=>[
-                    'css'=>file_get_contents(public_path($app_name.'/style.css')),
-                    'resources'=>json_decode(file_get_contents(public_path($app_name.'/resources.json'))),
-                ],
-            ],
-        ];
-        $code_types = ['forms','templates','scripts'];
-        foreach($code_types as $type) {
-            $files = array_diff(scandir(public_path($app_name.'/'.$type)),['..', '.']);
-            foreach($files as $filename) {
-                $app_data['app']['code'][$type][] = [
-                    'name'=>pathinfo($filename, PATHINFO_FILENAME),
-                    'content' => file_get_contents(public_path($app_name.'/'.$type.'/'.$filename)),
-                ];
-            }
-        }
-        return view('uapp_engine.main',[
-            'app_data' => json_encode($app_data),
-            'name'=>$app_name
-        ]);
-    }
-
-    public function getViewerApp(Request $request) {
-        return $this->getApp('ePATIENTViewer');
-    }
-    public function getViewerInitData() {
+    public function getInitData() {
         $libraries = ['labs','solutions','products','providers'];
         $response = [];
         foreach($libraries as $library_type) {
@@ -90,11 +57,60 @@ class AppController extends Controller
         return $response;
     }
 
-    public function initData(Request $request, $app_name)
-    {
-        if ($app_name === 'ePATIENTViewer') {
-            return $this->getViewerInitData();
+    private function getAppDefinition() {
+        $app_name = 'ePATIENTViewer';
+        $app_data = [
+            'id'=>$app_name,
+            'name'=>$app_name,
+            'slug'=>$app_name,
+            'app'=>[
+                'id'=>$app_name,
+                'name'=>$app_name,
+                'code'=>[
+                    'css'=>file_get_contents(public_path($app_name.'/style.css')),
+                    'resources'=>json_decode(file_get_contents(public_path($app_name.'/resources.json'))),
+                ],
+            ],
+        ];
+        $code_types = ['forms','templates','scripts'];
+        foreach($code_types as $type) {
+            $files = array_diff(scandir(public_path($app_name.'/'.$type)),['..', '.']);
+            foreach($files as $filename) {
+                $app_data['app']['code'][$type][] = [
+                    'name'=>pathinfo($filename, PATHINFO_FILENAME),
+                    'content' => file_get_contents(public_path($app_name.'/'.$type.'/'.$filename)),
+                ];
+            }
         }
+        return $app_data;
+    }
+
+    public function getViewer(Request $request, $team_id) {
+        $init_data = $this->getInitData();
+        $init_data['team_id'] = $team_id;
+        return view('uapp_engine.main',[
+            'app_definition' => json_encode($this->getAppDefinition()),
+            'init_data' => json_encode($init_data),
+        ]);
+    }
+    public function getTeamConfig(Request $request, $team_id) {
+        $init_data = $this->getInitData();
+        $init_data['team_id'] = $team_id;
+        $init_data['admin'] = "true";
+        return view('uapp_engine.main',[
+            'app_definition' => json_encode($this->getAppDefinition()),
+            'init_data' => json_encode($init_data),
+        ]);
+    }
+
+    public function getScenarioConfig(Request $request, $scenario_id) {
+        $init_data = $this->getInitData();
+        $init_data['scenario_id'] = $scenario_id;
+        $init_data['admin'] = "true";
+        return view('uapp_engine.main',[
+            'app_definition' => json_encode($this->getAppDefinition()),
+            'init_data' => json_encode($init_data),
+        ]);
     }
 
     public function home(Request $request) {
@@ -103,7 +119,6 @@ class AppController extends Controller
         })->with(['scenario'=>function($query){
             $query->select('id','name');
         }])->get();
-
         return view('home',['teams'=>$teams,'user'=>Auth::user()]);
     }
 

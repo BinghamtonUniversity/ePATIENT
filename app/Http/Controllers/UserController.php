@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function add(Request $request)
     {
-        $this->validate($request,['first_name'=>['required'],'last_name'=>['required'],'email'=>['required']]);
+        $this->validate($request,['first_name'=>['required'],'last_name'=>['required']]);
         $user = new User($request->all());
         $user->save();
         return $user;

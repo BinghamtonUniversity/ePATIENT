@@ -37,8 +37,8 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/admin" style="background: #358;">
-            <h3 style="color:#fff;margin:0px;"><i class="fa fa-address-book"></i> ePATIENT</h3>
+          <a class="navbar-brand" href="/admin" style="background: #d9534f;padding: 12px 0px 0px 18px;">
+            <h3 style="color:#fff;margin:0px;"><i class="fa fa-address-book fa-fw"></i> ePATIENT</h3>
           </a>
             <ul class="nav navbar-nav  hidden-xs">
                 <li><a href="#"><h4 style="margin:0">{{$title}}</h4></a></li>

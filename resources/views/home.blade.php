@@ -11,7 +11,7 @@
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="list-group">
                     @foreach ($teams as $team)
-                        <a class="list-group-item" href="/viewer?team={{$team->id}}">{{$team->name}}: {{$team->scenario->name}}</a>
+                        <a class="list-group-item" href="/team/{{$team->id}}">{{$team->name}}: {{$team->scenario->name}}</a>
                     @endforeach
                 </div>
             </div>

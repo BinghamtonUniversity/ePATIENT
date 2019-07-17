@@ -13,7 +13,8 @@
         <div class="panel-body">
           You are logged out of this application, but you are not logged out of the IDP
           so you can probably log back in really easily.  I guess turn off your computer
-          or something?  I don't know.
+          or something?  I don't know.<br><br>
+          <a href="/"><i class="fa fa-arrow-left fa-fw"></i> Return to Home</a>
         </div>
       </div>
     </div>
