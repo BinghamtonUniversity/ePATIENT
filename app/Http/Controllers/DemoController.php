@@ -19,16 +19,18 @@ class DemoController extends Controller
     }
 
     public function list(Request $request) {
-        $users = User::where('unique_id','like','_demo%')->get();
-        return view('demo_login',['users'=>$users]);
-    }
-
-    public function login(Request $request, User $user) {
-        if (substr($user->unique_id, 0, 5 ) === "_demo") {
-            Auth::login($user,true);
-            return redirect('/');
+        if ($request->has('accountId')) {
+            $user = User::where('unique_id','like','_demo%')
+                ->where('unique_id',$request->accountId)
+                ->first();
+            if (!is_null($user)) {
+                Auth::login($user,true);
+                return redirect('/');
+            } else {
+                return view('demo_login',['error'=>'The '.$request->accountId.' guest user account is not authorized']);
+            }
         } else {
-            return response('The Specified Account is Unauthorized', 403);
+            return view('demo_login');
         }
     }
 }

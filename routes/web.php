@@ -20,10 +20,8 @@ Route::group(['middleware'=>['saml2.auth']], function () use ($router) {
     Route::get('/admin/teams/{team?}/{type?}', ['uses'=>'AdminController@admin_teams']);
     Route::get('/admin/{page?}', ['uses'=>'AdminController@admin']);
 });
-Route::group(['prefix' => 'demo','middleware' => ['public.api.auth']], function () {
-    Route::get('/', ['uses' => 'DemoController@list']);
-    Route::get('/{user}', ['uses' => 'DemoController@login']);
-});
+
+Route::any('/demo', ['uses' => 'DemoController@list']);
 Route::get('/logout', ['as' => 'saml_logout','uses' => 'Saml2Controller@logout']);
 /* SAML Stuff */
 Route::group(['prefix' => 'saml2','middleware' => ['saml']], function () {
