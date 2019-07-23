@@ -167,3 +167,7 @@ ajax.resources = {
     "messages": "/teams{{#request.id}}/{{request.id}}{{/request.id}}/messages",
     "notes": "/teams{{#request.id}}/{{request.id}}{{/request.id}}/notes",
 };
+
+toastr.options = {
+    "positionClass": "toast-bottom-right",
+}

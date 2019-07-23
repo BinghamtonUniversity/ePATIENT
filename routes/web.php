@@ -53,7 +53,7 @@ Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () 
 
     Route::get('/teams/{team}/members',['uses'=>'TeamController@list_members'])->middleware('can:manage,team');
     Route::post('/teams/{team}/members/{user}',['uses'=>'TeamController@add_member'])->middleware('can:manage,team');
-    Route::delete('/teams/{team}/members/{user}',['uses'=>'TeamController@remove_member'])->middleware('can:manage,team');
+    Route::delete('/teams/{team}/members/{user_id}',['uses'=>'TeamController@remove_member'])->middleware('can:manage,team');
     Route::put('/teams/{team}/members/{user}',['uses'=>'TeamController@update_member'])->middleware('can:manage,team');
 
     Route::get('/teams/{team}/messages',['uses'=>'TeamController@list_messages'])->middleware('can:view,team');

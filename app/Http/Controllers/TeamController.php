@@ -120,9 +120,9 @@ class TeamController extends Controller
         return TeamMember::where('team_id',$team->id)->where('user_id',$user->id)->with('user')->first();
     }
 
-    public function remove_member(Request $request, Team $team, User $user)
+    public function remove_member(Request $request, Team $team, $user_id)
     {
-        if ( TeamMember::where('team_id',$team->id)->where('user_id',$user->id)->delete() ) {
+        if ( TeamMember::where('team_id',$team->id)->where('user_id',$user_id)->delete() ) {
             return [true];
         }
     }
