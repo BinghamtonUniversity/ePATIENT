@@ -148,9 +148,9 @@ class TeamController extends Controller
         return TeamMessage::where('id',$team_message->id)->with('user')->first();
     }
 
-    public function remove_message(Team $team, TeamMessage $team_message)
+    public function remove_message(Team $team, TeamMessage $message)
     {
-        if ( $team_message->delete() ) {
+        if ( $message->delete() ) {
             return [true];
         }
     }
@@ -167,12 +167,12 @@ class TeamController extends Controller
 
         $team_note = new TeamNote(['user_id'=>$user->id,'team_id'=>$team->id,'note'=>$request->note]);
         $team_note->save();
-        return $team_note;
+        return TeamNote::where('id',$team_note->id)->with('user')->first();
     }
 
-    public function remove_note(Team $team, TeamNote $team_note)
+    public function remove_note(Team $team, TeamNote $note)
     {
-        if ( $team_note->delete() ) {
+        if ( $note->delete() ) {
             return [true];
         }
     }

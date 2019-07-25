@@ -1,3 +1,5 @@
+// import { request } from "https";
+
 build_table = function(resource, options) {
     var options = options || {};
     if(typeof options.add == 'undefined'){
@@ -71,6 +73,13 @@ build_table = function(resource, options) {
     options.container =  options.container || '#dataGrid';
     options.schema =  options.schema || adminFormFields[resource];
     options.data =  options.data || this.data[resource];
+
+    if(resource === 'messages') {
+        options.edit = false;
+    }
+    if(resource === 'notes') {
+        options.edit = false;
+    }
 
     if(resource === 'teams'){
         options.events = [
@@ -164,8 +173,8 @@ ajax.resources = {
     "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
     "update_permissions": "/users/{{request.user_id}}/permissions",
     "members": "/teams{{#request.id}}/{{request.id}}{{/request.id}}/members{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
-    "messages": "/teams{{#request.id}}/{{request.id}}{{/request.id}}/messages",
-    "notes": "/teams{{#request.id}}/{{request.id}}{{/request.id}}/notes",
+    "messages": "{{#request.team_id}}/teams/{{request.team_id}}/messages/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/messages{{/request.team_id}}",
+    "notes": "{{#request.team_id}}/teams/{{request.team_id}}/notes/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/notes{{/request.team_id}}",
 };
 
 toastr.options = {

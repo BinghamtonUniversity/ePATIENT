@@ -48,11 +48,13 @@ adminFormFields = {
       },
       {
         "label": "Report to learner",
-        "name": "summary_description"
+        "name": "summary_description",
+        "type": "textarea"
       },
       {
         "label": "Case Synopsis",
-        "name": "synopsis_description"
+        "name": "synopsis_description",
+        "type": "textarea"
       },       
       {"name": "id","type": "hidden"} 
   
@@ -99,60 +101,74 @@ adminFormFields = {
     ],
     "members" : [
         {
-          "type": "select",
-          "label": "User",
-          "name": "user_id",
-          "label_key": "email",
-          "value_key": "id",
-          "choices":"/api/users"
-        },
-        {
-          "type": "select",
-          "label": "Role",
-          "name": "role_id",
-          "label_key": "title",
-          "value_key": "id",
-          "choices":"roles",
-          "choices":"/api/roles"
-        },
-        {
-          "type": "checkbox",
-          "label": "Team Admin",
-          "name": "admin"
-        },
-        {
-          "name": "team_id",
-          "type":"hidden"
-        }
-      ],
-      "messages":[
-          {
-            "label": "Message",
-            "name": "message"
-          },
-          {
-            "name": "team_id",
-            "type":"hidden"
-          }   
-      ],
-      "notes":[
-        {
             "type": "select",
             "label": "User",
             "name": "user_id",
             "label_key": "email",
             "value_key": "id",
             "choices":"/api/users"
-          },
-          {
+        },
+        {
+            "type": "select",
+            "label": "Role",
+            "name": "role_id",
+            "label_key": "title",
+            "value_key": "id",
+            "choices":"roles",
+            "choices":"/api/roles"
+        },
+        {
+            "type": "checkbox",
+            "label": "Team Admin",
+            "name": "admin"
+        },
+        {
+            "name": "team_id",
+            "type":"hidden"
+        }
+      ],
+      "messages":[
+        {
+            "label": "Message",
+            "name": "message",
+            "type":"textarea"
+        },
+        {
+            "label": "User",
+            "name": "user_id",
+            "template": "{{attributes.user.first_name}} {{attributes.user.last_name}} - {{attributes.user.email}}",
+            "show":false,
+        },
+        {
+            "label": "Timestamp",
+            "name": "created_at",
+            "show":false,
+        },
+        {
+            "name": "team_id",
+            "type":"hidden"
+        }   
+      ],
+      "notes":[
+        {
             "label": "Note",
             "name": "note",
             "type":"textarea"
-          },
-          {
+        },
+        {
+            "label": "User",
+            "name": "user_id",
+            "template": "{{attributes.user.first_name}} {{attributes.user.last_name}} - {{attributes.user.email}}",
+            "show":false,
+        },
+        {
+            "label": "Timestamp",
+            "name": "created_at",
+            "show":false,
+        },
+        {
             "name": "team_id",
             "type":"hidden"
-          }      
+        }      
       ]
-
   }
