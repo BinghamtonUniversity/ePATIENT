@@ -83,6 +83,7 @@ return [
         // Usually x509cert and privateKey of the SP are provided by files placed at
         // the certs folder. But we can also provide them with the following parameters
         'x509cert' => env('SAML2_SP_x509','
+        -----BEGIN CERTIFICATE-----
         MIIDhTCCAmygAwIBAgIBADANBgkqhkiG9w0BAQ0FADBcMQswCQYDVQQGEwJ1czEL
         MAkGA1UECAwCTlkxHjAcBgNVBAoMFUJpbmdoYW10b24gVW5pdmVyc2l0eTEgMB4G
         A1UEAwwXZXBhdGllbnQuYmluZ2hhbXRvbi5lZHUwHhcNMTkwODA2MTMxNDA4WhcN
@@ -102,8 +103,10 @@ return [
         /jIu89gzrPMXvSin7E54d9Cg1OJyAoE20CMAZXN9KUP78ZfuIlVFcbmkVgKg/hY7
         4z014V5Hlz0fLHc57+dBOyVdgCNg1XSUnM6ydlpEABLG6mpSqZdlN8g3Ap+SmG2S
         9vky2tIwmNq5Vos9fCuh5Qly+lttZjfHQiQlKoG2AC0CSgUkWvRFA24=
+        -----END CERTIFICATE-----
         '),
         'privateKey' => env('SAML2_SP_PRIVATEKEY','
+        -----BEGIN PRIVATE KEY-----
         MIIEwgIBADANBgkqhkiG9w0BAQEFAASCBKwwggSoAgEAAoIBAgDBMMiwi85nQ0KQ
         6AwNK7m7/igFYNiHT6Shh1Jw+vDu6Q4R/OQyqdJu06viLJpejxfYIy4pS3n8FHIB
         nrFFvKK0AbnxUYedlGiVEYWDRalxjFKfesDyHWLLmf3tMfuAjuCqNdPfnPXiXKCb
@@ -130,6 +133,7 @@ return [
         cyB9R7t92Md/XAQJhxxpIyuoYgxPUvh57McrPG1hOfuR0dAG1Uy1p7Qr9Q5qqOfR
         EZ3yC0YTaUhaSnudHevEDmRz3VoLvjKFta20kCKMBLcemlNIj1DG6ocDmybL9zWS
         aFcq15rQjwdyGC1/eSbW0N6Z4rHT2A==
+        -----END PRIVATE KEY-----
         '),
 
         // Identifier (URI) of the SP entity.
