@@ -127,6 +127,18 @@ return [
             // Leave blank to use the 'saml_acs' route
             'url' => '',
         ),
+
+        "attributeConsumingService"=> [
+            "serviceName" => "ePATIENT",
+            "serviceDescription" => "ePATIENT Attributes",
+            "requestedAttributes" => [
+                ["name" => "givenName","isRequired" => true],
+                ["name" => "sn","isRequired" => true],
+                ["name" => "mail","isRequired" => true],
+                ["name" => "eduPersonTargetedID","isRequired" => true],
+            ]
+        ],
+
         // Specifies info about where and how the <Logout Response> message MUST be
         // returned to the requester, in this case our SP.
         // Remove this part to not include any URL Location in the metadata.
@@ -204,9 +216,17 @@ return [
             'givenName' => 'Tim Cortesi',
             'emailAddress' => 'tcortesi@binghamton.edu'
         ),
-        'support' => array(
+        'administrative' => array(
             'givenName' => 'Sarah Lynch',
             'emailAddress' => 'selynch@binghamton.edu'
+        ),
+        'other' => array(
+            'givenName' => 'Binghamton Security Office',
+            'emailAddress' => 'security@binghamton.edu'
+        ),
+        'support' => array(
+            'givenName' => 'Binghamton Helpdesk',
+            'emailAddress' => 'helpdesk@binghamton.edu'
         ),
     ),
 
@@ -357,7 +377,7 @@ return [
             DhluZZ0sGI/0bkISU4g/vGZTu8xwTnCifQKAXf4VfP35h/VeHbQyv5922JU=
             '),
             'data_map' => [
-                'unique_id' => '{{bnumber}}',
+                'unique_id' => '{{eduPersonTargetedID}}',
                 'first_name' => '{{givenName}}',
                 'last_name' => '{{sn}}',
                 'email' => '{{mail}}',
