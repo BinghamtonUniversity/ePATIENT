@@ -59,13 +59,13 @@ class Saml2User
         return app('request')->input('SAMLResponse'); //just this request
     }
 
-    function getIntendedUrl() {
-        $relayState = app('request')->input('RelayState'); //just this request
-        $url = app('Illuminate\Contracts\Routing\UrlGenerator');
-        if ($relayState && $url->full() != $relayState) {
-            return $relayState;
-        }
-    }
+    // function getIntendedUrl() {
+    //     $relayState = app('request')->input('RelayState'); //just this request
+    //     $url = app('Illuminate\Contracts\Routing\UrlGenerator');
+    //     if ($relayState && $url->full() != $relayState) {
+    //         return $relayState;
+    //     }
+    // }
 
     /**
      * Parses a SAML property and adds this property to this user or returns the value

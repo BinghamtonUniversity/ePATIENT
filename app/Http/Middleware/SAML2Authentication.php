@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+
 
 class SAML2Authentication
 {
@@ -17,7 +19,11 @@ class SAML2Authentication
     public function handle($request, Closure $next)
     {
         if(!Auth::user()){    
-            return redirect(URL::route('saml_wayf'));
+            if (Route::current()->uri == '/') {
+                return redirect(URL::route('saml_wayf'));
+            } else {
+                return redirect(URL::route('saml_wayf').'?redirect='.urlencode(url()->full()));
+            }
         }
         return $next($request);
     }

@@ -31,7 +31,10 @@ class Saml2Controller extends Controller
             } else {
                 config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
                 $this->saml2Auth->configure();
-                return $this->saml2Auth->login();
+                // Construct the RelayState Variable to contain the correct IDP and Redirect URL
+                $relay_state = ['idp'=>$site,'redirect'=>isset(request()->redirect)?request()->redirect:null];
+                $relay_state = strtr(base64_encode(json_encode($relay_state)),'+/=','._-');
+                return $this->saml2Auth->login($relay_state);
             }
         } else {
             return redirect('/');
@@ -54,7 +57,11 @@ class Saml2Controller extends Controller
      */
     public function acs()
     {
-        $site = basename(parse_url(request()->input('RelayState'), PHP_URL_PATH));
+        // Deconstruct the RelayState Variable to fetch the correct IDP and Redirect URL
+        $relay_state = json_decode(base64_decode(strtr(request()->input('RelayState'),'._-','+/=')));
+        $site = $relay_state->idp;
+        $redirect = $relay_state->redirect;
+        
         config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
         $this->saml2Auth->configure();
 
@@ -86,10 +93,10 @@ class Saml2Controller extends Controller
         if (env('IDP_DEBUG_'.$site,false)) {
             echo '<h3>SAML Attributes</h3>';
             echo '<pre>'.print_r($saml_attributes,true).'</pre>';
-            echo '<h3>SAML2 User</h3>';
-            echo '<pre>'.print_r($saml2user,true).'</pre>';
-            echo '<h3>SAML Last Message</h3>';
-            echo '<pre>'.print_r($messageId,true).'</pre>';
+            // echo '<h3>SAML2 User</h3>';
+            // echo '<pre>'.print_r($saml2user,true).'</pre>';
+            // echo '<h3>SAML Last Message</h3>';
+            // echo '<pre>'.print_r($messageId,true).'</pre>';
             exit();
         }
         $data_map = config('saml2_settings.idp.data_map');
@@ -106,10 +113,8 @@ class Saml2Controller extends Controller
         $user->save();
         Auth::login($user, true);
 
-        $redirectUrl = $saml2user->getIntendedUrl();
-
-        if ($redirectUrl !== null) {
-            return redirect($redirectUrl);
+        if ($redirect !== null) {
+            return redirect($redirect);
         } else {
             return redirect(config('saml2_settings.loginRoute'));
         }
