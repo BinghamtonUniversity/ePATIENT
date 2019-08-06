@@ -83,36 +83,53 @@ return [
         // Usually x509cert and privateKey of the SP are provided by files placed at
         // the certs folder. But we can also provide them with the following parameters
         'x509cert' => env('SAML2_SP_x509','
-        MIICfDCCAeWgAwIBAgIBADANBgkqhkiG9w0BAQ0FADBaMQswCQYDVQQGEwJ1czEL
-        MAkGA1UECAwCTlkxGTAXBgNVBAoMEEVzY2hlciBMYWJzLCBJbmMxIzAhBgNVBAMM
-        Gmh0dHBzOi8vd3d3LmVzY2hlcmxhYnMuY29tMCAXDTE5MDIyNTIxNDEyOFoYDzIy
-        OTIxMjEwMjE0MTI4WjBaMQswCQYDVQQGEwJ1czELMAkGA1UECAwCTlkxGTAXBgNV
-        BAoMEEVzY2hlciBMYWJzLCBJbmMxIzAhBgNVBAMMGmh0dHBzOi8vd3d3LmVzY2hl
-        cmxhYnMuY29tMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCj5VSfKKmTcw/F
-        /dQQAj/25R/5sg2fGsSWHl4hlBfX41uNpdakwxTdnuY+KWV7q5ze6IHU4lXo53fK
-        ogSb5hueC7E5NSQKDLx335b7rGEh9M9GK+9mRO8Z2aPJwJ4lR9FBI2pwKTyTIo4M
-        ElfdpCoAYOqyekRW1isE2j/82zDq/wIDAQABo1AwTjAdBgNVHQ4EFgQUYR1E5wEg
-        41oVrxpBBLMXvOkxrCYwHwYDVR0jBBgwFoAUYR1E5wEg41oVrxpBBLMXvOkxrCYw
-        DAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQ0FAAOBgQAXgD+9rOq/3mHOORI1KWja
-        kc2jbtGJIfhElbLuFTRwyYqoWD+xJpH/qcrULdDnFwVUECJTsfGe0jCJAp0cZHJk
-        DLpmr/So1/oKuep9VAgDPZODLx3XMy+HuwKLswFK/dNs+XFQQgYMUPJ1a3VyKpt+
-        pau2XHxLOFTsMKEoA+nuOg==
+        MIIDhTCCAmygAwIBAgIBADANBgkqhkiG9w0BAQ0FADBcMQswCQYDVQQGEwJ1czEL
+        MAkGA1UECAwCTlkxHjAcBgNVBAoMFUJpbmdoYW10b24gVW5pdmVyc2l0eTEgMB4G
+        A1UEAwwXZXBhdGllbnQuYmluZ2hhbXRvbi5lZHUwHhcNMTkwODA2MTMxNDA4WhcN
+        MjkwODAzMTMxNDA4WjBcMQswCQYDVQQGEwJ1czELMAkGA1UECAwCTlkxHjAcBgNV
+        BAoMFUJpbmdoYW10b24gVW5pdmVyc2l0eTEgMB4GA1UEAwwXZXBhdGllbnQuYmlu
+        Z2hhbXRvbi5lZHUwggEjMA0GCSqGSIb3DQEBAQUAA4IBEAAwggELAoIBAgDBMMiw
+        i85nQ0KQ6AwNK7m7/igFYNiHT6Shh1Jw+vDu6Q4R/OQyqdJu06viLJpejxfYIy4p
+        S3n8FHIBnrFFvKK0AbnxUYedlGiVEYWDRalxjFKfesDyHWLLmf3tMfuAjuCqNdPf
+        nPXiXKCb3ER4NKPJHQYzvsRMcMqs+0otz+0QYwyfieqMbgFSucNsRBKZqr9ic21M
+        w6Y+tShMhevahQWGB9rTiPCm7o+DMcdGzZj+yNbnOtoeOKk0gpZieds1fmoM6oW0
+        HR05VMR4dPFv79i05zso7ty+R1SAFu9v64a7MNPJqp9D2X6vpVdQP+5JVURfWak4
+        fDn4y7grK7I74wTTbwIDAQABo1AwTjAdBgNVHQ4EFgQUcl0Jb6MqCN3PTdpQXkeC
+        jRnw68AwHwYDVR0jBBgwFoAUcl0Jb6MqCN3PTdpQXkeCjRnw68AwDAYDVR0TBAUw
+        AwEB/zANBgkqhkiG9w0BAQ0FAAOCAQIAVn/GLPFLOKdArcvt3IFEIOyaOT/hIWBR
+        KRDD6OV2VDNpdgiWY9rcwaFAerzakYzj4voAv1YmBTjc/kdqZOunhmcciKjT8sQA
+        soDV1LaEvfqEQUzyd/TK4/BtLtdcV9wbrJNy2NLDFedVKcVcz/1QY/fyXUsN61Ab
+        /jIu89gzrPMXvSin7E54d9Cg1OJyAoE20CMAZXN9KUP78ZfuIlVFcbmkVgKg/hY7
+        4z014V5Hlz0fLHc57+dBOyVdgCNg1XSUnM6ydlpEABLG6mpSqZdlN8g3Ap+SmG2S
+        9vky2tIwmNq5Vos9fCuh5Qly+lttZjfHQiQlKoG2AC0CSgUkWvRFA24=
         '),
         'privateKey' => env('SAML2_SP_PRIVATEKEY','
-        MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAKPlVJ8oqZNzD8X9
-        1BACP/blH/myDZ8axJYeXiGUF9fjW42l1qTDFN2e5j4pZXurnN7ogdTiVejnd8qi
-        BJvmG54LsTk1JAoMvHfflvusYSH0z0Yr72ZE7xnZo8nAniVH0UEjanApPJMijgwS
-        V92kKgBg6rJ6RFbWKwTaP/zbMOr/AgMBAAECgYEAnxRKFY3HQooNBlUAD2XPphnw
-        9lB/bi3yH+9r2FXA6tgQFiWgeB2t1AqWWkGd8fK5eZbd5b6mOkDpAfJOXO91X1z/
-        /Q9SM08P5P4qajbzq2M5yjz9YZHpZC1jrZdpIneDs+Y7wyGPNXVDrC2j4qXsXPp8
-        CuJbgL4IZ/dye4AOfFECQQDUSabT/pSFGgoQUEZWoLeO9n2BffXZIlsTIakdtvWi
-        13vrUWlnx/YuqK2AR4BB6tsGJPD0vKeMISfotLMFkAQpAkEAxaTKqhKR3GiwlVKD
-        u2TVZ5e8D+OlpsY+z33SRpQ58s7dK0DHTwrxWAEA7JLkmz/EHbzHqESCDVdMN2k0
-        mWka5wJBAKIKij5doC6tPqtPKzGqwhJtUkXKySNyFwTWd8mHw54GT7/Cx+uA9giN
-        lspJSbyHMaJSBl85tca/9D+r1s7TLGkCQARBVwewXKmVK3AblbB8LEgNsUPaT9+2
-        VvXarKNOX60FnSdoPqJKBwYxB1cQlpFtHwjQ3q+VwgMNhRuQTUycQbMCQEr0Fy4a
-        /c37BF4D7+QIo6/mig6XIgqirFIlEkiZD8NI7v9zq04gdi1/eKqPiSaBOdBtZjTw
-        KoVmnAs4iu3s+cI=
+        MIIEwgIBADANBgkqhkiG9w0BAQEFAASCBKwwggSoAgEAAoIBAgDBMMiwi85nQ0KQ
+        6AwNK7m7/igFYNiHT6Shh1Jw+vDu6Q4R/OQyqdJu06viLJpejxfYIy4pS3n8FHIB
+        nrFFvKK0AbnxUYedlGiVEYWDRalxjFKfesDyHWLLmf3tMfuAjuCqNdPfnPXiXKCb
+        3ER4NKPJHQYzvsRMcMqs+0otz+0QYwyfieqMbgFSucNsRBKZqr9ic21Mw6Y+tShM
+        hevahQWGB9rTiPCm7o+DMcdGzZj+yNbnOtoeOKk0gpZieds1fmoM6oW0HR05VMR4
+        dPFv79i05zso7ty+R1SAFu9v64a7MNPJqp9D2X6vpVdQP+5JVURfWak4fDn4y7gr
+        K7I74wTTbwIDAQABAoIBAgCjUIQ3ith/vwJE0YVulOo8nAxlD4u8R32a93SgAeMv
+        dGDqn+ihU6KLAfGqD56oFTtJAeSCEEYc7YO7DtY5Z8/7cAIqmIuWkOEgM2G0qW0m
+        ikNGglUd1+2uxI0+uSQtd5tBCKQFwwCxzTAQ0lIndAiJeTnHAJudKzSKqxv4Qm/b
+        jGiR4wPMSYHt9DqJEoWj22ii/wwDdwuZBPcPM0lYHlFrkIyTneoAst5EXX697x+m
+        KQ3mcuGq9E5FbN2Q+sGEYpBydFn/QZhAZmLwF7j2hbB0wxv8eNl5lY+wEv9PEiIN
+        gGDWpi1yCf7WXxdxTJgMWLG68Of5U4PpxyqUWUl9XgfWcQKBgQ7Je+y571MSZ9mp
+        OqUj51Yz05I1Ox53Hp2zUBFoCD4iD8R5p5gFx7LHtDux5xrxrfexVtf+uw9TESwx
+        4ckqqeZZv7FekpUHEBdo7AvPibFSA7crlf2KsUzTSoLRWYr0aBFFIX/6D9BpO+Zc
+        EPsp/TNcZVI23hcZ5ukh1xqdczUE+wKBgQ0QmgxtVxIGg21T5KSX4zMSLjB9nEsL
+        PieoYiVAQt0/TtsCqANwKIosBpn5LlQuWlCY6QHm55+oaIBaDNNqlNYcevE5mxha
+        7/Y7ppznWkPD1aP8XRrRE13+IVRG4TvZjULeZ6raX9VT/02Okox//3VLEDLqwaoK
+        b1jZPPGjQ1hZHQKBgQoCVjD59sZrWgJaa4jm0atm71ozT+4iQYYLnzH5EkNEeRnM
+        IyZjGzanuRcDJ+T0HIbh8l/IXERWPPSGW0f46gIzU+8yjdP0cO73pXelJpXxZvRw
+        u1lgrPzMtM3x+UN2ho7SFYfz8wpmgRY/0XrBhFNkwmyxGQnYDZZWwqyQUTBdSwKB
+        gQI9d3xr/wLrNPu457pFBMLL+jl8QCEp41VfbLygYRaYdUfeE7rLL1hJpjQeYpAy
+        hm/NWB5oXgylDo37YrmZS73OklHsI6iwZvacUbwTewmleWstqTUg5iY2nbZalOHz
+        MmJlyfakjMwCJANDT+NhSwbsgPGKCPzD30WnsehoqvJqDQKBgQucY3En8JSm19FL
+        cyB9R7t92Md/XAQJhxxpIyuoYgxPUvh57McrPG1hOfuR0dAG1Uy1p7Qr9Q5qqOfR
+        EZ3yC0YTaUhaSnudHevEDmRz3VoLvjKFta20kCKMBLcemlNIj1DG6ocDmybL9zWS
+        aFcq15rQjwdyGC1/eSbW0N6Z4rHT2A==
         '),
 
         // Identifier (URI) of the SP entity.
