@@ -102,7 +102,10 @@ class Saml2Controller extends Controller
         $data_map = config('saml2_settings.idp.data_map');
         $m = new \Mustache_Engine;                                    
         $user = User::where('unique_id', $m->render($data_map['unique_id'], $saml_attributes))
-            // ->where('idp',$school)
+            ->where(function ($query) use ($site) {
+                $query->where('idp',$site)
+                    ->orWhereNull('idp');
+            })
             ->first();
         if ($user === null) {
             $user = new User();
