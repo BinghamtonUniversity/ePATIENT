@@ -85,4 +85,6 @@ Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () 
     Route::put('/library/{library_type}/{library}',['uses'=>'LibraryController@edit'])->middleware('can:manage,App\Library');
     Route::post('/library/{library_type}',['uses'=>'LibraryController@add'])->middleware('can:manage,App\Library');
     Route::delete('/library/{library_type}/{library}',['uses'=>'LibraryController@delete'])->middleware('can:manage,App\Library');
+
+    Route::get('/idps',['uses'=>'Saml2Controller@idps']);
 });

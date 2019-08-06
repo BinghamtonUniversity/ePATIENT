@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable()->unique()->default(null);
+            $table->string('idp')->nullable()->default(null);
             $table->string('password')->nullable();
             $table->boolean('invalidate_cache')->default(false);
             $table->rememberToken();
@@ -26,7 +27,8 @@ class CreateUsersTable extends Migration
             $table->index('unique_id');
             $table->index('first_name');
             $table->index('last_name');
-            $table->index('email');        
+            $table->index('email');       
+            $table->index('dip'); 
         });
     }
 

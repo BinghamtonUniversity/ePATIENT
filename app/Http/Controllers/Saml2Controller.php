@@ -101,8 +101,9 @@ class Saml2Controller extends Controller
         }
         $data_map = config('saml2_settings.idp.data_map');
         $m = new \Mustache_Engine;                                    
-        $user = User::where('unique_id', '=', 
-            $m->render($data_map['unique_id'], $saml_attributes))->first();
+        $user = User::where('unique_id', $m->render($data_map['unique_id'], $saml_attributes))
+            // ->where('idp',$school)
+            ->first();
         if ($user === null) {
             $user = new User();
             $user->unique_id = $m->render($data_map['unique_id'], $saml_attributes);
@@ -110,6 +111,7 @@ class Saml2Controller extends Controller
         $user->first_name = $m->render($data_map['first_name'], $saml_attributes);
         $user->last_name = $m->render($data_map['last_name'], $saml_attributes);
         $user->email = $m->render($data_map['email'], $saml_attributes);
+        $user->idp = $site;
         $user->save();
         Auth::login($user, true);
 
@@ -152,6 +154,15 @@ class Saml2Controller extends Controller
             $full_logout = false;
         }
         return view('logout',['full_logout' => $full_logout]);
+    }
+
+    public function idps(Request $request)
+    {
+        $idps = [];
+        foreach(config('saml2_settings.idps') as $idp_name => $idp) {
+            $idps[] = ['value'=>$idp_name, 'label'=>$idp['name']];
+        }
+        return $idps;
     }
 
 }

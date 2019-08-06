@@ -12,6 +12,13 @@ adminFormFields = {
         {
           "label": "Email",
           "name": "email"
+        },        
+        {
+            "label": "Identity Provider",
+            "name": "idp",
+            "type": "select",
+            "choices":"/api/idps",
+            "enabled":false   
         },
         {
           "label": "ID",
