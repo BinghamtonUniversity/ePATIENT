@@ -130,12 +130,12 @@ return [
 
         "attributeConsumingService"=> [
             "serviceName" => "ePATIENT",
-            "serviceDescription" => "ePATIENT Attributes",
+            "serviceDescription" => 'ePATIENT is an educational EMR to aid in asynchronous interprofessional healthcare training. ePATIENT allows multiple student professions, from different campuses, to simultaneously access "virtual patient" records in real-time allowing them to respond to notes, orders, and comments from other members of the team as professionals do in real-world clinical environments.',
             "requestedAttributes" => [
-                ["name" => "givenName","isRequired" => true],
-                ["name" => "sn","isRequired" => true],
-                ["name" => "mail","isRequired" => true],
-                ["name" => "eduPersonTargetedID","isRequired" => true],
+                ["friendlyName" => "givenName", 'name'=> 'urn:oid:2.5.4.42', "isRequired" => true],
+                ["friendlyName" => "sn", 'name'=> 'urn:oid:2.5.4.4', "isRequired" => true],
+                ["friendlyName" => "mail", 'name'=> 'urn:oid:0.9.2342.19200300.100.1.3', "isRequired" => true],
+                ["friendlyName" => "eduPersonTargetedID", 'name'=> 'urn:oid:1.3.6.1.4.1.5923.1.1.1.10', "isRequired" => true],
             ]
         ],
 
