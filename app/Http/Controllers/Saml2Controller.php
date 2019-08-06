@@ -159,6 +159,7 @@ class Saml2Controller extends Controller
     public function idps(Request $request)
     {
         $idps = [];
+        $idps[] = ['value'=>null,'label'=>'None'];
         foreach(config('saml2_settings.idps') as $idp_name => $idp) {
             $idps[] = ['value'=>$idp_name, 'label'=>$idp['name']];
         }
