@@ -427,5 +427,50 @@ return [
                 'email' => '{{mail}}',
             ],
         ],
+        'stonybrook' => [
+            'name' => 'Stony Brook University',
+            // Identifier of the IdP entity  (must be a URI)
+            'entityId' => env('SAML2_IDP_ENTITYID', 'urn:mace:incommon:stonybrook.edu'),
+            // SSO endpoint info of the IdP. (Authentication Request protocol)
+            'singleSignOnService' => array(
+                // URL Target of the IdP where the SP will send the Authentication Request Message,
+                // using HTTP-Redirect binding.
+                'url' => 'https://sso.cc.stonybrook.edu/idp/profile/SAML2/Redirect/SSO',
+            ),
+            // SLO endpoint info of the IdP.
+            'singleLogoutService' => array(
+                // URL Location of the IdP where the SP will send the SLO Request,
+                // using HTTP-Redirect binding.
+                'url' => null,
+            ),
+            // Public x509 certificate of the IdP
+            'x509cert' => env('SAML2_IDP_x509', '
+            MIIDQDCCAiigAwIBAgIVAM6zo1Tg/Cni0U1ZiS9qUjHwTb0qMA0GCSqGSIb3DQEB
+            BQUAMCAxHjAcBgNVBAMTFXNzby5jYy5zdG9ueWJyb29rLmVkdTAeFw0xMjAzMzAy
+            MTI4MTBaFw0zMjAzMzAyMTI4MTBaMCAxHjAcBgNVBAMTFXNzby5jYy5zdG9ueWJy
+            b29rLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAIZH1YAL8Nsb
+            ZP7r1ZCfT0iXKNeVMUoes4lotQGna8lfAkwbBAOIi8z6Ck1pHtTwZBnRf0HalU2r
+            +INFd/U2MQMUl63YrdhjXwkM7LepxMqj1nBRRS7W1qnS4B9N1Gx8h4RwaYVlW7YR
+            EFSZjuqVTz3aJqr4IY6OjxHlXKCYy9q0x2QGgJm7z0/0K0K1w1LymoL8smE+7X4T
+            foEKIZohNHxTPoM8tLU3XZhuMQL8TAtbUIz18+gyq0ug8Nf5mXkBPDSIQ92VWTKN
+            CbFuu1meG18OXGNQwDsjj3D6WzoV8/h7wsVhf1tyBXfJ6GFfkhdJPJZTCgJzsGEk
+            wVmSKNwTwzkCAwEAAaNxMG8wTgYDVR0RBEcwRYIVc3NvLmNjLnN0b255YnJvb2su
+            ZWR1hixodHRwczovL3Nzby5jYy5zdG9ueWJyb29rLmVkdS9pZHAvc2hpYmJvbGV0
+            aDAdBgNVHQ4EFgQUoH3ycV3oftfj3WFA33xtpoaRyUYwDQYJKoZIhvcNAQEFBQAD
+            ggEBAE2vfQbGmZWnFMWylYeLqj7lvX5P1Se9i8DBJjy3tdCTIHdHTSRPLnnroFEb
+            Au55cnXU3SeJ4jzHj3k4tOXQQfE+BGER47DtPuJ5Ey2Ug33DCrMoP0yjpwp3uTcy
+            NRSzJT6FikcvJbGxzswA6chGOHWtGwe4dq+5Om0q8QQsQMX5o3TUrkL/9e4cSyHV
+            beoZeLMhDf4M7wf971qx6tV+qVQqqSdDbQOPx+IKKXGuHCwKXwi1V1KjmYFqnOm6
+            vjLJq/ZYknekwIgXDYdL99d5kwqV6W7vHm5V7j2fv0o+mNu46sL9Y+TVZPAnyw8b
+            P5kJpNl6SkvUOjZ4nvr9i9FgmHc=
+            '),
+            'data_map' => [
+                'unique_id' => '{{#eduPersonTargetedID}}{{eduPersonTargetedID}}{{/eduPersonTargetedID}}{{^eduPersonTargetedID}}{{mail}}{{/eduPersonTargetedID}}',
+                'first_name' => '{{givenName}}',
+                'last_name' => '{{sn}}',
+                'email' => '{{mail}}',
+            ],
+        ],
+
     ]
 ];
