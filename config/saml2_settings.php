@@ -471,6 +471,33 @@ return [
                 'email' => '{{mail}}',
             ],
         ],
+        'sunyfederation' => [
+            'name' => 'SUNY Federation (All SUNY Schools)',
+            // Identifier of the IdP entity  (must be a URI)
+            'entityId' => env('SAML2_IDP_ENTITYID', 'https://idm.suny.edu/fed/sp/metadata'),
+            // SSO endpoint info of the IdP. (Authentication Request protocol)
+            'singleSignOnService' => array(
+                // URL Target of the IdP where the SP will send the Authentication Request Message,
+                // using HTTP-Redirect binding.
+                'url' => 'https://idm.suny.edu/fed/sp/samlv20',
+            ),
+            // SLO endpoint info of the IdP.
+            'singleLogoutService' => array(
+                // URL Location of the IdP where the SP will send the SLO Request,
+                // using HTTP-Redirect binding.
+                'url' => null,
+            ),
+            // Public x509 certificate of the IdP
+            'x509cert' => env('SAML2_IDP_x509', '
+            MIIDXDCCAkSgAwIBAgIEU0hI7zANBgkqhkiG9w0BAQUFADBwMQswCQYDVQQGEwJV UzELMAkGA1UECBMCTlkxDzANBgNVBAcTBkFsYmFueTEMMAoGA1UEChMDT0lUMSMw IQYDVQQLExpTVU5ZIFN5c3RlbSBBZG1pbmlzdHJhdGlvbjEQMA4GA1UEAxMHVW5r bm93bjAeFw0xNDA0MTExOTU2MzFaFw0yNDA0MDgxOTU2MzFaMHAxCzAJBgNVBAYT AlVTMQswCQYDVQQIEwJOWTEPMA0GA1UEBxMGQWxiYW55MQwwCgYDVQQKEwNPSVQx IzAhBgNVBAsTGlNVTlkgU3lzdGVtIEFkbWluaXN0cmF0aW9uMRAwDgYDVQQDEwdV bmtub3duMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlZSaYvjczolB nsayjKHHcjQ9Z8EFy9C5w3l9SBsdrqXDmf+qtnl8JEaGiYTOnLXRt8bQpDWbqppD 5T8j840N8aKAvLZBtaB6Rj510cAY7ktVMSCkx6RvBumxEHrELyJ72azkWVsL2NHS 013jMrYub/fjiBXHiMlV/tYgU9uSCFHJdDVuETTHIwbYF4707hncPV1nGRMwqAaf pfddVkApNIiecklgsCbnNa7eASLK9S09J/Sq6gvxl0hkEMOZga+HByoTkMRdgDQT vd2G8mfV59KCUe/r1dl56RMnlrUu0015qouIjl3XPUQCfb+YJQHHBJEfoCyei7Ay /tZF5dD7EwIDAQABMA0GCSqGSIb3DQEBBQUAA4IBAQCM+xTaN0xvStbn51bXDTxG h6iA9DuiDCwZ10CS7R0aEBpbND4qdt1iq7fBqkYcYWnMqrhlOKbbUhsR+4eapGnB ih4+rQmOesAJQKpJJ7xF0z2nP9Molqp0vesPRaFUZPEcNN5x5ruAijrTPImzVLIK UN1UT8UjSsca2q+hnM0ow1G86KG07ObEYD/hYpQt19ktB+6tPDCYQj7Q4JoSNiuj oAbVDHc1K/l83Zb3EojEs4HQbEnMB8oHv/IqGmn75+NMrx8jZdV8RI8iek5rZWex vqyRb8fl8H0+CzXD5Ds6f0EX31/c4CMEhoL+RK8i2cnWpZzUE6/P7I6PyQnGRlgF
+            '),
+            'data_map' => [
+                'unique_id' => '{{#eduPersonTargetedID}}{{eduPersonTargetedID}}{{/eduPersonTargetedID}}{{^eduPersonTargetedID}}{{mail}}{{/eduPersonTargetedID}}',
+                'first_name' => '{{givenName}}',
+                'last_name' => '{{sn}}',
+                'email' => '{{mail}}',
+            ],
+        ],
 
     ]
 ];

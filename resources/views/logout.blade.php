@@ -11,9 +11,11 @@
     <div class="col-sm-8 col-sm-offset-2">
       <div class="panel panel-default">
         <div class="panel-body">
-          You are logged out of this application, but you are not logged out of the IDP
-          so you can probably log back in really easily.  I guess turn off your computer
-          or something?  I don't know.<br><br>
+          You are now logged out of the ePATIENT Application, but you may not be logged out of your Identity Provider.
+          As a result, you may be able to log back into the ePATIENT application from this browser without re-entering your credentials until after your 
+          Identity Provider's session "times out".  If you <i>must</i> terminate your session immediately, 
+          the only reliable way to do that is to will need to delete your browser's session cookies.  
+          <br><br>
           <a href="/"><i class="fa fa-arrow-left fa-fw"></i> Return to Home</a>
         </div>
       </div>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="row">
 <center><h1 style="text-align:center;">Welcome to ePATIENT!</h1></center>
-<center><h3 style="text-align:center;">To Login, Please Select Your School From The List Below:</h1></center>
+<center><h3 style="text-align:center;">To Log In, Please Select Your Identity Provider From The List Below:</h1></center>
     <div class="col-sm-4 col-sm-offset-4">
         <ul class="list-group"> 
         <?php
