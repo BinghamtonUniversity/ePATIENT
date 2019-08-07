@@ -377,7 +377,7 @@ return [
             DhluZZ0sGI/0bkISU4g/vGZTu8xwTnCifQKAXf4VfP35h/VeHbQyv5922JU=
             '),
             'data_map' => [
-                'unique_id' => '{{eduPersonTargetedID}}',
+                'unique_id' => '{{#eduPersonTargetedID}}{{eduPersonTargetedID}}{{/eduPersonTargetedID}}{{^eduPersonTargetedID}}{{mail}}{{/eduPersonTargetedID}}',
                 'first_name' => '{{givenName}}',
                 'last_name' => '{{sn}}',
                 'email' => '{{mail}}',
@@ -421,7 +421,7 @@ return [
             Kq1D/QWBwg4oa9Zq
             '),
             'data_map' => [
-                'unique_id' => '{{mail}}',
+                'unique_id' => '{{#eduPersonTargetedID}}{{eduPersonTargetedID}}{{/eduPersonTargetedID}}{{^eduPersonTargetedID}}{{mail}}{{/eduPersonTargetedID}}',
                 'first_name' => '{{givenName}}',
                 'last_name' => '{{sn}}',
                 'email' => '{{mail}}',
