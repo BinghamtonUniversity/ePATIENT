@@ -383,5 +383,49 @@ return [
                 'email' => '{{mail}}',
             ],
         ],
+        'albany' => [
+            'name' => 'University at Albany',
+            // Identifier of the IdP entity  (must be a URI)
+            'entityId' => env('SAML2_IDP_ENTITYID', 'https://weblogin.albany.edu/shibboleth/idp2'),
+            // SSO endpoint info of the IdP. (Authentication Request protocol)
+            'singleSignOnService' => array(
+                // URL Target of the IdP where the SP will send the Authentication Request Message,
+                // using HTTP-Redirect binding.
+                'url' => 'https://weblogin.albany.edu/idp2/profile/SAML2/Redirect/SSO',
+            ),
+            // SLO endpoint info of the IdP.
+            'singleLogoutService' => array(
+                // URL Location of the IdP where the SP will send the SLO Request,
+                // using HTTP-Redirect binding.
+                'url' => null,
+            ),
+            // Public x509 certificate of the IdP
+            'x509cert' => env('SAML2_IDP_x509', '
+            MIIDODCCAiCgAwIBAgIVAKWha+CKTeinjttEcaqLm7fQSZLLMA0GCSqGSIb3DQEB
+            BQUAMB4xHDAaBgNVBAMTE3dlYmxvZ2luLmFsYmFueS5lZHUwHhcNMDkwMjExMTk1
+            NDE0WhcNMjkwMjExMTk1NDE0WjAeMRwwGgYDVQQDExN3ZWJsb2dpbi5hbGJhbnku
+            ZWR1MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjAY1R6LqpUcsbpn3
+            8AcJW/KtQTyVcdcHmkEeCdW3UNzd6ibmhRFcPVhXwY9Z8jAuHQLjIkPj4QuiaGXI
+            lfRJBQkTnkWeGLrHCzZA7/eZ0uJxL+SBf84OiK2jSmLqw6xGAADE8GmcyBpTQe2d
+            HDFDbLvsLc3UNs0U/WzIGEE5iPBd33UntVEYezO8vszjdKZr8r4ZRVTeSUe+qkgW
+            19ncHiqrbPBT+5qK2j8PaCiFrOjc0ScnsqHkgxr5krBM//SGoFPc+2bClUtbF/ci
+            wuNZ3RHxhkyxlwEwkhLyuhr9gpZDYH6mi/SKUXMcXdLBKev13ddXN3Is6JZxagXn
+            qZv/cwIDAQABo20wazBKBgNVHREEQzBBghN3ZWJsb2dpbi5hbGJhbnkuZWR1hipo
+            dHRwczovL3dlYmxvZ2luLmFsYmFueS5lZHUvaWRwL3NoaWJib2xldGgwHQYDVR0O
+            BBYEFC5IsCUVHd9dT/Q7onCX7ItOnehlMA0GCSqGSIb3DQEBBQUAA4IBAQBy+8+Q
+            vnDnS010CWPNF76wHA24ka7cX4FsV/+nsUbxCtL9lundZdBfzqTquy5GuF3j96ej
+            foXg0Vz9GOn/KtRDDCFz8Gym+8hZdvPQ/XOdxHW1kjb7EbbL/K8dLilUYR9B/IOZ
+            AXr4j4M4Qrh3jyxoFP+a4QTkUj/9+bcDPmqwftxaRoUIGcmyRzUvwU5pl227UkNy
+            nftVP/rsZZ6nr0wJBZfPbhiBDAuzamzI05QHB+sFskVXB6Z8h2KawwNSrjgc2poj
+            QWzZNOuth932vN8p2Lc6iI5v5bC/QSDDBlZ7tl+Uj/ejZC9b9WG/y83RrM333twp
+            Kq1D/QWBwg4oa9Zq
+            '),
+            'data_map' => [
+                'unique_id' => '{{eduPersonTargetedID}}',
+                'first_name' => '{{givenName}}',
+                'last_name' => '{{sn}}',
+                'email' => '{{mail}}',
+            ],
+        ],
     ]
 ];
