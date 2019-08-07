@@ -8,14 +8,20 @@
 <center><h3 style="text-align:center;">To Login, Please Select Your School From The List Below:</h1></center>
     <div class="col-sm-4 col-sm-offset-4">
         <ul class="list-group"> 
-              @foreach(config('saml2_settings.idps') as $school => $configuration)
+        <?php
+            $saml2_idps = config('saml2_settings.idps');
+            uasort($saml2_idps, function ($a, $b) {
+                return strcmp($a['name'],$b['name']);
+            });
+        ?>
+            @foreach($saml2_idps as $school => $configuration)
                 @if (in_array($school, $enabled_idps))
                     <a href="/saml2/wayf/{{$school}}@if(isset(request()->redirect))?redirect={{request()->redirect}}@endif" class="list-group-item"><i style="margin-top: 4px;" class="fa fa-lock fa-lg fa-fw pull-right"></i>{{$configuration['name']}}</a>
                 @endif
-              @endforeach
-              @if(config('app.demo.enabled'))
+            @endforeach
+            @if(config('app.demo.enabled'))
                 <a href="/demo" class="list-group-item"><i style="margin-top: 4px;" class="fa fa-lock fa-lg fa-fw pull-right"></i>Demo (Guest) Login</a>
-              @endif
+            @endif
         </ul>
     </div>
 </div>

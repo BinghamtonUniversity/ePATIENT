@@ -421,7 +421,7 @@ return [
             Kq1D/QWBwg4oa9Zq
             '),
             'data_map' => [
-                'unique_id' => '{{eduPersonTargetedID}}',
+                'unique_id' => '{{mail}}',
                 'first_name' => '{{givenName}}',
                 'last_name' => '{{sn}}',
                 'email' => '{{mail}}',
