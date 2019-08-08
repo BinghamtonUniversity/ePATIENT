@@ -67,7 +67,7 @@ class LibraryController extends Controller
     public function edit(Request $request, $library_type, Library $library)
     {
         $library->update(['data'=>$request->except(['created_at','updated_at','id','type','image'])]);
-        if ($request->has('image')) {
+        if ($request->has('image') && substr($request->image,0,5) === "data:") {
             self::delete_image($library);
             $data = $library->data;
             $data['image'] = self::create_image($library, $request->image);
@@ -81,7 +81,7 @@ class LibraryController extends Controller
     {
         $library = new Library(['type'=>$library_type, 'data'=>$request->except(['created_at','updated_at','id','type','image'])]);
         $library->save();
-        if ($request->has('image')) {
+        if ($request->has('image') && substr($request->image,0,5) === "data:") {
             $data = $library->data;
             $data['image'] = self::create_image($library, $request->image);
             $library->data = $data;
