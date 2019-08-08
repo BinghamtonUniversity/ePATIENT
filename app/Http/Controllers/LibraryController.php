@@ -49,13 +49,14 @@ class LibraryController extends Controller
 
     public function read_image($library_type, Library $library) {
         if (isset($library->data['image'])) {
-            $max_age = 2592000; // Cache Images for 30 days
+            // $max_age = 2592000; // Cache Images for 30 days
+            $max_age = 0; // Cache Images for 0 seconds
             $headers = [
                 "Cache-Control"=>"max-age=".$max_age,
                 "Pragma"=>"cache",
                 "Content-Disposition"=>'inline; filename="'.$library->data['image'].'"'
             ];
-            $img_path = storage_path('app/images/'.$library->data['image']);
+            $img_path = config('filesystems.disks.local.root').'/images/'.$library->data['image'];
             if (file_exists($img_path) && is_file($img_path)) {
                 return response()->file($img_path, $headers);
             } 

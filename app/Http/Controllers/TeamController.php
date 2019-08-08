@@ -129,7 +129,7 @@ class TeamController extends Controller
 
     public function update_member(Request $request, Team $team, User $user)
     {
-        $this->remove_member($request, $team, $user);
+        $this->remove_member($request, $team, $user->id);
         return $this->add_member($request, $team, $user);
     }
 
