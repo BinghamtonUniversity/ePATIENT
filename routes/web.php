@@ -82,6 +82,7 @@ Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () 
     Route::get('/library',['uses'=>'LibraryController@browse_all']);
     Route::get('/library/{library_type}',['uses'=>'LibraryController@browse']);
     Route::get('/library/{library_type}/{library}',['uses'=>'LibraryController@read']);
+    Route::get('/library/{library_type}/{library}/img',['uses'=>'LibraryController@read_image']);
     Route::put('/library/{library_type}/{library}',['uses'=>'LibraryController@edit'])->middleware('can:manage,App\Library');
     Route::post('/library/{library_type}',['uses'=>'LibraryController@add'])->middleware('can:manage,App\Library');
     Route::delete('/library/{library_type}/{library}',['uses'=>'LibraryController@delete'])->middleware('can:manage,App\Library');

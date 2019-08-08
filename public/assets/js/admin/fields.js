@@ -72,7 +72,7 @@ adminFormFields = {
       {"label": "Color","name":"color"},
       {"label": "Imprint","name":"imprint"},
       {"label": "Barcode","name":"barcode"},		
-      {"label": "Image","name":"image","type":"base64","template":"<img style=\"max-width:120px\" src=\"{{value}}\"/>"},
+      {"label": "Image","name":"image","type":"base64","template":"{{#attributes.image}}<img style=\"max-width:120px\" src=\"/api/library/products/{{attributes.id}}/img\"/>{{/attributes.image}}"},
       {"name": "id","type": "hidden"} 
   
     ],
