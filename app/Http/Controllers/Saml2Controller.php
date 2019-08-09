@@ -65,11 +65,11 @@ class Saml2Controller extends Controller
         config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
         $this->saml2Auth->configure();
 
-        try {
+        // try {
             $errors = $this->saml2Auth->acs();
-        } catch(\Exception $e) {
+        // } catch(\Exception $e) {
             // continue?
-        }
+        // }
 
         if (!empty($errors)) {
             logger()->error('Saml2 error_detail', ['error' => $this->saml2Auth->getLastErrorReason()]);
