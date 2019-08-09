@@ -325,7 +325,7 @@ return [
         'buffalo' => [
             'name' => 'University at Buffalo',
             // Identifier of the IdP entity  (must be a URI)
-            'entityId' => env('SAML2_IDP_ENTITYID', 'https://shibboleth.buffalo.edu/idp/shibboleth'),
+            'entityId' => env('SAML2_IDP_ENTITYID', 'urn:mace:incommon:buffalo.edu'),
             // SSO endpoint info of the IdP. (Authentication Request protocol)
             'singleSignOnService' => array(
                 // URL Target of the IdP where the SP will send the Authentication Request Message,
@@ -336,45 +336,32 @@ return [
             'singleLogoutService' => array(
                 // URL Location of the IdP where the SP will send the SLO Request,
                 // using HTTP-Redirect binding.
-                'url' => 'https://shibboleth.buffalo.edu/idp/profile/SAML2/Redirect/SLO',
+                'url' => null,
             ),
             // Public x509 certificate of the IdP
             'x509cert' => env('SAML2_IDP_x509', '
-            MIIGiDCCBXCgAwIBAgIRAPhtlvy0TuFvgXffz2JAt+wwDQYJKoZIhvcNAQELBQAw
-            djELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAk1JMRIwEAYDVQQHEwlBbm4gQXJib3Ix
-            EjAQBgNVBAoTCUludGVybmV0MjERMA8GA1UECxMISW5Db21tb24xHzAdBgNVBAMT
-            FkluQ29tbW9uIFJTQSBTZXJ2ZXIgQ0EwHhcNMTgwNzE2MDAwMDAwWhcNMTkwNzE2
-            MjM1OTU5WjCBsTELMAkGA1UEBhMCVVMxDjAMBgNVBBETBTE0MjYwMQswCQYDVQQI
-            EwJOWTEQMA4GA1UEBxMHQnVmZmFsbzEXMBUGA1UECRMONTAxIENhcGVuIEhhbGwx
-            JDAiBgNVBAoTG1NVTlksIFVuaXZlcnNpdHkgYXQgQnVmZmFsbzETMBEGA1UECxMK
-            c2hpYmJvbGV0aDEfMB0GA1UEAxMWc2hpYmJvbGV0aC5idWZmYWxvLmVkdTCCASIw
-            DQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMrK92tQ933kjE8h/XjtCOOb6QQG
-            x9p+h7kjlkBLB9jw4fswBYQtS6yVM7/2+DeJfTPc+FKuBjLUhR9OqNxpExGO2kwv
-            HkQWcUtrnPv+1duzIvcjeerMTo6qH3TqcpMQrHaljYfl4pKhrIK/D/CFer/apOUD
-            TUO1/Uc09tLqEZlqhNfSdA9AkpfDqj5dNk3mQ4zIyTy2TVdGq6Fm+qeQEhDC6xic
-            a+5J+NditOzcDxaMxGmpyxFJYX66rQdmOQWNbuDokVU/RH2YMibFV+HC5iazh5ms
-            FHGmw+FM6oTQUygdfdy03HO588nbaNcZ+y//UERGsilx4aJnpcKmCl9q3qkCAwEA
-            AaOCAtMwggLPMB8GA1UdIwQYMBaAFB4Fo3ePbJbiW4dLprSGrHEADOc4MB0GA1Ud
-            DgQWBBSum7CFjeruelx71gYaXFUlRNIgyzAOBgNVHQ8BAf8EBAMCBaAwDAYDVR0T
-            AQH/BAIwADAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwZwYDVR0gBGAw
-            XjBSBgwrBgEEAa4jAQQDAQEwQjBABggrBgEFBQcCARY0aHR0cHM6Ly93d3cuaW5j
-            b21tb24ub3JnL2NlcnQvcmVwb3NpdG9yeS9jcHNfc3NsLnBkZjAIBgZngQwBAgIw
-            RAYDVR0fBD0wOzA5oDegNYYzaHR0cDovL2NybC5pbmNvbW1vbi1yc2Eub3JnL0lu
-            Q29tbW9uUlNBU2VydmVyQ0EuY3JsMHUGCCsGAQUFBwEBBGkwZzA+BggrBgEFBQcw
-            AoYyaHR0cDovL2NydC51c2VydHJ1c3QuY29tL0luQ29tbW9uUlNBU2VydmVyQ0Ff
-            Mi5jcnQwJQYIKwYBBQUHMAGGGWh0dHA6Ly9vY3NwLnVzZXJ0cnVzdC5jb20wIQYD
-            VR0RBBowGIIWc2hpYmJvbGV0aC5idWZmYWxvLmVkdTCCAQUGCisGAQQB1nkCBAIE
-            gfYEgfMA8QB2AO5Lvbd1zmC64UJpH6vhnmajD35fsHLYgwDEe4l6qP3LAAABZKQ/
-            aa8AAAQDAEcwRQIgXJW5jyo7b/vmzTAHaAcdpSjTdf3mhgD6U3Ic4Lg5FhwCIQCN
-            oCGURhiCxOdbY9dyJGj54v2ZcAR6STFCe+47RQDqmwB3AHR+2oMxrTMQkSGcziVP
-            QnDCv/1eQiAIxjc1eeYQe8xWAAABZKQ/bCUAAAQDAEgwRgIhAIWkDWn2SXXCphLF
-            Nwk4kYTSP7g99uLG556jdjc8EGOqAiEAiVOqSfEzC+9X1HlPhNc3ZXFuvWkjyghC
-            G9svSBdp43owDQYJKoZIhvcNAQELBQADggEBAFfOEcxaHgturAna2KrjYcCaUlF1
-            2d0elyRojp1KqaOy1QqD3SaYexQYxm1sm+xYekN5QsKOcUdynrTh5/YBVYe3OdNT
-            7Ztf2gkz9tffE456DCsSL1qo09CFPagTiOrOHNLw3KtA8ir4q3Es/KML6VqV/Rbd
-            bdLVQxUEHSAXl4GquQ4pawR6eoBJmSn2YL8rK24/TAVjGrFpVXMFxEx73g+6vn2L
-            ca8qV6BzmUtwnA7UTCeL/eIaM41vwKuiRGamhGT5qR++fibr0qFtXn1k436M5rD+
-            DhluZZ0sGI/0bkISU4g/vGZTu8xwTnCifQKAXf4VfP35h/VeHbQyv5922JU=
+            MIID8TCCAtmgAwIBAgIJAIwAxS9816XYMA0GCSqGSIb3DQEBCwUAMIGOMQswCQYD
+            VQQGEwJVUzERMA8GA1UECAwITmV3IFlvcmsxEDAOBgNVBAcMB0J1ZmZhbG8xJDAi
+            BgNVBAoMG1NVTlksIFVuaXZlcnNpdHkgYXQgQnVmZmFsbzETMBEGA1UECwwKc2hp
+            YmJvbGV0aDEfMB0GA1UEAwwWc2hpYmJvbGV0aC5idWZmYWxvLmVkdTAeFw0xOTA3
+            MDUxOTA3MDhaFw0yOTA3MDIxOTA3MDhaMIGOMQswCQYDVQQGEwJVUzERMA8GA1UE
+            CAwITmV3IFlvcmsxEDAOBgNVBAcMB0J1ZmZhbG8xJDAiBgNVBAoMG1NVTlksIFVu
+            aXZlcnNpdHkgYXQgQnVmZmFsbzETMBEGA1UECwwKc2hpYmJvbGV0aDEfMB0GA1UE
+            AwwWc2hpYmJvbGV0aC5idWZmYWxvLmVkdTCCASIwDQYJKoZIhvcNAQEBBQADggEP
+            ADCCAQoCggEBAMrK92tQ933kjE8h/XjtCOOb6QQGx9p+h7kjlkBLB9jw4fswBYQt
+            S6yVM7/2+DeJfTPc+FKuBjLUhR9OqNxpExGO2kwvHkQWcUtrnPv+1duzIvcjeerM
+            To6qH3TqcpMQrHaljYfl4pKhrIK/D/CFer/apOUDTUO1/Uc09tLqEZlqhNfSdA9A
+            kpfDqj5dNk3mQ4zIyTy2TVdGq6Fm+qeQEhDC6xica+5J+NditOzcDxaMxGmpyxFJ
+            YX66rQdmOQWNbuDokVU/RH2YMibFV+HC5iazh5msFHGmw+FM6oTQUygdfdy03HO5
+            88nbaNcZ+y//UERGsilx4aJnpcKmCl9q3qkCAwEAAaNQME4wHQYDVR0OBBYEFK6b
+            sIWN6u56XHvWBhpcVSVE0iDLMB8GA1UdIwQYMBaAFK6bsIWN6u56XHvWBhpcVSVE
+            0iDLMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBACJLMAk0t3N60xEa
+            6aAm7y4dxrhpevJLrtedyLS32VYLnosS1Yg92bd5cPywzbY057fbkrFJkfgJbgj8
+            fx923zvbsVQfP7yl01rEy9DUiYi4OHZKeqT6xv7pw9sU7KuYQ9k/cxY2tVcCmIPW
+            3ncO9aDu9QEKjZUM03Lb4TvRUH47V/1Xdoz2eX/94BwoMXuZz1MkEgnx8jHtOGj4
+            edhmqk6AXkjW4XLs6hjGUErW3C2vy/2p2WRXmI6UQKvSFKpFwypeI9+oCp2AAa/D
+            YNClrvzNFVFT6XeUaftcsCuBUdzg0Iocm3E/blWgyBmdw7zE5EcPZXtYfi989TuB
+            hZTw6bQ=
             '),
             'data_map' => [
                 'unique_id' => '{{#eduPersonTargetedID}}{{eduPersonTargetedID}}{{/eduPersonTargetedID}}{{^eduPersonTargetedID}}{{mail}}{{/eduPersonTargetedID}}',
