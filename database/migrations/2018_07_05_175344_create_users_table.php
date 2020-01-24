@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
             $table->index('first_name');
             $table->index('last_name');
             $table->index('email');       
-            $table->index('dip'); 
+            $table->index('idp'); 
         });
     }
 
