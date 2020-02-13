@@ -28,6 +28,14 @@
 <script src='/assets/js/cob/links.cob.js'></script>
 <script src='/assets/js/templates/widget.js'></script>
 <script src='/assets/js/lib.js'></script> 
+<script src='/assets/js/vendor/sugar.js'></script> 
+<script src='/assets/js/utils.js'></script> 
+<script src='/assets/js/chat.js'></script> 
+<script src='/assets/js/advisor_notes.js'></script> 
+<script src='/assets/js/collections.js'></script> 
+<script src='/assets/js/vital_sections.js'></script> 
+<script src='/assets/js/page_map.js'></script> 
+
 <script src='https://drvic10k.github.io/bootstrap-sortable/Scripts/bootstrap-sortable.js'></script>	
 <style>
     .group_ .widget,.group_ .page-menu ul li{display:none;}

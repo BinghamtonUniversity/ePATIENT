@@ -1,4 +1,3 @@
-this.data.messages = [];
 
 chat_init = function() {
     // Handle Message Posting

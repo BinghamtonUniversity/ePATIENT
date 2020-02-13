@@ -74,7 +74,10 @@ class AppController extends Controller
         ];
         $code_types = ['forms','templates','scripts'];
         foreach($code_types as $type) {
-            $files = array_diff(scandir(public_path($app_name.'/'.$type)),['..', '.']);
+            $files = ($type == 'scripts')?[
+                'Main.js',
+                'init.js'
+                ]:array_diff(scandir(public_path($app_name.'/'.$type)),['..', '.']);
             foreach($files as $filename) {
                 $app_data['app']['code'][$type][] = [
                     'name'=>pathinfo($filename, PATHINFO_FILENAME),

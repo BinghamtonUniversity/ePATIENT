@@ -1,6 +1,3 @@
-this.data.notes = [];
-this.data.newnotes = 0;
-this.data.localStorageNotesVar = 'epatient_notes_read_'
 
 notes_init = function() {
     $('#notes-modal').on('show.bs.modal', function (event) {

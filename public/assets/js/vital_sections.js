@@ -1,5 +1,4 @@
-
-this.data.vitals_sections = [
+vital_sections = [
     {
         key:'vital_signs',
         label:'Vital Signs',
