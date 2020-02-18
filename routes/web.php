@@ -21,14 +21,17 @@ Route::group(['middleware'=>['saml2.auth']], function () use ($router) {
     Route::get('/admin/{page?}', ['uses'=>'AdminController@admin']);
 });
 
-Route::any('/demo', ['uses' => 'DemoController@list']);
+Route::get('/login', ['as'=>'wayf_login','uses' => 'Saml2Controller@wayf']);
+Route::any('/idp/demo', ['uses' => 'DemoController@list']);
+Route::get('/idp/google', 'Saml2Controller@google_redirect');
+Route::get('/idp/google/callback', 'Saml2Controller@google_callback');
 Route::get('/logout', ['as' => 'saml_logout','uses' => 'Saml2Controller@logout']);
 /* SAML Stuff */
-Route::group(['prefix' => 'saml2','middleware' => ['saml']], function () {
+Route::group(['prefix' => '/saml2','middleware' => ['saml']], function () {
     Route::get('/metadata',['as' => 'saml_metadata','uses' => 'Saml2Controller@metadata']);
     Route::post('/acs',['as' => 'saml_acs','uses' => 'Saml2Controller@acs']);
     Route::get('/sls',['as' => 'saml_sls','uses' => 'Saml2Controller@sls']);
-    Route::get('/wayf/{site?}', ['as' => 'saml_wayf','uses' => 'Saml2Controller@wayf']);
+    Route::get('/wayf/{site}', ['as' => 'saml_wayf','uses' => 'Saml2Controller@wayfcallback']);
 });
 
 /* API STUFF */

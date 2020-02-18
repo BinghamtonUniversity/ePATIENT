@@ -9,6 +9,8 @@ use App\Libraries\SAML2AuthWrapper;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+use Socialite;
 
 class Saml2Controller extends Controller
 {
@@ -23,24 +25,56 @@ class Saml2Controller extends Controller
         $this->saml2Auth = $saml2Auth;
     }
 
-    public function wayf($site = null) {
+    public function wayf() {
         if(!Auth::user()){
-            if (is_null($site)) {
-                $enabled_idps = explode(',',config('saml2_settings.enabled_idps'));
-                return view('wayf',['enabled_idps'=>$enabled_idps]);
-            } else {
-                config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
-                $this->saml2Auth->configure();
-                // Construct the RelayState Variable to contain the correct IDP and Redirect URL
-                $relay_state = ['idp'=>$site,'redirect'=>isset(request()->redirect)?request()->redirect:null];
-                $relay_state = strtr(base64_encode(json_encode($relay_state)),'+/=','._-');
-                return $this->saml2Auth->login($relay_state);
-            }
+            $enabled_idps = explode(',',config('saml2_settings.enabled_idps'));
+            return view('wayf',['enabled_idps'=>$enabled_idps]);
         } else {
             return redirect('/');
         }  
     }
 
+    public function wayfcallback($site) {
+        if(!Auth::user()){
+            config(['saml2_settings.idp' => config('saml2_settings.idps.'.$site)]);
+            $this->saml2Auth->configure();
+            // Construct the RelayState Variable to contain the correct IDP and Redirect URL
+            $relay_state = ['idp'=>$site,'redirect'=>isset(request()->redirect)?request()->redirect:null];
+            $relay_state = strtr(base64_encode(json_encode($relay_state)),'+/=','._-');
+            return $this->saml2Auth->login($relay_state);
+        } else {
+            return redirect('/');
+        }  
+    }
+
+    public function google_redirect(Request $request) {
+        return Socialite::driver('google')
+            ->redirect();
+    }
+    public function google_callback(Request $request) {
+        $idp_user = Socialite::driver('google')->user();
+
+        $user = User::where('unique_id', $idp_user->getEmail())
+            ->where('idp','google')
+            ->first();
+        if ($user === null) {
+            $user = new User();
+            $user->unique_id = $idp_user->getEmail();
+        }
+        $user->first_name = $idp_user->user['given_name'];
+        $user->last_name = $idp_user->user['family_name'];
+        $user->email = $idp_user->getEmail();
+        $user->idp = 'google';
+        $user->last_login = now();
+        $user->save();
+        Auth::login($user, true);
+
+        if (isset($redirect) && $redirect !== null) {
+            return redirect($redirect);
+        } else {
+            return redirect(config('saml2_settings.loginRoute'));
+        }
+    }
     /**
      * Generate local sp metadata
      * @return \Illuminate\Http\Response
@@ -115,6 +149,7 @@ class Saml2Controller extends Controller
         $user->last_name = $m->render($data_map['last_name'], $saml_attributes);
         $user->email = $m->render($data_map['email'], $saml_attributes);
         $user->idp = $site;
+        $user->last_login = now();
         $user->save();
         Auth::login($user, true);
 
@@ -163,6 +198,7 @@ class Saml2Controller extends Controller
     {
         $idps = [];
         $idps[] = ['value'=>null,'label'=>'None'];
+        $idps[] = ['value'=>'google','label'=>'Google'];
         foreach(config('saml2_settings.idps') as $idp_name => $idp) {
             $idps[] = ['value'=>$idp_name, 'label'=>$idp['name']];
         }

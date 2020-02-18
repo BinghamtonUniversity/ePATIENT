@@ -20,9 +20,9 @@ class SAML2Authentication
     {
         if(!Auth::user()){    
             if (Route::current()->uri == '/') {
-                return redirect(URL::route('saml_wayf'));
+                return redirect(URL::route('wayf_login'));
             } else {
-                return redirect(URL::route('saml_wayf').'?redirect='.urlencode(url()->full()));
+                return redirect(URL::route('wayf_login').'?redirect='.urlencode(url()->full()));
             }
         }
         return $next($request);

@@ -18,11 +18,15 @@ adminFormFields = {
             "name": "idp",
             "type": "select",
             "choices":"/api/idps",
-            "enabled":false   
         },
         {
           "label": "ID",
           "name": "unique_id"
+        },
+        {
+            "label": "Last Login",
+            "name": "last_login",
+            "enabled":false   
         },
         {
           "type": "hidden",

@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('idp')->nullable()->default(null);
             $table->string('password')->nullable();
             $table->boolean('invalidate_cache')->default(false);
+            $table->timestamp('last_login');
             $table->rememberToken();
             $table->timestamps();
             $table->unique(['unique_id', 'idp']);
