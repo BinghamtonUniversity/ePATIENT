@@ -18,7 +18,14 @@
             @else
                 <div class="alert alert-warning">
                     <h4 style="margin-top:0px;">You are not a member of any teams!</h4>
-                    <div>Contact your professor if you feel that this is in error.</div>
+                    <p>Contact your professor if you feel that this is in error.</p>
+                    <p>
+                        Note that if you have logged in previously with a different 
+                        Identity Provider (Google / Your School / etc), you may have 
+                        created multiple ePATIENT accounts.  Please ensure that you
+                        are logged-in with the correct account from the correct 
+                        Identity Provider in order to see any relevant assignments.
+                    </p>
                 </div>
             @endif
             </div>
