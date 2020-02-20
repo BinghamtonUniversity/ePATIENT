@@ -1,0 +1,29 @@
+{"legend": "Mental Status", "fields":[
+	{"label":"General", "enabled":true,"fields":[
+		{"label":"Behavior/Affect", "name":"behavior", "type": "check_collection",
+			"options": ["Calm", "Cooperative", "Appropriate", "Restless", "Combative", "Confused", "Agitated", "Anxious", "Depressed", "Crying", "Fearful", "Hostile", "Inappropriate"]
+		},		
+		{"label":"Coping", "type": "select",
+			"options": ["Well", "Fair", "Poor", "Ineffective"]
+		},		
+		{"label":"Consult", "type": "check_collection",
+			"options": ["Chaplain", "Social Work", "Psychiatry"]
+		},	
+		{"label":"At Risk for", "type": "check_collection",
+			"options": ["Homocidal", "Suicidal"]
+		}
+	]},
+	{"label":"Abuse", "enabled":true,"fields":[
+		{
+			"label":"Check the appropriate box(es) that indicate the patient's risk for abuse.", 
+		    "name":"abuse_risk",
+			"type": "check_collection",
+			"options": ["Physical", "Sexual", "Psychological", "Property"]
+		},
+		{"label": "Detail assessments that suggest abuse","type": "textarea"}
+	]},
+	{"label":"Narrative Note", "enabled":true,"fields":[
+		{"label":"note", "type": "textarea", "label": false}
+	]},
+	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
+]}

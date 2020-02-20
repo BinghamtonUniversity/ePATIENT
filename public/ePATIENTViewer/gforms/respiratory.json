@@ -1,0 +1,292 @@
+{
+	"legend": "Respiratory",
+	"fields": [
+		{
+			"label":"Oxygen Delivery",
+			"fields": [
+				{
+					"label":"Method",
+					"type": "radio",
+					"options": [
+						"Room Air",
+						"Nasal Cannula",
+						"Non-rebreather",
+						"Venti mask",
+						"Ventilator",
+						"Other"
+					]
+				},
+				{"label":"Other Details","name":"other_details","show":{"matches":{"name":"method","value":"Other"}}},
+				{"label":"Amount (in Liters)","name":"o2amount"},
+				{
+					"label":"Airway Device",
+					"type": "check_collection",
+					"options": [
+						"Endotracheal Tube",
+						"Tracheostomy"
+					]
+				}
+			]
+		},
+		{
+			"label":"Breath Sounds",
+			"fields": [
+			    {
+					"label":"Left Lung (Anterior)",
+			        "name":"lla_enabled",
+			        "type":"checkbox"
+			    },
+				{
+					"name":"lla",
+				    "label":false,
+					"type": "radio_collection",
+					"labels": [
+						{
+							"name": "All"
+						},
+						{
+							"name": "Upper Lobe"
+						},
+						{
+							"name": "Mid Lobe"
+						},
+						{
+							"name": "Lower Lobe"
+						},
+						{
+							"name": "Axillary"
+						}
+					],
+					"options": [
+						"Clear",
+						"Crackles",
+						"Rhonchi",
+						"Wheeze",
+						"Absent"
+					],"show":[{"type": "matches","name":"lla_enabled","value":true}]
+				},
+				{
+					"label":"Right Lung (Anterior)",
+			        "name":"rla_enabled",
+			        "type":"checkbox"
+			    },
+				{
+					"name":"rla",
+				    "label":false,
+					"type": "radio_collection",
+					"labels": [
+						{
+							"name": "All"
+						},
+						{
+							"name": "Upper Lobe"
+						},
+						{
+							"name": "Mid Lobe"
+						},
+						{
+							"name": "Lower Lobe"
+						},
+						{
+							"name": "Axillary"
+						}
+					],
+					"options": [
+						"Clear",
+						"Crackles",
+						"Rhonchi",
+						"Wheeze",
+						"Absent"
+					],"show":[{"type": "matches","name":"rla_enabled","value":true}]
+				},
+				
+				
+				
+				
+				{
+					"label":"Left Lung (Posterior)",
+			        "name":"llp_enabled",
+			        "type":"checkbox"
+			    },
+				{
+					"name":"llp",
+				    "label":false,
+					"type": "radio_collection",
+					"labels": [
+						{
+							"name": "All"
+						},
+						{
+							"name": "Upper Lobe"
+						},
+						{
+							"name": "Mid Lobe"
+						},
+						{
+							"name": "Lower Lobe"
+						},
+						{
+							"name": "Axillary"
+						}
+					],
+					"options": [
+						"Clear",
+						"Crackles",
+						"Rhonchi",
+						"Wheeze",
+						"Absent"
+					],"show":{"matches":{"name":"llp_enabled","value":true}}
+				},
+				{
+					"label":"Right Lung (Posterior)",
+			        "name":"rlp_enabled",
+			        "type":"checkbox"
+			    },
+				{
+					"name":"rlp",
+				    "label":false,
+					"type": "radio_collection",
+					"labels": [
+						{
+							"name": "All"
+						},
+						{
+							"name": "Upper Lobe"
+						},
+						{
+							"name": "Mid Lobe"
+						},
+						{
+							"name": "Lower Lobe"
+						},
+						{
+							"name": "Axillary"
+						}
+					],
+					"options": [
+						"Clear",
+						"Crackles",
+						"Rhonchi",
+						"Wheeze",
+						"Absent"
+					],"show":[{"type": "matches","name":"rlp_enabled","value":true}]
+				},
+				
+				
+				
+				
+				{
+					"label":"Wheeze Quality",
+					"type": "check_collection",
+					"options": [
+						"Inspiratory",
+						"Expiratory",
+						"Low pitched",
+						"High pitched"
+					]
+				},
+				{
+					"label":"Stridor",
+					"type": "radio",
+					"options": [
+						"Present",
+						"Absent"
+					]
+				}
+			]
+		},
+		{
+			"label":"Cough",
+			"options": [
+				"None",
+				"Dry",
+				"Productive"
+			]
+		},
+		{
+			"label":"Sputum",
+			"fields": [
+				{
+					"label":"Color",
+					"type": "check_collection",
+					"options": [
+						"None",
+						"Clear",
+						"White",
+						"Creamy",
+						"Yellow",
+						"Green",
+						"Bloody",
+						"Blood tinged",
+						"Tan",
+						"Black"
+					]
+				},
+				{
+					"label":"Consistency",
+					"type": "radio",
+					"options": [
+						"None",
+						"Thin",
+						"Thick"
+					]
+				},
+				{
+					"label":"Amount",
+					"type": "radio",
+					"options": [
+						"None",
+						"Small",
+						"Moderate",
+						"Copious"
+					]
+				}
+			]
+		},
+		{
+			"label":"Respirations",
+			"fields": [
+				{
+					"label": "Respirations",
+					"type": "check_collection",
+					"options": [
+						"Unlabored",
+						"Labored",
+						"Shallow",
+						"Gasping",
+						"Grunting",
+						"Nasal Flaring",
+						"Cheyne-Stokes",
+						"Kussmaul",
+						"Apneic",
+						"Tachypnea"
+					]
+				},
+				{
+					"label":"Retractions",
+					"type": "check_collection",
+					"options": [
+						"Supracostal",
+						"Intercostal",
+						"Subcostal",
+						"Substernal"
+					]
+				},
+				{
+					"label":"Other Respiratory Symptoms",
+					"type": "check_collection",
+					"options": [
+						"None",
+						"Shortness of Breath",
+						"Difficulty Breathing at Rest",
+						"Difficulty Breathing with Activity",
+						"Cyanosis",
+						"Kussmaul"
+					]
+				},
+				{"label":"Other"}
+			]
+		},
+		{"label":"Date", "name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+	]
+}

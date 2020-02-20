@@ -1,0 +1,34 @@
+{
+	"legend": "Patient Information",
+        "name":"patient_info",
+			"fields":[
+				{"label":"First Name"},
+				{"label":"Middle Name","help":"or initial"},
+				{"label":"Last Name"},
+				{"label":"Sex",
+					"options": [
+						"Female",
+						"Male",
+						"Ambiguous",
+						"Unknown",
+						"Other"
+					]
+				},
+				{"label":"Current Gender Identity"},
+				{"label":"Ethnicity","options":["White (non-Hispanic)"," Black (non-Hispanic)", "Hispanic", "Asian", "Asian American or Pacific Islander", "American Indian or Alaska Native","Unknown"]},
+				{"label":"Date of Birth","name":"dob"},
+				{"label":"Admit Date","name":"admit"},
+				{"label":"Allergies","name":"allergies"},
+				{"label":"Medical Record Number"},
+				{"label":"Street Address"},
+				{"label":"City"},
+				{"label":"State","type":"select","options":"/assets/data/states.json","default":{"label":"","value":""}},
+				{"label":"Telephone","type":"text"},
+				{"label":"Occupation"},
+				{"label":"Primary care provider","name":"primary_care"},
+				{"label":"Primary care provider telephone","name":"primary_care_phone","type":"text"},
+				{"label":"Height (cm)","name":"height"},
+				{"label":"Weight (kg)","name":"weight"}
+			]
+
+}

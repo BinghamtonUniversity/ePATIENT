@@ -1,0 +1,102 @@
+{
+	"legend": "Vital Signs",
+	"fields": [
+		{
+			"label":"Blood Pressure",
+			"enabled":true,
+			"fields": [
+				{"label":"Systolic"},
+				{"label":"Diastolic"},
+				{
+					"label":"Location",
+					"name":"bp_location",
+					"options": [
+						"LUE",
+						"RUE",
+						"Left Forearm",
+						"Right Forearm",
+						"Left Thigh",
+						"Right Thigh"
+					]
+				},
+				{
+					"label":"Position",
+					"options": [
+						"Sitting ",
+						"Standing ",
+						"Supine",
+						"Prone",
+						"Left Side Lying",
+						"Right Side Lying"
+					]
+				}
+			]
+		},
+		{
+			"label":"Heart Rate",
+			"enabled":true,
+			"fields": [
+				{"label":"Beats per Minute"},
+				{
+					"label":"Location",
+					"name":"hr_location",
+					"options": [
+						"Left Radial",
+						"Right Radial",
+						"Left Brachial",
+						"Right Brachial",
+						"Left Femoral",
+						"Right Femoral"
+					]
+				}
+			]
+		},
+		{
+			"label":"Respiratory",
+			"enabled":true,
+			"fields": [
+				{"label":"Breaths per Minute"},
+				{"label":"SpO2"}
+			]
+		},
+		{
+			"label":"Temperature",
+			"enabled":true,
+			"fields": [
+				{
+					"label":"Temp",
+					"type": "number"
+				},
+				{
+					"label":"Units",
+					"choices": [
+						"F",
+						"C"
+					],
+					"type": "radio"
+				},
+				{
+					"label":"Route",
+					"options": [
+						"Oral",
+						"Rectal",
+						"Tympanic",
+						"Core",
+						"Axillary "
+					]
+				}
+			]
+		},
+		{
+			"label":"Notes",
+			"enabled":true,
+			"fields": {
+				"Notes": {
+					"type": "textarea"
+				}
+			}
+		
+		},
+		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}}
+	]
+}

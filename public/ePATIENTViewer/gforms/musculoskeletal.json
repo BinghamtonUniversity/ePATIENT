@@ -1,0 +1,151 @@
+{
+	"legend": "Musculoskeletal",
+	"fields": [
+		{
+			"label":"General", 
+			"fields": [
+				{
+					"label":"Musculoskeletal Symptoms", 
+					"type": "check_collection",
+					"options": [
+						"None",
+						"Pain",
+						"Joint Swelling",
+						"Joint Stiffness",
+						"Contractures",
+						"Deformities",
+						"Crepitus",
+						"Weakness",
+						"Amputation",
+						"Other"
+					]
+				},
+				{
+					"label":"Muscle Tone/Strength", 
+				    "name": "muscle_tone_strength",
+					"fields": [
+						{
+							"label":"Motor Strength Grade", 
+							"type": "radio_collection",
+							"labels": [
+								{
+									"name": "All"
+								},
+								{
+									"name": "LUE"
+								},
+								{
+									"name": "RUE"
+								},
+								{
+									"name": "LLE"
+								},
+								{
+									"name": "RLE"
+								}
+							],
+							"options": [
+								"Normal",
+								"Average Weakness",
+								"Poor ROM",
+								"Severe Weakness",
+								"Paralysis"
+							]
+						},
+						{
+							"label":"Range of Motion", 
+							"type": "radio_collection",
+							"labels": [
+								{
+									"name": "All"
+								},
+								{
+									"name": "LUE"
+								},
+								{
+									"name": "RUE"
+								},
+								{
+									"name": "LLE"
+								},
+								{
+									"name": "RLE"
+								}
+							],
+							"options": [
+								"Full ROM",
+								"Impaired ROM"
+							]
+						},
+						{
+							"label":"Characteristic", 
+							"type": "radio_collection",
+							"labels": [
+								{
+									"name": "All"
+								},
+								{
+									"name": "LUE"
+								},
+								{
+									"name": "RUE"
+								},
+								{
+									"name": "LLE"
+								},
+								{
+									"name": "RLE"
+								}
+							],
+							"options": [
+								"Spasm",
+								"Contracture",
+								"Atrophy",
+								"Paralysis"
+							]
+						}
+					]
+				},
+				{"label":"Muscle Tone/Strength Summary", "name":"muscle_summary", "type":"textarea"},
+				{
+					"label":"Weight Bearing/Gate", 
+				    "name": "weight_bearing_gate",
+					"fields": [
+						{
+							"label":"Gate",
+							"type": "check_collection",
+							"help": "Check all that apply",
+							"options": [
+								"None",
+								"Steady",
+								"Independent",
+								"Unsteady",
+								"Dependent",
+								"Asymmetrical",
+								"Jerky",
+								"Shuffling",
+								"Spastic",
+								"N/A",
+								"Other:"
+							]
+						},
+						{
+							"label":"Ambulatory Device", 
+							"options": [
+								"None",
+								"Cane",
+								"Crutches",
+								"Walker",
+								"Wheelchair",
+								"Bedfast",
+								"Artificial Limb",
+								"M/A"
+							]
+						}
+					]
+				}
+			]
+		},
+		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
+	]
+}

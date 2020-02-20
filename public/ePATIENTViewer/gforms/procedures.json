@@ -1,0 +1,20 @@
+{
+	"legend": "Procedures",
+	"fields": [
+		{
+			"multiple": {
+				"duplicate": true
+			},
+			"label": false,
+			"name":"procedure",
+			"fields": [
+				{"label":"Procedure Date"},
+				{"label":"Procedure"},
+				{"label":"Indication"},
+				{"label":"Report","type": "textarea"},
+				{"label":"Impression"},
+				{"label":"Dictated By"}
+			]
+		}
+	]
+}

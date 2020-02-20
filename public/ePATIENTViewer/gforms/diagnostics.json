@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {"label":"Date/time","type":"date", "name":"date"},
+    {"label":"Author"},
+    {"label":"Note","type":"textarea"},
+    {"label":"Type"},
+    {"label":"Upload","type":"base64"}
+  ]
+}

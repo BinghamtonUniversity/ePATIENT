@@ -1,0 +1,19 @@
+{
+	"legend": "Physician Orders",
+	"fields": [
+		{
+			"multiple": {
+				"duplicate": true
+			},
+			"name":"order",
+			"label": false,
+			"fields": [
+				{"label":"Date"},
+				{"label":"Time"},
+				{"label":"Order","type":"textarea"},
+				{"label":"Physician"},
+				{"label":"Verified by"}
+			]
+		}
+	]
+}

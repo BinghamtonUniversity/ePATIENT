@@ -18,7 +18,7 @@ toastr.options = {
   "positionClass": "toast-top-left",
 };
 
-function save(state,callback){
+ save = function(state,callback){
     if(this.data.admin && this.data.scenario_id){
         this.app.put('scenarios', {name:state.name,id:this.data.scenario_id, scenario:state}, callback||function(){
             toastr.warning('Saved Configuration Successfully');
@@ -35,7 +35,7 @@ function save(state,callback){
         }
     }
 }
-function readHash(){
+ readHash = function(){
     this.app.click('.clear-local', function(){
         Lockr.rm('epatient');
         location.reload();

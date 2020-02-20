@@ -1,0 +1,25 @@
+{
+	"legend": "Report of Operation",
+	"fields": [
+		{
+			"label":"General",
+			"parsable": false,
+			"fields": [
+				{"label":"Dictated By"},
+				{"label":"Operation Date"},
+				{"label":"Operation Time"},
+				{"label":"Preoperative Diagnosis"},
+				{"label":"Postoperative Diagnosis"},
+				{"label":"Operation Performed"},
+				{"label":"Surgeon"},
+				{"label":"Assistant"},
+				{"label":"Anesthesia"},
+				{"label":"Anesthesiologist"},
+				{"label":"Specimen Removed"},
+				{"label":"Blood Loss"},
+				{"label":"Findings"},
+				{"label":"Description of the Operation", "type":"textarea"}
+			]
+		}
+	]
+}

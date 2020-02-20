@@ -1,0 +1,21 @@
+{"legend": "History and Physical", "fields":[
+	{"label":"Completed On"},
+	{"label":"History of Present Condition","type": "textarea"},
+	{"label":"Past Medical History","type": "textarea"},
+	{"label":"Past Surgical History","type": "textarea"},
+	{"label":"Social History","type": "textarea"},
+	{"label":"Regular Medications","type": "textarea"},
+	{"label":"Immunizations","type": "textarea"},
+	{"label":"Allergies","type": "textarea"},
+	{"label":"Vital Signs","type": "textarea"},
+	{"label":"Neuro","type": "textarea"},
+	{"label":"HEENT","type": "textarea"},
+	{"label":"Cardiac","type": "textarea"},
+	{"label":"Respiratory","type": "textarea"},
+	{"label":"GI","type": "textarea"},
+	{"label":"GU","type": "textarea"},
+	{"label":"Skin","type": "textarea"},
+	{"label":"Musculoskeletal","type": "textarea"},
+	{"label":"Plan","type": "textarea"},
+	{"label":"Dictated By"}
+]}

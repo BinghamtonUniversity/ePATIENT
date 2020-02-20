@@ -1,0 +1,31 @@
+{"legend": "Cardiac","enabled":true, "fields":[
+
+	{"label":"General", "enabled":true,"fields":[
+		{"label":"Heart Tones", "type": "check_collection",
+			"options": ["S1, S2", "Regular", "Murmur", "Gallop", "S3", "S4", "Muffled", "Irregular", "Distant"]
+		},
+		{"label":"Pulses", "type": "radio_collection",
+			"labels": [{"name":"All"}, {"name":"LUE"}, {"name":"RUE"}, {"name":"LLE"}, {"name":"RLE"}],
+			"options": ["Absent","+1", "+2", "+3", "Bounding"]
+		},
+		{"label":"Pulses Summary","type":"textarea"},
+
+		{"label":"Edema", "type": "radio_collection",
+			"labels": [{"name":"All"}, {"name":"LUE"}, {"name":"RUE"}, {"name":"LLE"}, {"name":"RLE"}],
+			"options": ["None", "Non Pitting", "Slight Pitting", "Pitting", "Deep Pitting"]
+		},
+		{"label":"Edema Summary","type":"textarea"},
+
+		{"label":"Capillary Refill", "type": "radio_collection",
+			"labels": [{"name":"All"}, {"name":"LUE"}, {"name":"RUE"}, {"name":"LLE"}, {"name":"RLE"}],
+			"options": ["Absent", "< 3 seconds", "> 3 seconds"]
+		},
+		{"label":"Capillary Refill Summary","type":"textarea"},
+
+		{"label":"Detail","type": "textarea"},
+		{"label":"Devices", "type": "check_collection",
+			"options": ["Pacer", "IABP", "CVP", "Pulmonary Artery Monitoring", "Cardiac Monitor", "Arterial line", "Other:"]
+		}
+	]},
+	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
+]}

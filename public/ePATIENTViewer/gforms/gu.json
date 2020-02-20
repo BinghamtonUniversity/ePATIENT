@@ -1,0 +1,120 @@
+{
+	"legend": "Genitourinary","enabled":true,
+	"fields": [
+		{"label":"General", "enabled":true,
+			"fields": [
+				{
+					"label":"Urinary Symptoms",
+					"help": "Check all that apply",
+					"type": "check_collection",
+					"options": [
+						"None",
+						"Dysuria",
+						"Frequency",
+						"Urgency",
+						"Oliguria",
+						"Polyuria",
+						"Anuria",
+						"Incontinence, Stress",
+						"Incontinence, Complete",
+						"Hematuria",
+						"Nocturia",
+						"Urinary Retention",
+						"Diffculty Starting Stream",
+						"Hesitancy"
+					]
+				},
+				{
+					"label":"Urine Color",
+				    "default":"Not Visualized",
+					"options": [
+						"Yellow",
+						"Amber",
+						"Orange",
+						"Brown",
+						"Pink",
+						"Green",
+						"Blue"
+					]
+				},
+				{
+					"label":"Urine Character",
+				    "default":"Not Visualized",
+					"options": [
+						"Clear",
+						"Cloudy",
+						"Concentrated",
+						"Dilute",
+						"Sediment",
+						"Bloody",
+						"Clots",
+						"Frothy",
+						"Purulent"
+					]
+				},
+				{
+					"label":"Urinary Elimination",
+				    "default":"Not Visualized",
+					"options": [
+						"Voiding w/o Difficulty",
+						"Voiding with Difficulty",
+						"Indwelling Catheter",
+						"Inability to Void",
+						"Straight Catheter",
+						"Self Catheter",
+						"Condom Catheter",
+						"Surapubic Catheter",
+						"3-way Indwelling Catheter",
+						"Urostomy",
+						"Nephrostomy Tube",
+						"Dialysis"
+					]
+				},
+				{"label":"Amount"},
+				{
+					"label":"Catheter",
+			        "name":"catheter_enabled",
+			        "type":"checkbox"
+			    },
+				{
+					"label":"Catheter Details",
+				    "legend":false,
+					"fields": [
+						{
+							"label":"Catheter Size",
+							"help": "Fr"
+						},
+						{
+							"label":"Volume in Balloon",
+							"help": "mL"
+						},
+						{"label":"Site Description", "type": "textarea"}
+					],"show":[{"type": "matches","name":"catheter_enabled","value":true}]
+				},
+				{
+					"label":"Genitalia Exam",
+					"fields": [
+						{
+							"name":"genitalia_exam",
+							"label": false,
+							"type": "textarea"
+						}
+					]
+				},
+				{
+					"label":"SANE (Sexual Assault Nurse Examiners) Exam",
+				    "name": "sane_exam",
+					"fields": [
+						{
+							"name":"sane_exam",
+							"label": false,
+							"type": "textarea"
+						}
+					]
+				}
+			]
+		},
+		{"label":"Notes","type":"textarea"},
+		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+	]
+}

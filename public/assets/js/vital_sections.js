@@ -71,9 +71,6 @@ vital_sections = [
             }},
             {label:'Ramsey Scale',name:'sedation'},
             
-            
-            
-            
         ]
     },    
     {

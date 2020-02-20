@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {"label":"Date","type":"date"},
+    {"label":"Author"},
+    {"label":"Alert Type","name":"type", "options":["Advance Directive", "Adverse Reaction/Allergy","Crisis Note","Clinical Reminder","Clinical Warning"]},
+    {"label":"Alert Status","name":"status","options":["Active","Inactive"],"type":"radio"},
+    {"label":"Subject"}
+  ]
+}
