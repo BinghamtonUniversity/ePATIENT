@@ -8,7 +8,7 @@
 			"fields": []
 		},
 		{
-			"label":"Scheduled",
+			"name":"scheduled",
 			"multiple": {
 				"duplicate": true
 			},

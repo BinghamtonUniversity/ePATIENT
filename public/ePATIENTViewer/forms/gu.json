@@ -6,7 +6,8 @@
 				{
 					"label":"Urinary Symptoms",
 					"help": "Check all that apply",
-					"type": "radio", 			"multiple": true,
+					"type": "radio", 			
+					"multiple": true,
 					"options": [
 						"None",
 						"Dysuria",
@@ -27,6 +28,7 @@
 				{
 					"label":"Urine Color",
 				    "default":"Not Visualized",
+					"type": "select",
 					"options": [
 						"Yellow",
 						"Amber",
@@ -40,6 +42,7 @@
 				{
 					"label":"Urine Character",
 				    "default":"Not Visualized",
+					"type": "select",
 					"options": [
 						"Clear",
 						"Cloudy",
@@ -55,6 +58,7 @@
 				{
 					"label":"Urinary Elimination",
 				    "default":"Not Visualized",
+					"type": "select",
 					"options": [
 						"Voiding w/o Difficulty",
 						"Voiding with Difficulty",

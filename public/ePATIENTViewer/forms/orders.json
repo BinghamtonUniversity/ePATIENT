@@ -11,7 +11,7 @@
     {"label":"Author"},
     {"label":"Order Item"},
     {"label":"Order Details"},
-    {"label":"Frequency","options":"frequency"},
+    {"label":"Frequency","type": "select","options":"frequency"},
     {"label":"Start on", "name":"start_time", "type":"date"},
     {"label":"End on","name":"end_time", "type":"date"},
     {"label":"Status","name":"status","type":"custom_radio","value":"New", "options":["New","In progress", "Completed"]},

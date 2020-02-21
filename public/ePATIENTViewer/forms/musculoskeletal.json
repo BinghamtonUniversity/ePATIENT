@@ -6,7 +6,8 @@
 			"fields": [
 				{
 					"label":"Musculoskeletal Symptoms", 
-					"type": "radio", 			"multiple": true,
+					"type": "radio", 			
+					"multiple": true,
 					"options": [
 						"None",
 						"Pain",
@@ -113,7 +114,8 @@
 					"fields": [
 						{
 							"label":"Gate",
-							"type": "radio", 			"multiple": true,
+							"type": "radio", 			
+							"multiple": true,
 							"help": "Check all that apply",
 							"options": [
 								"None",

@@ -14,7 +14,8 @@
 			"options": ["Non Tender", "Tender", "Guarding", "Rebound pain", "Other:"]
 		},
         {"label":"Summary","type":"textarea"},
-		{"label":"Gi Symptoms","type": "radio", 			"multiple": true,
+		{"label":"Gi Symptoms","type": "radio", 			
+			"multiple": true,
 			"options": [" None", "Anorexia", "Belching", "Vomiting", "Heartburn", "Nausea", "Epl. Pain", "Cramping", "Constipation", "Diarrhea", "Abd. Pain", "Flatulence", "Hiccup", "Incontinence", "Insatiately"]
 		},
 		{"label":"Bowel Sounds", "type":"grid",
@@ -25,10 +26,12 @@
 			"options": ["Good", "Fair", "Poor", "N/A"]
 		},
 		{"enabled":true,"label":"Output","fields":[
-			{"label":"Stool","type": "radio", 			"multiple": true,
+			{"label":"Stool","type": "radio", 			
+				"multiple": true,
 				"options": ["Soft", "Hard", "Liquid", "Formed", "Frothy", "Clots", "Loose", "Mucous", "Large", "Small", "Pasty", "Seedy", "Tarry", "Watery", "Brown", "Black", "Blood, Frank", "Blood, Tinged", "Clay", "Green", "Maroon", "Yellow", "Tan"]
 			},
-			{"label":"Emesis","type": "radio", 			"multiple": true,
+			{"label":"Emesis","type": "radio", 			
+				"multiple": true,
 				"options": ["Clear", "Frothy", "Blood, Tinged", "Billious", "Green", "Bloody", "Coffee Ground", "Food Content", "Projectile"]
 			}
 		]},
@@ -50,12 +53,14 @@
 			},
 			{"label":"Appliance Changed"},
 			{"label":"Type",
+				"type": "select",
 				"options": ["Colostomy", "Ileostomy"]
 			},
 			{"label":"Site Description","type":"textarea"}
 		]},
 		{"label":"Diet","enabled":true,"fields":[
-			{"label":"Diet Ordered", "type": "radio", 			"multiple": true,
+			{"label":"Diet Ordered", "type": "radio", 			
+				"multiple": true,
 				"options": ["Regular", "Clear Liquids", "NPO", "Low Fat", "Low Sodium", "1800 cal ADA", "Tube Feeds", "Soft Mechanical", "TPN", "Pureed", "Cardiac"]
 			},
 			{"label":"Amount of Meal Consumed", "type": "scale", "min": 1, "max": 5, "high": "100%", "low": "0%"}

@@ -13,7 +13,8 @@
 			"options": ["Yes", "No"],
 			"fields": [{"name":"Hand"}, {"name":"Forearm"}, {"name":"Antecube"}, {"name":"Upper arm"}, {"name":"Femoral"}, {"name":"Saphenous"}, {"name":"Subclavian"}, {"name":"Jugular"}]
 		},
-		{"label":"Assessment",  "type": "radio", 			"multiple": true,
+		{"label":"Assessment",  "type": "radio", 			
+			"multiple": true,
 			"options": [" Dressing clean and dry", "Assessed every hour", "Infusing well", "Errythema", "Edema", "Drainage", "Eccymotic", "Necrotic", "Discontinued", "Physician notified", "Warm compress", "Cold compress", "Dressing changed", "Tubing changed", "New site"]
 		},
 		{"label":"If new site, document catheter gauge and time initiated." }

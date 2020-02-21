@@ -6,10 +6,12 @@
 		{"label":"Coping", "type": "select",
 			"options": ["Well", "Fair", "Poor", "Ineffective"]
 		},		
-		{"label":"Consult", "type": "radio", 			"multiple": true,
+		{"label":"Consult", "type": "radio", 			
+			"multiple": true,
 			"options": ["Chaplain", "Social Work", "Psychiatry"]
 		},	
-		{"label":"At Risk for", "type": "radio", 			"multiple": true,
+		{"label":"At Risk for", "type": "radio", 			
+			"multiple": true,
 			"options": ["Homocidal", "Suicidal"]
 		}
 	]},
@@ -17,7 +19,8 @@
 		{
 			"label":"Check the appropriate box(es) that indicate the patient's risk for abuse.", 
 		    "name":"abuse_risk",
-			"type": "radio", 			"multiple": true,
+			"type": "radio", 			
+			"multiple": true,
 			"options": ["Physical", "Sexual", "Psychological", "Property"]
 		},
 		{"label": "Detail assessments that suggest abuse","type": "textarea"}
