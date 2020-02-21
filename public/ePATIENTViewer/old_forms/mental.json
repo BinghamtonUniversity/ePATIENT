@@ -1,0 +1,28 @@
+{"legend": "Mental Status", "fields":{
+	"General": {"enabled":true,"fields":{
+		"Behavior/Affect": {"name":"behavior", "type": "check_collection",
+			"options": ["Calm", "Cooperative", "Appropriate", "Restless", "Combative", "Confused", "Agitated", "Anxious", "Depressed", "Crying", "Fearful", "Hostile", "Inappropriate"]
+		},		
+		"Coping": { "type": "select",
+			"options": ["Well", "Fair", "Poor", "Ineffective"]
+		},		
+		"Consult": { "type": "check_collection",
+			"options": ["Chaplain", "Social Work", "Psychiatry"]
+		},	
+		"At Risk for": { "type": "check_collection",
+			"options": ["Homocidal", "Suicidal"]
+		}
+	}},
+	"Abuse": {"enabled":true,"fields":{
+		"Check the appropriate box(es) that indicate the patient's risk for abuse.": {
+		    "name":"abuse_risk",
+			"type": "check_collection",
+			"options": ["Physical", "Sexual", "Psychological", "Property"]
+		},
+		"Detail assessments that suggest abuse": "textarea"
+	}},
+	"Narrative Note": {"enabled":true,"fields":{
+		"note": {"type": "textarea", "label": false}
+	}},
+	"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+}}

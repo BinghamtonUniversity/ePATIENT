@@ -1,28 +1,29 @@
-{"legend": "Mental Status", "fields":{
-	"General": {"enabled":true,"fields":{
-		"Behavior/Affect": {"name":"behavior", "type": "check_collection",
+{"legend": "Mental Status", "fields":[
+	{"label":"General", "enabled":true,"fields":[
+		{"label":"Behavior/Affect", "name":"behavior", "type": "radio", 			"multiple": true,
 			"options": ["Calm", "Cooperative", "Appropriate", "Restless", "Combative", "Confused", "Agitated", "Anxious", "Depressed", "Crying", "Fearful", "Hostile", "Inappropriate"]
 		},		
-		"Coping": { "type": "select",
+		{"label":"Coping", "type": "select",
 			"options": ["Well", "Fair", "Poor", "Ineffective"]
 		},		
-		"Consult": { "type": "check_collection",
+		{"label":"Consult", "type": "radio", 			"multiple": true,
 			"options": ["Chaplain", "Social Work", "Psychiatry"]
 		},	
-		"At Risk for": { "type": "check_collection",
+		{"label":"At Risk for", "type": "radio", 			"multiple": true,
 			"options": ["Homocidal", "Suicidal"]
 		}
-	}},
-	"Abuse": {"enabled":true,"fields":{
-		"Check the appropriate box(es) that indicate the patient's risk for abuse.": {
+	]},
+	{"label":"Abuse", "enabled":true,"fields":[
+		{
+			"label":"Check the appropriate box(es) that indicate the patient's risk for abuse.", 
 		    "name":"abuse_risk",
-			"type": "check_collection",
+			"type": "radio", 			"multiple": true,
 			"options": ["Physical", "Sexual", "Psychological", "Property"]
 		},
-		"Detail assessments that suggest abuse": "textarea"
-	}},
-	"Narrative Note": {"enabled":true,"fields":{
-		"note": {"type": "textarea", "label": false}
-	}},
-	"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
-}}
+		{"label": "Detail assessments that suggest abuse","type": "textarea"}
+	]},
+	{"label":"Narrative Note", "enabled":true,"fields":[
+		{"label":"note", "type": "textarea", "label": false}
+	]},
+	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
+]}

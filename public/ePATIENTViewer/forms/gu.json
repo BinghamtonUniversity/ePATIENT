@@ -1,11 +1,12 @@
 {
 	"legend": "Genitourinary","enabled":true,
-	"fields": {
-		"General": {"enabled":true,
-			"fields": {
-				"Urinary Symptoms": {
+	"fields": [
+		{"label":"General", "enabled":true,
+			"fields": [
+				{
+					"label":"Urinary Symptoms",
 					"help": "Check all that apply",
-					"type": "check_collection",
+					"type": "radio", 			"multiple": true,
 					"options": [
 						"None",
 						"Dysuria",
@@ -23,7 +24,8 @@
 						"Hesitancy"
 					]
 				},
-				"Urine Color": {
+				{
+					"label":"Urine Color",
 				    "default":"Not Visualized",
 					"options": [
 						"Yellow",
@@ -35,7 +37,8 @@
 						"Blue"
 					]
 				},
-				"Urine Character": {
+				{
+					"label":"Urine Character",
 				    "default":"Not Visualized",
 					"options": [
 						"Clear",
@@ -49,7 +52,8 @@
 						"Purulent"
 					]
 				},
-				"Urinary Elimination": {
+				{
+					"label":"Urinary Elimination",
 				    "default":"Not Visualized",
 					"options": [
 						"Voiding w/o Difficulty",
@@ -66,43 +70,51 @@
 						"Dialysis"
 					]
 				},
-				"Amount": {},
-				"Catheter":{
+				{"label":"Amount"},
+				{
+					"label":"Catheter",
 			        "name":"catheter_enabled",
 			        "type":"checkbox"
 			    },
-				"Catheter Details": {
+				{
+					"label":"Catheter Details",
 				    "legend":false,
-					"fields": {
-						"Catheter Size": {
+					"fields": [
+						{
+							"label":"Catheter Size",
 							"help": "Fr"
 						},
-						"Volume in Balloon": {
+						{
+							"label":"Volume in Balloon",
 							"help": "mL"
 						},
-						"Site Description": "textarea"
-					},"show":{"matches":{"name":"catheter_enabled","value":true}}
+						{"label":"Site Description", "type": "textarea"}
+					],"show":[{"type": "matches","name":"catheter_enabled","value":true}]
 				},
-				"Genitalia Exam": {
-					"fields": {
-						"genitalia_exam": {
+				{
+					"label":"Genitalia Exam",
+					"fields": [
+						{
+							"name":"genitalia_exam",
 							"label": false,
 							"type": "textarea"
 						}
-					}
+					]
 				},
-				"SANE (Sexual Assault Nurse Examiners) Exam": {
+				{
+					"label":"SANE (Sexual Assault Nurse Examiners) Exam",
 				    "name": "sane_exam",
-					"fields": {
-						"sane_exam": {
+					"fields": [
+						{
+							"name":"sane_exam",
 							"label": false,
 							"type": "textarea"
 						}
-					}
+					]
 				}
-			}
+			]
 		},
-		"Notes": "textarea",
-		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
-	}
+		{"label":"Notes","type":"textarea"},
+		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+	]
 }

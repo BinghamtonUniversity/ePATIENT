@@ -3,9 +3,9 @@
     {"label":"Date/time","type":"date"},
     {"label":"Author"},
     {"label":"Problem", "type":"textarea"},
-    {"label":"Status","options":["Active","Inactive", "Resolved", "Removed"],"type":"select"},
+    {"label":"Status","choices":["Active","Inactive", "Resolved", "Removed"],"type":"select"},
     {"label":"Date of Onset", "name":"onset", "type":"date"},
     {"label":"Provider"},
-    {"label":"Priority","options":["High","Medium","Low"],"type":"select"}
+    {"label":"Priority","choices":["High","Medium","Low"],"type":"select"}
   ]
 }

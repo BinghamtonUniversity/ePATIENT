@@ -1,49 +1,53 @@
 {
 	"legend": "Scenario Vital Signs",
-	"fields": {
-		"items": {
+	"fields": [
+		{
+			"name":"items",
 			"multiple": {
 				"duplicate": true
 			},
 			"label": false,
-			"fields": {
-			    "Date": "",
-			    "Time": "",
-				"Blood Pressure": {
-					"fields": {
-						"Systolic": {},
-						"Diastolic": {}
-					}
+			"fields": [
+				{"label":"Date"},
+				{"label":"Time"},
+				{
+					"label":"Blood Pressure",
+					"fields": [
+						{"label":"Systolic"},
+						{"label":"Diastolic"}
+					]
 				},
-				"Heart Rate":{
+				{
 				    "label":"Heart Rate",
-					"fields": {
-						"Beats per Minute": {}
-					}
+					"fields": [
+						{"label":"Beats per Minute"}
+					]
 				},
-				"Respiratory": {
+				{
 				    "label":"Respiratory",
-					"fields": {
-						"Breaths per Minute": {},
-						"SpO2": {}
-					}
+					"fields": [
+						{"label":"Breaths per Minute"},
+						{"label":"SpO2"}
+					]
 				},
-				"Temperature": {
+				{
 				    "label":"Temperature",
-					"fields": {
-						"Temp": {
+					"fields": [
+						{
+							"label":"Temp",
 							"type": "number"
 						},
-						"Units": {
-							"choices": [
+						{
+							"label":"Units",
+							"options": [
 								"F",
 								"C"
 							],
 							"type": "radio"
 						}
-					}
+					]
 				}
-			}
+			]
 		}
-	}
+	]
 }

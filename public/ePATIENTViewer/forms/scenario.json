@@ -1,22 +1,20 @@
 {
 	"legend": "Scenario Information",
-	"fields": {
-		"Enabled": "checkbox",
-		"Description": "textarea",
-		"Disable": {
-			"fields": {}
-		},
-		"Demographics": "checkbox",
-		"History": "checkbox",
-		"Orders": "checkbox",
-		"Progress Notes": "checkbox",
-		"Operation": "checkbox",
-		"Consents": "checkbox",
-		"Labs": "checkbox",
-		"Plan of Care": "checkbox",
-		"Admin Record": "checkbox",
-		"Shift Assessment": "checkbox",
-		"Nursing Notes": "checkbox",
-		"Submit": "checkbox"
-	}
+	"fields": [
+		{"label":"Enabled","type":"checkbox"},
+		{"label":"Description","type":"textarea"},
+		{"label":"Disable","fields": {}},
+		{"label":"Demographics","type":"checkbox"},
+		{"label":"History","type":"checkbox"},
+		{"label":"Orders","type":"checkbox"},
+		{"label":"Progress Notes","type":"checkbox"},
+		{"label":"Operation","type":"checkbox"},
+		{"label":"Consents","type":""},
+		{"label":"Labs","type":"checkbox"},
+		{"label":"Plan of Care","type":"checkbox"},
+		{"label":"Admin Record","type":"checkbox"},
+		{"label":"Shift Assessment","type":"checkbox"},
+		{"label":"Nursing Notes","type":"checkbox"},
+		{"label":"Submit","type":"checkbox"}
+	]
 }

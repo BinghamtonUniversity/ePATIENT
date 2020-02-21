@@ -22,7 +22,7 @@
 				{"label":"Medical Record Number"},
 				{"label":"Street Address"},
 				{"label":"City"},
-				{"label":"State","type":"select","choices":"/assets/data/states.json","default":{"label":"","value":""}},
+				{"label":"State","type":"select","options":"/assets/data/states.json","default":{"label":"","value":""}},
 				{"label":"Telephone","type":"text"},
 				{"label":"Occupation"},
 				{"label":"Primary care provider","name":"primary_care"},

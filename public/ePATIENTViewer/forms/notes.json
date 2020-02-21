@@ -1,9 +1,9 @@
 {
   "fields": [
-    {"label":"Author", "inline":true},
-    {"label":"Role", "inline":true, "columns":6},
-    {"label":"Date", "inline":true, "type":"date", "columns":6},
-    {"label":"Subject", "inline":true},
-    {"label":"Content", "type":"contenteditable", "inline":true}
+    {"label":"Author", "horizontal":false},
+    {"label":"Role", "horizontal":false, "columns":6},
+    {"label":"Date", "horizontal":false, "type":"date", "columns":6},
+    {"label":"Subject", "horizontal":false},
+    {"label":"Content", "type":"summernote", "horizontal":false}
   ]
 }

@@ -1,11 +1,9 @@
 {
 	"legend": "Respiratory",
-	"fields": [
-		{
-			"label":"Oxygen Delivery",
-			"fields": [
-				{
-					"label":"Method",
+	"fields": {
+		"Oxygen Delivery": {
+			"fields": {
+				"Method": {
 					"type": "radio",
 					"options": [
 						"Room Air",
@@ -16,28 +14,24 @@
 						"Other"
 					]
 				},
-				{"label":"Other Details","name":"other_details","show":{"matches":{"name":"method","value":"Other"}}},
-				{"label":"Amount (in Liters)","name":"o2amount"},
-				{
-					"label":"Airway Device",
+				"Other Details":{"name":"other_details","show":{"matches":{"name":"method","value":"Other"}}},
+				"Amount (in Liters)": {"name":"o2amount"},
+				"Airway Device": {
 					"type": "check_collection",
 					"options": [
 						"Endotracheal Tube",
 						"Tracheostomy"
 					]
 				}
-			]
+			}
 		},
-		{
-			"label":"Breath Sounds",
-			"fields": [
-			    {
-					"label":"Left Lung (Anterior)",
+		"Breath Sounds": {
+			"fields": {
+			    "Left Lung (Anterior)":{
 			        "name":"lla_enabled",
 			        "type":"checkbox"
 			    },
-				{
-					"name":"lla",
+				"lla": {
 				    "label":false,
 					"type": "radio_collection",
 					"labels": [
@@ -63,15 +57,13 @@
 						"Rhonchi",
 						"Wheeze",
 						"Absent"
-					],"show":[{"type": "matches","name":"lla_enabled","value":true}]
+					],"show":{"matches":{"name":"lla_enabled","value":true}}
 				},
-				{
-					"label":"Right Lung (Anterior)",
+				"Right Lung (Anterior)":{
 			        "name":"rla_enabled",
 			        "type":"checkbox"
 			    },
-				{
-					"name":"rla",
+				"rla":  {
 				    "label":false,
 					"type": "radio_collection",
 					"labels": [
@@ -97,19 +89,17 @@
 						"Rhonchi",
 						"Wheeze",
 						"Absent"
-					],"show":[{"type": "matches","name":"rla_enabled","value":true}]
+					],"show":{"matches":{"name":"rla_enabled","value":true}}
 				},
 				
 				
 				
 				
-				{
-					"label":"Left Lung (Posterior)",
+				"Left Lung (Posterior)":{
 			        "name":"llp_enabled",
 			        "type":"checkbox"
 			    },
-				{
-					"name":"llp",
+				"llp": {
 				    "label":false,
 					"type": "radio_collection",
 					"labels": [
@@ -137,13 +127,11 @@
 						"Absent"
 					],"show":{"matches":{"name":"llp_enabled","value":true}}
 				},
-				{
-					"label":"Right Lung (Posterior)",
+				"Right Lung (Posterior)":{
 			        "name":"rlp_enabled",
 			        "type":"checkbox"
 			    },
-				{
-					"name":"rlp",
+				"rlp":  {
 				    "label":false,
 					"type": "radio_collection",
 					"labels": [
@@ -169,14 +157,13 @@
 						"Rhonchi",
 						"Wheeze",
 						"Absent"
-					],"show":[{"type": "matches","name":"rlp_enabled","value":true}]
+					],"show":{"matches":{"name":"rlp_enabled","value":true}}
 				},
 				
 				
 				
 				
-				{
-					"label":"Wheeze Quality",
+				"Wheeze Quality": {
 					"type": "check_collection",
 					"options": [
 						"Inspiratory",
@@ -185,29 +172,25 @@
 						"High pitched"
 					]
 				},
-				{
-					"label":"Stridor",
+				"Stridor": {
 					"type": "radio",
 					"options": [
 						"Present",
 						"Absent"
 					]
 				}
-			]
+			}
 		},
-		{
-			"label":"Cough",
+		"Cough": {
 			"options": [
 				"None",
 				"Dry",
 				"Productive"
 			]
 		},
-		{
-			"label":"Sputum",
-			"fields": [
-				{
-					"label":"Color",
+		"Sputum": {
+			"fields": {
+				"Color": {
 					"type": "check_collection",
 					"options": [
 						"None",
@@ -222,8 +205,7 @@
 						"Black"
 					]
 				},
-				{
-					"label":"Consistency",
+				"Consistency": {
 					"type": "radio",
 					"options": [
 						"None",
@@ -231,8 +213,7 @@
 						"Thick"
 					]
 				},
-				{
-					"label":"Amount",
+				"Amount": {
 					"type": "radio",
 					"options": [
 						"None",
@@ -241,12 +222,11 @@
 						"Copious"
 					]
 				}
-			]
+			}
 		},
-		{
-			"label":"Respirations",
-			"fields": [
-				{
+		"Respirations": {
+			"fields": {
+				"Respirations": {
 					"label": "Respirations",
 					"type": "check_collection",
 					"options": [
@@ -262,8 +242,7 @@
 						"Tachypnea"
 					]
 				},
-				{
-					"label":"Retractions",
+				"Retractions": {
 					"type": "check_collection",
 					"options": [
 						"Supracostal",
@@ -272,8 +251,7 @@
 						"Substernal"
 					]
 				},
-				{
-					"label":"Other Respiratory Symptoms",
+				"Other Respiratory Symptoms": {
 					"type": "check_collection",
 					"options": [
 						"None",
@@ -284,9 +262,9 @@
 						"Kussmaul"
 					]
 				},
-				{"label":"Other"}
-			]
+				"Other": {}
+			}
 		},
-		{"label":"Date", "name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
-	]
+		"Date": {"label":"Date", "name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+	}
 }

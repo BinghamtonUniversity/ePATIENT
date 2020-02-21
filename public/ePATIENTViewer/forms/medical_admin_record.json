@@ -1,95 +1,121 @@
 {
 	"legend": "Medication",
-	"fields": {
-		"n0": {
+	"fields": [
+		{
+			"name":"n0",
 			"parsable": false,
 			"label": "Scheduled",
-			"fields": {}
+			"fields": []
 		},
-		"Scheduled": {
+		{
+			"label":"Scheduled",
 			"multiple": {
 				"duplicate": true
 			},
 			"label": false,
-			"fields": {
-				"Order Date": "",
-				"Order Text": "",
-				"Validation Text": {
+			"fields": [
+
+				{"label":"Order Date"},
+				{"label":"Order Text"},
+				{
+					"label":"Validation Text",
 					"name": "order_validation"
 				},
-				"Scheduled Time": "2400",
-				"Has been Administered": {
+				{
+				"label":"Scheduled Time","default": "2400"
+				},
+				{
+					"label":"Has been Administered",
 					"type": "checkbox"
 				},
-				"Due to Administer": {
+				{
+					"label":"Due to Administer",
 					"type": "checkbox"
 				},
-				"IM": {
+				{
+					"label":"IM",
 					"type": "checkbox"
 				},
-				"SQ": {
+				{
+					"label":"SQ",
 					"type": "checkbox"
 				},
-				"Insulin": {
+				{
+					"label":"Insulin",
 					"type": "checkbox"
 				},
-				"Reason Not Administered": "",
-				"Admin Initials": {"name": "initials"},
-				"Time":""
-			}
+				{"label": "Reason Not Administered"}
+				{"label":"Admin Initials","name": "initials"},
+				{"label": "Time"}
+			]
 		},
-		"n1": {
+		{
+			"name":"n1",
 			"parsable": false,
 			"label": "PRN",
-			"fields": {}
+			"fields": []
 		},
-		"PRN": {
+		{
+			"label":"PRN",
 			"multiple": {
 				"duplicate": true
 			},
 			"label": false,
-			"fields": {
-				"Order Date": "",
-				"Order Text": "",
-				"Validation Text": {
+			"fields": [
+				{
+					"label":"Order Date"
+				},
+				{
+					"label":"Order Text"
+				},
+				{
+					"label":"Validation Text",
 					"name": "order_validation"
 				},
-				"Last Admin Time": "2400",
-				"Recently Administered": {
+				{
+				"label":"Last Admin Time","default": "2400"
+				},
+				{
+					"label":"Recently Administered",
 			        "name": "has_been_administered",
 					"type": "checkbox"
 				},
-				"IM": {
+				{
+					"label":"IM",
 					"type": "checkbox"
 				},
-				"SQ": {
+				{
+					"label":"SQ",
 					"type": "checkbox"
 				},
-				"Insulin": {
+				{
+					"label":"Insulin",
 					"type": "checkbox"
 				},
-				"Admin Initials": {"name": "initials"},
-				"Time":""
-			}
+				{"label":"Admin Initials","name": "initials"},
+				{"label":"Time"}
+			]
 		},
-		"n2": {
+		{
+			"name":"n2",
 			"parsable": false,
 			"label": "Discontinued",
-			"fields": {}
+			"fields": []
 		},
-		"Discontinued": {
+		{
+			"name":"discontinued",
 			"multiple": {
 				"duplicate": true
 			},
 			"label": false,
-			"fields": {
-				"Order Date": "",
-				"Order Text": "",
-				"Last Admin Time": "",
-				"Last Admin Date": "",
-				"Discontinued Time": "",
-				"Discontinued Date": ""
-			}
+			"fields": [
+				{"label":"Order Date"},
+				{"label":"Order Text"},
+				{"label":"Last Admin Time"},
+				{"label":"Last Admin Date"},
+				{"label":"Discontinued Time"},
+				{"label":"Discontinued Date"}
+			]
 		}
-	}
+	]
 }

@@ -1,10 +1,9 @@
 {
 	"legend": "Genitourinary","enabled":true,
-	"fields": [
-		{"label":"General", "enabled":true,
-			"fields": [
-				{
-					"label":"Urinary Symptoms",
+	"fields": {
+		"General": {"enabled":true,
+			"fields": {
+				"Urinary Symptoms": {
 					"help": "Check all that apply",
 					"type": "check_collection",
 					"options": [
@@ -24,8 +23,7 @@
 						"Hesitancy"
 					]
 				},
-				{
-					"label":"Urine Color",
+				"Urine Color": {
 				    "default":"Not Visualized",
 					"options": [
 						"Yellow",
@@ -37,8 +35,7 @@
 						"Blue"
 					]
 				},
-				{
-					"label":"Urine Character",
+				"Urine Character": {
 				    "default":"Not Visualized",
 					"options": [
 						"Clear",
@@ -52,8 +49,7 @@
 						"Purulent"
 					]
 				},
-				{
-					"label":"Urinary Elimination",
+				"Urinary Elimination": {
 				    "default":"Not Visualized",
 					"options": [
 						"Voiding w/o Difficulty",
@@ -70,51 +66,43 @@
 						"Dialysis"
 					]
 				},
-				{"label":"Amount"},
-				{
-					"label":"Catheter",
+				"Amount": {},
+				"Catheter":{
 			        "name":"catheter_enabled",
 			        "type":"checkbox"
 			    },
-				{
-					"label":"Catheter Details",
+				"Catheter Details": {
 				    "legend":false,
-					"fields": [
-						{
-							"label":"Catheter Size",
+					"fields": {
+						"Catheter Size": {
 							"help": "Fr"
 						},
-						{
-							"label":"Volume in Balloon",
+						"Volume in Balloon": {
 							"help": "mL"
 						},
-						{"label":"Site Description", "type": "textarea"}
-					],"show":[{"type": "matches","name":"catheter_enabled","value":true}]
+						"Site Description": "textarea"
+					},"show":{"matches":{"name":"catheter_enabled","value":true}}
 				},
-				{
-					"label":"Genitalia Exam",
-					"fields": [
-						{
-							"name":"genitalia_exam",
+				"Genitalia Exam": {
+					"fields": {
+						"genitalia_exam": {
 							"label": false,
 							"type": "textarea"
 						}
-					]
+					}
 				},
-				{
-					"label":"SANE (Sexual Assault Nurse Examiners) Exam",
+				"SANE (Sexual Assault Nurse Examiners) Exam": {
 				    "name": "sane_exam",
-					"fields": [
-						{
-							"name":"sane_exam",
+					"fields": {
+						"sane_exam": {
 							"label": false,
 							"type": "textarea"
 						}
-					]
+					}
 				}
-			]
+			}
 		},
-		{"label":"Notes","type":"textarea"},
-		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
-	]
+		"Notes": "textarea",
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+	}
 }

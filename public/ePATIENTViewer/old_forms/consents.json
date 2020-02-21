@@ -1,0 +1,38 @@
+{
+	"legend": "Consents",
+	"fields": {
+		"Care": {
+			"fields": {
+		        "label":{"label":false, "type":"raw","value":"<h4>Care</h4>"},
+			    "Disabled":{"type":"checkbox", "default":true},
+                "Payee":{},
+				"Consent Date": {},
+				"Signatory": {},
+				"Relationship To Patient": {},
+				"Consent Time":{},
+				"Witnessing Staff": {}
+			}
+		},
+        "Surgery": {
+            "legend": "Surgery",
+			"fields": {				
+			    "label":{"label":false, "type":"raw","value":"<h4>Surgery</h4>"},
+			    "Disabled":{"type":"checkbox", "default":true},
+				"Signatory Initials": {},
+				"Consent Date": {},
+				"Signatory": {},				
+				"Relationship To Patient": {},
+				"Operation": {},
+				"Risks": {"type": "textarea"},
+				"Alternatives": {"type": "textarea"},
+				"Consent Time":{},
+				"Witnessing Staff": {},
+				"Certification Time":{},
+				
+				"Form read to":{"type":"checkbox", "default":true},
+				"Understands the info":{"type":"checkbox", "default":true},
+				"No further questions":{"type":"checkbox", "default":true}
+			}
+		}
+	}
+}

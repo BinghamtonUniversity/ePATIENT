@@ -1,0 +1,17 @@
+{
+	"legend": "Progress Notes",
+	"fields": {
+		"notes": {
+			"multiple": {
+				"duplicate": true
+			},
+			"label": false,
+			"fields": {
+				"Date": "",
+				"Time": "",
+				"Documented by": "",
+				"Note": ""
+			}
+		}
+	}
+}

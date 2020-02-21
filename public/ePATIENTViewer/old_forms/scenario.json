@@ -1,0 +1,22 @@
+{
+	"legend": "Scenario Information",
+	"fields": {
+		"Enabled": "checkbox",
+		"Description": "textarea",
+		"Disable": {
+			"fields": {}
+		},
+		"Demographics": "checkbox",
+		"History": "checkbox",
+		"Orders": "checkbox",
+		"Progress Notes": "checkbox",
+		"Operation": "checkbox",
+		"Consents": "checkbox",
+		"Labs": "checkbox",
+		"Plan of Care": "checkbox",
+		"Admin Record": "checkbox",
+		"Shift Assessment": "checkbox",
+		"Nursing Notes": "checkbox",
+		"Submit": "checkbox"
+	}
+}

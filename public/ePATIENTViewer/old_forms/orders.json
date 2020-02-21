@@ -1,20 +1,20 @@
 {
-  "legend": "Orders",
+    "legend": "Orders",
   "fields": [
     {
       "type": "select",
       "label": "Category",
       "name": "category",
-      "options": "category"
+      "choices": "category"
     }, 
     {"label":"Date/time","type":"date"},
     {"label":"Author"},
     {"label":"Order Item"},
     {"label":"Order Details"},
-    {"label":"Frequency","options":"frequency"},
+    {"label":"Frequency","choices":"frequency"},
     {"label":"Start on", "name":"start_time", "type":"date"},
     {"label":"End on","name":"end_time", "type":"date"},
     {"label":"Status","name":"status","type":"custom_radio","value":"New", "options":["New","In progress", "Completed"]},
-    {"label":"Completed By","type":"hidden", "show":[{"type": "matches","name":"status","value":"Completed"}]}
+    {"label":"Completed By","type":"hidden", "show":{"matches":{"name":"status","value":"Completed"}}}
   ]
 }

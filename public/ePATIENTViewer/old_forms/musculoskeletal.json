@@ -1,11 +1,9 @@
 {
 	"legend": "Musculoskeletal",
-	"fields": [
-		{
-			"label":"General", 
-			"fields": [
-				{
-					"label":"Musculoskeletal Symptoms", 
+	"fields": {
+		"General": {
+			"fields": {
+				"Musculoskeletal Symptoms": {
 					"type": "check_collection",
 					"options": [
 						"None",
@@ -20,12 +18,10 @@
 						"Other"
 					]
 				},
-				{
-					"label":"Muscle Tone/Strength", 
+				"Muscle Tone/Strength": {
 				    "name": "muscle_tone_strength",
-					"fields": [
-						{
-							"label":"Motor Strength Grade", 
+					"fields": {
+						"Motor Strength Grade": {
 							"type": "radio_collection",
 							"labels": [
 								{
@@ -52,8 +48,7 @@
 								"Paralysis"
 							]
 						},
-						{
-							"label":"Range of Motion", 
+						"Range of Motion": {
 							"type": "radio_collection",
 							"labels": [
 								{
@@ -77,8 +72,7 @@
 								"Impaired ROM"
 							]
 						},
-						{
-							"label":"Characteristic", 
+						"Characteristic": {
 							"type": "radio_collection",
 							"labels": [
 								{
@@ -104,15 +98,13 @@
 								"Paralysis"
 							]
 						}
-					]
+					}
 				},
-				{"label":"Muscle Tone/Strength Summary", "name":"muscle_summary", "type":"textarea"},
-				{
-					"label":"Weight Bearing/Gate", 
+				"Muscle Tone/Strength Summary":{"name":"muscle_summary", "type":"textarea"},
+				"Weight Bearing/Gate": {
 				    "name": "weight_bearing_gate",
-					"fields": [
-						{
-							"label":"Gate",
+					"fields": {
+						"Gate": {
 							"type": "check_collection",
 							"help": "Check all that apply",
 							"options": [
@@ -129,8 +121,7 @@
 								"Other:"
 							]
 						},
-						{
-							"label":"Ambulatory Device", 
+						"Ambulatory Device": {
 							"options": [
 								"None",
 								"Cane",
@@ -142,10 +133,10 @@
 								"M/A"
 							]
 						}
-					]
+					}
 				}
-			]
+			}
 		},
-		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
-	]
+		"Date": {"name":"date","show":{"matches":{"name":"admin","value":"true"}}}
+	}
 }

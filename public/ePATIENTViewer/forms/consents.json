@@ -1,38 +1,39 @@
 {
 	"legend": "Consents",
-	"fields": {
-		"Care": {
-			"fields": {
-		        "label":{"label":false, "type":"raw","value":"<h4>Care</h4>"},
-			    "Disabled":{"type":"checkbox", "default":true},
-                "Payee":{},
-				"Consent Date": {},
-				"Signatory": {},
-				"Relationship To Patient": {},
-				"Consent Time":{},
-				"Witnessing Staff": {}
-			}
+	"fields": [
+		{
+			"label":"Care",
+			"fields": [
+		        {"name":"label","label":false, "type":"raw","value":"<h4>Care</h4>"},
+				{"label":"Disabled", "type":"checkbox", "default":true},
+				{"label":"Payee"},
+				{"label":"Consent Date"},
+				{"label":"Signatory"},
+				{"label":"Relationship To Patient"},
+				{"label":"Consent Time"},
+				{"label":"Witnessing Staff"}
+			]
 		},
-        "Surgery": {
+        {
+			"label":"Surgery",
             "legend": "Surgery",
-			"fields": {				
-			    "label":{"label":false, "type":"raw","value":"<h4>Surgery</h4>"},
-			    "Disabled":{"type":"checkbox", "default":true},
-				"Signatory Initials": {},
-				"Consent Date": {},
-				"Signatory": {},				
-				"Relationship To Patient": {},
-				"Operation": {},
-				"Risks": {"type": "textarea"},
-				"Alternatives": {"type": "textarea"},
-				"Consent Time":{},
-				"Witnessing Staff": {},
-				"Certification Time":{},
-				
-				"Form read to":{"type":"checkbox", "default":true},
-				"Understands the info":{"type":"checkbox", "default":true},
-				"No further questions":{"type":"checkbox", "default":true}
-			}
+			"fields": [			
+			    {"name":"label","label":false, "type":"raw","value":"<h4>Surgery</h4>"},
+			    {"label":"Disabled", "type":"checkbox", "default":true},
+				{"label":"Signatory Initials"},
+				{"label":"Consent Date"},
+				{"label":"Signatory"},
+				{"label":"Relationship To Patient"},
+				{"label":"Operation"},
+				{"label":"Risks", "type": "textarea"},
+				{"label":"Alternatives", "type": "textarea"},
+				{"label":"Consent Time"},
+				{"label":"Witnessing Staff"},
+				{"label":"Certification Time"},
+				{"label":"Form read to", "type":"checkbox", "default":true},
+				{"label":"Understands the info", "type":"checkbox", "default":true},
+				{"label":"No further questions", "type":"checkbox", "default":true}
+			]
 		}
-	}
+	]
 }

@@ -68,7 +68,7 @@ toastr.options = {
                     return item;
                 })
             }
-            if(this.data.hashParams.page !== 'form' && !this.data.admin){
+            if(false && this.data.hashParams.page !== 'form' && !this.data.admin){
                 // temp.default = {enabled:false}
                 // temp.inline = false;
                 temp.actions = false;
@@ -129,9 +129,13 @@ toastr.options = {
             		return item;
                 });
             }
+
+
+
+
             // temp.attributes = this.data.scenario[temp.name];
-            temp.attributes = (this.data.page_map[temp.name] || this.data.page_map.default).attr.call(this);
-            temp.attributes.author = temp.attributes.author || this.data.user.first_name+" "+this.data.user.last_name;
+            temp.data = (this.data.page_map[temp.name] || this.data.page_map.default).attr.call(this);
+            temp.data.author = temp.data.author || this.data.user.first_name+" "+this.data.user.last_name;
   
 			if(_.isArray(temp.fields)){
 			    temp.fields.push({"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"});
@@ -141,11 +145,28 @@ toastr.options = {
             if(typeof Berries[this.data.hashParams.form] !== 'undefined'){
                 Berries[this.data.hashParams.form].destroy();
             }
-            $('#form').berry(temp).on('cancel', function(){
+            // debugger;
+            temp.horizontal = true;
+            temp.inline = false;
+            temp.default= {
+                "horizontal": true,
+                "inline":false
+            }
+            debugger;
+            this.data.admin = false
+            if(this.data.hashParams.page !== 'form' && !this.data.admin){
+                $("#form").html((new gform(temp)).toString())
+
+            }else{
+
+            // $('#form').berry
+            new gform(temp, "#form").on('cancel', function(){
                 // window.history.back()
                 document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
-            },this).on('save',function(){
-                var tempForm = Berries[this.data.hashParams.form].toJSON();
+            }.bind(this)).on('save',function(e){
+                debugger;
+                // var tempForm = Berries[this.data.hashParams.form].toJSON();
+                var tempForm = e.form.get();
                 if(typeof tempForm.date !== 'undefined'){
                     tempForm.date = tempForm.date || moment().format("MM/DD/YYYY");
                 }
@@ -162,9 +183,10 @@ toastr.options = {
                 // document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
 
 
-            }, this);
+            }.bind(this));
+            }
 
-            if(this.data.hashParams.page !== 'form' && !this.data.admin){
+            if(false && this.data.hashParams.page !== 'form' && !this.data.admin){
                 $('#form.well [type=checkbox]:not(:checked)').parent().parent().remove();
                 $('#form.well .radio [type=radio]:not(:checked)').parent().parent().remove();
                 $('#form.well input,#form.well textarea').attr({readonly:'readonly'});
