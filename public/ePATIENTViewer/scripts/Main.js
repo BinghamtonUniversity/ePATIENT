@@ -136,7 +136,6 @@ toastr.options = {
             // temp.attributes = this.data.scenario[temp.name];
             temp.data = (this.data.page_map[temp.name] || this.data.page_map.default).attr.call(this);
             temp.data.author = temp.data.author || this.data.user.first_name+" "+this.data.user.last_name;
-  
 			if(_.isArray(temp.fields)){
 			    temp.fields.push({"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"});
 			}else{
@@ -152,7 +151,6 @@ toastr.options = {
                 "horizontal": true,
                 "inline":false
             }
-            debugger;
             this.data.admin = false
             if(this.data.hashParams.page !== 'form' && !this.data.admin){
                 $("#form").html((new gform(temp)).toString())

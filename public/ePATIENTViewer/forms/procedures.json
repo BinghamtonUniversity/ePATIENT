@@ -1,12 +1,12 @@
 {
-	"legend": "Procedures",
+	"legend": "Procedures","type":"fieldset",
 	"fields": [
 		{
 			"multiple": {
 				"duplicate": true
 			},
 			"label": false,
-			"name":"procedure",
+			"name":"procedure","type":"fieldset",
 			"fields": [
 				{"label":"Procedure Date"},
 				{"label":"Procedure"},

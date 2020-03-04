@@ -1,5 +1,5 @@
 {
-    "legend": "Prescription Orders",
+    "legend": "Prescription Orders","type":"fieldset",
 	"fields": [
         {"label":"Type", "type":"select","options":[{"label":"Prescription","value":0},{"label":"Infusion Meds","value":1}]},
 		{"label":"Date/time","type":"date","name":"date"},

@@ -1,5 +1,5 @@
 {
-	"legend": "Scenario Information",
+	"legend": "Scenario Information","type":"fieldset",
 	"fields": [
 		{"label":"Enabled","type":"checkbox"},
 		{"label":"Description","type":"textarea"},

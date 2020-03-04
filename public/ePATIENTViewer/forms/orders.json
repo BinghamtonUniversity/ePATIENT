@@ -1,5 +1,5 @@
 {
-  "legend": "Orders",
+  "legend": "Orders","type":"fieldset",
   "fields": [
     {
       "type": "select",

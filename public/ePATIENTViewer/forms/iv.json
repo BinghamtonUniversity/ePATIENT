@@ -1,11 +1,11 @@
-{"legend": "IV", "fields":[
+{"legend": "IV","type":"fieldset", "fields":[
 
-	{"label":"General", "fields":[
+	{"label":"General","type":"fieldset", "fields":[
 		{"label":"IV Access?",  "type": "custom_radio",
 			"options": ["Yes", "No"]
 		}
 	]},
-	{"label":"IV Site", "multiple":{"duplicate": true},"fields":[
+	{"label":"IV Site", "multiple":{"duplicate": true},"type":"fieldset","fields":[
 		{"label":"Type",  "type": "radio",
 			"options": ["Saline Lock", "Peripheral IV", "PICC", "Central Venous Catheter", "Port-a-Cath"]
 		},

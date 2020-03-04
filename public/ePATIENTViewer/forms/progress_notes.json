@@ -1,12 +1,12 @@
 {
-	"legend": "Progress Notes",
+	"legend": "Progress Notes","type":"fieldset",
 	"fields": [
 		{
 			"multiple": {
 				"duplicate": true
 			},
 			"name":"notes",
-			"label": false,
+			"label": false,"type":"fieldset",
 			"fields": [
 				{"label":"Date"},
 				{"label":"Time"},

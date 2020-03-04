@@ -1,6 +1,6 @@
 {
 	"legend": "Patient Information",
-        "name":"patient_info",
+        "name":"patient_info","type":"fieldset",
 			"fields":[
 				{"label":"First Name"},
 				{"label":"Middle Name","help":"or initial"},

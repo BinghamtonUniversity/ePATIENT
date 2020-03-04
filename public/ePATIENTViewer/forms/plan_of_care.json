@@ -1,5 +1,5 @@
 {
-	"legend": "Plan of Care",
+	"legend": "Plan of Care","type":"fieldset",
 	"fields": [
 		{
 			"multiple": {

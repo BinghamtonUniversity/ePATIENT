@@ -3,7 +3,7 @@
 	"fields": [
 		{
 			"label":"General",
-			"parsable": false,
+			"parsable": false,"type":"fieldset",
 			"fields": [
 				{"label":"Dictated By"},
 				{"label":"Operation Date"},

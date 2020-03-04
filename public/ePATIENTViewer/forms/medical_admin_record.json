@@ -12,7 +12,7 @@
 			"multiple": {
 				"duplicate": true
 			},
-			"label": false,
+			"label": false,"type":"fieldset",
 			"fields": [
 
 				{"label":"Order Date"},
@@ -44,7 +44,7 @@
 					"label":"Insulin",
 					"type": "checkbox"
 				},
-				{"label": "Reason Not Administered"}
+				{"label": "Reason Not Administered"},
 				{"label":"Admin Initials","name": "initials"},
 				{"label": "Time"}
 			]
@@ -56,11 +56,11 @@
 			"fields": []
 		},
 		{
-			"label":"PRN",
+			"name":"PRN",
 			"multiple": {
 				"duplicate": true
 			},
-			"label": false,
+			"label": false,"type":"fieldset",
 			"fields": [
 				{
 					"label":"Order Date"
@@ -107,7 +107,7 @@
 			"multiple": {
 				"duplicate": true
 			},
-			"label": false,
+			"label": false,"type":"fieldset",
 			"fields": [
 				{"label":"Order Date"},
 				{"label":"Order Text"},

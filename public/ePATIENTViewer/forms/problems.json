@@ -7,5 +7,5 @@
     {"label":"Date of Onset", "name":"onset", "type":"date"},
     {"label":"Provider"},
     {"label":"Priority","options":["High","Medium","Low"],"type":"select"}
-  ]
+  ],"type":"fieldset"
 }

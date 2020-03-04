@@ -1,7 +1,7 @@
-{"legend": "Gastrointestinal","enabled":true, 
+{"legend": "Gastrointestinal","type":"fieldset","enabled":true, 
 "fields":[
 
-		{"label":"General", "enabled":true,"fields":[
+		{"label":"General","type":"fieldset", "enabled":true,"fields":[
 		{"label":"Abdominal Description", 
 			"help": "All",
 			"type": "radio",

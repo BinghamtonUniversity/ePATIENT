@@ -1,5 +1,5 @@
-{"legend": "Pain", "enabled":true,"fields":[
-	{"label":"General", "enabled":true,"fields":[
+{"legend": "Pain", "enabled":true,"type":"fieldset","fields":[
+	{"label":"General", "enabled":true, "type":"fieldset","fields":[
 		{"label":"Site"},
 		{"label":"Quantity","min": 0, "max": 10, "type": "scale", "low": "No Pain", "high": "Worst Pain Imaginable"},
 		{"label":"Aggravating Factors", "type": "radio", 			

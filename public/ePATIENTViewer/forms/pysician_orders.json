@@ -6,7 +6,7 @@
 				"duplicate": true
 			},
 			"name":"order",
-			"label": false,
+			"label": false,"type":"fieldset",
 			"fields": [
 				{"label":"Date"},
 				{"label":"Time"},

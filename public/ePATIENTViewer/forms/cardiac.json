@@ -1,6 +1,6 @@
-{"legend": "Cardiac","enabled":true, "fields":[
+{"legend": "Cardiac","enabled":true,"type":"fieldset", "fields":[
 
-	{"label":"General", "enabled":true,"fields":[
+	{"label":"General", "enabled":true,"type":"fieldset","fields":[
 		{"label":"Heart Tones", "type": "radio", 			"multiple": true,
 			"options": ["S1, S2", "Regular", "Murmur", "Gallop", "S3", "S4", "Muffled", "Irregular", "Distant"]
 		},

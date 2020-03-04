@@ -1,5 +1,5 @@
-{"legend": "Skin Assessment","enabled":true, "fields":[
-	{"label":"General", "enabled":true,"fields":[
+{"legend": "Skin Assessment","enabled":true,"type":"fieldset", "fields":[
+	{"label":"General", "enabled":true,"type":"fieldset","fields":[
 		{"name":"skin", "type": "radio", 			"multiple": true, "label": false,
 			"options": ["Warm", "Dry", "Intact", "Skin color appropriate for ethnicity", "Yellow", "Dusky", "Pale", "Ruddy", "Cool", "Diaphoretic", "Lesion(s) noted", "Wound(s) noted", "Pressure ulcers noted"]
 		},

@@ -1,5 +1,5 @@
-{"legend": "Mental Status", "fields":[
-	{"label":"General", "enabled":true,"fields":[
+{"legend": "Mental Status","type":"fieldset", "fields":[
+	{"label":"General", "enabled":true,"type":"fieldset","fields":[
 		{"label":"Behavior/Affect", "name":"behavior", "type": "radio", 			"multiple": true,
 			"options": ["Calm", "Cooperative", "Appropriate", "Restless", "Combative", "Confused", "Agitated", "Anxious", "Depressed", "Crying", "Fearful", "Hostile", "Inappropriate"]
 		},		
@@ -15,7 +15,7 @@
 			"options": ["Homocidal", "Suicidal"]
 		}
 	]},
-	{"label":"Abuse", "enabled":true,"fields":[
+	{"label":"Abuse", "enabled":true,"type":"fieldset","fields":[
 		{
 			"label":"Check the appropriate box(es) that indicate the patient's risk for abuse.", 
 		    "name":"abuse_risk",
@@ -25,8 +25,8 @@
 		},
 		{"label": "Detail assessments that suggest abuse","type": "textarea"}
 	]},
-	{"label":"Narrative Note", "enabled":true,"fields":[
-		{"label":"note", "type": "textarea", "label": false}
+	{"label":"Narrative Note", "enabled":true,"type":"fieldset","fields":[
+		{"name":"note", "type": "textarea", "label": false}
 	]},
 	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 ]}

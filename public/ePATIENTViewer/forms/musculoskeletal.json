@@ -2,7 +2,7 @@
 	"legend": "Musculoskeletal",
 	"fields": [
 		{
-			"label":"General", 
+			"label":"General","type":"fieldset", 
 			"fields": [
 				{
 					"label":"Musculoskeletal Symptoms", 
@@ -23,7 +23,7 @@
 				},
 				{
 					"label":"Muscle Tone/Strength", 
-				    "name": "muscle_tone_strength",
+				    "name": "muscle_tone_strength","type":"fieldset",
 					"fields": [
 						{
 							"label":"Motor Strength Grade", 
@@ -110,7 +110,7 @@
 				{"label":"Muscle Tone/Strength Summary", "name":"muscle_summary", "type":"textarea"},
 				{
 					"label":"Weight Bearing/Gate", 
-				    "name": "weight_bearing_gate",
+				    "name": "weight_bearing_gate","type":"fieldset",
 					"fields": [
 						{
 							"label":"Gate",

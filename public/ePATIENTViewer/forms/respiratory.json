@@ -2,7 +2,7 @@
 	"legend": "Respiratory",
 	"fields": [
 		{
-			"label":"Oxygen Delivery",
+			"label":"Oxygen Delivery","type":"fieldset",
 			"fields": [
 				{
 					"label":"Method",
@@ -29,7 +29,7 @@
 			]
 		},
 		{
-			"label":"Breath Sounds",
+			"label":"Breath Sounds","type":"fieldset",
 			"fields": [
 			    {
 					"label":"Left Lung (Anterior)",
@@ -204,7 +204,7 @@
 			]
 		},
 		{
-			"label":"Sputum",
+			"label":"Sputum","type":"fieldset",
 			"fields": [
 				{
 					"label":"Color",
@@ -244,7 +244,7 @@
 			]
 		},
 		{
-			"label":"Respirations",
+			"label":"Respirations","type":"fieldset",
 			"fields": [
 				{
 					"label": "Respirations",

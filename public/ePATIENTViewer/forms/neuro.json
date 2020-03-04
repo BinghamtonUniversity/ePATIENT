@@ -1,5 +1,5 @@
-{"legend": "Neuro","enabled":true, "fields":[
-		{"label":"General", "enabled":true,"fields":[
+{"legend": "Neuro","type":"fieldset","enabled":true, "fields":[
+		{"label":"General","type":"fieldset", "enabled":true,"fields":[
 			{"label":"Orientation", "type": "radio", 			
 				"multiple": true, 
 				"options": ["Person, Time, Place, Situation", " Disoriented", " Person", " Time", " Place", " Situation"]
@@ -14,7 +14,7 @@
 			},
 			{"label":"Strength Summary", "type":"textarea"}
 		]},
-		{"label":"Pupils", "enabled":true,"fields":[
+		{"label":"Pupils", "enabled":true,"type":"fieldset","fields":[
 			{"label":"PERRLA", "type": "radio", 			
 				"multiple": true,
 				"options": ["Equal", "Round", "Reactive to light", "Reactive to accomodation"]
@@ -30,7 +30,7 @@
 			},
 			{"label":"Accomodate", "options":["Left", "Right", "Both"]}
 		]},
-		{"label":"Glasgow Coma Score", "enabled":true,"fields":[
+		{"label":"Glasgow Coma Score","type":"fieldset", "enabled":true,"fields":[
 			{"label":"",  "type": "radio", 
 				"options": ["Spontaneously", "To Speech", "To Pain", "No Response"],
 				"value_key":"index"
@@ -44,7 +44,7 @@
 				"value_key":"index"
 			}
 		]},
-		{"label":"Ramsey Scale", "enabled":true,"fields":[
+		{"label":"Ramsey Scale","type":"fieldset", "enabled":true,"fields":[
 			{"label":"Sedation",  "type": "radio",
 				"options": [
 				    {"label": "Anxious or Restless or Both","value":1},

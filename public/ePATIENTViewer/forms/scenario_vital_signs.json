@@ -1,37 +1,37 @@
 {
-	"legend": "Scenario Vital Signs",
+	"legend": "Scenario Vital Signs","type":"fieldset",
 	"fields": [
 		{
 			"name":"items",
 			"multiple": {
 				"duplicate": true
 			},
-			"label": false,
+			"label": false,"type":"fieldset",
 			"fields": [
 				{"label":"Date"},
 				{"label":"Time"},
 				{
-					"label":"Blood Pressure",
+					"label":"Blood Pressure","type":"fieldset",
 					"fields": [
 						{"label":"Systolic"},
 						{"label":"Diastolic"}
 					]
 				},
 				{
-				    "label":"Heart Rate",
+				    "label":"Heart Rate","type":"fieldset",
 					"fields": [
 						{"label":"Beats per Minute"}
 					]
 				},
 				{
-				    "label":"Respiratory",
+				    "label":"Respiratory","type":"fieldset",
 					"fields": [
 						{"label":"Breaths per Minute"},
 						{"label":"SpO2"}
 					]
 				},
 				{
-				    "label":"Temperature",
+				    "label":"Temperature","type":"fieldset",
 					"fields": [
 						{
 							"label":"Temp",
