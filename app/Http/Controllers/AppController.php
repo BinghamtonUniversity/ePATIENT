@@ -99,7 +99,7 @@ class AppController extends Controller
     public function getTeamConfig(Request $request, $team_id) {
         $init_data = $this->getInitData();
         $init_data['team_id'] = $team_id;
-        $init_data['admin'] = "true";
+        $init_data['admin'] = true;
         return view('uapp_engine.main',[
             'app_definition' => json_encode($this->getAppDefinition()),
             'init_data' => json_encode($init_data),
@@ -109,7 +109,7 @@ class AppController extends Controller
     public function getScenarioConfig(Request $request, $scenario_id) {
         $init_data = $this->getInitData();
         $init_data['scenario_id'] = $scenario_id;
-        $init_data['admin'] = "true";
+        $init_data['admin'] = true;
         return view('uapp_engine.main',[
             'app_definition' => json_encode($this->getAppDefinition()),
             'init_data' => json_encode($init_data),

@@ -4,6 +4,11 @@ Berry.collection.add('products',_.sortBy(data.products,'name'));
 Berry.collection.add('solutions',_.sortBy(data.solutions,'solution_name'));
 Berry.collection.add('labs',data.labs);
 
+gform.collections.add('providers',_.sortBy(data.providers,'last_name'));
+gform.collections.add('products',_.sortBy(data.products,'name'));
+gform.collections.add('solutions',_.sortBy(data.solutions,'solution_name'));
+gform.collections.add('labs',data.labs);
+
 
 data.users = [
     // {label:"Guest",unique_id:'Guest1', last_name:'User', first_name:'Guest' },
@@ -151,7 +156,6 @@ toastr.options = {
                 "horizontal": true,
                 "inline":false
             }
-            this.data.admin = false
             if(this.data.hashParams.page !== 'form' && !this.data.admin){
                 $("#form").html((new gform(temp)).toString())
 
