@@ -7,23 +7,26 @@ vital_sections = [
             // {label:'Time',name:'time'},
             // {label:'Systolic',name:'systolic'},
             // {label:'Diastolic',name:'diastolic'},
-            {label:'BP',name:'bps',calculation:function(e){
-                if (isNaN(parseInt(e.systolic)) || isNaN(parseInt(e.diastolic))){
+            {label:'BP',name:'blood_pressure',name: 'bps',calculation:function(e){
+                if (isNaN(parseInt(e.blood_pressure.systolic)) || isNaN(parseInt(e.blood_pressure.diastolic))){
                     return '';
                 }
-                return parseInt(e.systolic)+'/'+parseInt(e.diastolic);
+                return parseInt(e.blood_pressure.systolic)+'/'+parseInt(e.blood_pressure.diastolic);
             }},
-            {label:'HR',name:'beats_per_minute'},
-            {label:'RR',name:'breaths_per_minute'},
+            {label:'HR',path:'heart_rate.beats_per_minute'},
+            {label:'RR',path:"respiratory.breaths_per_minute"},
             {label:'Temp',name:'temps', calculation: function(e){
-                var temp = parseInt(e.temp);
+                var temp = parseInt(e.temperature.temp);
                 if (temp == 0){
+                    return '';
+                }
+                if (isNaN(temp)){
                     return '';
                 }
                 return temp;
             }},
             {label:'SpO2',name:'spo2_p', calculation: function(e){
-                var temp = parseInt(e.spo2);
+                var temp = parseInt(e.respiratory.spo2);
                 if (isNaN(temp)){
                     return '';
                 }
@@ -38,8 +41,8 @@ vital_sections = [
         label:'Intake/Output',
         display:[
             {label:'Date',name:'date'},
-            {label:'Oral',name:'oral'},
-            {label:'IV',name:'iv'}
+            {label:'Oral',path:'intake.oral'},
+            {label:'IV',path:'intake.iv'}
         ]
     },    
     {
@@ -97,7 +100,7 @@ vital_sections = [
             {label:'O2 Delivery method',name:'method'},
             {label:'Amount',name:'o2amount'},
             {label:'Sputum',name:'sputum',calculation:function(e){
-                return "<div><b>Color:</b> "+e.color+"</div>"+"<div><b>Consistency:</b> "+e.consistency+"</div>"+"<div><b>Amount:</b> "+e.amount+"</div>"
+                return "<div><b>Color:</b> "+e.sputum.color+"</div>"+"<div><b>Consistency:</b> "+e.consistency+"</div>"+"<div><b>Amount:</b> "+e.amount+"</div>"
             }},
             // {label:'Airway Device',name:'airway_device'}
         ]

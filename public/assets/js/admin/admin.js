@@ -171,6 +171,7 @@ ajax.resources = {
     "solutions": "/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
     "labs": "/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
     "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
+    "activity": "/teams/{{request.team_id}}/activity",
     "update_permissions": "/users/{{request.user_id}}/permissions",
     "members": "/teams{{#request.id}}/{{request.id}}{{/request.id}}/members{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
     "messages": "{{#request.team_id}}/teams/{{request.team_id}}/messages/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/messages{{/request.team_id}}",

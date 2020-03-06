@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#alerts.alert}}
+            {{#alerts}}
             <tr class="filterable" data-href="#page=alerts&form=alerts&id={{ @index }}">
                 <td>{{ customRender(date) }}</td>
                 <td>{{author}}</td>
@@ -34,7 +34,7 @@
                 <td>{{subject}}</td>
                 <td><a href="#page=form&form=alerts&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
             </tr>
-            {{/alerts.alert}}
+            {{/alerts}}
         </tbody>
     </table>
   </div>
@@ -100,14 +100,14 @@
             </tr>
         </thead>
         <tbody>
-            {{#_.extend([],scenario[key].item).reverse():t}}
+            {{#_.extend([],scenario[key]).reverse():t}}
             <tr class="filterable" data-href="#page=assessment&form={{key}}&id={{ @index }}">
-                {{#display}}<td>{{prepend}}{{#calculation}}{{{calculation(_.extend([],scenario[key].item).reverse()[t])}}}{{/calculation}}  {{^sub}}{{_.extend([],scenario[key].item).reverse()[t][name]}}{{/sub}}{{#sub}}{{_.extend([],scenario[key].item).reverse()[t][name][sub]}}{{/sub}}{{append}}</td>{{/display}}
+                {{#display}}<td>{{prepend}}{{#calculation}}{{{calculation(_.extend([],scenario[key]).reverse()[t])}}}{{/calculation}}{{#path}}{{{_.selectPath(_.extend([],scenario[key]).reverse()[t],path)}}} {{/path}}  {{^path}}{{^sub}}{{_.extend([],scenario[key]).reverse()[t][name]}}{{/sub}}{{#sub}}{{_.extend([],scenario[key]).reverse()[t][name][sub]}}{{/sub}}{{/path}}{{append}}</td>{{/display}}
                 {{#if options.admin == 'true'}}<td><a href="#page=form&form={{key}}&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a> 
                 <div data-action="delete" data-form="{{key}}" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>
                 </td>{{/if}}
             </tr>
-            {{/scenario[key].item}}
+            {{/scenario[key]}}
         </tbody>
     </table>
     </div>
@@ -206,7 +206,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#prescription_orders.order}}
+            {{#prescription_orders}}
             <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
                 <td>{{#if type == "1"}}Prescription{{else}}Infusion Meds{{/if}}</td>
                 <td>{{date}}</td>
@@ -214,7 +214,7 @@
             <td>{{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).last_name}}</td>
                 <td><a href="#page=form&form=prescription_orders&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a></td>
             </tr>
-            {{/prescription_orders.order}}
+            {{/prescription_orders}}
         </tbody>
     </table>
   </div>

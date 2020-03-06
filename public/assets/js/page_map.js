@@ -1,4 +1,5 @@
-page_map = {
+get_page_map = function(){
+return {
     
     
     // "patient_info":{
@@ -97,21 +98,33 @@ page_map = {
     "orders":{
         attr: function(){
             if(typeof this.data.scenario.orders !== 'undefined'){
-                return this.data.scenario.orders.order[parseInt(this.data.hashParams.id)] || {}
+                return this.data.scenario.orders[parseInt(this.data.hashParams.id)] || {}
             }else{
-                this.data.scenario.orders = {order:[]};
+                this.data.scenario.orders = [];
                 return {}
             }
         },
-        update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario.orders.order[parseInt(this.data.hashParams.id)] = updates
-            }else{
-            this.data.scenario.orders.order.push(updates);
+        // update:function(scenario, updates){
+        //     // if(typeof this.data.hashParams.id !== 'undefined'){
+        //     //     this.data.scenario.orders.order[parseInt(this.data.hashParams.id)] = updates
+        //     // }else{
+        //     // this.data.scenario.orders.order.push(updates);
                 
-            }
-            return this.data.scenario;
-        },       
+        //     // }
+        //     // return this.data.scenario;
+        //     var action = {
+        //         form:'orders.order',
+        //         data:updates,
+        //         event:'create'
+        //     }
+        //     if(typeof this.data.hashParams.id !== 'undefined'){
+        //         action.event = "update";
+        //         action.form +='.'+this.data.hashParams.id;           
+        //     }
+
+        //     return action;
+
+        // },       
         start:function(id){
             this.data.scenario.orders.order[id].status = "In Progress";
             this.app.update(this.data.scenario)
@@ -140,23 +153,38 @@ page_map = {
     "prescription_orders":{
         attr:function(){
             if(typeof this.data.scenario.prescription_orders !== 'undefined'){
-                return this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)] || {}
+                return this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)] || {}
             }else{
-                this.data.scenario.prescription_orders = {order:[]};
+                this.data.scenario.prescription_orders = [];
                 return {}
             };
         },
         update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
+            // if(typeof this.data.hashParams.id !== 'undefined'){
                 
-                var medication_admin = this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)].medication_admin || [];
-                this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)] = updates
-                this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)].medication_admin = medication_admin;
-            }else{
-            this.data.scenario.prescription_orders.order.push(updates);
+            //     var medication_admin = this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)].medication_admin || [];
+            //     this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)] = updates
+            //     this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)].medication_admin = medication_admin;
+            // }else{
+            // this.data.scenario.prescription_orders.order.push(updates);
                 
+            // }
+            // return this.data.scenario;
+
+            var action = {
+                form:'prescription_orders',
+                data:updates,
+                event:'create'
             }
-            return this.data.scenario;
+            if(typeof this.data.hashParams.id !== 'undefined'){
+
+                var medication_admin = this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)].medication_admin || [];
+                action.data.medication_admin = medication_admin;
+                action.event = "update";
+                action.form +='.'+this.data.hashParams.id;           
+            }
+
+            return action;
         },        
         "administer":this.administer,
         delete:function(id, e){
@@ -184,30 +212,47 @@ page_map = {
     },
     
     "alerts":{
+        root:"alerts",
         attr: function(){
             if(typeof this.data.scenario.alerts !== 'undefined'){
-                return this.data.scenario.alerts.alert[parseInt(this.data.hashParams.id)] || {}
+                return this.data.scenario.alerts[parseInt(this.data.hashParams.id)] || {}
             }else{
-                this.data.scenario.alerts = {alert:[]};
+                this.data.scenario.alerts = [];
                 return {}
             };
         },
-        update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario.alerts.alert[parseInt(this.data.hashParams.id)] = updates
-            }else{
-                this.data.scenario.alerts.alert.push(updates);
-            }
-            return this.data.scenario;
-    
-        },
+        // update:function(scenario, updates){
+        //     var action = {
+        //         form:'alerts',
+        //         data:updates,
+        //         event:'create'
+        //     }
+        //     if(typeof this.data.hashParams.id !== 'undefined'){
+        //         action.event = "update";
+        //         action.form +='.'+this.data.hashParams.id;           
+        //     }
+
+        //     return action;
+        // },
         delete:function(id, e){
             if(this.data.admin){
                 if(confirm("Are you sure you want to delete this alert?")){
-                    delete this.data.scenario.alerts.alert[id]
-                    this.data.scenario.alerts.alert = _.compact(this.data.scenario.alerts.alert);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
+
+                    var action = {
+                        form:'alerts'+'.'+id,
+                        event:'delete'
+                    }
+                    debugger;
+                    // if(typeof this.data.hashParams.id !== 'undefined'){
+                    //     action.event = "update";
+                    //     action.form +='.'+this.data.hashParams.id;           
+                    // }
+                    // return action;
+
+                    // delete this.data.scenario.alerts[id]
+                    // this.data.scenario.alerts = _.compact(this.data.scenario.alerts);
+                    // this.app.update(this.data.scenario)
+                    save.call(this,action)
                 }
             }
         },
@@ -216,21 +261,21 @@ page_map = {
     "problems":{
         attr: function(){
             if(typeof this.data.scenario.problems !== 'undefined'){
-                return this.data.scenario.problems.problem[parseInt(this.data.hashParams.id)] || {}
+                return this.data.scenario.problems[parseInt(this.data.hashParams.id)] || {}
             }else{
                 this.data.scenario.problems = {problem:[]};
                 return {}
             };
         },
-        update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario.problems.problem[parseInt(this.data.hashParams.id)] = updates
-            }else{
-            this.data.scenario.problems.problem.push(updates);
+        // update:function(scenario, updates){
+        //     if(typeof this.data.hashParams.id !== 'undefined'){
+        //         this.data.scenario.problems.problem[parseInt(this.data.hashParams.id)] = updates
+        //     }else{
+        //     this.data.scenario.problems.problem.push(updates);
                 
-            }
-            return this.data.scenario;
-        },
+        //     }
+        //     return this.data.scenario;
+        // },
         delete:function(id, e){
             if(this.data.admin){
                 if(confirm("Are you sure you want to delete this problem?")){
@@ -244,24 +289,38 @@ page_map = {
         back:"#page=problems"
     },   
     "notes":{
+        
         attr: function(){
             if(typeof this.data.scenario.notes !== 'undefined'){
-                return this.data.scenario.notes.note[parseInt(this.data.hashParams.id)] || {}
+                return this.data.scenario.notes[parseInt(this.data.hashParams.id)] || {}
             }else{
-                this.data.scenario.notes = {note:[]};
+                this.data.scenario.notes = [];
                 return {}
             }
         },
-        update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario.notes.note[parseInt(this.data.hashParams.id)] = updates
-            }else{
-            this.data.scenario.notes.note.push(updates);
+        // update:function(scenario, updates){
+        //     // if(typeof this.data.hashParams.id !== 'undefined'){
+        //     //     this.data.scenario.notes.note[parseInt(this.data.hashParams.id)] = updates
+        //     // }else{
+        //     // this.data.scenario.notes.note.push(updates);
                 
-            }
-            return this.data.scenario;
+        //     // }
+        //     // return this.data.scenario;
     
-        },
+
+        //     var action = {
+        //         form:'notes',
+        //         data:updates,
+        //         event:'create'
+        //     }
+        //     if(typeof this.data.hashParams.id !== 'undefined'){
+        //         action.event = "update";
+        //         action.form +='.'+this.data.hashParams.id;           
+        //     }
+
+        //     return action;
+
+        // },
         delete:function(id, e){
             if(this.data.admin){
                 if(confirm("Are you sure you want to delete this note?")){
@@ -350,7 +409,10 @@ page_map = {
                 
             // }
             // return this.data.scenario;
-            this.data.scenario.patient_info = updates;
+            var temp = 'patient_info';
+            _.reduce(temp.split('.'),function(i,map){return i[map]},this.data.scenario) = updates;
+
+            // this.data.scenario.patient_info = updates;
             return this.data.scenario;
     
         },
@@ -382,9 +444,9 @@ page_map = {
     "default":{
         attr: function(){
             if(typeof this.data.scenario[this.data.hashParams.form] !== 'undefined'){
-                return _.extend([],this.data.scenario[this.data.hashParams.form].item).reverse()[parseInt(this.data.hashParams.id)] || {}
+                return _.extend([],this.data.scenario[this.data.hashParams.form]).reverse()[parseInt(this.data.hashParams.id)] || {}
             }else{
-                this.data.scenario[this.data.hashParams.form] = {item:[]};
+                this.data.scenario[this.data.hashParams.form] = [];
                 return {}
             };
         },
@@ -392,13 +454,30 @@ page_map = {
             // if(typeof this.data.scenario[this.data.hashParams.form] == 'undefined'){
             //     this.data.scenario[this.data.hashParams.form] = {item:[]};
             // };
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario[this.data.hashParams.form].item[parseInt(this.data.hashParams.id)] = updates
-            }else{
-                this.data.scenario[this.data.hashParams.form].item.push(updates);
+
+
+            // if(typeof this.data.hashParams.id !== 'undefined'){
+            //     this.data.scenario[this.data.hashParams.form].item[parseInt(this.data.hashParams.id)] = updates
+            // }else{
+            //     this.data.scenario[this.data.hashParams.form].item.push(updates);
                 
+            // }
+            // return this.data.scenario;
+            // debugger;
+            var action = {
+                form:this.data.hashParams.form,
+                data:updates,
+                event:'create'
             }
-            return this.data.scenario;
+            if(typeof this.data.hashParams.id !== 'undefined'){
+                action.event = "update";
+                action.form +='.'+this.data.hashParams.id;           
+            }
+
+            return action;
+
+
+
         },
         delete:function(id, e){
             if(confirm("Are you sure you want to delete this assessment?")){
@@ -418,4 +497,5 @@ page_map = {
         back:"#page=assessment"
     }
     
+}
 }

@@ -67,6 +67,9 @@ Route::group(['prefix' => 'api','middleware'=>['no.save.session']], function () 
     Route::post('/teams/{team}/notes/',['uses'=>'TeamController@add_note'])->middleware('can:manage,team');
     Route::delete('/teams/{team}/notes/{note}',['uses'=>'TeamController@remove_note'])->middleware('can:manage,team');
 
+    Route::get('/teams/{team}/activity',['uses'=>'TeamController@list_activity_log'])->middleware('can:view,team');
+    Route::post('/teams/{team}/activity/',['uses'=>'TeamController@add_activity_log'])->middleware('can:manage,team');
+
     Route::get('/teams/{team}/scenario_logs',['uses'=>'TeamController@list_scenario_logs'])->middleware('can:view,team');
     Route::post('/teams/{team}/scenario_logs/{user?}',['uses'=>'TeamController@add_scenario_log'])->middleware('can:view,team');
 

@@ -15,6 +15,6 @@
     {"label":"Start on", "name":"start_time", "type":"date"},
     {"label":"End on","name":"end_time", "type":"date"},
     {"label":"Status","name":"status","type":"custom_radio","value":"New", "options":["New","In progress", "Completed"]},
-    {"label":"Completed By","type":"hidden", "show":[{"type": "matches","name":"status","value":"Completed"}]}
+    {"label":"Completed By","type":"text", "show":[{"type": "matches","name":"status","value":"Completed"}]}
   ]
 }

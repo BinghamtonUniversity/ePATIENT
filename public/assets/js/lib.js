@@ -96,3 +96,85 @@ $('body').on('keyup','[name=filter]', function(event){
 
 templates.listing = Hogan.compile('<ol class="list-group">{{#widgets}}<li data-guid="{{guid}}" class="list-group-item"><div class="handle"></div>{{widgetType}} - {{title}}</li>{{/widgets}}</ol>')
 
+updateActivity = function(item){
+  // debugger;
+  var object = this.data.scenario;
+  var path = item.form;
+  var action =item.event;
+  var value = item.data
+  if(typeof page_map[path.split('.')[0]]!== 'undefined'  && typeof page_map[path.split('.')[0]].root !== 'undefined'){
+    var temp = path.split('.')
+    temp[0] = page_map[path.split('.')[0]].root;
+    path = temp.join('.')
+  }
+  var index  = null;
+  _.reduce(path.split('.'),function(i,map,a,b,c){
+    // var isNumber = !_.isNaN(parseInt(b[a+1]));
+
+    // if(action == 'delete' &&  isNumber && b.length-2 == a){
+    //   // debugger;
+    //   // i[map].splice(parseInt(b[a+1]),1)
+    //   // delete i[map][b[a+1]];
+    //   // i[map] = _.compact(i[map]);
+    // }
+    if(typeof i[map] == "undefined"){
+      i[map] = {};
+    }
+    if((b.length-1)!=a){
+      return i[map];
+    }else{
+      switch (action){
+        case "create":
+          if(!_.isArray(i[map])){
+            i[map] = [];
+          }
+          i[map].push(value);
+          index = i[map].length-1;
+          break;
+        case "update":
+          // if(!_.isArray(i) && !_.isNaN(parseInt(map))){
+          //   i = [];
+          // }
+          i[map] = value;
+          index = map;
+          break;
+        case "delete":
+          // delete i[map];
+          i.splice(parseInt(map),1)
+
+          // i = _.compact(i);
+          // return i;
+          // return i[map];
+
+          break;
+      }
+    }
+  },object)
+  
+  if( typeof gform.instances[item.form.split('.')[0]] !== 'undefined' && 
+      (action == 'create' || action == 'update') && 
+      index+'' == this.data.hashParams.id
+  ){
+    gform.instances[item.form.split('.')[0]].set(item.data)
+  }
+
+  // if(_.isArray(temp)){
+  //   temp = _.compact(temp); 
+  // }
+}
+
+
+
+
+
+_.mixin({
+  selectPath: function(object,path){
+    return _.reduce(_.toPath(path),function(i,map){
+      if(typeof i == 'object' && i !== null){
+        return i[map];
+      }else{
+        return undefined;
+      }
+    },object)
+  }
+});

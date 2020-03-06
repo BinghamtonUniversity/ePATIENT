@@ -30,19 +30,24 @@
 							"type": "grid",
 							"fields": [
 								{
-									"name": "All"
+									"name": "All",
+									"value":"all"
 								},
 								{
-									"name": "LUE"
+									"name": "LUE",
+									"value":"lue"
 								},
 								{
-									"name": "RUE"
+									"name": "RUE",
+									"value":"rue"
 								},
 								{
-									"name": "LLE"
+									"name": "LLE",
+									"value":"lle"
 								},
 								{
-									"name": "RLE"
+									"name": "RLE",
+									"value":"rle"
 								}
 							],
 							"options": [

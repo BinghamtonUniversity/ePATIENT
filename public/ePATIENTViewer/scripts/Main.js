@@ -9,7 +9,6 @@ gform.collections.add('products',_.sortBy(data.products,'name'));
 gform.collections.add('solutions',_.sortBy(data.solutions,'solution_name'));
 gform.collections.add('labs',data.labs);
 
-
 data.users = [
     // {label:"Guest",unique_id:'Guest1', last_name:'User', first_name:'Guest' },
     {label:"Nurse One",unique_id:'nurse1', last_name:'One', first_name:'Nurse' },
@@ -24,15 +23,23 @@ toastr.options = {
 };
 
  save = function(state,callback){
+
+
     if(this.data.admin && this.data.scenario_id){
+        updateActivity.call(this,state)
+
         this.app.put('scenarios', {name:state.name,id:this.data.scenario_id, scenario:state}, callback||function(){
             toastr.warning('Saved Configuration Successfully');
         });
     }else{
         if(this.data.team_id){
-            this.app.post('scenario_log', {team_id:this.data.team_id, state:state, unique_id:this.data.user.unique_id}, callback||function(){
-                toastr.success('Saved Team status Successfully');
-            });
+            this.app.post('activity', _.extend({team_id:this.data.team_id},state), callback||function(){
+
+                toastr.success('Saved Team Activity Successfully');
+            }.bind(this));
+            // this.app.post('scenario_log', {team_id:this.data.team_id, state:state, unique_id:this.data.user.unique_id}, callback||function(){
+            //     toastr.success('Saved Team status Successfully');
+            // });
         }else{
             if(this.data.scenario_id && this.data.local && !this.data.team_id){
                 Lockr.set('_'+this.data.scenario_id,state||{});
@@ -139,7 +146,8 @@ toastr.options = {
 
 
             // temp.attributes = this.data.scenario[temp.name];
-            temp.data = (this.data.page_map[temp.name] || this.data.page_map.default).attr.call(this);
+
+            temp.data = ((this.data.page_map[temp.name] || this.data.page_map.default).attr || this.data.page_map.default.attr).call(this)
             temp.data.author = temp.data.author || this.data.user.first_name+" "+this.data.user.last_name;
 			if(_.isArray(temp.fields)){
 			    temp.fields.push({"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"});
@@ -157,7 +165,9 @@ toastr.options = {
                 "inline":false
             }
             if(this.data.hashParams.page !== 'form' && !this.data.admin){
-                $("#form").html((new gform(temp)).toString())
+                $("#form").html((new gform(temp)).on('change',function(e){
+                    $("#form").html(e.form.toString());
+                }).toString())
 
             }else{
 
@@ -166,18 +176,20 @@ toastr.options = {
                 // window.history.back()
                 document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
             }.bind(this)).on('save',function(e){
-                debugger;
                 // var tempForm = Berries[this.data.hashParams.form].toJSON();
                 var tempForm = e.form.get();
                 if(typeof tempForm.date !== 'undefined'){
                     tempForm.date = tempForm.date || moment().format("MM/DD/YYYY");
                 }
-                var state = (this.data.page_map[temp.name] || this.data.page_map.default).update.call(this, this.data.scenario, tempForm);
+                var state = ((this.data.page_map[temp.name] || this.data.page_map.default).update || this.data.page_map.default.update).call(this, this.data.scenario, tempForm);
+                
                 // var state = this.data.scenarioh
                 // this.app.post('scenario_log', {team_id:this.data.team_id, state:state}, function(){
                 //     toastr.success('Saved Successfully')
                 // })
                 save.call(this,state,function(){
+                    fetch_activity.call(this);
+
                     toastr.success('Saved Team status Successfully');
                     document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
                 });
@@ -202,6 +214,7 @@ toastr.options = {
 }
 
 scenarioInit = function(object){
+    
     if(typeof object == 'object'){
         for(i in object){
             if(typeof object[i] == 'object'){
@@ -223,7 +236,6 @@ updateScenario = function(data){
                 this.data.scenario = data.scenario.scenario;
 
             }
-
         
             this.data.scenario = scenarioInit(this.data.scenario);
     
@@ -244,16 +256,20 @@ updateScenario = function(data){
                     tests:_.where(this.data.labs,{category:item}),
                     results:_.where(this.data.scenario.lab_results,{category:item})
             }}.bind(this));
-// readHash.call(this);
         }
 
 this.data.last_activity_id = null;
 var fetch_activity = function() {
     this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
-        this.data.last_activity_id = activity.last_activity_id;
-        this.app.update();
-        chat_add_messages.call(this,activity.messages);
-        notes_add_notes.call(this,activity.notes);
+
+        if(this.data.last_activity_id !== activity.last_activity_id){
+            this.data.last_activity_id = activity.last_activity_id;
+            _.each(activity.activity,updateActivity.bind(this));
+            // this.app.update();
+            chat_add_messages.call(this,activity.messages);
+            notes_add_notes.call(this,activity.notes);
+            this.app.update();
+        }
     });
 }
     
@@ -278,7 +294,6 @@ this.callback = function(){
         // window.location = $(e.currentTarget).data("href");
     // });
     if(typeof this.data.team_id !== 'undefined'){
-  debugger;
         this.app.get('teams',{id:this.data.team_id},function(data){
             // TJC 6/29/19 -- Don't use team_scenario is deprcated.
             // Now using team activity log to playback scenario events
@@ -314,7 +329,7 @@ this.callback = function(){
         chat_init.call(this);
         notes_init.call(this);
         fetch_activity.call(this);
-        setInterval(fetch_activity.bind(this), 5000);
+        // setInterval(fetch_activity.bind(this), 5000);
 
 
     }else{
@@ -442,6 +457,5 @@ this.callback = function(){
     //         }
     //     }
     // }.bind(this), 20000);
-
 
 }

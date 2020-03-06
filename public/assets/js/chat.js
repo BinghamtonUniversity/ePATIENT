@@ -8,6 +8,8 @@ chat_init = function() {
             $(this).val('')
             myappcontext.app.post('msg_submit',{team_id:myappcontext.data.team_id,message:msg_text},function(response){
                 chat_add_messages.call(myappcontext,[response])
+                myappcontext.app.update();
+
             })
             e.preventDefault();
         }
@@ -25,7 +27,7 @@ chat_add_messages = function(messages){
             }
         }
         this.data.messages = _.unionBy(this.data.messages,messages,'id');
-        this.app.update();
+        // this.app.update();
         $('.chat-messages').scrollTop($('.chat-messages')[0].scrollHeight);
     }
 }

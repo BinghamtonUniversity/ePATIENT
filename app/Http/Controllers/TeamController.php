@@ -177,6 +177,23 @@ class TeamController extends Controller
         }
     }
 
+
+    public function list_activity_log(Team $team)
+    {
+        return TeamActivityLog::where('team_id',$team->id)->with('user')->get();
+    }
+
+    public function add_activity_log(Request $request, Team $team)
+    {
+        $team_activity_log = new TeamActivityLog($request->all());
+        $team_activity_log->user_id = Auth::user()->id;
+        $team_activity_log->team_id = $team->id;
+        $team_activity_log->save();
+        return TeamActivityLog::where('id',$team_activity_log->id)->with('user')->first();
+    }
+
+
+
     public function list_scenario_logs(Team $team)
     {
         return TeamScenario::where('team_id',$team->id)->with('user')->get();

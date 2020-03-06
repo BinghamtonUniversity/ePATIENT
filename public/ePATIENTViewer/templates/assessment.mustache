@@ -24,14 +24,14 @@
             </tr>
         </thead>
         <tbody>
-            {{#_.extend([],scenario[key].item).reverse():t}}
+            {{#_.extend([],scenario[key]).reverse():t}}
             <tr class="filterable" data-href="#page=assessment&form={{key}}&id={{ @index }}">
-                {{#display}}<td>{{prepend}}{{#calculation}}{{{calculation(_.extend([],scenario[key].item).reverse()[t])}}}{{/calculation}}  {{^sub}}{{_.extend([],scenario[key].item).reverse()[t][name]}}{{/sub}}{{#sub}}{{_.extend([],scenario[key].item).reverse()[t][name][sub]}}{{/sub}}{{append}}</td>{{/display}}
+                {{#display}}<td>{{prepend}}{{#calculation}}{{{calculation(_.extend([],scenario[key]).reverse()[t])}}}{{/calculation}}{{#path}}{{{_.selectPath(_.extend([],scenario[key]).reverse()[t],path)}}} {{/path}}  {{^path}}{{^sub}}{{_.extend([],scenario[key]).reverse()[t][name]}}{{/sub}}{{#sub}}{{_.extend([],scenario[key]).reverse()[t][name][sub]}}{{/sub}}{{/path}}{{append}}</td>{{/display}}
                 {{#if options.admin == 'true'}}<td><a href="#page=form&form={{key}}&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a> 
                 <div data-action="delete" data-form="{{key}}" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>
                 </td>{{/if}}
             </tr>
-            {{/scenario[key].item}}
+            {{/scenario[key]}}
         </tbody>
     </table>
     </div>
@@ -47,7 +47,7 @@
 
         {{#if hashParams.id>0}}<a href="#page=assessment&form={{hashParams.form}}&id={{ hashParams.id -1 }}" class="btn btn-default btn-lg" title="Previous"><i class="fa fa-chevron-left"></i><div style="font-size:12px">Previous</div></a>{{/if}}
         <a href="#page=form&form={{hashParams.form}}&id={{ hashParams.id}}" class="btn btn-info btn-lg" title="Edit"><i class="fa fa-edit"></i><div style="font-size:12px">Edit</div></a>
-        {{#if hashParams.id<(scenario[hashParams.form].item.length-1)}}<a href="#page=assessment&form={{hashParams.form}}&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
+        {{#if hashParams.id<(scenario[hashParams.form].length-1)}}<a href="#page=assessment&form={{hashParams.form}}&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
 
     </div>
 

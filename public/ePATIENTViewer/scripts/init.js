@@ -28,7 +28,7 @@ this.data.notes = [];
 this.data.newnotes = 0;
 this.data.localStorageNotesVar = 'epatient_notes_read_'
 this.data.vitals_sections = vital_sections;
-this.data.page_map = page_map
+// this.data.page_map = page_map
 this.data.apps_pages = [
     {
         "name":"Health",
@@ -116,3 +116,4 @@ this.administer = function(id){
 }
 
 
+this.data.page_map = page_map = get_page_map.call(this)

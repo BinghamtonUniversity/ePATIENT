@@ -16,7 +16,7 @@
 						"Other"
 					]
 				},
-				{"label":"Other Details","name":"other_details","show":{"matches":{"name":"method","value":"Other"}}},
+				{"label":"Other Details","name":"other_details","show":[{"type":"matches","name":"method","value":"Other"}]},
 				{"label":"Amount (in Liters)","name":"o2amount"},
 				{
 					"label":"Airway Device",
@@ -135,7 +135,7 @@
 						"Rhonchi",
 						"Wheeze",
 						"Absent"
-					],"show":{"matches":{"name":"llp_enabled","value":true}}
+					],"show":[{"type": "matches","name":"llp_enabled","value":true}]
 				},
 				{
 					"label":"Right Lung (Posterior)",

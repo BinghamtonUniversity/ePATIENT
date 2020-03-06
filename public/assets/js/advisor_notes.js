@@ -29,6 +29,6 @@ notes_add_notes = function(notes) {
             }
         }
         this.data.notes = notes;
-        this.app.update();
+        // this.app.update();
     }
 }

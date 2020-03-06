@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#orders.order}}
+        {{#orders}}
         <tr class="filterable" data-href="#page=orders&form=orders&id={{ @index }}">
             <td>{{category}}</td>
             <td>{{order_item}}</td>
@@ -46,7 +46,7 @@
                 {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
             </td>
         </tr>
-        {{/orders.order}}
+        {{/orders}}
     </tbody>
 </table>
 {{else}}
@@ -54,7 +54,7 @@
 
         {{#if hashParams.id>0}}<a href="#page=orders&form=orders&id={{ hashParams.id -1 }}" class="btn btn-default btn-lg" title="Previous"><i class="fa fa-chevron-left"></i><div style="font-size:12px">Previous</div></a>{{/if}}
         <a href="#page=form&form=orders&id={{ hashParams.id}}" class="btn btn-info btn-lg" title="Edit"><i class="fa fa-edit"></i><div style="font-size:12px">Edit</div></a>
-        {{#if hashParams.id<(orders.order.length-1)}}<a href="#page=orders&form=orders&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
+        {{#if hashParams.id<(orders.length-1)}}<a href="#page=orders&form=orders&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
 
     </div>
                 

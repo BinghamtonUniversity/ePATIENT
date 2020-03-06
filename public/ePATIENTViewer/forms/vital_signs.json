@@ -1,5 +1,6 @@
 {
-	"legend": "Vital Signs",
+	"label": "Vital Signs",
+	"type":"fieldset",
 	"fields": [
 		{
 			"label":"Blood Pressure",
@@ -73,7 +74,7 @@
 				},
 				{
 					"label":"Units",
-					"choices": [
+					"options": [
 						"F",
 						"C"
 					],
@@ -93,13 +94,7 @@
 		},
 		{
 			"label":"Notes",
-			"type":"fieldset",
-			"enabled":true,
-			"fields": {
-				"Notes": {
-					"type": "textarea"
-				}
-			}
+			"type":"textarea"
 		
 		},
 		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}

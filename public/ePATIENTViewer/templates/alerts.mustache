@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#alerts.alert}}
+        {{#alerts}}
         <tr class="filterable" data-href="#page=alerts&form=alerts&id={{ @index }}">
             <td>{{ customRender(date) }}</td>
             <td>{{author}}</td>
@@ -30,7 +30,7 @@
                 {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
             </td>
         </tr>
-        {{/alerts.alert}}
+        {{/alerts}}
     </tbody>
 </table>
 {{else}}

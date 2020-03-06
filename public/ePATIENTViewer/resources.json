@@ -5,6 +5,7 @@
     "msg_submit": "/teams/{{request.team_id}}/messages",
     "myteams": "/users/{{user.unique_id}}/teams",
     "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{request.unique_id}}",
+    "activity": "/teams/{{request.team_id}}/activity",
     "notes_list": "/teams/{{request.team_id}}/notes",
     "providers": "/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
     "products": "/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
