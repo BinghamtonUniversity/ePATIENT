@@ -25,6 +25,7 @@ helpers.customRender = function(data){
 };
 helpers._ = _;
 helpers.Berry = Berry;
+helpers.gform = gform;
 
 function customRender(content, scope) {
   // return content+'hrell';

@@ -4,7 +4,7 @@
 
 <h3><a href="#page=labs"><i class="fa fa-tint text-muted"></i> Labs</a></h3>
 <hr>
-<a href="#page=lab_form" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
+<a href="#page=lab_results" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
 <span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
 {{#lab_types}}
 {{#results.length}}
@@ -18,7 +18,7 @@
                 <tr>
                 <tr>
                     <th>Lab Test</th>
-                    {{#results}}<th><span style="font-weight:300">({{#admin}}<a href="#page=lab_form&id={{id}}">{{date}}</a>{{/admin}}{{^admin}}{{date}}{{/admin}})</span></th>{{/results}}
+                    {{#results}}<th><span style="font-weight:300">({{#admin}}<a href="#page=lab_results&id={{id}}">{{date}}</a>{{/admin}}{{^admin}}{{date}}{{/admin}})</span></th>{{/results}}
                     <th>Unit</th>
                     {{!--<th>Abnormal Flag</th>--}}
                     <th>Reference Range</th>

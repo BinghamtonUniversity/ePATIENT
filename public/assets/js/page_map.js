@@ -1,6 +1,6 @@
 get_page_map = function(){
 return {
-    "lab_form":{
+    "lab_results":{
         onload: function(){
             var temp = {};
             if(typeof this.data.hashParams.id !== 'undefined'){
@@ -10,22 +10,27 @@ return {
     
             _.each(this.data.lab_types,function(item){
                 if(item.tests.length){
-                $('[name="'+item.name+'"]').berry(
-                    {attributes:temp,name:item.name,fields:_.map(item.tests,function(test){test.name = test.test;return test;}),renderer:'inline'}
-                    )
+                    new gform(
+                        {clear:false,actions:[],data:temp,name:item.name,fields:_.map(item.tests,function(test){test.name = test.test;return test;}),renderer:'inline',default:{hideLabel:true,type:'text',format:{label: '{{label}}', value: '{{value}}'},target:function(){
+                            return '[data-inline="'+this.name+'"]'
+                        }}}
+                    ,'[name="'+item.name+'"]')
                 }
             }.bind(this))
             
             if(this.data.admin){
+
                 if(this.data.scenario_id){
-                    $('.admin-date').berry(
-                        {attributes:temp,name:'date',fields:[{label:'Lab Date',name:'date',type:'text'}],actions:[]}
-                    )
+                    new gform(
+                        {data:temp,name:'date',fields:[{label:'Lab Date',name:'date',type:'text'}],actions:[]}
+                        ,'.admin-date')
                 }else{
-                    $('.admin-date').berry(
-                        {attributes:temp,name:'date',fields:[{label:'Lab Date',name:'date',type:'date'}],actions:[]}
-                    )
+                    new gform(
+                        {data:temp,name:'date',fields:[{label:'Lab Date',name:'date',type:'date'}],actions:[]}
+                    ,'.admin-date')
                 }
+
+
             }
             // fields.push({name:'date'})
 
@@ -33,40 +38,43 @@ return {
         save: function(){
             _.each(this.data.lab_types,function(item){                
                 if(item.tests.length){
-                    var tests = Berries[item.name].toJSON();
+                    var tests = gform.instances[item.name].toJSON();
                     if(!_.every(tests, _.isEmpty)){
                         var temp = _.map(tests,function(test,i){
                             return {test_name:i,value:test}
                         }.bind(this))
                         var date = moment().format("MM/DD/YYYY");
                         if(this.data.admin){
-                            date = Berries.date.toJSON().date;
+                            date = gform.instances.date.toJSON().date;
                         }
-                        if(typeof this.data.hashParams.id !== 'undefined'){
-                            this.data.scenario.lab_results[parseInt(this.data.hashParams.id)] ={category:item.name,date:date,result:temp}
-                        }else{
-                            this.data.scenario.lab_results.push({category:item.name,date:date,result:temp})
-                        }
+                        // if(typeof this.data.hashParams.id !== 'undefined'){
+                        //     this.data.scenario.lab_results[parseInt(this.data.hashParams.id)] ={category:item.name,date:date,result:temp}
+                        // }else{
+                        //     this.data.scenario.lab_results.push({category:item.name,date:date,result:temp})
+                        // }
 
-                        debugger;
                         updates = {category:item.name,date:date,result:temp};
-                        var action = {
-                            // form:this.data.hashParams.form,
-                            form:"lab_results",
-                            data:updates,
-                            event:'create'
-                        }
-                        if(typeof this.data.hashParams.id !== 'undefined'){
-                            action.event = "update";
-                            action.form +='.'+this.data.hashParams.id;           
-                        }
-                        save.call(this,action,function(){
-                            fetch_activity.call(this);
+                        // var action = {
+                        //     form:this.data.hashParams.form,
+                        //     // form:"lab_results",
+                        //     data:updates,
+                        //     event:'create'
+                        // }
+                        // if(typeof this.data.hashParams.id !== 'undefined'){
+                        //     action.event = "update";
+                        //     action.form +='.'+this.data.hashParams.id;           
+                        // }
+                        // debugger;
+                        //;
+                        debugger;
+                        save.call(this,
+                            this.data.page_map.default.update.call(this, this.data.scenario, updates),
+                            function(){
+                                fetch_activity.call(this);
         
-                            toastr.success('Saved Team status Successfully');
-                            // document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
-                        }.bind(this));
-                        // return action;
+                                toastr.success('Saved Team status Successfully');
+                            }.bind(this)
+                        );
 
 
                     }
@@ -74,32 +82,20 @@ return {
             }.bind(this))
             
             // this.data.scenario.lab_results = [];
-            this.data.lab_types = _.map(lab_types,function(item){
-                return {
-                    name:item,
-                    tests:_.where(this.data.labs,{category:item}),
-                    results:_.where(this.data.scenario.lab_results,{category:item})
-                }}.bind(this))
+            // this.data.lab_types = _.map(lab_types,function(item){
+            //     return {
+            //         name:item,
+            //         tests:_.where(this.data.labs,{category:item}),
+            //         results:_.where(this.data.scenario.lab_results,{category:item})
+            //     }}.bind(this))
                 
             
-            this.app.update(this.data.scenario)
+            // this.app.update(this.data.scenario)
             // save.call(this, this.data.scenario)
 
             // this.app.post('scenario_log', {team_id:this.data.team_id, state:this.data.scenario}, function(){})
-            document.location.hash = this.data.page_map.lab_form.back;
+            document.location.hash = this.data.page_map.lab_results.back;
 
-        },
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this alert?")){
-                    delete this.data.scenario.lab_results[id]
-                    this.data.scenario.lab_results = _.compact(this.data.scenario.lab_results);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                    document.location.hash = this.data.page_map.lab_form.back;
-                    location.reload();
-                }
-            }
         },
         back:"#page=labs"
     },
@@ -253,8 +249,9 @@ return {
         },
 
         update:function(scenario, updates){
+            // debugger;
             var action = {
-                form:this.data.hashParams.form,
+                form:(this.data.hashParams.form|| this.data.hashParams.page),
                 data:updates,
                 event:'create'
             }
@@ -277,6 +274,7 @@ return {
                         fetch_activity.call(this);
 
                         toastr.success('Item Deleted Successfully');
+                        document.location.hash = this.data.page_map[(e.currentTarget.dataset.form||this.data.hashParams.page)].back;
                     })
                 }
             }

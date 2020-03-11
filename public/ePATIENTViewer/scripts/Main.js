@@ -1,8 +1,8 @@
 
-Berry.collection.add('providers',_.sortBy(data.providers,'last_name'));
-Berry.collection.add('products',_.sortBy(data.products,'name'));
-Berry.collection.add('solutions',_.sortBy(data.solutions,'solution_name'));
-Berry.collection.add('labs',data.labs);
+// Berry.collection.add('providers',_.sortBy(data.providers,'last_name'));
+// Berry.collection.add('products',_.sortBy(data.products,'name'));
+// Berry.collection.add('solutions',_.sortBy(data.solutions,'solution_name'));
+// Berry.collection.add('labs',data.labs);
 
 gform.collections.add('providers',_.sortBy(data.providers,'last_name'));
 gform.collections.add('products',_.sortBy(data.products,'name'));
@@ -154,8 +154,8 @@ toastr.options = {
 			}else{
 			    temp.fields.admin = {"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"};
 			}
-            if(typeof Berries[this.data.hashParams.form] !== 'undefined'){
-                Berries[this.data.hashParams.form].destroy();
+            if(typeof gform.instances[this.data.hashParams.form] !== 'undefined'){
+                gform.instances[this.data.hashParams.form].destroy();
             }
             // debugger;
             temp.horizontal = true;

@@ -76,7 +76,7 @@ this.administer = function(id){
         fields.push({label:'Time',type:"time",value:moment().format("hh:mm A")})
         fields.push({label:'Administered By',value:this.data.user.first_name+" "+this.data.user.last_name})
     }
-        $().berry({name:'validate',legend: 'Confirmation', fields: fields}).on('save', function() {
+        new gfrom({name:'validate',legend: 'Confirmation', fields: fields}).on('save', function(e) {
         if( Berries.validate.validate() ) {
             var order = this.data.scenario.prescription_orders.order[parseInt(Berries.validate.toJSON().id)]
             order.medication_admin = order.medication_admin || [];
@@ -95,7 +95,7 @@ this.administer = function(id){
             Berries.validate.trigger('close')
             
         }
-    },this)
+    }.bind(this))
     .on('change:patient', function(item){
             this.fields.patient.setValue(item.value)
             
