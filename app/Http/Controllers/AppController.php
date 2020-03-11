@@ -53,7 +53,7 @@ class AppController extends Controller
 
         /* Get Options */
         // $response['options'] = ['admin'=>false];
-        $response['admin'] = true;
+        $response['admin'] = false;
 
         return $response;
     }
