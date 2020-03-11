@@ -258,7 +258,7 @@ updateScenario = function(data){
         }
 
 this.data.last_activity_id = null;
-var fetch_activity = function() {
+fetch_activity = function() {
     this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
 
         if(this.data.last_activity_id !== activity.last_activity_id){
@@ -302,7 +302,18 @@ this.callback = function(){
     });
         this.app.$el.on( "click", "[data-action]", function(e) {
         e.stopPropagation();
-        ((this.data.page_map[this.data.hashParams.form || this.data.hashParams.page] || this.data.page_map.default)[$(e.currentTarget).data("action")]||        (this.data.page_map[ this.data.hashParams.page ||this.data.hashParams.form ] || this.data.page_map.default)[$(e.currentTarget).data("action")]).call(this,$(e.currentTarget).data("id"),e);
+        (
+            (
+                this.data.page_map[this.data.hashParams.form || this.data.hashParams.page] || 
+                this.data.page_map.default
+            )[$(e.currentTarget).data("action")]
+            ||        
+            (
+                this.data.page_map[ this.data.hashParams.page ||this.data.hashParams.form ] || 
+                this.data.page_map.default
+            )[$(e.currentTarget).data("action")] ||
+            this.data.page_map.default[$(e.currentTarget).data("action")]
+        ).call(this,$(e.currentTarget).data("id"),e);
             
         // window.location = $(e.currentTarget).data("href");
     }.bind(this));
@@ -348,7 +359,7 @@ this.callback = function(){
         chat_init.call(this);
         notes_init.call(this);
         fetch_activity.call(this);
-        // setInterval(fetch_activity.bind(this), 5000);
+        setInterval(fetch_activity.bind(this), 5000);
 
 
     }else{

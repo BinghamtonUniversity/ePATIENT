@@ -1,18 +1,5 @@
 get_page_map = function(){
 return {
-    
-    
-    // "patient_info":{
-    //             attr: function(){
-    //             return this.data.scenario.patient_info ||{}
-
-    //     },
-    //     update:function(scenario, updates){
-    //         this.data.scenario.patient_info = updates;
-    //         return this.data.scenario;
-    //     },back:"#page=patient_info"
-        
-    // },
     "lab_form":{
         onload: function(){
             var temp = {};
@@ -116,36 +103,8 @@ return {
         },
         back:"#page=labs"
     },
-    "orders":{
-        // attr: function(){
-        //     if(typeof this.data.scenario.orders !== 'undefined'){
-        //         return this.data.scenario.orders[parseInt(this.data.hashParams.id)] || {}
-        //     }else{
-        //         this.data.scenario.orders = [];
-        //         return {}
-        //     }
-        // },
-        // update:function(scenario, updates){
-        //     // if(typeof this.data.hashParams.id !== 'undefined'){
-        //     //     this.data.scenario.orders.order[parseInt(this.data.hashParams.id)] = updates
-        //     // }else{
-        //     // this.data.scenario.orders.order.push(updates);
-                
-        //     // }
-        //     // return this.data.scenario;
-        //     var action = {
-        //         form:'orders.order',
-        //         data:updates,
-        //         event:'create'
-        //     }
-        //     if(typeof this.data.hashParams.id !== 'undefined'){
-        //         action.event = "update";
-        //         action.form +='.'+this.data.hashParams.id;           
-        //     }
 
-        //     return action;
-
-        // },       
+    "orders":{   
         start:function(id){
             this.data.scenario.orders.order[id].status = "In Progress";
             this.app.update(this.data.scenario)
@@ -158,40 +117,11 @@ return {
             this.app.update(this.data.scenario)
             save.call(this,this.data.scenario)
         },        
-        // delete:function(id, e){
-        //     if(this.data.admin){
-        //         if(confirm("Are you sure you want to delete this order?")){
-        //             delete this.data.scenario.orders.order[id]
-        //             this.data.scenario.orders.order = _.compact(this.data.scenario.orders.order);
-        //             this.app.update(this.data.scenario)
-        //             save.call(this,this.data.scenario)
-        //         }
-        //     }
-        // },
         back:"#page=orders"
         
     },
     "prescription_orders":{
-        // attr:function(){
-        //     if(typeof this.data.scenario.prescription_orders !== 'undefined'){
-        //         return this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)] || {}
-        //     }else{
-        //         this.data.scenario.prescription_orders = [];
-        //         return {}
-        //     };
-        // },
         update:function(scenario, updates){
-            // if(typeof this.data.hashParams.id !== 'undefined'){
-                
-            //     var medication_admin = this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)].medication_admin || [];
-            //     this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)] = updates
-            //     this.data.scenario.prescription_orders.order[parseInt(this.data.hashParams.id)].medication_admin = medication_admin;
-            // }else{
-            // this.data.scenario.prescription_orders.order.push(updates);
-                
-            // }
-            // return this.data.scenario;
-
             var action = {
                 form:'prescription_orders',
                 data:updates,
@@ -207,17 +137,6 @@ return {
 
             return action;
         },        
-        "administer":this.administer,
-        // delete:function(id, e){
-        //     if(this.data.admin){
-        //         if(confirm("Are you sure you want to delete this prescription order?")){
-        //             delete this.data.scenario.prescription_orders.order[id]
-        //             this.data.scenario.prescription_orders.order = _.compact(this.data.scenario.prescription_orders.order);
-        //             this.app.update(this.data.scenario)
-        //             save.call(this,this.data.scenario)
-        //         }
-        //     }
-        // },
         back:"#page=prescription_orders"
     },
     
@@ -233,142 +152,32 @@ return {
     },
     
     "alerts":{
-        // root:"alerts",
-        // attr: function(){
-        //     if(typeof this.data.scenario.alerts !== 'undefined'){
-        //         return this.data.scenario.alerts[parseInt(this.data.hashParams.id)] || {}
-        //     }else{
-        //         this.data.scenario.alerts = [];
-        //         return {}
-        //     };
-        // },
-        // update:function(scenario, updates){
-        //     var action = {
-        //         form:'alerts',
-        //         data:updates,
-        //         event:'create'
-        //     }
-        //     if(typeof this.data.hashParams.id !== 'undefined'){
-        //         action.event = "update";
-        //         action.form +='.'+this.data.hashParams.id;           
-        //     }
-
-        //     return action;
-        // },
-        // delete:function(id, e){
-        //     if(this.data.admin){
-        //         if(confirm("Are you sure you want to delete this alert?")){
-
-        //             var action = {
-        //                 form:'alerts'+'.'+id,
-        //                 event:'delete'
-        //             }
-        //             debugger;
-        //             // if(typeof this.data.hashParams.id !== 'undefined'){
-        //             //     action.event = "update";
-        //             //     action.form +='.'+this.data.hashParams.id;           
-        //             // }
-        //             // return action;
-
-        //             // delete this.data.scenario.alerts[id]
-        //             // this.data.scenario.alerts = _.compact(this.data.scenario.alerts);
-        //             // this.app.update(this.data.scenario)
-        //             save.call(this,action)
-        //         }
-        //     }
-        // },
         back:"#page=alerts"
     },
     "problems":{
-        // attr: function(){
-        //     if(typeof this.data.scenario.problems !== 'undefined'){
-        //         return this.data.scenario.problems[parseInt(this.data.hashParams.id)] || {}
-        //     }else{
-        //         this.data.scenario.problems = {problem:[]};
-        //         return {}
-        //     };
-        // },
-        // update:function(scenario, updates){
-        //     if(typeof this.data.hashParams.id !== 'undefined'){
-        //         this.data.scenario.problems.problem[parseInt(this.data.hashParams.id)] = updates
-        //     }else{
-        //     this.data.scenario.problems.problem.push(updates);
-                
-        //     }
-        //     return this.data.scenario;
-        // },
-        // delete:function(id, e){
-        //     if(this.data.admin){
-        //         if(confirm("Are you sure you want to delete this problem?")){
-        //             delete this.data.scenario.problems.problem[id]
-        //             this.data.scenario.problems.problem = _.compact(this.data.scenario.problems.problem);
-        //             this.app.update(this.data.scenario)
-        //             save.call(this,this.data.scenario)
-        //         }
-        //     }
-        // },
         back:"#page=problems"
     },   
     "notes":{
-        
-        // attr: function(){
-        //     if(typeof this.data.scenario.notes !== 'undefined'){
-        //         return this.data.scenario.notes[parseInt(this.data.hashParams.id)] || {}
-        //     }else{
-        //         this.data.scenario.notes = [];
-        //         return {}
-        //     }
-        // },
-        // update:function(scenario, updates){
-        //     // if(typeof this.data.hashParams.id !== 'undefined'){
-        //     //     this.data.scenario.notes.note[parseInt(this.data.hashParams.id)] = updates
-        //     // }else{
-        //     // this.data.scenario.notes.note.push(updates);
-                
-        //     // }
-        //     // return this.data.scenario;
-    
-
-        //     var action = {
-        //         form:'notes',
-        //         data:updates,
-        //         event:'create'
-        //     }
-        //     if(typeof this.data.hashParams.id !== 'undefined'){
-        //         action.event = "update";
-        //         action.form +='.'+this.data.hashParams.id;           
-        //     }
-
-        //     return action;
-
-        // },
-        // delete:function(id, e){
-        //     if(this.data.admin){
-        //         if(confirm("Are you sure you want to delete this note?")){
-        //             delete this.data.scenario.notes.note[id]
-        //             this.data.scenario.notes.note = _.compact(this.data.scenario.notes.note);
-        //             this.app.update(this.data.scenario)
-        //             save.call(this,this.data.scenario)
-        //         }
-        //     }
-        // },
         back:"#page=notes"
     },
     "diagnostics":{
+        back:"#page=diagnostics"
+    },
+    "labs":{
         // attr: function(){
-        //     if(typeof this.data.scenario.diagnostics !== 'undefined'){
+        //     if(typeof this.data.scenario.labs !== 'undefined'){
                 
-        //         return this.data.scenario.diagnostics[parseInt(this.data.hashParams.id)] || {}
+        //         return this.data.scenario.labs[parseInt(this.data.hashParams.id)] || {}
         //     }else{
-        //         this.data.scenario.diagnostics = [];
+        //         this.data.scenario.labs = [];
         //         return {}
         //     }
         // },
         // update:function(scenario, updates){
         //     if(typeof this.data.hashParams.id !== 'undefined'){
-        //         this.data.scenario.diagnostics[parseInt(this.data.hashParams.id)] = updates
+        //         this.data.scenario.labs[parseInt(this.data.hashParams.id)] = updates
         //     }else{
-        //     this.data.scenario.diagnostics.push(updates);
+        //     this.data.scenario.labs.push(updates);
                 
         //     }
         //     return this.data.scenario;
@@ -376,45 +185,14 @@ return {
         // },
         // delete:function(id, e){
         //     if(this.data.admin){
-        //         if(confirm("Are you sure you want to delete this diagnostic?")){
-        //             delete this.data.scenario.diagnostics[id]
-        //             this.data.scenario.diagnostics = _.compact(this.data.scenario.diagnostics);
+        //         if(confirm("Are you sure you want to delete this lab?")){
+        //             delete this.data.scenario.labs[id]
+        //             this.data.scenario.labs = _.compact(this.data.scenario.labs);
         //             this.app.update(this.data.scenario)
         //             save.call(this,this.data.scenario)
         //         }
         //     }
         // },
-        back:"#page=diagnostics"
-    },
-    "labs":{
-        attr: function(){
-            if(typeof this.data.scenario.labs !== 'undefined'){
-                
-                return this.data.scenario.labs[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.labs = [];
-                return {}
-            }
-        },
-        update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario.labs[parseInt(this.data.hashParams.id)] = updates
-            }else{
-            this.data.scenario.labs.push(updates);
-                
-            }
-            return this.data.scenario;
-        },
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this lab?")){
-                    delete this.data.scenario.labs[id]
-                    this.data.scenario.labs = _.compact(this.data.scenario.labs);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                }
-            }
-        },
         back:"#page=labs"
     },   
     "patient_info":{
@@ -429,8 +207,9 @@ return {
                 
             // }
             // return this.data.scenario;
-            var temp = 'patient_info';
-            _.reduce(temp.split('.'),function(i,map){return i[map]},this.data.scenario) = updates;
+            // var temp = 'patient_info';
+            // _.reduce(temp.split('.'),function(i,map){return i[map]},this.data.scenario) 
+            this.data.scenario.patient_info = updates;
 
             // this.data.scenario.patient_info = updates;
             return this.data.scenario;
@@ -464,26 +243,16 @@ return {
     "default":{
         attr: function(){
             if(typeof this.data.scenario[this.data.hashParams.form] !== 'undefined'){
-                return _.extend([],this.data.scenario[this.data.hashParams.form]).reverse()[parseInt(this.data.hashParams.id)] || {}
+                return _.extend([],this.data.scenario[this.data.hashParams.form])
+                //.reverse()
+                [parseInt(this.data.hashParams.id)] || {}
             }else{
                 this.data.scenario[this.data.hashParams.form] = [];
                 return {}
             };
         },
+
         update:function(scenario, updates){
-            // if(typeof this.data.scenario[this.data.hashParams.form] == 'undefined'){
-            //     this.data.scenario[this.data.hashParams.form] = {item:[]};
-            // };
-
-
-            // if(typeof this.data.hashParams.id !== 'undefined'){
-            //     this.data.scenario[this.data.hashParams.form].item[parseInt(this.data.hashParams.id)] = updates
-            // }else{
-            //     this.data.scenario[this.data.hashParams.form].item.push(updates);
-                
-            // }
-            // return this.data.scenario;
-            debugger;
             var action = {
                 form:this.data.hashParams.form,
                 data:updates,
@@ -495,25 +264,24 @@ return {
             }
 
             return action;
-
-
-
         },
         delete:function(id, e){
-            if(confirm("Are you sure you want to delete this assessment?")){
-                delete this.data.scenario[e.currentTarget.dataset.form].item[id]
-                this.data.scenario[e.currentTarget.dataset.form].item = _.compact(this.data.scenario[e.currentTarget.dataset.form].item);
-                this.app.update(this.data.scenario)
-                save.call(this,this.data.scenario)
+            if(this.data.admin){
+                if(confirm("Are you sure you want to delete this item?")){
+
+                    var action = {
+                        form:(e.currentTarget.dataset.form||this.data.hashParams.page)+'.'+id,
+                        event:'delete'
+                    }
+                    save.call(this,action,function(){
+                        fetch_activity.call(this);
+
+                        toastr.success('Item Deleted Successfully');
+                    })
+                }
             }
-            // if(typeof this.data.hashParams.id !== 'undefined'){
-            //     this.data.scenario[this.data.hashParams.form].item[parseInt(this.data.hashParams.id)] = updates
-            // }else{
-            // this.data.scenario[this.data.hashParams.form].item.push(updates);
-                
-            // }
-            // return this.data.scenario;
         },
+        "administer":this.administer,
         back:"#page=assessment"
     }
     
