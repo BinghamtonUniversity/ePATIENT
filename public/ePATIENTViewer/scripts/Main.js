@@ -17,14 +17,13 @@ data.users = [
     {label:"Pharmacy Guest",unique_id:'pharmacy', last_name:'Guest', first_name:'Pharmacy' }
 ]
 
+lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
 
 toastr.options = {
   "positionClass": "toast-top-left",
 };
 
  save = function(state,callback){
-
-
     if(this.data.admin && this.data.scenario_id){
         updateActivity.call(this,state)
 
@@ -33,6 +32,7 @@ toastr.options = {
         });
     }else{
         if(this.data.team_id){
+            debugger;
             this.app.post('activity', _.extend({team_id:this.data.team_id},state), callback||function(){
 
                 toastr.success('Saved Team Activity Successfully');
@@ -230,7 +230,7 @@ scenarioInit = function(object){
    return object;
 }
 updateScenario = function(data){
-            if(data.team_scenario !== null){
+            if(typeof data.team_scenario !== 'undefined' && data.team_scenario !== null){
                 this.data.scenario = data.team_scenario.state || data.scenario.scenario;
             }else{
                 this.data.scenario = data.scenario.scenario;
@@ -238,7 +238,6 @@ updateScenario = function(data){
             }
         
             this.data.scenario = scenarioInit(this.data.scenario);
-    
     
             this.data.scenario.name = data.name;
             this.data.scenario.lab_results = this.data.scenario.lab_results || [];
@@ -248,7 +247,7 @@ updateScenario = function(data){
                 return item;
             });
      
-            var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+            // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
 
             this.data.lab_types = _.map(lab_types,function(item){
                 return {
@@ -268,6 +267,26 @@ var fetch_activity = function() {
             // this.app.update();
             chat_add_messages.call(this,activity.messages);
             notes_add_notes.call(this,activity.notes);
+            // debugger;
+            // debugger;
+            // updateScenario.call(this.app,this.app.data);
+            // this.data.scenario.lab_results = this.data.scenario.lab_results || [];
+                
+            this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
+                item.id = i;
+                return item;
+            });
+     
+            // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+
+            this.data.lab_types = _.map(lab_types,function(item){
+                return {
+                    name:item,
+                    tests:_.where(this.data.labs,{category:item}),
+                    results:_.where(this.data.scenario.lab_results,{category:item})
+            }}.bind(this));
+
+
             this.app.update();
         }
     });
@@ -313,7 +332,7 @@ this.callback = function(){
                 return item;
             });
      
-            var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+            // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
 
             this.data.lab_types = _.map(lab_types,function(item){
                 return {
@@ -403,7 +422,7 @@ this.callback = function(){
                     item.id = i;
                     return item;
                 })
-                var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+                // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
     
                 this.data.lab_types = _.map(lab_types,function(item){
                     return {
@@ -429,7 +448,7 @@ this.callback = function(){
                     item.id = i;
                     return item;
                 })
-                var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+                // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
     
                 this.data.lab_types = _.map(lab_types,function(item){
                     return {

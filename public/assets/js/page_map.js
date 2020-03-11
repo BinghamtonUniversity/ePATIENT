@@ -44,38 +44,59 @@ return {
 
         },
         save: function(){
-            
-    _.each(this.data.lab_types,function(item){                
-        if(item.tests.length){
-            var tests = Berries[item.name].toJSON();
-            if(!_.every(tests, _.isEmpty)){
-                var temp = _.map(tests,function(test,i){
-                    return {test_name:i,value:test}
-                }.bind(this))
-                var date = moment().format("MM/DD/YYYY");
-                if(this.data.admin){
-                    date = Berries.date.toJSON().date;
+            _.each(this.data.lab_types,function(item){                
+                if(item.tests.length){
+                    var tests = Berries[item.name].toJSON();
+                    if(!_.every(tests, _.isEmpty)){
+                        var temp = _.map(tests,function(test,i){
+                            return {test_name:i,value:test}
+                        }.bind(this))
+                        var date = moment().format("MM/DD/YYYY");
+                        if(this.data.admin){
+                            date = Berries.date.toJSON().date;
+                        }
+                        if(typeof this.data.hashParams.id !== 'undefined'){
+                            this.data.scenario.lab_results[parseInt(this.data.hashParams.id)] ={category:item.name,date:date,result:temp}
+                        }else{
+                            this.data.scenario.lab_results.push({category:item.name,date:date,result:temp})
+                        }
+
+                        debugger;
+                        updates = {category:item.name,date:date,result:temp};
+                        var action = {
+                            // form:this.data.hashParams.form,
+                            form:"lab_results",
+                            data:updates,
+                            event:'create'
+                        }
+                        if(typeof this.data.hashParams.id !== 'undefined'){
+                            action.event = "update";
+                            action.form +='.'+this.data.hashParams.id;           
+                        }
+                        save.call(this,action,function(){
+                            fetch_activity.call(this);
+        
+                            toastr.success('Saved Team status Successfully');
+                            // document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
+                        }.bind(this));
+                        // return action;
+
+
+                    }
                 }
-                if(typeof this.data.hashParams.id !== 'undefined'){
-                    this.data.scenario.lab_results[parseInt(this.data.hashParams.id)] ={category:item.name,date:date,result:temp}
-                }else{
-                    this.data.scenario.lab_results.push({category:item.name,date:date,result:temp})
-                }
-            }
-        }
             }.bind(this))
             
             // this.data.scenario.lab_results = [];
-            this.data.lab_types = _.map(["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"],function(item){
+            this.data.lab_types = _.map(lab_types,function(item){
                 return {
                     name:item,
                     tests:_.where(this.data.labs,{category:item}),
                     results:_.where(this.data.scenario.lab_results,{category:item})
                 }}.bind(this))
                 
-                
+            
             this.app.update(this.data.scenario)
-            save.call(this, this.data.scenario)
+            // save.call(this, this.data.scenario)
 
             // this.app.post('scenario_log', {team_id:this.data.team_id, state:this.data.scenario}, function(){})
             document.location.hash = this.data.page_map.lab_form.back;
@@ -96,14 +117,14 @@ return {
         back:"#page=labs"
     },
     "orders":{
-        attr: function(){
-            if(typeof this.data.scenario.orders !== 'undefined'){
-                return this.data.scenario.orders[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.orders = [];
-                return {}
-            }
-        },
+        // attr: function(){
+        //     if(typeof this.data.scenario.orders !== 'undefined'){
+        //         return this.data.scenario.orders[parseInt(this.data.hashParams.id)] || {}
+        //     }else{
+        //         this.data.scenario.orders = [];
+        //         return {}
+        //     }
+        // },
         // update:function(scenario, updates){
         //     // if(typeof this.data.hashParams.id !== 'undefined'){
         //     //     this.data.scenario.orders.order[parseInt(this.data.hashParams.id)] = updates
@@ -137,28 +158,28 @@ return {
             this.app.update(this.data.scenario)
             save.call(this,this.data.scenario)
         },        
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this order?")){
-                    delete this.data.scenario.orders.order[id]
-                    this.data.scenario.orders.order = _.compact(this.data.scenario.orders.order);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                }
-            }
-        },
+        // delete:function(id, e){
+        //     if(this.data.admin){
+        //         if(confirm("Are you sure you want to delete this order?")){
+        //             delete this.data.scenario.orders.order[id]
+        //             this.data.scenario.orders.order = _.compact(this.data.scenario.orders.order);
+        //             this.app.update(this.data.scenario)
+        //             save.call(this,this.data.scenario)
+        //         }
+        //     }
+        // },
         back:"#page=orders"
         
     },
     "prescription_orders":{
-        attr:function(){
-            if(typeof this.data.scenario.prescription_orders !== 'undefined'){
-                return this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.prescription_orders = [];
-                return {}
-            };
-        },
+        // attr:function(){
+        //     if(typeof this.data.scenario.prescription_orders !== 'undefined'){
+        //         return this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)] || {}
+        //     }else{
+        //         this.data.scenario.prescription_orders = [];
+        //         return {}
+        //     };
+        // },
         update:function(scenario, updates){
             // if(typeof this.data.hashParams.id !== 'undefined'){
                 
@@ -187,16 +208,16 @@ return {
             return action;
         },        
         "administer":this.administer,
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this prescription order?")){
-                    delete this.data.scenario.prescription_orders.order[id]
-                    this.data.scenario.prescription_orders.order = _.compact(this.data.scenario.prescription_orders.order);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                }
-            }
-        },
+        // delete:function(id, e){
+        //     if(this.data.admin){
+        //         if(confirm("Are you sure you want to delete this prescription order?")){
+        //             delete this.data.scenario.prescription_orders.order[id]
+        //             this.data.scenario.prescription_orders.order = _.compact(this.data.scenario.prescription_orders.order);
+        //             this.app.update(this.data.scenario)
+        //             save.call(this,this.data.scenario)
+        //         }
+        //     }
+        // },
         back:"#page=prescription_orders"
     },
     
@@ -212,15 +233,15 @@ return {
     },
     
     "alerts":{
-        root:"alerts",
-        attr: function(){
-            if(typeof this.data.scenario.alerts !== 'undefined'){
-                return this.data.scenario.alerts[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.alerts = [];
-                return {}
-            };
-        },
+        // root:"alerts",
+        // attr: function(){
+        //     if(typeof this.data.scenario.alerts !== 'undefined'){
+        //         return this.data.scenario.alerts[parseInt(this.data.hashParams.id)] || {}
+        //     }else{
+        //         this.data.scenario.alerts = [];
+        //         return {}
+        //     };
+        // },
         // update:function(scenario, updates){
         //     var action = {
         //         form:'alerts',
@@ -234,39 +255,39 @@ return {
 
         //     return action;
         // },
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this alert?")){
+        // delete:function(id, e){
+        //     if(this.data.admin){
+        //         if(confirm("Are you sure you want to delete this alert?")){
 
-                    var action = {
-                        form:'alerts'+'.'+id,
-                        event:'delete'
-                    }
-                    debugger;
-                    // if(typeof this.data.hashParams.id !== 'undefined'){
-                    //     action.event = "update";
-                    //     action.form +='.'+this.data.hashParams.id;           
-                    // }
-                    // return action;
+        //             var action = {
+        //                 form:'alerts'+'.'+id,
+        //                 event:'delete'
+        //             }
+        //             debugger;
+        //             // if(typeof this.data.hashParams.id !== 'undefined'){
+        //             //     action.event = "update";
+        //             //     action.form +='.'+this.data.hashParams.id;           
+        //             // }
+        //             // return action;
 
-                    // delete this.data.scenario.alerts[id]
-                    // this.data.scenario.alerts = _.compact(this.data.scenario.alerts);
-                    // this.app.update(this.data.scenario)
-                    save.call(this,action)
-                }
-            }
-        },
+        //             // delete this.data.scenario.alerts[id]
+        //             // this.data.scenario.alerts = _.compact(this.data.scenario.alerts);
+        //             // this.app.update(this.data.scenario)
+        //             save.call(this,action)
+        //         }
+        //     }
+        // },
         back:"#page=alerts"
     },
     "problems":{
-        attr: function(){
-            if(typeof this.data.scenario.problems !== 'undefined'){
-                return this.data.scenario.problems[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.problems = {problem:[]};
-                return {}
-            };
-        },
+        // attr: function(){
+        //     if(typeof this.data.scenario.problems !== 'undefined'){
+        //         return this.data.scenario.problems[parseInt(this.data.hashParams.id)] || {}
+        //     }else{
+        //         this.data.scenario.problems = {problem:[]};
+        //         return {}
+        //     };
+        // },
         // update:function(scenario, updates){
         //     if(typeof this.data.hashParams.id !== 'undefined'){
         //         this.data.scenario.problems.problem[parseInt(this.data.hashParams.id)] = updates
@@ -276,28 +297,28 @@ return {
         //     }
         //     return this.data.scenario;
         // },
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this problem?")){
-                    delete this.data.scenario.problems.problem[id]
-                    this.data.scenario.problems.problem = _.compact(this.data.scenario.problems.problem);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                }
-            }
-        },
+        // delete:function(id, e){
+        //     if(this.data.admin){
+        //         if(confirm("Are you sure you want to delete this problem?")){
+        //             delete this.data.scenario.problems.problem[id]
+        //             this.data.scenario.problems.problem = _.compact(this.data.scenario.problems.problem);
+        //             this.app.update(this.data.scenario)
+        //             save.call(this,this.data.scenario)
+        //         }
+        //     }
+        // },
         back:"#page=problems"
     },   
     "notes":{
         
-        attr: function(){
-            if(typeof this.data.scenario.notes !== 'undefined'){
-                return this.data.scenario.notes[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.notes = [];
-                return {}
-            }
-        },
+        // attr: function(){
+        //     if(typeof this.data.scenario.notes !== 'undefined'){
+        //         return this.data.scenario.notes[parseInt(this.data.hashParams.id)] || {}
+        //     }else{
+        //         this.data.scenario.notes = [];
+        //         return {}
+        //     }
+        // },
         // update:function(scenario, updates){
         //     // if(typeof this.data.hashParams.id !== 'undefined'){
         //     //     this.data.scenario.notes.note[parseInt(this.data.hashParams.id)] = updates
@@ -321,48 +342,48 @@ return {
         //     return action;
 
         // },
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this note?")){
-                    delete this.data.scenario.notes.note[id]
-                    this.data.scenario.notes.note = _.compact(this.data.scenario.notes.note);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                }
-            }
-        },
+        // delete:function(id, e){
+        //     if(this.data.admin){
+        //         if(confirm("Are you sure you want to delete this note?")){
+        //             delete this.data.scenario.notes.note[id]
+        //             this.data.scenario.notes.note = _.compact(this.data.scenario.notes.note);
+        //             this.app.update(this.data.scenario)
+        //             save.call(this,this.data.scenario)
+        //         }
+        //     }
+        // },
         back:"#page=notes"
     },
     "diagnostics":{
-        attr: function(){
-            if(typeof this.data.scenario.diagnostics !== 'undefined'){
+        // attr: function(){
+        //     if(typeof this.data.scenario.diagnostics !== 'undefined'){
                 
-                return this.data.scenario.diagnostics[parseInt(this.data.hashParams.id)] || {}
-            }else{
-                this.data.scenario.diagnostics = [];
-                return {}
-            }
-        },
-        update:function(scenario, updates){
-            if(typeof this.data.hashParams.id !== 'undefined'){
-                this.data.scenario.diagnostics[parseInt(this.data.hashParams.id)] = updates
-            }else{
-            this.data.scenario.diagnostics.push(updates);
+        //         return this.data.scenario.diagnostics[parseInt(this.data.hashParams.id)] || {}
+        //     }else{
+        //         this.data.scenario.diagnostics = [];
+        //         return {}
+        //     }
+        // },
+        // update:function(scenario, updates){
+        //     if(typeof this.data.hashParams.id !== 'undefined'){
+        //         this.data.scenario.diagnostics[parseInt(this.data.hashParams.id)] = updates
+        //     }else{
+        //     this.data.scenario.diagnostics.push(updates);
                 
-            }
-            return this.data.scenario;
+        //     }
+        //     return this.data.scenario;
     
-        },
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this diagnostic?")){
-                    delete this.data.scenario.diagnostics[id]
-                    this.data.scenario.diagnostics = _.compact(this.data.scenario.diagnostics);
-                    this.app.update(this.data.scenario)
-                    save.call(this,this.data.scenario)
-                }
-            }
-        },
+        // },
+        // delete:function(id, e){
+        //     if(this.data.admin){
+        //         if(confirm("Are you sure you want to delete this diagnostic?")){
+        //             delete this.data.scenario.diagnostics[id]
+        //             this.data.scenario.diagnostics = _.compact(this.data.scenario.diagnostics);
+        //             this.app.update(this.data.scenario)
+        //             save.call(this,this.data.scenario)
+        //         }
+        //     }
+        // },
         back:"#page=diagnostics"
     },
     "labs":{
@@ -383,7 +404,6 @@ return {
                 
             }
             return this.data.scenario;
-    
         },
         delete:function(id, e){
             if(this.data.admin){
@@ -463,7 +483,7 @@ return {
                 
             // }
             // return this.data.scenario;
-            // debugger;
+            debugger;
             var action = {
                 form:this.data.hashParams.form,
                 data:updates,
