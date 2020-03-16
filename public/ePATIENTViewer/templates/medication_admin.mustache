@@ -25,9 +25,9 @@
                 </tr>
             </thead>
             <tbody>
-                {{#prescription_orders.order}}
+                {{#prescription_orders}}
                 {{#if approved == "Verified"}}
-                {{#if type !== "1"}}
+                {{#if type !== 1}}
                 <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
                     <td>{{medication}}</td>
                     <td>{{route}}</td>
@@ -43,7 +43,7 @@
                 </tr>
                 {{/if}}
                 {{/if}}
-                {{/prescription_orders.order}}
+                {{/prescription_orders}}
             </tbody>
         </table>
     </div>
@@ -65,9 +65,9 @@
         </tr>
     </thead>
     <tbody>
-        {{#prescription_orders.order}}
+        {{#prescription_orders}}
         {{#if approved == "Verified"}}
-        {{#if type == "1"}}
+        {{#if type == 1}}
         <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
             <td>{{description}}</td>
             <td>{{solution_rate}}</td>
@@ -84,7 +84,7 @@
         </tr>
         {{/if}}
         {{/if}}
-        {{/prescription_orders.order}}
+        {{/prescription_orders}}
     </tbody>
 </table>
 </div></div>

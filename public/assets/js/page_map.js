@@ -102,16 +102,34 @@ return {
 
     "orders":{   
         start:function(id){
-            this.data.scenario.orders.order[id].status = "In Progress";
-            this.app.update(this.data.scenario)
-            save.call(this,this.data.scenario)
+            this.data.scenario.orders[id].status = "In Progress";
+
+            save.call(this,{
+                form:'orders.'+id,
+                data: this.data.scenario.orders[id],
+                event:'update'
+            },function(){
+                fetch_activity.call(this);
+                toastr.success('In Progress');
+                document.location.hash =  "page=orders"
+            });
 
         },       
         complete:function(id){
-            this.data.scenario.orders.order[id].status = "Completed"
-            this.data.scenario.orders.order[id].completed_by = this.data.user.first_name+" "+this.data.user.last_name;
-            this.app.update(this.data.scenario)
-            save.call(this,this.data.scenario)
+            this.data.scenario.orders[id].status = "Completed"
+            this.data.scenario.orders[id].completed_by = this.data.user.first_name+" "+this.data.user.last_name;
+            // this.app.update(this.data.scenario)
+            // save.call(this,this.data.scenario)
+            save.call(this,{
+                form:'orders.'+id,
+                data: this.data.scenario.orders[id],
+                event:'update'
+            },function(){
+                fetch_activity.call(this);
+                toastr.success('Completed');
+                document.location.hash = "page=orders";
+            });
+                
         },        
         back:"#page=orders"
         
@@ -138,13 +156,13 @@ return {
     
     "medication_admin":{
         "administer":this.administer,
-        "delete":function(id,e){
-            // debugger;
-            delete this.data.scenario.prescription_orders.order[parseInt(e.currentTarget.parentElement.parentElement.dataset.id)].medication_admin[id]
-            this.data.scenario.prescription_orders.order[parseInt(e.currentTarget.parentElement.parentElement.dataset.id)].medication_admin = _.compact(this.data.scenario.prescription_orders.order[parseInt(e.currentTarget.parentElement.parentElement.dataset.id)].medication_admin);
-            this.app.update(this.data.scenario)
-            save.call(this,this.data.scenario)
-        }
+        // "delete":function(id,e){
+        //     // debugger;
+        //     delete this.data.scenario.prescription_orders.order[parseInt(e.currentTarget.parentElement.parentElement.dataset.id)].medication_admin[id]
+        //     this.data.scenario.prescription_orders.order[parseInt(e.currentTarget.parentElement.parentElement.dataset.id)].medication_admin = _.compact(this.data.scenario.prescription_orders.order[parseInt(e.currentTarget.parentElement.parentElement.dataset.id)].medication_admin);
+        //     this.app.update(this.data.scenario)
+        //     save.call(this,this.data.scenario)
+        // }
     },
     
     "alerts":{
@@ -214,23 +232,42 @@ return {
         back:"#page=patient_info&form=patient_info"
     },
     "pharmacist_verification":{
-        attr:  function(){
-            // return this.data.scenario.patient_info || {}
-        },
+        // attr:  function(){
+        //     // return this.data.scenario.patient_info || {}
+        // },
         approve:function(id){
-            this.data.scenario.prescription_orders.order[parseInt(id)].approved = 'Verified'
-            this.app.update(this.data.scenario)
-            save.call(this,this.data.scenario)
+            debugger;
+            this.data.scenario.prescription_orders[parseInt(id)].approved = 'Verified'
+            // this.app.update(this.data.scenario)
+            // save.call(this,this.data.scenario)
             // this.app.post('scenario_log', {team_id:this.data.team_id, state:this.data.scenario}, function(){})
-            document.location.hash = this.data.page_map.pharmacist_verification.back;
+            // document.location.hash = this.data.page_map.pharmacist_verification.back;
+
+            save.call(this,{
+                form:'prescription_orders.'+id,
+                data: this.data.scenario.prescription_orders[parseInt(id)],
+                event:'update'
+            },function(){
+                fetch_activity.call(this);
+                toastr.success('Verified');
+                document.location.hash = "#page=pharmacist_verification";
+            });
 
         },
         reject:function(id){
-            this.data.scenario.prescription_orders.order[parseInt(id)].approved = 'Declined'
-            this.app.update(this.data.scenario)
-            save.call(this,this.data.scenario)
-            document.location.hash = this.data.page_map.pharmacist_verification.back;
-
+            this.data.scenario.prescription_orders[parseInt(id)].approved = 'Declined'
+            // this.app.update(this.data.scenario)
+            // save.call(this,this.data.scenario)
+            // document.location.hash = this.data.page_map.pharmacist_verification.back;
+            save.call(this,{
+                form:'prescription_orders.'+id,
+                data: this.data.scenario.prescription_orders[parseInt(id)],
+                event:'update'
+            },function(){
+                fetch_activity.call(this);
+                toastr.success('Declined');
+                document.location.hash = "#page=pharmacist_verification";
+            });
             // this.app.post('scenario_log', {team_id:this.data.team_id, state:this.data.scenario}, function(){})
         },
 

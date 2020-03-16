@@ -64,6 +64,27 @@ var QueryStringToHash = function(query) {
     }
       return response;
   }
+
+
+    // Berry.register({
+    //   type: 'barcode',
+    //   defaults: { elType: 'text' },
+    //   update: function(item, silent) {
+    //       if(typeof item === 'object') {
+    //           $.extend(this.item, item);
+    //       }
+    //       $.extend(this, this.item);
+    //       this.setValue(this.value);
+    //       this.render();
+    //       this.setup();
+    //       if(!silent) {
+    //           this.trigger('change');
+    //       }
+    //   },
+    //   satisfied: function(){
+    //       return (this.value.toLowerCase().trim() == this.item.help.toLowerCase().trim());
+    //   }
+  });
   
   
   
