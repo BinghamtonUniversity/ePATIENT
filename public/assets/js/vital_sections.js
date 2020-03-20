@@ -3,19 +3,21 @@ vital_sections = [
         key:'vital_signs',
         label:'Vital Signs',
         display:[
-            {label:'Date',name:'date'},
+            {label:'Date',width:"200px",name:'dates',calculation:function(e){
+                return gform.m('{{date}} {{time}}',e);
+            }},
             // {label:'Time',name:'time'},
             // {label:'Systolic',name:'systolic'},
             // {label:'Diastolic',name:'diastolic'},
-            {label:'BP',name:'blood_pressure',name: 'bps',calculation:function(e){
+            {label:'BP',name:'blood_pressure',width:"80px",name: 'bps',calculation:function(e){
                 if (isNaN(parseInt(e.blood_pressure.systolic)) || isNaN(parseInt(e.blood_pressure.diastolic))){
                     return '';
                 }
                 return parseInt(e.blood_pressure.systolic)+'/'+parseInt(e.blood_pressure.diastolic);
             }},
-            {label:'HR',path:'heart_rate.beats_per_minute'},
-            {label:'RR',path:"respiratory.breaths_per_minute"},
-            {label:'Temp',name:'temps', calculation: function(e){
+            {label:'HR',width:"80px",path:'heart_rate.beats_per_minute'},
+            {label:'RR',width:"80px",path:"respiratory.breaths_per_minute"},
+            {label:'Temp',width:"80px",name:'temps', calculation: function(e){
                 var temp = parseInt(e.temperature.temp);
                 if (temp == 0){
                     return '';
@@ -25,7 +27,7 @@ vital_sections = [
                 }
                 return temp;
             }},
-            {label:'SpO2',name:'spo2_p', calculation: function(e){
+            {label:'SpO2',width:"80px",name:'spo2_p', calculation: function(e){
                 var temp = parseInt(e.respiratory.spo2);
                 if (isNaN(temp)){
                     return '';
@@ -111,11 +113,12 @@ vital_sections = [
         display:[
             {label:'Date',name:'date'},
             {label:'Assessment',name:'summary'},
+            {label:'Diet',name:'diet'},
             {label:'Output',name:'output_summary'},
             {label:'Gastric tube Location',name:'gt_location'},
             {label:'Ostamy Location',name:'ostamy_location'},
-            {label:'Diet',name:'diet'},
-            {label:'Abdominal girth',name:'size'}
+            {label:'Abdominal girth',name:'size'},
+            {label:'Notes',name:'notes'}
         ]
     },    
     {

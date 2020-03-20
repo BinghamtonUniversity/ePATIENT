@@ -25,7 +25,7 @@
 		{"label":"Diet Tolerance",
 			"options": ["Good", "Fair", "Poor", "N/A"]
 		},
-		{"enabled":true,"label":"Output","fields":[
+		{"enabled":true,"label":"Output","type":"fieldset","fields":[
 			{"label":"Stool","type": "radio", 			
 				"multiple": true,
 				"options": ["Soft", "Hard", "Liquid", "Formed", "Frothy", "Clots", "Loose", "Mucous", "Large", "Small", "Pasty", "Seedy", "Tarry", "Watery", "Brown", "Black", "Blood, Frank", "Blood, Tinged", "Clay", "Green", "Maroon", "Yellow", "Tan"]
@@ -37,7 +37,7 @@
 		]},
 		{"label":"Output Summary","type":"textarea"},
 
-		{"label":"Gastric Tubes","enabled":true,"fields": [
+		{"label":"Gastric Tubes","enabled":true,"type":"fieldset","fields": [
 			{"label":"Location","name":"gt_location", "type": "radio",
 				"options": ["Nasogastric, Left Nare", "Nasogastric, Right Nare", "Orogastric", "Gastric"]
 			},
@@ -47,7 +47,7 @@
 				"options": ["Nare", "Lip", "Teeth", "Skin Insertion"]
 			}
 		]},
-		{"label":"Ostomy","enabled":true,"fields": [
+		{"label":"Ostomy","enabled":true,"type":"fieldset","fields": [
 			{"label":"Location","name":"ostomy_location", "type": "radio",
 				"options": ["LUQ", "RUQ", "LLQ", "RLQ"]
 			},
@@ -58,14 +58,14 @@
 			},
 			{"label":"Site Description","type":"textarea"}
 		]},
-		{"label":"Diet","enabled":true,"fields":[
+		{"label":"Diet","enabled":true,"type":"fieldset","fields":[
 			{"label":"Diet Ordered", "type": "radio", 			
 				"multiple": true,
 				"options": ["Regular", "Clear Liquids", "NPO", "Low Fat", "Low Sodium", "1800 cal ADA", "Tube Feeds", "Soft Mechanical", "TPN", "Pureed", "Cardiac"]
 			},
 			{"label":"Amount of Meal Consumed", "type": "scale", "min": 1, "max": 5, "high": "100%", "low": "0%"}
 		]},
-		{"label":"Abdominal Girth","enabled":true,"fields":[
+		{"label":"Abdominal Girth","enabled":true,"type":"fieldset","fields":[
 			{"label":"Size","help": "cm"},
 			{"label":"Measured At"}
 		]}

@@ -178,9 +178,11 @@ toastr.options = {
             }.bind(this)).on('save',function(e){
                 // var tempForm = Berries[this.data.hashParams.form].toJSON();
                 var tempForm = e.form.get();
-                if(typeof tempForm.date !== 'undefined'){
+                // if(typeof tempForm.date !== 'undefined'){
                     tempForm.date = tempForm.date || moment().format("MM/DD/YYYY");
-                }
+                // }
+                tempForm.time = tempForm.time || moment().format("hh:mm:ss");
+
                 var state = ((this.data.page_map[temp.name] || this.data.page_map.default).update || this.data.page_map.default.update).call(this, this.data.scenario, tempForm);
                 
                 // var state = this.data.scenarioh

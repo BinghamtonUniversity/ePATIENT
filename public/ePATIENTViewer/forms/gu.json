@@ -1,7 +1,7 @@
 {
 	"legend": "Genitourinary","enabled":true,
 	"fields": [
-		{"label":"General", "enabled":true,
+		{"label":"General","type":"fieldset", "enabled":true,
 			"fields": [
 				{
 					"label":"Urinary Symptoms",
@@ -82,7 +82,7 @@
 			    },
 				{
 					"label":"Catheter Details",
-				    "legend":false,
+				    "legend":false,"type":"fieldset",
 					"fields": [
 						{
 							"label":"Catheter Size",
@@ -96,7 +96,7 @@
 					],"show":[{"type": "matches","name":"catheter_enabled","value":true}]
 				},
 				{
-					"label":"Genitalia Exam",
+					"label":"Genitalia Exam","type":"fieldset",
 					"fields": [
 						{
 							"name":"genitalia_exam",
@@ -107,7 +107,7 @@
 				},
 				{
 					"label":"SANE (Sexual Assault Nurse Examiners) Exam",
-				    "name": "sane_exam",
+				    "name": "sane_exam","type":"fieldset",
 					"fields": [
 						{
 							"name":"sane_exam",

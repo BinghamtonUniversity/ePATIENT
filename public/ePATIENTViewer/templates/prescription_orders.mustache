@@ -24,7 +24,7 @@
             <td>{{medication}}{{description}}</td>
             <td>{{ customRender(date) }}</td>
             <td>{{author}}</td>
-            <td>{{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).last_name}}</td>
+            <td>{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}</td>
             <td>
                 <a href="#page=form&form=prescription_orders&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
                 {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}

@@ -52,7 +52,6 @@ return {
                         // }else{
                         //     this.data.scenario.lab_results.push({category:item.name,date:date,result:temp})
                         // }
-
                         updates = {category:item.name,date:date,result:temp};
                         // var action = {
                         //     form:this.data.hashParams.form,

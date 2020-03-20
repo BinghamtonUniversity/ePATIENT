@@ -1,6 +1,6 @@
 {"legend": "Intake and Output","type":"fieldset","enabled":true, "fields":[
 		{"name":"shift", "label":"Shift", "type": "custom_radio", "options": ["Day", "Evening", "Night"]},
-		{"label":"Date"},
+		{"label":"Date","type":"date"},
 		{"label":"Intake","type":"fieldset","fields": [
 			{"label":"Oral","help": "in mLs"},
 			{"label":"IV","help": "in mLs"},

@@ -8,11 +8,11 @@
 		},		
 		{"label":"Consult", "type": "radio", 			
 			"multiple": true,
-			"options": ["Chaplain", "Social Work", "Psychiatry"]
+			"options": ["N/A", "Chaplain", "Social Work", "Psychiatry"]
 		},	
 		{"label":"At Risk for", "type": "radio", 			
 			"multiple": true,
-			"options": ["Homocidal", "Suicidal"]
+			"options": ["N/A", "Homocidal", "Suicidal"]
 		}
 	]},
 	{"label":"Abuse", "enabled":true,"type":"fieldset","fields":[
