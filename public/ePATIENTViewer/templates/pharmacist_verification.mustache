@@ -29,7 +29,8 @@
         </tr>
     </thead>
     <tbody>
-        {{#prescription_order}}
+
+        {{#prescription_orders}}
         {{!#if (typeof approved == "undefined")}}
         <tr class="filterable" data-href="#page=pharmacist_verification&form=prescription_orders&id={{ @index }}">
             <td>{{#if type == "0"}}Prescription{{else}}Infusion Meds{{/if}}</td>
@@ -49,7 +50,8 @@
             </td>
         </tr>
         {{!/if}}
-        {{/prescription_order}}
+
+        {{/prescription_orders}}
     </tbody>
 </table>
 {{else}}

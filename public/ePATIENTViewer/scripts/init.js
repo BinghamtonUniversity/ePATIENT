@@ -58,9 +58,13 @@ this.data.apps_pages = [
         ]
     }
 ];
-
+gform.types['barcode'] = _.extend({}, gform.types['input'],{
+    satisfied: function(value){
+          return (this.value.toLowerCase().trim() == this.item.help.toLowerCase().trim());
+      }
+})
 this.administer = function(id){
-    var order = this.data.scenario.prescription_orders.order[id];
+    var order = this.data.scenario.prescription_orders[id];
     var fields = [
         //  {label: 'Prescription', type: 'barcode', name:'prescription', required: true, help:order.medication },
 
@@ -76,9 +80,9 @@ this.administer = function(id){
         fields.push({label:'Time',type:"time",value:moment().format("hh:mm A")})
         fields.push({label:'Administered By',value:this.data.user.first_name+" "+this.data.user.last_name})
     }
-        new gfrom({name:'validate',legend: 'Confirmation', fields: fields}).on('save', function(e) {
-        if( Berries.validate.validate() ) {
-            var order = this.data.scenario.prescription_orders.order[parseInt(Berries.validate.toJSON().id)]
+        new gform({name:'validate',legend: 'Confirmation', fields: fields}).on('save', function(e) {
+        if( e.form.validate() ) {
+            var order = this.data.scenario.prescription_orders[parseInt(e.form.get('id'))]
             order.medication_admin = order.medication_admin || [];
             if(!this.data.admin){
                 order.medication_admin.push({
@@ -87,29 +91,45 @@ this.administer = function(id){
                     administered_by:this.data.user.first_name+" "+this.data.user.last_name
                 })
             }else{
-                    order.medication_admin.push(_.pick(Berries.validate.toJSON(),'date','time','administered_by'))
+                    order.medication_admin.push(_.pick(e.form.get(),'date','time','administered_by'))
             }
                 order.medication_admin = _.sortBy(order.medication_admin, 'date')
-                this.app.update(this.data.scenario)
-                save.call(this,this.data.scenario)
-            Berries.validate.trigger('close')
+                save.call(this,{
+                    form:'prescription_orders.'+parseInt(e.form.get('id')),
+                    data: order,
+                    event:'update'
+                },function(){
+                    fetch_activity.call(this);
+                    toastr.success('Administered');
+                    document.location.hash = "page=prescription_orders";
+                });
+
+                // this.app.update(this.data.scenario)
+                // save.call(this,this.data.scenario)
+            e.form.trigger('close')
             
         }
     }.bind(this))
-    .on('change:patient', function(item){
-            this.fields.patient.setValue(item.value)
+    .on('change:patient', function(e){
+        // ;
+        // debugger;
+//        gform.validateItem(true,e.field)
+
+            $(e.field.el).toggleClass('has-success', e.form.validate());
+
+            // this.fields.patient.set(item.value)
             
-            var field = this.findByID(item.id);
-            this.performValidate(field, item.value)
-            field.self.toggleClass('has-success', field.valid);
+            // var field = this.findByID(item.id);
+            // this.performValidate(field, item.value)
+            // field.self.toggleClass('has-success', field.valid);
     })
     .on('change:prescription', function(item){
-            this.fields.prescription.setValue(item.value)
+            this.fields.prescription.set(item.value)
             
             var field = this.findByID(item.id);
             this.performValidate(field, item.value)
             field.self.toggleClass('has-success', field.valid);
-    })
+    }).modal()
 
 
 

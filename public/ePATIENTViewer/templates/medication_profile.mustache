@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        {{#prescription_orders.order}}
+        {{#prescription_orders}}
         {{#if approved == "Verified"}}
         <tr class="filterable" data-href="#page=medication_profile&form=prescription_orders&id={{ @index }}">
             <td>{{#if type == "1"}}Prescription{{else}}Infusion Meds{{/if}}</td>
@@ -25,7 +25,7 @@
             <td>{{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(Berry.collection.get('providers'),{id:parseInt(provider)}).last_name}}</td>
         </tr>
         {{/if}}
-        {{/prescription_orders.order}}
+        {{/prescription_orders}}
     </tbody>
 </table>
 {{else}}
