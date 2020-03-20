@@ -222,11 +222,23 @@ return {
             // return this.data.scenario;
             // var temp = 'patient_info';
             // _.reduce(temp.split('.'),function(i,map){return i[map]},this.data.scenario) 
-            this.data.scenario.patient_info = updates;
+            // this.data.scenario.patient_info = updates;
 
             // this.data.scenario.patient_info = updates;
-            return this.data.scenario;
+            // return this.data.scenario;
     
+            var action = {
+                form:'patient_info',
+                data:updates,
+                event:'update'
+            }
+            // if(typeof this.data.hashParams.id !== 'undefined'){
+            //     action.event = "update";
+            //     action.form +='.'+this.data.hashParams.id;           
+            // }
+
+            return action;
+
         },
         back:"#page=patient_info&form=patient_info"
     },

@@ -27,12 +27,11 @@ toastr.options = {
     if(this.data.admin && this.data.scenario_id){
         updateActivity.call(this,state)
 
-        this.app.put('scenarios', {name:state.name,id:this.data.scenario_id, scenario:state}, callback||function(){
+        this.app.put('scenarios', {name:state.name,id:this.data.scenario_id, scenario:this.data.scenario}, callback||function(){
             toastr.warning('Saved Configuration Successfully');
         });
     }else{
         if(this.data.team_id){
-            debugger;
             this.app.post('activity', _.extend({team_id:this.data.team_id},state), callback||function(){
 
                 toastr.success('Saved Team Activity Successfully');
@@ -261,37 +260,39 @@ updateScenario = function(data){
 
 this.data.last_activity_id = null;
 fetch_activity = function() {
-    this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
+    if(!(this.data.admin && this.data.scenario_id)){
+        this.app.get('team_activity',{id:this.data.team_id,last_activity_id:this.data.last_activity_id},function(activity) {
 
-        if(this.data.last_activity_id !== activity.last_activity_id){
-            this.data.last_activity_id = activity.last_activity_id;
-            _.each(activity.activity,updateActivity.bind(this));
-            // this.app.update();
-            chat_add_messages.call(this,activity.messages);
-            notes_add_notes.call(this,activity.notes);
-            // debugger;
-            // debugger;
-            // updateScenario.call(this.app,this.app.data);
-            // this.data.scenario.lab_results = this.data.scenario.lab_results || [];
-                
-            this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
-                item.id = i;
-                return item;
-            });
-     
-            // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+            if(this.data.last_activity_id !== activity.last_activity_id){
+                this.data.last_activity_id = activity.last_activity_id;
+                _.each(activity.activity,updateActivity.bind(this));
+                // this.app.update();
+                chat_add_messages.call(this,activity.messages);
+                notes_add_notes.call(this,activity.notes);
+                // debugger;
+                // debugger;
+                // updateScenario.call(this.app,this.app.data);
+                // this.data.scenario.lab_results = this.data.scenario.lab_results || [];
+                    
+                this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
+                    item.id = i;
+                    return item;
+                });
+        
+                // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
 
-            this.data.lab_types = _.map(lab_types,function(item){
-                return {
-                    name:item,
-                    tests:_.where(this.data.labs,{category:item}),
-                    results:_.where(this.data.scenario.lab_results,{category:item})
-            }}.bind(this));
+                this.data.lab_types = _.map(lab_types,function(item){
+                    return {
+                        name:item,
+                        tests:_.where(this.data.labs,{category:item}),
+                        results:_.where(this.data.scenario.lab_results,{category:item})
+                }}.bind(this));
 
 
-            this.app.update();
-        }
-    });
+                this.app.update();
+            }
+        });
+    }
 }
     
 this.callback = function(){
