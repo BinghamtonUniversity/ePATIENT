@@ -490,7 +490,18 @@ return [
         },        
         filter:true,add:true,
         actions:[
-            {name:"administer",label:"Administer",icon:"syringe"}
+            {name:"administer",label:"Administer",icon:"syringe",condition: function(hashParams,scenario,admin){
+                if(typeof scenario[hashParams.form] == "undefined"){return false}
+                return (scenario.prescription_orders[hashParams.id].approved== "Verified");
+            }}
+            ,
+            {name:"edit",label:"Edit",icon:"edit",type:"info",condition: function(hashParams,scenario,admin){
+                return (hashParams.id && hashParams.form && admin);
+            }},
+    
+            {name:"delete",label:"Delete",icon:"times",type:"danger",condition: function(hashParams,scenario,admin){
+                return (hashParams.id && hashParams.form && admin);
+            }}
         ],
         label:'<i class="fa fa-prescription text-muted"></i> Prescription Orders',
         back:"#page=orders"

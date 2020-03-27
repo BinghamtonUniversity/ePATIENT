@@ -7,7 +7,7 @@
         {"label":"Provider","type":"select","options":"providers","label_key":"last_name","value_key":"id"},
         
         
-        {"label":"Medication","show":[{"type": "matches","name":"type","value":"0"}]},
+        {"label":"Drug","show":[{"type": "matches","name":"type","value":"0"}]},
         {"label":"Dose"},
         {"label":"Route","options":"route","show":[{"type": "matches","name":"type","value":"0"}]},
         {"label":"Directions","show":[{"type": "matches","name":"type","value":"0"}]},
