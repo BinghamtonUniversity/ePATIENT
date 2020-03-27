@@ -281,6 +281,15 @@ return [
     
     {
         slug:"lab_results",
+        actions:[
+
+            {name:"delete",label:"Delete",icon:"times",type:"danger",condition:function(hashParams,scenario,admin){
+                return admin && hashParams.id;
+            }},
+            {name:"save",label:"Save",icon:"plus",type:"success",condition:function(hashParams,scenario){
+                return true;
+            }}
+        ],
         onload: function(){
             var temp = {};
             if(typeof this.data.hashParams.id !== 'undefined' && typeof this.data.scenario.lab_results[parseInt(this.data.hashParams.id)] !== 'undefined'){
@@ -400,7 +409,7 @@ return [
         },
         label:'<i class="fa fa-file-prescription text-muted"></i> Medication Profile',
         actions:[
-            {name:"discontinue",label:"Discontinue",icon:"times",type:"danger",condition:function(hashParams,scenario){
+            {name:"discontinue",width:"80px",label:"Discontinue",icon:"times",type:"danger",condition:function(hashParams,scenario){
                 return (scenario.prescription_orders[hashParams.id].status !== "Discontinued");
             }}
         ],filter:true,
@@ -418,7 +427,7 @@ return [
             },function(){
                 fetch_activity.call(this);
                 toastr.success('In Progress');
-                // setHash('#page=orders')
+                setHash('#page=orders')
             });
 
         },       
@@ -434,7 +443,7 @@ return [
             },function(){
                 fetch_activity.call(this);
                 toastr.success('Completed');
-                // setHash('#page=orders')
+                setHash('#page=orders')
             });
                 
         },
@@ -455,7 +464,7 @@ return [
     
             {name:"delete",label:"Delete",icon:"times",type:"danger",condition: function(hashParams,scenario,admin){
                 return (hashParams.id && hashParams.form && admin);
-            }},
+            }}
 
         ],
         back:"#page=orders"
@@ -572,6 +581,12 @@ return [
     {
         slug:"overview",
         label:'<i class="fa fa-tachometer-alt text-muted"></i> Overview',
+        actions:[
+            {name:"report_to_learner",width:"120px",label:"Report To Learner",icon:"info",type:"info",condition:function(hashParams,scenario,admin){
+                return true;
+            }}
+        ],
+
         filter:true},
     {
         slug:"pharmacist_verification",
@@ -601,12 +616,23 @@ return [
             });
         },
 
+        edit:function(){
+            setHash('#page=form&form=prescription_orders&id='+this.data.hashParams.id)
+        },
         actions:[
+
+            {name:"edit",label:"Edit",icon:"edit",type:"info",condition: function(hashParams,scenario,admin){
+                return (hashParams.id && hashParams.form && admin);
+            }},
+    
+            {name:"delete",label:"Delete",icon:"times",type:"danger",condition: function(hashParams,scenario,admin){
+                return (hashParams.id && hashParams.form && admin);
+            }},
             {name:"approve",label:"Verify",icon:"check",condition: function(hashParams,scenario,admin){
                 if(typeof scenario[hashParams.form] == "undefined"){return false}
                 return hashParams.id && hashParams.form;
             }},
-            {name:"reject",label:"Decline",icon:"times",type:"danger",condition: function(hashParams,scenario,admin){
+            {name:"reject",label:"Decline",icon:"times",type:"warning",condition: function(hashParams,scenario,admin){
                 if(typeof scenario[hashParams.form] == "undefined"){return false}
                 return hashParams.id && hashParams.form;
             }}
@@ -624,7 +650,6 @@ return [
         delete:function(id, e){
             if(this.data.admin){
                 if(confirm("Are you sure you want to delete this item?")){
-debugger;
                     var action = {
                         form:'prescription_orders.'+e.currentTarget.parentElement.parentElement.dataset.id+'.medication_admin.'+e.currentTarget.dataset.id 
                         ,
@@ -693,6 +718,10 @@ debugger;
                     })
                 }
             }
+        },
+        "report_to_learner":function(){
+            modal({title:"Report to learner",content:this.data.summary_description})
+
         },
         "administer": function(id){
             var order = this.data.scenario.prescription_orders[id];

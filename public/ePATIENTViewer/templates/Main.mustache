@@ -23,23 +23,14 @@
         <div style="margin:20px">
         {{#if (team_id || scenario_id)}}
 
-            {{#if (typeof hashParams.form == 'undefined')}}
-            {{#page_map[hashParams.form||hashParams.page]}}
-                {{#add}}
-                    <a href="{{addLink}}{{^addLink}}#page=form&form={{hashParams.form||hashParams.page}}{{/addLink}}" class="btn btn-success pull-right" style="margin-left:20px"><i class="fa fa-plus"></i> Add</a>
-                {{/add}}
-                {{#filter}}
-                    <span style="width:200px;float:right;">{{>filter}}</span>
-                {{/filter}}
-            {{/page_map[hashParams.form||hashParams.page]}}
-            {{/if}}
+
             <h3><a href="{{{page_map[hashParams.form||hashParams.page].back}}}">{{{page_map[hashParams.form||hashParams.page].label}}}</a></h3>
             <hr style="clear:both">
 
             <div style="position:absolute;top: 110px;right: 20px;z-index:1">
                 <div class="btn-group pull-right btn-group-lg" role="group">
                     {{#page_map[hashParams.page].actions}}
-                    {{#if(typeof condition == 'undefined' || condition(hashParams,scenario,admin))}}<span data-action="{{name}}" {{#href}}data-href="{{href}}"{{/href}} data-id="{{ hashParams.id}}" class="btn btn-{{type}}{{^type}}success{{/type}} btn-lg" title="{{label}}"><i class="fa fa-{{icon}}"></i><div style="font-size:12px">{{label}}</div></span>{{/if}}
+                    {{#if(typeof condition == 'undefined' || condition(hashParams,scenario,admin))}}<span data-action="{{name}}" style="width:{{width}}" {{#href}}data-href="{{href}}"{{/href}} data-id="{{ hashParams.id}}" class="btn btn-{{type}}{{^type}}success{{/type}} btn-lg" title="{{label}}"><i class="fa fa-{{icon}}"></i><div style="font-size:12px">{{label}}</div></span>{{/if}}
                     {{/}}
                 </div>
 
@@ -48,6 +39,18 @@
                     <div class="pull-right" style="margin:10px"><dl class="dl-horizontal"><dt>Created By</dt><dd>{{user.first_name}} {{user.last_name}}</dd><dt>On</dt><dd>{{date}} @ {{time}}</dd></dl></div>
                     {{/scenario[hashParams.form][hashParams.id]}}
                 {{/}}
+
+            {{#if (typeof hashParams.form == 'undefined')}}
+            {{#page_map[hashParams.form||hashParams.page]}}
+                {{#add}}
+                    <a href="{{addLink}}{{^addLink}}#page=form&form={{hashParams.form||hashParams.page}}{{/addLink}}" class="btn btn-success pull-right" style="margin-left:0px"><i class="fa fa-plus"></i> Add</a>
+                {{/add}}
+                {{#filter}}
+                    <span style="width:200px;float:right;margin-right:20px">{{>filter}}</span>
+                {{/filter}}
+            {{/page_map[hashParams.form||hashParams.page]}}
+            {{/if}}
+
             </div>
 
             {{#if (hashParams.id)}}

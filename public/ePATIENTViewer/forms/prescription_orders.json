@@ -33,7 +33,7 @@
 		{"label":"Start on","name":"start_time", "type":"date"},
 		{"label":"End on","name":"end_time", "type":"date"},
         {"label":"Refills"},
-        {"label":"Approved","name":"approved","type":"checkbox","truestate":"Verified","show":[{"type": "matches","name":"admin","value":"true"}]}
+        {"label":"Approved","name":"approved","type":"checkbox","show":[{"type": "matches","name":"admin","value":"true"}],"options":[{"label":"Declined","value":"Declined"},{"label":"Verified","value":"Verified"}]}
     
 	]
 }
