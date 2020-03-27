@@ -696,7 +696,6 @@ return [
             };
         },
         update:function(scenario, updates){
-            // debugger;
             var action = {
                 form:(this.data.hashParams.form|| this.data.hashParams.page),
                 data:updates,
@@ -710,7 +709,6 @@ return [
             return action;
         },
         delete:function(id, e){
-            debugger;
             if(this.data.admin){
                 if(confirm("Are you sure you want to delete this item?")){
 

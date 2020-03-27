@@ -366,6 +366,12 @@ this.callback = function(){
                     item.id = i;
                     return item;
                 })
+                var record = _.selectPath(this.data.scenario,'patient_info.medical_record_number');
+                if(_.isNull(record)){
+                    this.data.scenario.patient_info = this.data.scenario.patient_info ||{};
+                    var id = Math.random().toString().split('.')[1].padStart(8,'0');
+                    this.data.scenario.patient_info.medical_record_number = "EP"+id.substr(id.length - 8)
+                }
                 // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
                 this.data.lab_types = _.map(lab_types,function(item){
                     return {
