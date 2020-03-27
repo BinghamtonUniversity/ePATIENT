@@ -1,4 +1,4 @@
-{"legend": "IV","type":"fieldset", "fields":[
+{"fields":[
 
 	{"label":"General","type":"fieldset", "fields":[
 		{"label":"IV Access?",  "type": "custom_radio",

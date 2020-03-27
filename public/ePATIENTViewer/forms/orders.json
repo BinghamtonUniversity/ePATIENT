@@ -7,8 +7,8 @@
       "name": "category",
       "options": "category"
     }, 
-    {"label":"Date/time","type":"date"},
-    {"label":"Author"},
+    {"label":"Date/time","type":"datetime","name":"datetime"},
+    {"label":"Provider"},
     {"label":"Order Item"},
     {"label":"Order Details"},
     {"label":"Frequency","type": "select","options":"frequency"},

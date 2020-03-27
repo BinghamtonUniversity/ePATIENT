@@ -97,11 +97,13 @@ $('body').on('keyup','[name=filter]', function(event){
 templates.listing = Hogan.compile('<ol class="list-group">{{#widgets}}<li data-guid="{{guid}}" class="list-group-item"><div class="handle"></div>{{widgetType}} - {{title}}</li>{{/widgets}}</ol>')
 
 updateActivity = function(item){
-  // debugger;
   var object = this.data.scenario;
   var path = item.form;
   var action =item.event;
-  var value = item.data
+  item.data = item.data||{};
+  var value = item.data;
+  item.data.user = value.user|| item.user
+
   if(typeof page_map[path.split('.')[0]]!== 'undefined'  && typeof page_map[path.split('.')[0]].root !== 'undefined'){
     var temp = path.split('.')
     temp[0] = page_map[path.split('.')[0]].root;
@@ -139,8 +141,13 @@ updateActivity = function(item){
           index = map;
           break;
         case "delete":
-          // delete i[map];
-          i.splice(parseInt(map),1)
+          if(_.isArray(i)){
+            i.splice(parseInt(map),1);
+          }else{
+          delete i[map];
+          i = _.compact(i);
+
+          }
 
           // i = _.compact(i);
           // return i;
@@ -153,7 +160,7 @@ updateActivity = function(item){
   
   if( typeof gform.instances[item.form.split('.')[0]] !== 'undefined' && 
       (action == 'create' || action == 'update') && 
-      index+'' == this.data.hashParams.id
+      (index+'' == this.data.hashParams.id || typeof this.data.hashParams.id == "undefined")
   ){
     gform.instances[item.form.split('.')[0]].set(item.data)
   }

@@ -1,28 +1,32 @@
 {{#scenario}}
+<!--Orders -->
+<div class="panel panel-default">
+    <div class="panel-heading" style="overflow:hidden">
+    {{#if(hashParams.page == "orders")}}
+        <a href="#page=form&form=orders" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
+        <span style="width:200px;float:right;margin-right:20px">{{>filter}}</span>
+    {{/if}}
+    <h3 class="panel-title"><i class="fa fa-prescription-list"></i> Orders</h3>
+    </div>
+    <div class="panel-body">
+  
 
-{{#if !(hashParams.id )}}
-
-<h3><a href="#page=orders"><i class="fa fa-th-list text-muted"></i> Orders</a></h3>
-<hr>
-<a href="#page=form&form=orders" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
-
-<span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
+{{#scenario}}
 <table class="table table-bordered table-striped table-hover table-fixed sortable">
     <thead>
         <tr>
-            <th>Category</th>
+            <th>Date/Time</th>
             <th>Order Item</th>
             <th>Frequency</th>
             <th>Start on date/time</th>
             <th>End on date/time</th>
             <th>Status</th>
-            <th style="width: 147px;"></th>
         </tr>
     </thead>
     <tbody>
         {{#orders}}
         <tr class="filterable" data-href="#page=orders&form=orders&id={{ @index }}">
-            <td>{{category}}</td>
+            <td>{{datetime}}</td>
             <td>{{order_item}}</td>
             <td>{{frequency}}</td>
             <td>{{start_time}}</td>
@@ -33,36 +37,33 @@
                 by {{completed_by}}                
                 {{/if}}
             </td>
-            <td>
-                
-                <a href="#page=form&form=orders&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                
-                {{#if(status == "New")}}
-                <div data-action="start" data-id="{{ @index }}" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Start</div>
-                {{/if}}
-                {{#if(status == "In Progress")}}
-                <div data-action="complete" data-id="{{ @index }}" class="btn btn-warning btn-xs"><i class="fa fa-times"></i> Complete</div>
-                {{/if}}
-                {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
-            </td>
+
         </tr>
         {{/orders}}
     </tbody>
 </table>
-{{else}}
-    <div class="btn-group pull-right btn-group-lg" style="margin-top:-10px" role="group">
-
-        {{#if hashParams.id>0}}<a href="#page=orders&form=orders&id={{ hashParams.id -1 }}" class="btn btn-default btn-lg" title="Previous"><i class="fa fa-chevron-left"></i><div style="font-size:12px">Previous</div></a>{{/if}}
-        <a href="#page=form&form=orders&id={{ hashParams.id}}" class="btn btn-info btn-lg" title="Edit"><i class="fa fa-edit"></i><div style="font-size:12px">Edit</div></a>
-        {{#if hashParams.id<(orders.length-1)}}<a href="#page=orders&form=orders&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
-
-    </div>
-                
-<h3><a href="#page=orders"><i class="fa fa-th-list text-muted"></i> Order</a></h3>
-<hr>
-<div class="flow-container">
-    <div id="form" class="view well"> </div>
-
-</div>
-{{/if}}
 {{/scenario}}
+    </div>
+</div>
+<!--Prescription -->
+<div class="panel panel-default">
+    <div class="panel-heading" style="overflow:hidden">
+    {{#if(hashParams.page == "orders")}}
+        <a href="#page=form&form=prescription_orders" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
+        <span style="width:200px;float:right;margin-right:20px">{{>filter}}</span>
+    {{/if}}
+    <h3 class="panel-title"><i class="fa fa-prescription-bottle"></i> Prescription Orders</h3>
+  </div>
+  <div class="panel-body">
+    {{>prescription_orders}}
+</div></div>
+{{/scenario}}
+
+
+
+
+
+
+
+
+

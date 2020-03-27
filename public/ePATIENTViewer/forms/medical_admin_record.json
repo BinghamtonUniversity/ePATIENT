@@ -1,6 +1,4 @@
-{
-	"legend": "Medication",
-	"fields": [
+{	"fields": [
 		{
 			"name":"n0",
 			"parsable": false,

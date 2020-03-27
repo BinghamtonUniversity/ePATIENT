@@ -67,6 +67,12 @@ adminFormFields = {
         "name": "synopsis_description",
         "type": "textarea"
       },       
+      {
+        "label":"Roles",
+        "name":"roles",
+        "choices":"/api/roles",
+        "type":"check_collection"
+      },
       {"name": "id","type": "hidden"} 
   
     ],

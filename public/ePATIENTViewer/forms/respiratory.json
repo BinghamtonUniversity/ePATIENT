@@ -28,34 +28,29 @@
 				}
 			]
 		},
+
 		{
 			"label":"Breath Sounds","type":"fieldset",
 			"fields": [
 			    {
 					"label":"Left Lung (Anterior)",
 			        "name":"lla_enabled",
-			        "type":"checkbox"
+			        "type":"switch",
+					"help":" <span class='text-muted'>(If yes please provide more details)</span>",
+					"options":[{"label":"None","value":false},{"label":"Yes","value":true}]
 			    },
 				{
 					"name":"lla",
-				    "label":false,
+					"label":false,
+					"offset":4,
+					"columns":8,
 					"type": "grid",
 					"fields": [
-						{
-							"name": "All"
-						},
-						{
-							"name": "Upper Lobe"
-						},
-						{
-							"name": "Mid Lobe"
-						},
-						{
-							"name": "Lower Lobe"
-						},
-						{
-							"name": "Axillary"
-						}
+						{"name": "All"},
+						{"name": "Upper Lobe"},
+						{"name": "Mid Lobe"},
+						{"name": "Lower Lobe"},
+						{"name": "Axillary"}
 					],
 					"options": [
 						"Clear",
@@ -68,28 +63,22 @@
 				{
 					"label":"Right Lung (Anterior)",
 			        "name":"rla_enabled",
-			        "type":"checkbox"
+					"type":"switch",
+					"help":" <span class='text-muted'>(If yes please provide more details)</span>",
+					"options":[{"label":"None","value":false},{"label":"Yes","value":true}]
 			    },
 				{
 					"name":"rla",
 				    "label":false,
 					"type": "grid",
+					"offset":4,
+					"columns":8,
 					"fields": [
-						{
-							"name": "All"
-						},
-						{
-							"name": "Upper Lobe"
-						},
-						{
-							"name": "Mid Lobe"
-						},
-						{
-							"name": "Lower Lobe"
-						},
-						{
-							"name": "Axillary"
-						}
+						{"name": "All"},
+						{"name": "Upper Lobe"},
+						{"name": "Mid Lobe"},
+						{"name": "Lower Lobe"},
+						{"name": "Axillary"}
 					],
 					"options": [
 						"Clear",
@@ -106,28 +95,22 @@
 				{
 					"label":"Left Lung (Posterior)",
 			        "name":"llp_enabled",
-			        "type":"checkbox"
+			        "type":"switch",
+					"help":" <span class='text-muted'>(If yes please provide more details)</span>",
+					"options":[{"label":"None","value":false},{"label":"Yes","value":true}]
 			    },
 				{
 					"name":"llp",
 				    "label":false,
 					"type": "grid",
+					"offset":4,
+					"columns":8,
 					"fields": [
-						{
-							"name": "All"
-						},
-						{
-							"name": "Upper Lobe"
-						},
-						{
-							"name": "Mid Lobe"
-						},
-						{
-							"name": "Lower Lobe"
-						},
-						{
-							"name": "Axillary"
-						}
+						{"name": "All"},
+						{"name": "Upper Lobe"},
+						{"name": "Mid Lobe"},
+						{"name": "Lower Lobe"},
+						{"name": "Axillary"}
 					],
 					"options": [
 						"Clear",
@@ -140,28 +123,22 @@
 				{
 					"label":"Right Lung (Posterior)",
 			        "name":"rlp_enabled",
-			        "type":"checkbox"
+			        "type":"switch",
+					"help":" <span class='text-muted'>(If yes please provide more details)</span>",
+					"options":[{"label":"None","value":false},{"label":"Yes","value":true}]
 			    },
 				{
 					"name":"rlp",
 				    "label":false,
 					"type": "grid",
+					"offset":4,
+					"columns":8,
 					"fields": [
-						{
-							"name": "All"
-						},
-						{
-							"name": "Upper Lobe"
-						},
-						{
-							"name": "Mid Lobe"
-						},
-						{
-							"name": "Lower Lobe"
-						},
-						{
-							"name": "Axillary"
-						}
+						{"name": "All"},
+						{"name": "Upper Lobe"},
+						{"name": "Mid Lobe"},
+						{"name": "Lower Lobe"},
+						{"name": "Axillary"}
 					],
 					"options": [
 						"Clear",
@@ -171,10 +148,6 @@
 						"Absent"
 					],"show":[{"type": "matches","name":"rlp_enabled","value":true}]
 				},
-				
-				
-				
-				
 				{
 					"label":"Wheeze Quality",
 					"type": "radio", 			"multiple": true,
@@ -208,7 +181,7 @@
 			"fields": [
 				{
 					"label":"Color",
-					"type": "radio", 			"multiple": true,
+					"type": "radio", 			"multiple": true,"size":3,
 					"options": [
 						"None",
 						"Clear",
@@ -248,7 +221,7 @@
 			"fields": [
 				{
 					"label": "Respirations",
-					"type": "radio", 			"multiple": true,
+					"type": "radio", 			"multiple": true,"size":3,
 					"options": [
 						"Unlabored",
 						"Labored",
@@ -264,7 +237,7 @@
 				},
 				{
 					"label":"Retractions",
-					"type": "radio", 			"multiple": true,
+					"type": "radio", 			"multiple": true,"size":2,
 					"options": [
 						"Supracostal",
 						"Intercostal",
@@ -274,7 +247,7 @@
 				},
 				{
 					"label":"Other Respiratory Symptoms",
-					"type": "radio", 			"multiple": true,
+					"type": "radio", 			"multiple": true,"size":2,
 					"options": [
 						"None",
 						"Shortness of Breath",
@@ -287,6 +260,11 @@
 				{"label":"Other"}
 			]
 		},
-		{"label":"Date", "name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+		{
+			"label":"Notes",
+			"type":"textarea"
+		
+		},
+		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 	]
 }

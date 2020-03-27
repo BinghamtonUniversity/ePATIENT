@@ -8,6 +8,7 @@
         
         
         {"label":"Medication","show":[{"type": "matches","name":"type","value":"0"}]},
+        {"label":"Dose"},
         {"label":"Route","options":"route","show":[{"type": "matches","name":"type","value":"0"}]},
         {"label":"Directions","show":[{"type": "matches","name":"type","value":"0"}]},
         {"label":"Dispense Quantity","show":[{"type": "matches","name":"type","value":"0"}]},

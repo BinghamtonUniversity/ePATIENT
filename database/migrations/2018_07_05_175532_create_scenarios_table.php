@@ -17,6 +17,7 @@ class CreateScenariosTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->json('scenario')->nullable();
+            $table->json('roles')->nullable();
             $table->text('summary_description');
             $table->text('synopsis_description');
             $table->timestamps();

@@ -1,5 +1,4 @@
 {
-	"legend": "Musculoskeletal",
 	"fields": [
 		{
 			"label":"General","type":"fieldset", 
@@ -114,11 +113,11 @@
 				},
 				{"label":"Muscle Tone/Strength Summary", "name":"muscle_summary", "type":"textarea"},
 				{
-					"label":"Weight Bearing/Gate", 
-				    "name": "weight_bearing_gate","type":"fieldset",
+					"label":"Weight Bearing/Gait", 
+				    "name": "weight_bearing_gait","type":"fieldset",
 					"fields": [
 						{
-							"label":"Gate",
+							"label":"Gait",
 							"type": "radio", 			
 							"multiple": true,
 							"help": "Check all that apply",
@@ -152,6 +151,11 @@
 					]
 				}
 			]
+		},
+		{
+			"label":"Notes",
+			"type":"textarea"
+		
 		},
 		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 	]

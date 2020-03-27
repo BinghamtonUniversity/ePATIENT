@@ -1,13 +1,13 @@
 {
-	"legend": "Genitourinary","enabled":true,
 	"fields": [
-		{"label":"General","type":"fieldset", "enabled":true,
+		{"label":"General","type":"fieldset", 
 			"fields": [
 				{
 					"label":"Urinary Symptoms",
 					"help": "Check all that apply",
 					"type": "radio", 			
 					"multiple": true,
+					"size":2,
 					"options": [
 						"None",
 						"Dysuria",
@@ -78,7 +78,8 @@
 				{
 					"label":"Catheter",
 			        "name":"catheter_enabled",
-			        "type":"checkbox"
+					"type":"checkbox"
+					,"options":[{"label":"No","value":false},{"label":"Yes","value":true}]
 			    },
 				{
 					"label":"Catheter Details",
@@ -118,7 +119,11 @@
 				}
 			]
 		},
-		{"label":"Notes","type":"textarea"},
-		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+		{
+			"label":"Notes",
+			"type":"textarea"
+		
+		},
+		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 	]
 }

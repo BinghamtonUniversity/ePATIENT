@@ -1,17 +1,18 @@
-{"legend": "Mental Status","type":"fieldset", "fields":[
+{"fields":[
 	{"label":"General", "enabled":true,"type":"fieldset","fields":[
 		{"label":"Behavior/Affect", "name":"behavior", "type": "radio", 			"multiple": true,
+			"size":4,
 			"options": ["Calm", "Cooperative", "Appropriate", "Restless", "Combative", "Confused", "Agitated", "Anxious", "Depressed", "Crying", "Fearful", "Hostile", "Inappropriate"]
 		},		
-		{"label":"Coping", "type": "select",
+		{"label":"Coping", "type": "radio","size":4,
 			"options": ["Well", "Fair", "Poor", "Ineffective"]
 		},		
 		{"label":"Consult", "type": "radio", 			
-			"multiple": true,
+			"multiple": true,"size":4,
 			"options": ["N/A", "Chaplain", "Social Work", "Psychiatry"]
 		},	
 		{"label":"At Risk for", "type": "radio", 			
-			"multiple": true,
+			"multiple": true,"size":4,
 			"options": ["N/A", "Homocidal", "Suicidal"]
 		}
 	]},
@@ -20,13 +21,14 @@
 			"label":"Check the appropriate box(es) that indicate the patient's risk for abuse.", 
 		    "name":"abuse_risk",
 			"type": "radio", 			
-			"multiple": true,
+			"multiple": true,"size":4,
 			"options": ["Physical", "Sexual", "Psychological", "Property"]
 		},
 		{"label": "Detail assessments that suggest abuse","type": "textarea"}
 	]},
-	{"label":"Narrative Note", "enabled":true,"type":"fieldset","fields":[
-		{"name":"note", "type": "textarea", "label": false}
-	]},
-	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
-]}
+	{
+		"label":"Notes",
+		"type":"textarea"
+	
+	},
+	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}]}

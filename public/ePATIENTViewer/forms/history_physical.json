@@ -1,4 +1,4 @@
-{"legend": "History and Physical","type":"fieldset", "fields":[
+{"fields":[
 	{"label":"Completed On"},
 	{"label":"History of Present Condition","type": "textarea"},
 	{"label":"Past Medical History","type": "textarea"},

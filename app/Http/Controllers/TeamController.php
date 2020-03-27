@@ -59,7 +59,7 @@ class TeamController extends Controller
             $ids = (Object) ['activity'=>0,'messages'=>0,'notes'=>0];
             $activity = TeamActivityLog::where('team_id',$team->id)->with('user')->orderBy('id', 'asc')->get();
             $messages = TeamMessage::where('team_id',$team->id)->with('user')->orderBy('id', 'asc')->get();
-            $notes = TeamNote::where('team_id',$team->id)->orderBy('id', 'asc')->get();
+            $notes = TeamNote::where('team_id',$team->id)->with('user')->orderBy('id', 'asc')->get();
         }
         $ids = [
             'activity'=>!count($activity)?$ids->activity:$activity->last()->id,

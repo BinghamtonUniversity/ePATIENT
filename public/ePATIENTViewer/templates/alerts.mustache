@@ -1,11 +1,4 @@
 {{#scenario}}
-
-<h3><a href="#page=alerts"><i class="fa fa-exclamation-triangle text-muted"></i> Alerts</a></h3>
-<hr>
-{{#if !(hashParams.id )}}
-
-<a href="#page=form&form=alerts" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
-<span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
 <table class="table table-bordered table-striped table-hover table-fixed sortable">
     <thead>
         <tr>
@@ -14,7 +7,6 @@
             <th>Alert Type</th>
             <th>Alert Status</th>
             <th>Subject</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -25,18 +17,8 @@
             <td>{{type}}</td>
             <td>{{status}}</td>
             <td>{{subject}}</td>
-            <td>
-                <a href="#page=form&form=alerts&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
-            </td>
         </tr>
         {{/alerts}}
     </tbody>
 </table>
-{{else}}
-<div class="flow-container">
-    <div id="form" class="view well"> </div>
-
-</div>
-{{/if}}
 {{/scenario}}

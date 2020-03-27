@@ -1,7 +1,8 @@
-{"legend": "Cardiac","enabled":true,"type":"fieldset", "fields":[
+{"fields":[
 
-	{"label":"General", "enabled":true,"type":"fieldset","fields":[
+	{"label":"General", "type":"fieldset","fields":[
 		{"label":"Heart Tones", "type": "radio", 			"multiple": true,
+			"size":3,
 			"options": ["S1, S2", "Regular", "Murmur", "Gallop", "S3", "S4", "Muffled", "Irregular", "Distant"]
 		},
 		{"label":"Pulses", "type": "grid",
@@ -24,8 +25,14 @@
 
 		{"label":"Detail","type": "textarea"},
 		{"label":"Devices", "type": "radio", 			"multiple": true,
+			"size":3,
 			"options": ["Pacer", "IABP", "CVP", "Pulmonary Artery Monitoring", "Cardiac Monitor", "Arterial line", "Other:"]
 		}
 	]},
+	{
+		"label":"Notes",
+		"type":"textarea"
+	
+	},
 	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 ]}

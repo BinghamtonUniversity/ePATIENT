@@ -1,76 +1,80 @@
-{"legend": "Gastrointestinal","type":"fieldset","enabled":true, 
+{
 "fields":[
 
-		{"label":"General","type":"fieldset", "enabled":true,"fields":[
-		{"label":"Abdominal Description", 
-			"help": "All",
-			"type": "radio",
-			"multiple": true,
-			"options": ["Soft", "Flat", "Non Distended", "Non Tender", "Firm", "Distended", "Rounded", "Rigid", "Sunken", "Tender", "Guarded", "Other:"]
-		},
+		{"label":"General","type":"fieldset", "fields":[
+			{"label":"Abdominal Description (all)",
+				"name":"abdominal_description",
+				"type": "radio",
+				"multiple": true,
+				"size":4,
+				"options": ["Soft", "Flat", "Non Distended", "Non Tender", "Firm", "Distended", "Rounded", "Rigid", "Sunken", "Tender", "Guarded", "Other"]
+			},
 
-		{"label":"Abdominal Description (details)", "type": "grid",
-			"fields": [{"name":"LUE"}, {"name":"RUE"}, {"name":"LLE"}, {"name":"RLE"}],
-			"options": ["Non Tender", "Tender", "Guarding", "Rebound pain", "Other:"]
-		},
-        {"label":"Summary","type":"textarea"},
-		{"label":"Gi Symptoms","type": "radio", 			
-			"multiple": true,
-			"options": [" None", "Anorexia", "Belching", "Vomiting", "Heartburn", "Nausea", "Epl. Pain", "Cramping", "Constipation", "Diarrhea", "Abd. Pain", "Flatulence", "Hiccup", "Incontinence", "Insatiately"]
-		},
-		{"label":"Bowel Sounds", "type":"grid",
-			"fields": [{"name":"All"}, {"name":"LUQ"}, {"name":"RUQ"}, {"name":"LLQ"}, {"name":"RLQ"}],
-			"options": ["Present", "Hyperactive", "Hypoactive", "Absent"]
-		},
-		{"label":"Diet Tolerance",
-			"options": ["Good", "Fair", "Poor", "N/A"]
-		},
-		{"enabled":true,"label":"Output","type":"fieldset","fields":[
-			{"label":"Stool","type": "radio", 			
-				"multiple": true,
-				"options": ["Soft", "Hard", "Liquid", "Formed", "Frothy", "Clots", "Loose", "Mucous", "Large", "Small", "Pasty", "Seedy", "Tarry", "Watery", "Brown", "Black", "Blood, Frank", "Blood, Tinged", "Clay", "Green", "Maroon", "Yellow", "Tan"]
+			{"label":"Abdominal Description (details)","name":"abdominal_details", "type": "grid",
+				"fields": [{"name":"LUE"}, {"name":"RUE"}, {"name":"LLE"}, {"name":"RLE"}],
+				"options": ["Non Tender", "Tender", "Guarding", "Rebound pain", "Other"]
 			},
-			{"label":"Emesis","type": "radio", 			
+			{"label":"Gi Symptoms","type": "radio", 			
 				"multiple": true,
-				"options": ["Clear", "Frothy", "Blood, Tinged", "Billious", "Green", "Bloody", "Coffee Ground", "Food Content", "Projectile"]
-			}
-		]},
-		{"label":"Output Summary","type":"textarea"},
+				"size":4,
+				"options": [" None", "Anorexia", "Belching", "Vomiting", "Heartburn", "Nausea", "Epl. Pain", "Cramping", "Constipation", "Diarrhea", "Abd. Pain", "Flatulence", "Hiccup", "Incontinence", "Insatiately"]
+			},
+			{"label":"Bowel Sounds", "type":"grid",
+				"fields": [{"name":"All"}, {"name":"LUQ"}, {"name":"RUQ"}, {"name":"LLQ"}, {"name":"RLQ"}],
+				"options": ["Present", "Hyperactive", "Hypoactive", "Absent"]
+			},
+			{"label":"Diet Tolerance",
+				"options": ["Good", "Fair", "Poor", "N/A"]
+			},
+			{"label":"Output","type":"fieldset","fields":[
+				{"label":"Stool","type": "radio", 			
+					"multiple": true,
+					"size":4,
+					"options": ["Soft", "Hard", "Liquid", "Formed", "Frothy", "Clots", "Loose", "Mucous", "Large", "Small", "Pasty", "Seedy", "Tarry", "Watery", "Brown", "Black", "Blood, Frank", "Blood, Tinged", "Clay", "Green", "Maroon", "Yellow", "Tan"]
+				},
+				{"label":"Emesis","type": "radio", 			
+					"multiple": true,
+					"size":4,
+					"options": ["Clear", "Frothy", "Blood, Tinged", "Billious", "Green", "Bloody", "Coffee Ground", "Food Content", "Projectile"]
+				}
+			]},
 
-		{"label":"Gastric Tubes","enabled":true,"type":"fieldset","fields": [
-			{"label":"Location","name":"gt_location", "type": "radio",
-				"options": ["Nasogastric, Left Nare", "Nasogastric, Right Nare", "Orogastric", "Gastric"]
-			},
-			{"label":"Size","name":"gt_size","help": "Fr"},
-			{"label":"Depth","name":"gt_depth","help": "cm"},
-			{"label":"Measure At","name":"gt_measured","type": "radio",
-				"options": ["Nare", "Lip", "Teeth", "Skin Insertion"]
-			}
+			{"label":"Gastric Tubes","type":"fieldset","fields": [
+				{"label":"Location","name":"gt_location", "type": "radio",
+					"options": ["Nasogastric, Left Nare", "Nasogastric, Right Nare", "Orogastric", "Gastric"]
+				},
+				{"label":"Size","name":"gt_size","help": "Fr"},
+				{"label":"Depth","name":"gt_depth","help": "cm"},
+				{"label":"Measure At","name":"gt_measured","type": "radio",
+					"options": ["Nare", "Lip", "Teeth", "Skin Insertion"]
+				}
+			]},
+			{"label":"Ostomy","type":"fieldset","fields": [
+				{"label":"Location","name":"ostomy_location", "type": "radio",
+					"options": ["LUQ", "RUQ", "LLQ", "RLQ"]
+				},
+				{"label":"Appliance Changed"},
+				{"label":"Type",
+					"type": "select",
+					"options": ["Colostomy", "Ileostomy"]
+				},
+				{"label":"Site Description","type":"textarea"}
+			]},
+			{"label":"Diet","type":"fieldset","fields":[
+				{"label":"Diet Ordered", "type": "radio", 			
+					"multiple": true,
+					"size":3,
+					"options": ["Regular", "Clear Liquids", "NPO", "Low Fat", "Low Sodium", "1800 cal ADA", "Tube Feeds", "Soft Mechanical", "TPN", "Pureed", "Cardiac"]
+				},
+				{"label":"Amount of Meal Consumed", "type": "scale", "min": 1, "max": 5, "high": "100%", "low": "0%"}
+			]},
+			{"label":"Abdominal Girth","type":"fieldset","fields":[
+				{"label":"Size","help": "cm"},
+				{"label":"Measured At"}
+			]}
 		]},
-		{"label":"Ostomy","enabled":true,"type":"fieldset","fields": [
-			{"label":"Location","name":"ostomy_location", "type": "radio",
-				"options": ["LUQ", "RUQ", "LLQ", "RLQ"]
-			},
-			{"label":"Appliance Changed"},
-			{"label":"Type",
-				"type": "select",
-				"options": ["Colostomy", "Ileostomy"]
-			},
-			{"label":"Site Description","type":"textarea"}
-		]},
-		{"label":"Diet","enabled":true,"type":"fieldset","fields":[
-			{"label":"Diet Ordered", "type": "radio", 			
-				"multiple": true,
-				"options": ["Regular", "Clear Liquids", "NPO", "Low Fat", "Low Sodium", "1800 cal ADA", "Tube Feeds", "Soft Mechanical", "TPN", "Pureed", "Cardiac"]
-			},
-			{"label":"Amount of Meal Consumed", "type": "scale", "min": 1, "max": 5, "high": "100%", "low": "0%"}
-		]},
-		{"label":"Abdominal Girth","enabled":true,"type":"fieldset","fields":[
-			{"label":"Size","help": "cm"},
-			{"label":"Measured At"}
-		]}
-		]},
-	
+		{"label":"Summary","type":"textarea"},
+
 		{"label":"Notes","type":"textarea"},
 		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
 ]

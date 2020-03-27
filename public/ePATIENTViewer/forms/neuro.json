@@ -1,4 +1,4 @@
-{"legend": "Neuro","type":"fieldset","enabled":true, "fields":[
+{"fields":[
 		{"label":"General","type":"fieldset", "enabled":true,"fields":[
 			{"label":"Orientation", "type": "radio", 			
 				"multiple": true, 
@@ -31,16 +31,16 @@
 			{"label":"Accomodate", "options":["Left", "Right", "Both"]}
 		]},
 		{"label":"Glasgow Coma Score","type":"fieldset", "enabled":true,"fields":[
-			{"label":"",  "type": "radio", 
-				"options": ["Spontaneously", "To Speech", "To Pain", "No Response"],
+			{"label":"Eye Opening Response",  "type": "radio", 
+				"options": [{"label":"Spontaneously","value":4},{"label":"To Speech","value":3},{"label":"To Pain","value":2},{"label":"No Response","value":1}],
 				"value_key":"index"
 			},
 			{"label":"Motor Response",  "type": "radio", 
-				"options": ["Obeys Verbal Command", "Localizes Pain", "Flexion Withdrawl", "Flexion Abnormal", "Extension Abnormal", "No Response"],
+				"options": [{"label":"Obeys Verbal Command","value":6},{"label":"Localizes Pain","value":5},{"label":"Flexion Withdrawl","value":4},{"label":"Flexion Abnormal","value":3},{"label":"Extension Abnormal","value":2},{"label":"No Response","value":1}],
 				"value_key":"index"
 			},
 			{"label":"Verbal Response",  "type": "radio", 
-				"options": ["Oriented X 3", "Conversation Confused", "Speech Inappropriate", "Sounds Incomprehensible", "No Response"],
+				"options": [{"label":"Oriented X 3","value":5},{"label":"Conversation Confused","value":4},{"label":"Speech Inappropriate","value":3},{"label":"Sounds Incomprehensible","value":2},{"label":"No Response","value":1}],
 				"value_key":"index"
 			}
 		]},
@@ -56,6 +56,11 @@
 				    ]
 			}
 		]},
+		{
+			"label":"Notes",
+			"type":"textarea"
+		
+		},
 		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 
 ]}

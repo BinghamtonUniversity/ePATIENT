@@ -1,8 +1,22 @@
+window.onclick = function (e) {
+    if (e.target.localName == 'a' && e.target.hash && !e.target.dataset.toggle) {
+        e.preventDefault();
+        setHash(e.target.hash)
+    }
+    else if(e.target.parentElement.localName == 'a' && e.target.parentElement.hash && !e.target.parentElement.dataset.toggle){
+        e.preventDefault();
+        setHash(e.target.parentElement.hash)
+    }
+}
+setHash = function(hash){
+    window.location.hash = hash.substr(1);
+}
 
-// Berry.collection.add('providers',_.sortBy(data.providers,'last_name'));
-// Berry.collection.add('products',_.sortBy(data.products,'name'));
-// Berry.collection.add('solutions',_.sortBy(data.solutions,'solution_name'));
-// Berry.collection.add('labs',data.labs);
+Berry.collection.add('providers',_.sortBy(data.providers,'last_name'));
+Berry.collection.add('products',_.sortBy(data.products,'name'));
+Berry.collection.add('solutions',_.sortBy(data.solutions,'solution_name'));
+Berry.collection.add('labs',data.labs);
+Array.prototype.toString = function(){return this.join(', ')}
 
 gform.collections.add('providers',_.sortBy(data.providers,'last_name'));
 gform.collections.add('products',_.sortBy(data.products,'name'));
@@ -32,6 +46,8 @@ toastr.options = {
         });
     }else{
         if(this.data.team_id){
+            debugger;
+            state.data = _.omit(state.data,'user');
             this.app.post('activity', _.extend({team_id:this.data.team_id},state), callback||function(){
 
                 toastr.success('Saved Team Activity Successfully');
@@ -57,6 +73,9 @@ toastr.options = {
     // if(typeof this.data.localVars !== 'undefined'){
     //     this.app.get('teams',{id:this.data.team_id},updateScenario);
     // }
+    if(typeof this.data.hashParams.page == 'undefined'){
+        modal({title:"Report to learner",content:this.data.summary_description})
+    }
     if(typeof this.data.page_map[this.data.hashParams.page] !== 'undefined' && typeof this.data.page_map[this.data.hashParams.page].onload == "function"){
         this.data.page_map[this.data.hashParams.page].onload.call(this);
     }
@@ -67,7 +86,7 @@ toastr.options = {
         
         if(typeof temp !== 'undefined'){
             temp = JSON.parse(temp.content);
-            this.app.update({vital_form:temp.legend});
+            this.app.update({vital_form:temp.legend||temp.label});
             temp.name = this.data.hashParams.form;
             temp.autoFocus = false;
             if(this.data.admin){
@@ -79,133 +98,46 @@ toastr.options = {
                     return item;
                 })
             }
-            if(false && this.data.hashParams.page !== 'form' && !this.data.admin){
-                // temp.default = {enabled:false}
-                // temp.inline = false;
-                temp.actions = false;
-                
-                // temp.legend = false;
-
-                temp.fields = _.map(temp.fields,function(item, name){
-                    switch(item.type){
-            			case 'custom_radio':
-            			case 'radio':
-                    // 	case 'select':
-            				item.type = 'radio';
-            				break;
-            				
-                    	case 'select':
-                    	    item.enabled = false;
-                    	    break;
-                    	    
-                    	case 'date':
-            				item.type = 'text';
-            				break;
-            		}
-            		if(typeof item.type == 'undefined' && (typeof item.options !== 'undefined' || typeof item.choices !== 'undefined')){item.type = 'radio';}
-                    if(typeof item.label == 'undefined'){
-            		item.label = item.label|| name;
-                    }else{
-                        // item.name = item.name|| name;
-                    }
-            		if(typeof item.fields !== 'undefined'){
-            		    item.fields = _.map(item.fields,function(item, name){
-                            switch(item.type){
-                    			case 'custom_radio':
-                    			case 'radio':
-                    // 			case 'select':
-                    				item.type = 'radio';
-                    				break;
-                    // 			case 'checkbox':
-                    			 //   item.type = "radio"
-                    			 
-                    	case 'date':
-            				item.type = 'text';
-            				break;
-                    			 
-                    	case 'select':
-                    	    item.enabled = false;
-                    		}
-                    		if(typeof item.type == 'undefined' && (typeof item.options !== 'undefined' || typeof item.choices !== 'undefined')){item.type = 'radio';}
-
-                    if(typeof item.label == 'undefined'){
-            		item.label = item.label|| name;
-                    }else{
-                        // item.name = item.name|| name;
-                    }
-                    
-                    return item;
-                        });
-            		}
-            		return item;
-                });
-            }
-
-
-
-
-            // temp.attributes = this.data.scenario[temp.name];
 
             temp.data = ((this.data.page_map[temp.name] || this.data.page_map.default).attr || this.data.page_map.default.attr).call(this)
             temp.data.author = temp.data.author || this.data.user.first_name+" "+this.data.user.last_name;
-			if(_.isArray(temp.fields)){
+			// if(_.isArray(temp.fields)){
 			    temp.fields.push({"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"});
-			}else{
-			    temp.fields.admin = {"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"};
-			}
+			// }else{
+			//     temp.fields.admin = {"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"};
+			// }
             if(typeof gform.instances[this.data.hashParams.form] !== 'undefined'){
                 gform.instances[this.data.hashParams.form].destroy();
             }
-            // debugger;
             temp.horizontal = true;
             temp.inline = false;
             temp.default= {
                 "horizontal": true,
                 "inline":false
             }
-            if(this.data.hashParams.page !== 'form' && !this.data.admin){
+            if(this.data.hashParams.page !== 'form'){// && !this.data.admin){
                 $("#form").html((new gform(temp)).on('change',function(e){
                     $("#form").html(e.form.toString());
                 }).toString())
 
             }else{
 
-            // $('#form').berry
-            new gform(temp, "#form").on('cancel', function(){
-                // window.history.back()
-                document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
-            }.bind(this)).on('save',function(e){
-                // var tempForm = Berries[this.data.hashParams.form].toJSON();
-                var tempForm = e.form.get();
-                // if(typeof tempForm.date !== 'undefined'){
+                new gform(temp, "#form").on('cancel', function(){
+                    setHash((this.data.page_map[temp.name] || this.data.page_map.default).back)
+                }.bind(this)).on('save',function(e){
+                    var tempForm = e.form.get();
                     tempForm.date = tempForm.date || moment().format("MM/DD/YYYY");
-                // }
-                tempForm.time = tempForm.time || moment().format("hh:mm:ss");
+                    tempForm.time = tempForm.time || moment().format("hh:mm:ss");
 
-                var state = ((this.data.page_map[temp.name] || this.data.page_map.default).update || this.data.page_map.default.update).call(this, this.data.scenario, tempForm);
-                
-                // var state = this.data.scenarioh
-                // this.app.post('scenario_log', {team_id:this.data.team_id, state:state}, function(){
-                //     toastr.success('Saved Successfully')
-                // })
-                save.call(this,state,function(){
-                    fetch_activity.call(this);
+                    var state = ((this.data.page_map[temp.name] || this.data.page_map.default).update || this.data.page_map.default.update).call(this, this.data.scenario, tempForm);
+                    
+                    save.call(this,state,function(){
+                        fetch_activity.call(this);
 
-                    toastr.success('Saved Team status Successfully');
-                    document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
-                });
-                
-                // document.location.hash = (this.data.page_map[temp.name] || this.data.page_map.default).back;
-
-
-            }.bind(this));
-            }
-
-            if(false && this.data.hashParams.page !== 'form' && !this.data.admin){
-                $('#form.well [type=checkbox]:not(:checked)').parent().parent().remove();
-                $('#form.well .radio [type=radio]:not(:checked)').parent().parent().remove();
-                $('#form.well input,#form.well textarea').attr({readonly:'readonly'});
-
+                        toastr.success('Saved Team status Successfully');
+                        setHash((this.data.page_map[temp.name] || this.data.page_map.default).back)
+                    });
+                }.bind(this));
             }
         }
     }
@@ -230,33 +162,33 @@ scenarioInit = function(object){
 
    return object;
 }
-updateScenario = function(data){
-            if(typeof data.team_scenario !== 'undefined' && data.team_scenario !== null){
-                this.data.scenario = data.team_scenario.state || data.scenario.scenario;
-            }else{
-                this.data.scenario = data.scenario.scenario;
+// updateScenario = function(data){
+//             if(typeof data.team_scenario !== 'undefined' && data.team_scenario !== null){
+//                 this.data.scenario = data.team_scenario.state || data.scenario.scenario;
+//             }else{
+//                 this.data.scenario = data.scenario.scenario;
 
-            }
+//             }
         
-            this.data.scenario = scenarioInit(this.data.scenario);
+//             this.data.scenario = scenarioInit(this.data.scenario);
     
-            this.data.scenario.name = data.name;
-            this.data.scenario.lab_results = this.data.scenario.lab_results || [];
+//             this.data.scenario.name = data.name;
+//             this.data.scenario.lab_results = this.data.scenario.lab_results || [];
                 
-            this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
-                item.id = i;
-                return item;
-            });
+//             this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
+//                 item.id = i;
+//                 return item;
+//             });
      
-            // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
-
-            this.data.lab_types = _.map(lab_types,function(item){
-                return {
-                    name:item,
-                    tests:_.where(this.data.labs,{category:item}),
-                    results:_.where(this.data.scenario.lab_results,{category:item})
-            }}.bind(this));
-        }
+//             // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+// debugger;
+//             this.data.lab_types = _.map(lab_types,function(item){
+//                 return {
+//                     name:item,
+//                     tests:_.where(this.data.labs,{category:item}),
+//                     results:_.where(this.data.scenario.lab_results,{category:item})
+//             }}.bind(this));
+//         }
 
 this.data.last_activity_id = null;
 fetch_activity = function() {
@@ -278,14 +210,13 @@ fetch_activity = function() {
                     item.id = i;
                     return item;
                 });
-        
-                // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
-
                 this.data.lab_types = _.map(lab_types,function(item){
+                    var search = {category:item};
+                    if(!this.data.admin){search.enable=true;}
                     return {
                         name:item,
                         tests:_.where(this.data.labs,{category:item}),
-                        results:_.where(this.data.scenario.lab_results,{category:item})
+                        results:_.where(this.data.scenario.lab_results,search)
                 }}.bind(this));
 
 
@@ -297,7 +228,9 @@ fetch_activity = function() {
     
 this.callback = function(){
     this.app.$el.on( "click", "[data-href]", function(e) {
-        window.location = $(e.currentTarget).data("href");
+        // window.location = $(e.currentTarget).data("href");
+        // window.location.hash = btoa(e.currentTarget.dataset.href.substr(1));
+        setHash(e.currentTarget.dataset.href);
     });
     this.app.$el.on( "click", "tr a", function(e) {
         e.stopPropagation();
@@ -328,6 +261,7 @@ this.callback = function(){
     // });
     if(typeof this.data.team_id !== 'undefined'){
         this.app.get('teams',{id:this.data.team_id},function(data){
+
             // TJC 6/29/19 -- Don't use team_scenario is deprcated.
             // Now using team activity log to playback scenario events
             // if(data.team_scenario !== null){
@@ -337,7 +271,7 @@ this.callback = function(){
             // }
         
             this.data.scenario = scenarioInit(this.data.scenario);
-    
+            this.data.summary_description = data.scenario.summary_description;
             this.data.scenario.name = data.name;
             this.data.scenario.lab_results = this.data.scenario.lab_results || [];
                 
@@ -346,8 +280,6 @@ this.callback = function(){
                 return item;
             });
      
-            // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
-
             this.data.lab_types = _.map(lab_types,function(item){
                 return {
                     name:item,
@@ -367,54 +299,55 @@ this.callback = function(){
 
     }else{
         if((this.data.admin||this.data.local) && this.data.scenario_id){
-            if(this.data.local){
-                if(typeof this.data.localVars == 'undefined'){
-                    $().berry({name:"local",legend:"Initialize Scenario",fields:[
-                        {name:"team",label:"Team",type:"select",options:[
-                            // {label:"Test", value:31},
-                            {label:"CIT 1", value:19},
-                            {label:"CIT 2", value:20},
-                            {label:"CIT 3", value:21},
-                            {label:"CIT 4", value:22},
-                            {label:"CIT 5", value:23},
-                            {label:"CIT 6", value:24},
-                            {label:"CIT 7", value:25},
-                            {label:"CIT 8", value:26},
-                            {label:"CIT 9", value:27},
-                            {label:"CIT 10", value:28},
-                            {label:"CIT 11", value:29},
-                            {label:"CIT 12", value:30},
-                        ]},
-                        {name:"user",label:"User/Role",type:"select",value_key:'unique_id',options:this.data.users}
-                    ]}).on('save',function(){
-                        Lockr.set('epatient',Berries.local.toJSON());
-                        this.data.localVars = Lockr.get('epatient');
+            // if(this.data.local){
+            //     if(typeof this.data.localVars == 'undefined'){
+            //         $().berry({name:"local",legend:"Initialize Scenario",fields:[
+            //             {name:"team",label:"Team",type:"select",options:[
+            //                 // {label:"Test", value:31},
+            //                 {label:"CIT 1", value:19},
+            //                 {label:"CIT 2", value:20},
+            //                 {label:"CIT 3", value:21},
+            //                 {label:"CIT 4", value:22},
+            //                 {label:"CIT 5", value:23},
+            //                 {label:"CIT 6", value:24},
+            //                 {label:"CIT 7", value:25},
+            //                 {label:"CIT 8", value:26},
+            //                 {label:"CIT 9", value:27},
+            //                 {label:"CIT 10", value:28},
+            //                 {label:"CIT 11", value:29},
+            //                 {label:"CIT 12", value:30},
+            //             ]},
+            //             {name:"user",label:"User/Role",type:"select",value_key:'unique_id',options:this.data.users}
+            //         ]}).on('save',function(){
+            //             Lockr.set('epatient',Berries.local.toJSON());
+            //             this.data.localVars = Lockr.get('epatient');
                         
-                        if(typeof this.data.localVars !== 'undefined'){
-                            var temp = _.find(data.users,{unique_id:this.data.localVars.user});
-                            if(typeof temp !== 'undefined'){
-                                _.extend(this.data.user,temp)
-                            }else{
-                                this.data.user.first_name = 'Guest';
-                                this.data.user.last_name = 'User';
-                                this.data.user.unique_id = "Guest1";
-                            }
-                            this.data.team_id = parseInt(this.data.localVars.team)
-                        }
-                        Berries.local.trigger('close')
-                        chat_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'});
-                        notes_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'}); 
+            //             if(typeof this.data.localVars !== 'undefined'){
+            //                 var temp = _.find(data.users,{unique_id:this.data.localVars.user});
+            //                 if(typeof temp !== 'undefined'){
+            //                     _.extend(this.data.user,temp)
+            //                 }else{
+            //                     this.data.user.first_name = 'Guest';
+            //                     this.data.user.last_name = 'User';
+            //                     this.data.user.unique_id = "Guest1";
+            //                 }
+            //                 this.data.team_id = parseInt(this.data.localVars.team)
+            //             }
+            //             Berries.local.trigger('close')
+            //             chat_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'});
+            //             notes_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'}); 
 
-                    },this)
-                }else{
-                    chat_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'});
-                    notes_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'});
-                }
-            }
+            //         },this)
+            //     }else{
+            //         chat_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'});
+            //         notes_init.call(this,{team_id:this.data.localVars.team,team_name:'Demo'});
+            //     }
+            // }
             // this.data.scenario = Lockr.get('_'+this.data.scenario_id);
 
-            if(typeof this.data.scenario !== 'object'){
+            // if(typeof this.data.scenario !== 'object'){
             this.app.get('scenarios',{id:this.data.scenario_id},function(data){
+                
                 // if(data.team_scenario !== null){
                 //     this.data.scenario = data.team_scenario.state || data.scenario.scenario;
                 // }else{
@@ -437,7 +370,7 @@ this.callback = function(){
                     return item;
                 })
                 // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
-    
+    debugger;
                 this.data.lab_types = _.map(lab_types,function(item){
                     return {
                         name:item,
@@ -454,30 +387,30 @@ this.callback = function(){
             })
             
             
-            }else{
-                //   this.data.scenario.name = data.scenario.name;
-                this.data.scenario.lab_results = this.data.scenario.lab_results || [];
+            // }else{
+            //     //   this.data.scenario.name = data.scenario.name;
+            //     this.data.scenario.lab_results = this.data.scenario.lab_results || [];
                         
-                this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
-                    item.id = i;
-                    return item;
-                })
-                // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
+            //     this.data.scenario.lab_results = _.map(this.data.scenario.lab_results,function(item,i){
+            //         item.id = i;
+            //         return item;
+            //     })
+            //     // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
     
-                this.data.lab_types = _.map(lab_types,function(item){
-                    return {
-                        name:item,
-                        tests:_.where(this.data.labs,{category:item}),
-                        results:_.where(this.data.scenario.lab_results,{category:item})
-                    }}.bind(this))
+            //     this.data.lab_types = _.map(lab_types,function(item){
+            //         return {
+            //             name:item,
+            //             tests:_.where(this.data.labs,{category:item}),
+            //             results:_.where(this.data.scenario.lab_results,{category:item})
+            //         }}.bind(this))
     
                 
-                // chat_init.call(this,{team_id:this.data.team_id,team_name:data.name})
-                // notes_init.call(this,{team_id:this.data.team_id,team_name:data.name})
+            //     // chat_init.call(this,{team_id:this.data.team_id,team_name:data.name})
+            //     // notes_init.call(this,{team_id:this.data.team_id,team_name:data.name})
     
-                readHash.call(this);
-                window.onhashchange = readHash.bind(this);
-            }
+            //     readHash.call(this);
+            //     window.onhashchange = readHash.bind(this);
+            // }
         }
     }
 

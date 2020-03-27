@@ -1,20 +1,26 @@
-{"legend": "Pain", "enabled":true,"type":"fieldset","fields":[
-	{"label":"General", "enabled":true, "type":"fieldset","fields":[
+{"fields":[
+	{"label":"General", "type":"fieldset","fields":[
 		{"label":"Site"},
 		{"label":"Quantity","min": 0, "max": 10, "type": "scale", "low": "No Pain", "high": "Worst Pain Imaginable"},
 		{"label":"Aggravating Factors", "type": "radio", 			
 			"multiple": true,
+			"size":2,
 			"options": ["Movement","Coughing","Breathing","Eating"]
 		},
 		{"label":"Alleviating Factors", "type": "radio", 			
 			"multiple": true,
+			"size":2,
 			"options": ["Rest", "Compression", "Medication", "Ice", "Immobility"]
 		},
 		{"label":"Quality Of Pain", "type": "radio", 			
 			"multiple": true,
+
+			"size":2,
 			"options": ["Aching", "Throbbing", "Dull", "Stabbing", "Burning", "Piercing", "Sore", "Crushing"]
 		},
 		{"label":"Periodicity", "type": "radio",
+
+			"size":0,
 			"options": ["Constant", "Intermittent "]
 		},
 		{"label":"Duration"},
@@ -24,8 +30,12 @@
 		{"label":"Radiation", "type": "custom_radio",
 			"options": ["Yes", "No"]
 		},
-		{"label":"Notes","type": "textarea"},
 		{"label":"Reassessment","min": 0, "max": 10, "type": "scale", "low": "No Pain", "high": "Worst Pain Imaginable"}
 	]},
-		{"label":"Date","name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
+	{
+		"label":"Notes",
+		"type":"textarea"
+	
+	},
+	{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 ]}

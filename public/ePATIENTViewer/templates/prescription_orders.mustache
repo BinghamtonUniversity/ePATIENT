@@ -1,11 +1,5 @@
 {{#scenario}}
 
-{{#if !(hashParams.id )}}
-
-<h3><a href="#page=prescription_orders"><i class="fa fa-th-list text-muted"></i> Prescription Orders</a></h3>
-<hr>
-<a href="#page=form&form=prescription_orders" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
-<span style="width:200px;float:right;margin-right:20px">{{>filter}}</span><br><br>
 <table class="table table-bordered table-striped table-hover table-fixed sortable">
     <thead>
         <tr>
@@ -13,8 +7,6 @@
             <th>Date</th>
             <th>Author</th>
             <th>Provider</th>
-            
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -25,28 +17,8 @@
             <td>{{ customRender(date) }}</td>
             <td>{{author}}</td>
             <td>{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}</td>
-            <td>
-                <a href="#page=form&form=prescription_orders&id={{ @index }}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
-            </td>
         </tr>
         {{/prescription_orders}}
     </tbody>
 </table>
-{{else}}
-    <div class="btn-group pull-right btn-group-lg" style="margin-top:-10px" role="group">
-
-        {{#if hashParams.id>0}}<a href="#page=prescription_orders&form=prescription_orders&id={{ hashParams.id -1 }}" class="btn btn-default btn-lg" title="Previous"><i class="fa fa-chevron-left"></i><div style="font-size:12px">Previous</div></a>{{/if}}
-        <span data-action="administer" data-id="{{ hashParams.id}}" class="btn btn-success btn-lg" title="Administer"><i class="fa fa-syringe"></i><div style="font-size:12px">Administer</div></span>
-        <a href="#page=form&form=prescription_orders&id={{ hashParams.id}}" class="btn btn-info btn-lg" title="Edit"><i class="fa fa-edit"></i><div style="font-size:12px">Edit</div></a>
-        {{#if hashParams.id<(orders.length-1)}}<a href="#page=prescription_orders&form=prescription_orders&id={{ parseInt(hashParams.id) +1 }}" class="btn-lg btn btn-default" title="Next"><i class="fa fa-chevron-right"></i><div style="font-size:12px">Next</div></a>{{/if}}
-
-    </div>
-    
-<h3><a href="#page=prescription_orders"><i class="fa fa-th-list text-muted"></i> Prescription Order</a></h3>
-<hr>
-<div class="flow-container">
-    <div id="form" class="view well"> </div>
-</div>
-{{/if}}
 {{/scenario}}

@@ -1,4 +1,4 @@
-{"legend": "Intake and Output","type":"fieldset","enabled":true, "fields":[
+{"fields":[
 		{"name":"shift", "label":"Shift", "type": "custom_radio", "options": ["Day", "Evening", "Night"]},
 		{"label":"Date","type":"date"},
 		{"label":"Intake","type":"fieldset","fields": [
@@ -18,6 +18,10 @@
 			{"label":"Other"},
 			{"label":"Total Output"}
 		]},
-		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+		{
+			"label":"Notes",
+			"type":"textarea"
+		},
+		{"label":"Date", "name":"date","show":[{"type":"matches","name":"admin","value":"true"}]}
 	]
 }
