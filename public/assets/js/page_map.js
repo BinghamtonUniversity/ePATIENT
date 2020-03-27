@@ -500,6 +500,23 @@ return [
         slug:"medication_admin",
         label:'<i class="fa fa-pills text-muted"></i> Medication Administration',
         filter:true,
+        delete:function(id, e){
+            if(this.data.admin){
+                if(confirm("Are you sure you want to delete this item?")){
+                    var action = {
+                        form:'prescription_orders.'+e.currentTarget.parentElement.parentElement.dataset.id+'.medication_admin.'+e.currentTarget.dataset.id 
+                        ,
+                        event:'delete'
+                    }
+                    save.call(this,action,function(){
+                        fetch_activity.call(this);
+
+                        toastr.success('Item Deleted Successfully');
+                        setHash(this.data.page_map[(e.currentTarget.dataset.form||this.data.hashParams.page)].back)
+                    })
+                }
+            }
+        }
         // "administer":this.administer,
         // "delete":function(id,e){
         //     // debugger;
@@ -644,26 +661,6 @@ return [
         slug:"assessment",
         label:'<i class="fa fa-thermometer-half text-muted"></i> Assessments',
         back:"#page=assessment"
-    },
-    {
-        slug:"medication_admin",
-        delete:function(id, e){
-            if(this.data.admin){
-                if(confirm("Are you sure you want to delete this item?")){
-                    var action = {
-                        form:'prescription_orders.'+e.currentTarget.parentElement.parentElement.dataset.id+'.medication_admin.'+e.currentTarget.dataset.id 
-                        ,
-                        event:'delete'
-                    }
-                    save.call(this,action,function(){
-                        fetch_activity.call(this);
-
-                        toastr.success('Item Deleted Successfully');
-                        setHash(this.data.page_map[(e.currentTarget.dataset.form||this.data.hashParams.page)].back)
-                    })
-                }
-            }
-        }
     },
     {
         slug:"default",
