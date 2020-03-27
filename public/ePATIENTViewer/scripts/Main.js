@@ -257,7 +257,6 @@ this.callback = function(){
         // window.location = $(e.currentTarget).data("href");
     // });
     if(typeof this.data.team_id !== 'undefined'){
-        debugger;
         this.app.get('teams',{id:this.data.team_id},function(data){
 
             // TJC 6/29/19 -- Don't use team_scenario is deprcated.
@@ -345,7 +344,6 @@ this.callback = function(){
 
             // if(typeof this.data.scenario !== 'object'){
             this.app.get('scenarios',{id:this.data.scenario_id},function(data){
-                debugger;
 
                 // if(data.team_scenario !== null){
                 //     this.data.scenario = data.team_scenario.state || data.scenario.scenario;

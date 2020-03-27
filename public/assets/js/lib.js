@@ -32,32 +32,59 @@ function render(template, data){
 return templates[template].render(data, templates);
 }
 function modal(options) {
-  $('#myModal').remove();
-  this.ref = $(render('modal', options));
-
-  options.legendTarget = this.ref.find('.modal-title');
-  options.actionTarget = this.ref.find('.modal-footer');
-
-  $(this.ref).appendTo('body');
-
-  if(options.content) {
-    $('.modal-body').html(options.content);
-    options.legendTarget.html(options.legend);
-  }else{
-    options.autoDestroy = true;
-    var myform = this.ref.find('.modal-body').berry(options).on('destroy', $.proxy(function(){
-      this.ref.modal('hide');
-    },this));
-
-    this.ref.on('shown.bs.modal', $.proxy(function () {
-      this.$el.find('.form-control:first').focus();
-    },myform));
+  if(typeof options == 'string'){
+    options = {content:options};
   }
-  if(options.onshow){
-    this.ref.on('shown.bs.modal', options.onshow);
-  }  
-  this.ref.modal();
-  return this;
+  var hClass = ''
+  switch(options.status){
+    case 'error':
+      hClass = 'bg-danger';
+      break;
+    case 'success':
+      hClass = 'bg-success';
+      break;
+    case 'primary':
+      hClass = 'bg-primary';
+      break;
+    case 'info':
+      hClass = 'bg-info';
+      break;
+    case 'warning':
+      hClass = 'bg-warning';
+      break;
+  }
+  new gform({legend:options.title,modal:{header_class:hClass},fields:[{type:'output',name:'modal',label:false,format:{},value:gform.m(options.content,_.extend({}, this.partials, data))}],actions:[{type:'cancel',label:'<i class="fa fa-times"></i> Close',"modifiers": "btn btn-default pull-right"}]}).modal().on('cancel',function(e){
+    e.form.dispatch('close');
+    e.form.destroy();
+  });
+  
+  // debugger;
+  // $('#myModal').remove();
+  // this.ref = $(render('modal', options));
+
+  // options.legendTarget = this.ref.find('.modal-title');
+  // options.actionTarget = this.ref.find('.modal-footer');
+
+  // $(this.ref).appendTo('body');
+
+  // if(options.content) {
+  //   $('.modal-body').html(options.content);
+  //   options.legendTarget.html(options.legend);
+  // }else{
+  //   options.autoDestroy = true;
+  //   var myform = this.ref.find('.modal-body').berry(options).on('destroy', $.proxy(function(){
+  //     this.ref.modal('hide');
+  //   },this));
+
+  //   this.ref.on('shown.bs.modal', $.proxy(function () {
+  //     this.$el.find('.form-control:first').focus();
+  //   },myform));
+  // }
+  // if(options.onshow){
+  //   this.ref.on('shown.bs.modal', options.onshow);
+  // }  
+  // this.ref.modal();
+  // return this;
 };
 
 
