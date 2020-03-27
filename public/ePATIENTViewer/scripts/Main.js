@@ -46,7 +46,6 @@ toastr.options = {
         });
     }else{
         if(this.data.team_id){
-            debugger;
             state.data = _.omit(state.data,'user');
             this.app.post('activity', _.extend({team_id:this.data.team_id},state), callback||function(){
 
@@ -74,7 +73,7 @@ toastr.options = {
     //     this.app.get('teams',{id:this.data.team_id},updateScenario);
     // }
     if(typeof this.data.hashParams.page == 'undefined'){
-        modal({title:"Report to learner",content:this.data.summary_description})
+        if(!this.data.admin)modal({title:"Report to learner",content:this.data.summary_description})
     }
     if(typeof this.data.page_map[this.data.hashParams.page] !== 'undefined' && typeof this.data.page_map[this.data.hashParams.page].onload == "function"){
         this.data.page_map[this.data.hashParams.page].onload.call(this);
@@ -102,7 +101,7 @@ toastr.options = {
             temp.data = ((this.data.page_map[temp.name] || this.data.page_map.default).attr || this.data.page_map.default.attr).call(this)
             temp.data.author = temp.data.author || this.data.user.first_name+" "+this.data.user.last_name;
 			// if(_.isArray(temp.fields)){
-			    temp.fields.push({"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"});
+			    temp.fields.push({"parsable": false,"type":"hidden","value":this.data.admin,"name":"admin"});
 			// }else{
 			//     temp.fields.admin = {"parsable": false,"type":"hidden","value":this.data.options.admin,"name":"admin"};
 			// }
@@ -181,7 +180,6 @@ scenarioInit = function(object){
 //             });
      
 //             // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
-// debugger;
 //             this.data.lab_types = _.map(lab_types,function(item){
 //                 return {
 //                     name:item,
@@ -201,8 +199,7 @@ fetch_activity = function() {
                 // this.app.update();
                 chat_add_messages.call(this,activity.messages);
                 notes_add_notes.call(this,activity.notes);
-                // debugger;
-                // debugger;
+
                 // updateScenario.call(this.app,this.app.data);
                 // this.data.scenario.lab_results = this.data.scenario.lab_results || [];
                     
@@ -260,6 +257,7 @@ this.callback = function(){
         // window.location = $(e.currentTarget).data("href");
     // });
     if(typeof this.data.team_id !== 'undefined'){
+        debugger;
         this.app.get('teams',{id:this.data.team_id},function(data){
 
             // TJC 6/29/19 -- Don't use team_scenario is deprcated.
@@ -347,7 +345,8 @@ this.callback = function(){
 
             // if(typeof this.data.scenario !== 'object'){
             this.app.get('scenarios',{id:this.data.scenario_id},function(data){
-                
+                debugger;
+
                 // if(data.team_scenario !== null){
                 //     this.data.scenario = data.team_scenario.state || data.scenario.scenario;
                 // }else{
@@ -370,7 +369,6 @@ this.callback = function(){
                     return item;
                 })
                 // var lab_types = ["abgs","bmp","cmpanel", "cbc","cmprofile","ck","electrolytes","lp","lfp","urinalysis","btc","csf","coagulation"];
-    debugger;
                 this.data.lab_types = _.map(lab_types,function(item){
                     return {
                         name:item,

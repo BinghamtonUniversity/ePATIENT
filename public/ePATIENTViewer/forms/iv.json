@@ -19,5 +19,5 @@
 		},
 		{"label":"If new site, document catheter gauge and time initiated." }
 	]},
-	{"label":"Date", "name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+	{"label":"Date", "name":"date","show":[{"type": "matches","name":"admin","value":true}]}
 ]}

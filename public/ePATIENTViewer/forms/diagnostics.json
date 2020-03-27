@@ -4,6 +4,8 @@
     {"label":"Author"},
     {"label":"Note","type":"textarea"},
     {"label":"Type"},
-    {"label":"Upload","type":"base64"}
+    {"label":"Upload","type":"base64"},
+    {"label":"Enabled","name":"enabled","type":"switch","value":true,"parse":true, "show":[{"type": "matches","name":"admin","value":true}],"options":[{"label":"No","value":false},{"label":"Yes","value":true}]}
+
   ]
 }

@@ -76,6 +76,6 @@
 		{"label":"Summary","type":"textarea"},
 
 		{"label":"Notes","type":"textarea"},
-		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":"true"}]}
+		{"label":"Date","name":"date","show":[{"type": "matches","name":"admin","value":true}]}
 ]
 }

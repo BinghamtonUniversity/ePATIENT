@@ -7,6 +7,7 @@ use App\Team;
 use App\TeamMember;
 use App\TeamMessage;
 use App\TeamNote;
+use App\Scenario;
 use App\TeamScenario;
 use App\TeamActivityLog;
 use Illuminate\Support\Facades\Auth;
@@ -83,10 +84,13 @@ class TeamController extends Controller
     public function add(Request $request)
     {
         $team = new Team($request->all());
+
+        
         $team->save();
-        $team_scenario = new TeamScenario(['team_id'=>$team->id,'user_id'=>Auth::user()->id]);
+        $team_scenario = new TeamScenario(['team_id'=>$team->id,'user_id'=>Auth::user()->id,'state'=>Scenario::find($request->scenario_id)->scenario]);
         $team_scenario->save();
         $team->team_scenario_id = $team_scenario->id;
+
         $team->save();
         return $team;
     }

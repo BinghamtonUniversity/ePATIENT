@@ -10,12 +10,14 @@
     </thead>
     <tbody>
         {{#diagnostics}}
+        {{#if(enabled || admin)}}
         <tr class="filterable" data-href="#page=diagnostics&form=diagnostics&id={{ @index }}">
             <td>{{type}}</td>
             <td>{{ customRender(date) }}</td>
             <td>{{note}}</td>
             <td><img src="{{upload}}"></td>
         </tr>
+        {{/if}}
         {{/diagnostics}}
     </tbody>
 </table>
