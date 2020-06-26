@@ -11,16 +11,18 @@ window.onclick = function (e) {
 setHash = function(hash){
     window.location.hash = hash.substr(1);
 }
-
-Berry.collection.add('providers',_.sortBy(data.providers,'last_name'));
+Berry.collection.add('providers',_.sortBy(data.prescribers,'last_name'));
 Berry.collection.add('products',_.sortBy(data.products,'name'));
-Berry.collection.add('solutions',_.sortBy(data.solutions,'solution_name'));
+Berry.collection.add('solutions',_.sortBy(data.solutions,'name'));
+// Berry.collection.add('additives',_.sortBy(data.additives,'name'));
+
 Berry.collection.add('labs',data.labs);
 Array.prototype.toString = function(){return this.join(', ')}
-
-gform.collections.add('providers',_.sortBy(data.providers,'last_name'));
+debugger;
+gform.collections.add('providers',_.sortBy(data.prescribers,'last_name'));
 gform.collections.add('products',_.sortBy(data.products,'name'));
-gform.collections.add('solutions',_.sortBy(data.solutions,'solution_name'));
+gform.collections.add('additives',_.sortBy(data.additives,'name'));
+gform.collections.add('solutions',_.sortBy(data.solutions,'name'));
 gform.collections.add('labs',data.labs);
 
 data.users = [
@@ -114,19 +116,21 @@ toastr.options = {
                 "horizontal": true,
                 "inline":false
             }
+            temp.data.data = {author:temp.data.author};
             if(this.data.hashParams.page !== 'form'){// && !this.data.admin){
                 $("#form").html((new gform(temp)).on('change',function(e){
                     $("#form").html(e.form.toString());
                 }).toString())
 
             }else{
-
                 new gform(temp, "#form").on('cancel', function(){
                     setHash((this.data.page_map[temp.name] || this.data.page_map.default).back)
                 }.bind(this)).on('save',function(e){
                     var tempForm = e.form.get();
+                    debugger;
                     tempForm.date = tempForm.date || moment().format("MM/DD/YYYY");
                     tempForm.time = tempForm.time || moment().format("hh:mm:ss");
+                    tempForm.datetime = tempForm.datetime || moment().format("MM/DD/YYYY hh:mm:ss");
 
                     var state = ((this.data.page_map[temp.name] || this.data.page_map.default).update || this.data.page_map.default.update).call(this, this.data.scenario, tempForm);
                     
@@ -136,7 +140,11 @@ toastr.options = {
                         toastr.success('Saved Team status Successfully');
                         setHash((this.data.page_map[temp.name] || this.data.page_map.default).back)
                     });
-                }.bind(this));
+                }.bind(this)).on('change:provider',_.debounce(function(e){
+                    if(typeof e.form.find('dea_npi_number') !== 'undefined' && e.form.get('dea_npi_number') == "" && typeof _.find(gform.collections.get('providers'),{id:parseInt(e.field.get())}) !== 'undefined'){
+                        e.form.find('dea_npi_number').set(_.find(gform.collections.get('providers'),{id:parseInt(e.field.get())}).npi)
+                    }
+                }.bind(this),400,{leading:false,trailing:true}));;
             }
         }
     }

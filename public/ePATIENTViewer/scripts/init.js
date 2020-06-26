@@ -41,7 +41,7 @@ this.data.apps_pages = [
             {name:'Assessment',icon:"thermometer-half",slug:'assessment'},
             {name:'Orders',icon:"th-list",slug:'orders'},
             // {name:'Prescription Orders',icon:"prescription-bottle",slug:'prescription_orders'},
-            {name:'Med Administration',icon:"pills",slug:'medication_admin'},
+            // {name:'Med Administration',icon:"pills",slug:'medication_admin'},
             {name:'Medication Profile',icon:"file-prescription",slug:'medication_profile'},
             {name:'Diagnostic Tests',icon:"flask", slug:'diagnostics'},
             {name:'Labs',icon:"tint",slug:'labs'},

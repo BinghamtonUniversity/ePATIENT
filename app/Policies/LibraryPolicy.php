@@ -12,6 +12,7 @@ class LibraryPolicy
 
     public function manage(User $user) {
         $library_type = request()->route()->parameters['library_type'];
+        if($library_type == 'additives'){return isset($user->permissions['manage_solutions']);}
         return isset($user->permissions['manage_'.$library_type]);
     }
     public function manage_product(User $user) {
@@ -21,6 +22,9 @@ class LibraryPolicy
         return isset($user->permissions['manage_prescribers']);
     }
     public function manage_solution(User $user) {
+        return isset($user->permissions['manage_solutions']);
+    }
+    public function manage_additive(User $user) {
         return isset($user->permissions['manage_solutions']);
     }
     public function manage_lab(User $user) {

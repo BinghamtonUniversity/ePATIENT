@@ -417,25 +417,24 @@ return [
     },        
     {   
         slug:"orders",
-        start:function(id){
-            this.data.scenario.orders[id].status = "In Progress";
+        // start:function(id){
+        //     this.data.scenario.orders[id].status = "In Progress";
 
-            save.call(this,{
-                form:'orders.'+id,
-                data: this.data.scenario.orders[id],
-                event:'update'
-            },function(){
-                fetch_activity.call(this);
-                toastr.success('In Progress');
-                setHash('#page=orders')
-            });
+        //     save.call(this,{
+        //         form:'orders.'+id,
+        //         data: this.data.scenario.orders[id],
+        //         event:'update'
+        //     },function(){
+        //         fetch_activity.call(this);
+        //         toastr.success('In Progress');
+        //         setHash('#page=orders')
+        //     });
 
-        },       
+        // },       
         complete:function(id){
             this.data.scenario.orders[id].status = "Completed"
             this.data.scenario.orders[id].completed_by = this.data.user.first_name+" "+this.data.user.last_name;
-            // this.app.update(this.data.scenario)
-            // save.call(this,this.data.scenario)
+
             save.call(this,{
                 form:'orders.'+id,
                 data: this.data.scenario.orders[id],
@@ -447,17 +446,50 @@ return [
             });
                 
         },
+        update_status:function(id){
+            var order = this.data.scenario.orders[id];
+            var fields = [
+                {"label":"Order Status","name":"status","type":"custom_radio","value":order.status, "options":"order_status"},
+                {name: 'id', type: 'hidden', value:id}
+        
+            ]
+                new gform({name:'validate',legend: 'Drug Levels', fields: fields}).on('save', function(e) {
+                if( e.form.validate() ) {
+                    var order = this.data.scenario.orders[parseInt(e.form.get('id'))]
+                        order.status = e.form.get('status')
+                        save.call(this,{
+                            form:'orders.'+parseInt(e.form.get('id')),
+                            data: order,
+                            event:'update'
+                        },function(){
+                            fetch_activity.call(this);
+                        });
+                    e.form.trigger('close')
+                    
+                }
+            }.bind(this)).on('cancel', function(e){
+                e.form.trigger('close')
+        }).modal()
+        },
         label:'<i class="fa fa-th-list text-muted"></i> Orders',
         
         actions:[
-            {name:"start",label:"Start",icon:"plus",type:"success",condition: function(hashParams,scenario,admin){
-                if(typeof scenario[hashParams.form] == "undefined"){return false}
-                return hashParams.id && hashParams.form && scenario[hashParams.form][hashParams.id].status == "New";
-            }},
+            // {name:"start",label:"Start",icon:"plus",type:"success",condition: function(hashParams,scenario,admin){
+            //     if(typeof scenario[hashParams.form] == "undefined"){return false}
+            //     return hashParams.id && hashParams.form && scenario[hashParams.form][hashParams.id].status == "New";
+            // }},
             {name:"complete",label:"Complete",icon:"times",type:"warning",condition: function(hashParams,scenario,admin){
                 if(typeof scenario[hashParams.form] == "undefined"){return false}
-                return hashParams.id && hashParams.form && scenario[hashParams.form][hashParams.id].status == "In Progress";
+                return hashParams.id && hashParams.form && scenario[hashParams.form][hashParams.id].status == "Active";
             }},
+            {name:"update_status",label:"Status",icon:"info",type:"info",condition: function(hashParams,scenario,admin){
+                if(typeof scenario[hashParams.form] == "undefined"){return false}
+                return true;
+                // return hashParams.id && hashParams.form && scenario[hashParams.form][hashParams.id].status !== "Complete";
+            }},
+
+
+
             {name:"edit",label:"Edit",icon:"edit",type:"info",condition: function(hashParams,scenario,admin){
                 return (hashParams.id && hashParams.form && admin);
             }},
@@ -478,6 +510,10 @@ return [
                 data:updates,
                 event:'create'
             }
+            debugger;
+            if(updates.category == "Home Medications"){
+                updates.status = "Active"
+            }
             if(typeof this.data.hashParams.id !== 'undefined'){
 
                 var medication_admin = this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)].medication_admin || [];
@@ -489,10 +525,61 @@ return [
             return action;
         },        
         filter:true,add:true,
+        levels:function(id){
+            var order = this.data.scenario.prescription_orders[id];
+            var fields = [
+                {label: false,name:"drug_levels", required:true},
+                {name: 'id', type: 'hidden', value:id}
+        
+            ]
+            if(this.data.admin){
+                fields.push({label:'Date',type:"date",value:moment().format("MM/DD/YYYY HH:mm")})
+                fields.push({label:'Time',type:"time",value:moment().format("hh:mm A")})
+                fields.push({label:'Measured By',value:this.data.user.first_name+" "+this.data.user.last_name})
+            }
+                new gform({name:'validate',legend: 'Drug Levels', fields: fields}).on('save', function(e) {
+                if( e.form.validate() ) {
+                    var order = this.data.scenario.prescription_orders[parseInt(e.form.get('id'))]
+                    order.drug_levels = order.drug_levels || [];
+                    if(!this.data.admin){
+                        order.drug_levels.push(_.extend({
+                            date:moment().format("MM/DD/YYYY HH:mm"), 
+                            time:moment().format("hh:mm A"),
+                            measured_by:this.data.user.first_name+" "+this.data.user.last_name
+                        },e.form.get()))
+                    }else{
+                            order.drug_levels.push(e.form.get())
+                    }
+                        order.medication_admin = _.sortBy(order.medication_admin, 'date')
+                        save.call(this,{
+                            form:'prescription_orders.'+parseInt(e.form.get('id')),
+                            data: order,
+                            event:'update'
+                        },function(){
+                            fetch_activity.call(this);
+                            toastr.success('Drug Levels Measured');
+                            // setHash("#page=medication_profile")
+                        });
+                    e.form.trigger('close')
+                    
+                }
+            }.bind(this)).on('cancel', function(e){
+                e.form.trigger('close')
+        }).modal()
+
+
+
+
+        },
         actions:[
             {name:"administer",label:"Administer",icon:"syringe",condition: function(hashParams,scenario,admin){
                 if(typeof scenario[hashParams.form] == "undefined"){return false}
                 return (scenario.prescription_orders[hashParams.id].approved== "Verified");
+            }}
+            ,           
+            {name:"levels",label:"Drug Levels",icon:"plus",type:"info",condition: function(hashParams,scenario,admin){
+                if(typeof scenario[hashParams.form] == "undefined"){return false}
+                return (scenario.prescription_orders[hashParams.id].approved== "Verified" && scenario.prescription_orders[hashParams.id].category =="Infusion");
             }}
             ,
             {name:"edit",label:"Edit",icon:"edit",type:"info",condition: function(hashParams,scenario,admin){
@@ -503,7 +590,7 @@ return [
                 return (hashParams.id && hashParams.form && admin);
             }}
         ],
-        label:'<i class="fa fa-prescription text-muted"></i> Prescription Orders',
+        label:'<i class="fa fa-prescription text-muted"></i> Medication Orders',
         back:"#page=orders"
     },
     
@@ -620,6 +707,7 @@ return [
         slug:"pharmacist_verification",
         approve:function(id){
             this.data.scenario.prescription_orders[parseInt(id)].approved = 'Verified'
+            this.data.scenario.prescription_orders[parseInt(id)].status = 'Active'
             save.call(this,{
                 form:'prescription_orders.'+id,
                 data: this.data.scenario.prescription_orders[parseInt(id)],
@@ -763,7 +851,7 @@ return [
                         },function(){
                             fetch_activity.call(this);
                             toastr.success('Administered');
-                            setHash("#page=medication_admin")
+                            setHash("#page=medication_profile")
                         });
                     e.form.trigger('close')
                     

@@ -9,17 +9,29 @@
             <th>Author</th>
             <th>Provider</th>
             <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         {{#prescription_orders}}
         {{#if approved == "Verified"}}
         <tr class="filterable" data-href="#page=medication_profile&form=prescription_orders&id={{ @index }}">
-            <td>{{#if type == "1"}}Prescription{{else}}Infusion Meds{{/if}}</td>
+            <td>{{category}}</td>
             <td>{{ customRender(date) }}</td>
             <td>{{author}}</td>
             <td>{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}</td>
-            <td>{{#status}}<span class="text-danger">{{status}}</span>{{/status}}{{^status}}<span class="text-success">Active</span>{{/status}}</td>
+            <td><span class="{{#if status== "Discontinued"}}text-danger{{/if}}">{{status}}</span>{{^status}}<span class="text-success">Active</span>{{/status}}</td>
+<td data-id="{{ @index }}">
+                        
+                        {{#medication_admin}}
+                        <div style="padding-bottom:4px">Administered @ {{time}} on {{ moment(date).format("MMM Do") }} by {{administered_by}}
+                            {{#admin}}<div data-action="delete" data-id="{{ @index }}" class="btn btn-danger btn-xs"><i class="fa fa-times"></i> Delete</div>{{/admin}}
+                        </div>
+                        {{/medication_admin}}
+                        {{#if status !== "Discontinued"}}
+                        <div data-action="administer" data-id="{{ @index }}" class="btn btn-success btn-xs"><i class="fa fa-syringe"></i> Administer</div>
+                        {{/if}}
+                    </td>
         </tr>
         {{/if}}
         {{/prescription_orders}}

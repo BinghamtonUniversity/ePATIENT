@@ -22,7 +22,7 @@ class AppController extends Controller
     }
 
     public function getInitData() {
-        $libraries = ['labs','solutions','products','providers'];
+        $libraries = ['labs','solutions','additives','products','prescribers'];
         $response = [];
         foreach($libraries as $library_type) {
             $libraries_obj = Library::where('type',$library_type)->get();

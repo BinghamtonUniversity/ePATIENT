@@ -77,10 +77,11 @@
             <li><a href="/admin/products" ><i class="fa fa-pills fa-fw"></i>&nbsp; Products</a></li>
             @endcan
             @can('manage_prescriber','App\Library')
-            <li><a href="/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Prescribers</a></li>
+            <li><a href="/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Providers</a></li>
             @endcan
             @can('manage_solution','App\Library')
-            <li><a href="/admin/solutions" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Solutions</a></li>
+            <li><a href="/admin/solutions" ><i class="fa fa-syringe fa-fw"></i>&nbsp; Solutions</a></li>
+            <li><a href="/admin/additives" ><i class="fa fa-plus fa-fw"></i>&nbsp; Solution Additives</a></li>
             @endcan
             @can('manage_lab','App\Library')
             <li><a href="/admin/labs" ><i class="fa fa-flask fa-fw"></i>&nbsp; Labs</a></li>
@@ -93,25 +94,26 @@
 
       <ul class="nav nav-sidebar">
         @can('manage','App\User')
-        <li class="@if($page=="users") active @endif"><a href="/admin/users"><i class="fa fa-user fa-fw"></i>&nbsp; Users</a></li>
+        <li class="@if($page=='users') active @endif"><a href="/admin/users"><i class="fa fa-user fa-fw"></i>&nbsp; Users</a></li>
         @endcan
         @can('manage','App\Team')
-        <li class="@if($page=="teams" || $page=="members" || $page=="notes" || $page=="messages") active @endif"><a href="/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
+        <li class="@if($page=='teams' || $page=='members' || $page=='notes' || $page=='messages') active @endif"><a href="/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
         @endcan
         @can('manage','App\Scenario')
-        <li class="@if($page=="scenarios") active @endif"><a href="/admin/scenarios"><i class="fa fa-notes-medical fa-fw"></i>&nbsp; Scenarios</a></li>
+        <li class="@if($page=='scenarios') active @endif"><a href="/admin/scenarios"><i class="fa fa-notes-medical fa-fw"></i>&nbsp; Scenarios</a></li>
         @endcan
         @can('manage_product','App\Library')
-        <li class="@if($page=="products") active @endif"><a href="/admin/products" ><i class="fa fa-pills fa-fw"></i>&nbsp; Products</a></li>
+        <li class="@if($page=='products') active @endif"><a href="/admin/products" ><i class="fa fa-pills fa-fw"></i>&nbsp; Products</a></li>
         @endcan
         @can('manage_prescriber','App\Library')
-        <li class="@if($page=="prescribers") active @endif"><a href="/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Prescribers</a></li>
+        <li class="@if($page=='prescribers') active @endif"><a href="/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Providers</a></li>
         @endcan
         @can('manage_solution','App\Library')
-        <li class="@if($page=="solutions") active @endif"><a href="/admin/solutions" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Solutions</a></li>
+        <li class="@if($page=='solutions') active @endif"><a href="/admin/solutions" ><i class="fa fa-syringe fa-fw"></i>&nbsp; Solutions</a></li>
+        <li><a href="/admin/additives" ><i class="fa fa-plus fa-fw"></i>&nbsp; Solution Additives</a></li>
         @endcan
         @can('manage_lab','App\Library')
-        <li class="@if($page=="labs") active @endif"><a href="/admin/labs" ><i class="fa fa-flask fa-fw"></i>&nbsp; Labs</a></li>
+        <li class="@if($page=='labs') active @endif"><a href="/admin/labs" ><i class="fa fa-flask fa-fw"></i>&nbsp; Labs</a></li>
         @endcan
       </ul>
     </div>

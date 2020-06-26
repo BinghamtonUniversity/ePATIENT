@@ -16,27 +16,28 @@
     <thead>
         <tr>
             <th>Date/Time</th>
-            <th>Order Item</th>
-            <th>Frequency</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Provider</th>
             <th>Start on date/time</th>
             <th>End on date/time</th>
-            <th>Status</th>
         </tr>
     </thead>
     <tbody>
         {{#orders}}
         <tr class="filterable" data-href="#page=orders&form=orders&id={{ @index }}">
-            <td>{{datetime}}</td>
-            <td>{{order_item}}</td>
-            <td>{{frequency}}</td>
-            <td>{{start_time}}</td>
-            <td>{{end_time}}</td>
+            <td>{{customRender(datetime)}}</td>
+            <td>{{category}}</td>
+            <td>{{description}}</td>
             <td>{{status}}
-            
                 {{#if(status == "Completed")}}
                 by {{completed_by}}                
                 {{/if}}
             </td>
+            <td>{{#if _.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}) == null}}{{provider}}{{else}}{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}{{/if}}</td>
+            <td>{{start_time}}</td>
+            <td>{{end_time}}</td>
 
         </tr>
         {{/orders}}
@@ -52,7 +53,7 @@
         <a href="#page=form&form=prescription_orders" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</a>
         <span style="width:200px;float:right;margin-right:20px">{{>filter}}</span>
     {{/if}}
-    <h3 class="panel-title"><i class="fa fa-prescription-bottle"></i> Prescription Orders</h3>
+    <h3 class="panel-title"><i class="fa fa-prescription-bottle"></i> Medication Orders</h3>
   </div>
   <div class="panel-body">
     {{>prescription_orders}}

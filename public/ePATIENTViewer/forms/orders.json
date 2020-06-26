@@ -1,20 +1,19 @@
 {
   "legend": "Orders","type":"fieldset",
   "fields": [
+    {"label":"Date/time","name":"date","type":"datetime","show":[{"type": "matches","name":"admin","value":true}]},
     {
       "type": "select",
       "label": "Category",
       "name": "category",
-      "options": "category"
+      "options": "order_category"
     }, 
-    {"label":"Date/time","type":"datetime","name":"datetime"},
-    {"label":"Provider"},
-    {"label":"Order Item"},
-    {"label":"Order Details"},
-    {"label":"Frequency","type": "select","options":"frequency"},
-    {"label":"Start on", "name":"start_time", "type":"date"},
-    {"label":"End on","name":"end_time", "type":"date"},
-    {"label":"Status","name":"status","type":"custom_radio","value":"New", "options":["New","In progress", "Completed"]},
+    {"label":"Description","type":"textarea"},
+    {"label":"Order Status","name":"status","type":"custom_radio","value":"Active", "options":"order_status"},
+
+    {"label":"Provider", "value":"{{data.author}}","strict":false, "type":"smallcombo","options":"providers","format":{"label":"{{last_name}}","value":"{{id}}"}},
+    {"label":"Start on", "name":"start_time", "type":"datetime"},
+    {"label":"End on","name":"end_time", "type":"datetime"},
     {"label":"Completed By","type":"text", "show":[{"type": "matches","name":"status","value":"Completed"}]}
   ]
 }

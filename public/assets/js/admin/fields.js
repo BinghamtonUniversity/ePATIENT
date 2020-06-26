@@ -91,6 +91,15 @@ adminFormFields = {
       {"label": "Last Name","name":"last_name"},
       {"label": "Address","name":"address"},
       {"label": "Phone","name":"phone"},
+      {"label": "Occupation", "name":"occupation","options":[
+        "MD",
+        "DO",
+        "NP",
+        "PA",
+        {"label":"Pharm D","value":"pharm_d"},
+        "RPH"
+        ]
+      },
       {"label": "DEA","name":"dea"},
       {"label": "NPI","name":"npi"},
       {"name": "id","type": "hidden"} 
@@ -100,6 +109,11 @@ adminFormFields = {
       {"label": "Abbreviation","name":"abbreviation"},
       {"label": "Solution Name/Strength","name":"name"},
       {"label": "Volume","name":"volume"},
+      {"name": "id","type": "hidden"} 
+  
+    ],
+    "additives" : [
+      {"label": "Name","name":"name"},
       {"name": "id","type": "hidden"} 
   
     ],

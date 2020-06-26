@@ -12,14 +12,14 @@
                 {{#messages}}
                     {{#me}}
                         <div class="alert alert-info">
-                            <div class="badge pull-right">{{created_at}}</div>
+                            <div class="badge pull-right parent-hover">{{created_at}}</div>
                             <a href="mailto:{{user.email}}">{{user.first_name}} {{user.last_name}}</a>:
                             {{message}}
                         </div>
                     {{/me}}
                     {{^me}}
                         <div class="alert alert-success">
-                            <div class="badge pull-right">{{created_at}}</div>
+                            <div class="badge pull-right parent-hover">{{created_at}}</div>
                             <a href="mailto:{{user.email}}">{{user.first_name}} {{user.last_name}}</a>:
                             {{message}}
                         </div>

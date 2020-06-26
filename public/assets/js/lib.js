@@ -187,8 +187,9 @@ updateActivity = function(item){
   
   if( typeof gform.instances[item.form.split('.')[0]] !== 'undefined' && 
       (action == 'create' || action == 'update') && 
-      (index+'' == this.data.hashParams.id || typeof this.data.hashParams.id == "undefined")
+      (index+'' == this.data.hashParams.id && typeof this.data.hashParams.id !== "undefined")
   ){
+    // debugger;
     gform.instances[item.form.split('.')[0]].set(item.data)
   }
 

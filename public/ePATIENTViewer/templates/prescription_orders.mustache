@@ -3,21 +3,51 @@
 <table class="table table-bordered table-striped table-hover table-fixed sortable">
     <thead>
         <tr>
-            <th>Medication/Description</th>
-            <th>Date</th>
-            <th>Author</th>
+            <th>Date/Time</th>
+            <th>Category</th>
+            <th style="width:400px">Description</th>
+            <th>Status</th>
             <th>Provider</th>
+            <th>Start on date/time</th>
+            <th>End on date/time</th>
         </tr>
     </thead>
     <tbody>
         {{#prescription_orders}}
+        {{#if status !== "Active"}}
         <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
-            <!--<td>{{#if type == "0"}}Prescription{{else}}Infusion Meds{{/if}}</td>-->
-            <td>{{medication}}{{description}}</td>
-            <td>{{ customRender(date) }}</td>
-            <td>{{author}}</td>
-            <td>{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}</td>
+            <td>{{customRender(datetime)}}</td>
+            <td>{{category}}</td>
+            <td>
+                {{#if category == "Infusion"}}
+                <dl class="dl-horizontal">
+                    <dt>Addative 1</dt><dd>{{additive_1}}</dd>
+                    <dt>Addative 2</dt><dd>{{additive_2}}</dd>
+                    <dt>Solution</dt><dd>{{solution}}</dd>
+                </dl>
+
+                {{else}}
+                <dl class="dl-horizontal">
+                    <dt>Drug/Strength</dt><dd>{{drug}}</dd>
+                    <dt>Route</dt><dd>{{route}}</dd>
+                    <dt>Frequency</dt><dd>{{frequency}}</dd>
+                </dl>
+
+                {{/if}}
+            </td>
+
+            <td>{{status}}
+            
+                {{#if(status == "Complete")}}
+                by {{completed_by}}                
+                {{/if}}
+            </td>
+            <td>{{#if _.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}) == null}}{{provider}}{{else}}{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}{{/if}}</td>
+            <td>{{start_time}}</td>
+            <td>{{end_time}}</td>
         </tr>
+
+        {{/if}}
         {{/prescription_orders}}
     </tbody>
 </table>

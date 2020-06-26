@@ -1,39 +1,57 @@
 {
     "legend": "Prescription Orders","type":"fieldset",
 	"fields": [
-        {"label":"Type", "type":"select","options":[{"label":"Prescription","value":0},{"label":"Infusion Meds","value":1}]},
-		{"label":"Date/time","type":"date","name":"date"},
-        {"label":"Author"},
-        {"label":"Provider","type":"select","options":"providers","label_key":"last_name","value_key":"id"},
+        {"label":"Category", "type":"select","options":"drug_category"},
+        {"label":"Date/time","name":"date","type":"datetime","report":true,"show":[{"type": "matches","name":"admin","value":true}]},
+        {"label":"Provider", "value":"{{data.author}}","strict":false, "type":"smallcombo","options":"providers","format":{"label":"{{first_name}} {{last_name}}","display":"<div>{{first_name}} {{last_name}}</div><div>{{dea}} {{npi}}</div>","value":"{{id}}"}},
         
-        
-        {"label":"Drug","show":[{"type": "matches","name":"type","value":"0"}]},
-        {"label":"Dose"},
-        {"label":"Route","options":"route","show":[{"type": "matches","name":"type","value":"0"}]},
-        {"label":"Directions","show":[{"type": "matches","name":"type","value":"0"}]},
-        {"label":"Dispense Quantity","show":[{"type": "matches","name":"type","value":"0"}]},
-        {"label":"Days Supply","show":[{"type": "matches","name":"type","value":"0"}]},
-        {"label":"Dispense as Written","type":"checkbox","show":[{"type": "matches","name":"type","value":"0"}]},
-        {"label":"Med","type":"custom_radio","options":["Home Med", "New Scheduled Med", "New PRN Med"],"show":[{"type": "matches","name":"type","value":"0"}]},
-        
-        {"label":"Description","type":"textarea","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Solution","type":"select","options":["Not the Precipitate","Other thing in this list"],"show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Solution Volume","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Solution Rate","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Number of bags","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Additive 1","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Addition 1 Quantity","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Additive 2","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Addition 2 Quantity","show":[{"type": "matches","name":"type","value":"1"}]},
-        {"label":"Order Details","show":[{"type": "matches","name":"type","value":"1"}]},
-        
-        
-        {"label":"Frequency","options":"frequency"},
-        {"label":"Scheduled Time","options":"scheduled", "type":"time"},
+        {"label":"DEA/NPI number", "name":"dea_npi_number"},
+        {"label":"Drug/Strength","name":"drug","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
+        {"label":"Barcode ID","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
+        {"label":"Route","type":"select","options":"route","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
+
+        {"label":"Additive 1","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+        {"label":"Addition 1 Quantity","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+
+        {"label":"Additive 2","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+        {"label":"Addition 2 Quantity","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+
+        {"label":"Solution","type":"select","options":"solutions","show":[{"type": "matches","name":"category","value":"Infusion"}],"format":{"label":"{{name}}","value":"{{id}}"}},
+        {"label":"Solution Volume","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+        {"label":"Solution Rate","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+        {"label":"Number of bags","show":[{"type": "matches","name":"category","value":"Infusion"}]},
+
+
+        {"label":"Frequency","type":"select","options":"frequency"},
+        {"label":"Directions","type":"textarea"},
+        {"label":"Dispense Quantity"},
+        {"label":"Days Supply"},
+
+        {"label":"Dispense as Written","type":"checkbox","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
+        {"label":"Refills","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
+
+        {"label":"Status","type":"select","value":"Non-Verified/Processing","options":"drug_order_status","show":[{"type": "matches","name":"admin","value":true}],"parse":"true","report":true},
 		{"label":"Start on","name":"start_time", "type":"date"},
-		{"label":"End on","name":"end_time", "type":"date"},
-        {"label":"Refills"},
+        {"label":"End on","name":"end_time", "type":"date"},
+        {"label":"Notes","type":"textarea"},
+        {"label":"Drug Levels",
+            "array":{
+				"duplicate": {
+					"enable": false
+				},
+				"remove": {
+					"enable": false
+				}
+			}
+            
+            ,"type":"table","fields":[
+                {"label":"Measured by"},
+                {"label":"ID"},
+                {"label":"Drug Levels"},
+                {"label":"Date"},
+                {"label":"Time"}
+        ],"show":[{"type": "matches","name":"admin","value":true}],"report":true},
         {"label":"Approved","name":"approved","type":"checkbox","show":[{"type": "matches","name":"admin","value":true}],"options":[{"label":"Declined","value":"Declined"},{"label":"Verified","value":"Verified"}]}
-    
 	]
 }
+

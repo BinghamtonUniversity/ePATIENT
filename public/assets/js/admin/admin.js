@@ -168,6 +168,7 @@ ajax.resources = {
     "scenarios": "/scenarios{{#request.id}}/{{request.id}}{{/request.id}}",
     "products": "/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
     "prescribers": "/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
+    "additives": "/library/additives{{#request.id}}/{{request.id}}{{/request.id}}",
     "solutions": "/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
     "labs": "/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
     "scenario_log": "/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
