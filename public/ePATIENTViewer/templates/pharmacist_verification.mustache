@@ -16,9 +16,9 @@
     <tbody>
 
         {{#prescription_orders}}
-        {{#if (approved != "Verified")}}
+        {{#if (approved != "Verified" && approved != "Declined")}}
         <tr class="filterable" data-href="#page=pharmacist_verification&form=prescription_orders&id={{ @index }}">
-            <td>{{#if type == "0"}}Prescription{{else}}Infusion Meds{{/if}}</td>
+            <td>{{category}}</td>
             <td>{{ customRender(date) }}</td>
             <td>{{author}}</td>
             <td>{{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).first_name}} {{_.findWhere(gform.collections.get('providers'),{id:parseInt(provider)}).last_name}}</td>

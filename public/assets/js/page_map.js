@@ -511,9 +511,9 @@ return [
                 event:'create'
             }
             debugger;
-            if(updates.category == "Home Medications"){
-                updates.status = "Active"
-            }
+            // if(updates.category == "Home Medications"){
+            //     updates.status = "Active"
+            // }
             if(typeof this.data.hashParams.id !== 'undefined'){
 
                 var medication_admin = this.data.scenario.prescription_orders[parseInt(this.data.hashParams.id)].medication_admin || [];
@@ -583,7 +583,7 @@ return [
             }}
             ,
             {name:"edit",label:"Edit",icon:"edit",type:"info",condition: function(hashParams,scenario,admin){
-                return (hashParams.id && hashParams.form && admin);
+                return (hashParams.id && hashParams.form && admin)||scenario.prescription_orders[hashParams.id].approved== "Declined";
             }},
     
             {name:"delete",label:"Delete",icon:"times",type:"danger",condition: function(hashParams,scenario,admin){

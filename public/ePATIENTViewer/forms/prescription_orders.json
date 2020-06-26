@@ -6,7 +6,7 @@
         {"label":"Provider", "value":"{{data.author}}","strict":false, "type":"smallcombo","options":"providers","format":{"label":"{{first_name}} {{last_name}}","display":"<div>{{first_name}} {{last_name}}</div><div>{{dea}} {{npi}}</div>","value":"{{id}}"}},
         
         {"label":"DEA/NPI number", "name":"dea_npi_number"},
-        {"label":"Drug/Strength","name":"drug","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
+        {"label":"Drug/Strength","name":"drug","type":"smallcombo","options":"products", "show":[{"type": "not_matches","name":"category","value":"Infusion"}],"format":{"label":"{{name}}","display":"<div>{{name}}</div><div><span class=\"pull-right\">{{barcode}}</span> {{#image}}<img style=\"max-width: 50px;max-height: 50px;\" src=\"/api/library/products/{{id}}/img\"/>{{/image}}</div>","value":"{{id}}"}},
         {"label":"Barcode ID","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
         {"label":"Route","type":"select","options":"route","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
 
@@ -31,8 +31,8 @@
         {"label":"Refills","show":[{"type": "not_matches","name":"category","value":"Infusion"}]},
 
         {"label":"Status","type":"select","value":"Non-Verified/Processing","options":"drug_order_status","show":[{"type": "matches","name":"admin","value":true}],"parse":"true","report":true},
-		{"label":"Start on","name":"start_time", "type":"date"},
-        {"label":"End on","name":"end_time", "type":"date"},
+        {"label":"Start on", "name":"start_time", "type":"datetime"},
+        {"label":"End on","name":"end_time", "type":"datetime"},
         {"label":"Notes","type":"textarea"},
         {"label":"Drug Levels",
             "array":{
@@ -51,7 +51,7 @@
                 {"label":"Date"},
                 {"label":"Time"}
         ],"show":[{"type": "matches","name":"admin","value":true}],"report":true},
-        {"label":"Approved","name":"approved","type":"checkbox","show":[{"type": "matches","name":"admin","value":true}],"options":[{"label":"Declined","value":"Declined"},{"label":"Verified","value":"Verified"}]}
+        {"label":"Approved","name":"approved","type":"select","show":[{"type": "matches","name":"admin","value":true}],"options":[{"label":"Created","value":"created"},{"label":"Declined","value":"Declined"},{"label":"Verified","value":"Verified"}]}
 	]
 }
 

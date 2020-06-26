@@ -141,8 +141,8 @@ toastr.options = {
                         setHash((this.data.page_map[temp.name] || this.data.page_map.default).back)
                     });
                 }.bind(this)).on('change:provider',_.debounce(function(e){
-                    if(typeof e.form.find('dea_npi_number') !== 'undefined' && e.form.get('dea_npi_number') == "" && typeof _.find(gform.collections.get('providers'),{id:parseInt(e.field.get())}) !== 'undefined'){
-                        e.form.find('dea_npi_number').set(_.find(gform.collections.get('providers'),{id:parseInt(e.field.get())}).npi)
+                    if(typeof e.form.find('dea_npi_number') !== 'undefined' && typeof _.find(gform.collections.get('providers'),{id:parseInt(e.field.get())}) !== 'undefined'){
+                        e.form.find('dea_npi_number').set(gform.m('{{dea}} {{npi}}',_.find(gform.collections.get('providers'),{id:parseInt(e.field.get())}) ))
                     }
                 }.bind(this),400,{leading:false,trailing:true}));;
             }

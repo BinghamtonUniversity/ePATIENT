@@ -14,7 +14,7 @@
     </thead>
     <tbody>
         {{#prescription_orders}}
-        {{#if status !== "Active"}}
+        {{#if approved != "Verified"}}
         <tr class="filterable" data-href="#page=prescription_orders&form=prescription_orders&id={{ @index }}">
             <td>{{customRender(datetime)}}</td>
             <td>{{category}}</td>
@@ -37,7 +37,9 @@
             </td>
 
             <td>{{status}}
-            
+                {{#if approved ==  'Declined'}}
+                <span class="text-danger">(declined)</span>
+                {{/if}}
                 {{#if(status == "Complete")}}
                 by {{completed_by}}                
                 {{/if}}
