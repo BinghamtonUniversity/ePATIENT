@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Libraries\Saml2Auth;
 use Illuminate\Routing\Controller;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Socialite;
 
-class AuthSaml2Controller extends Controller
+class Saml2Controller extends Controller
 {
 
     protected $saml2Auth;

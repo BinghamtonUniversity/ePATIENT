@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use App\Team;
 use App\TeamMember;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
-class AuthDemoController extends Controller
+class DemoController extends Controller
 {
     public function __construct() {
     }
