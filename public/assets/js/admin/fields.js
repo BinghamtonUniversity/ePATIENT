@@ -44,7 +44,7 @@ adminFormFields = {
         "label": "Scenario",
         "name": "scenario_id",
         "type": "select",
-        "choices":"/apps/epatient/api/scenarios"
+        "choices":"/app/epatient/api/scenarios"
       },
       {
         "type": "hidden",
@@ -70,7 +70,7 @@ adminFormFields = {
       {
         "label":"Roles",
         "name":"roles",
-        "choices":"/apps/epatient/api/roles",
+        "choices":"/app/epatient/api/roles",
         "type":"check_collection"
       },
       {"name": "id","type": "hidden"} 
@@ -146,7 +146,7 @@ adminFormFields = {
             "label_key": "title",
             "value_key": "id",
             "choices":"roles",
-            "choices":"/apps/epatient/api/roles"
+            "choices":"/app/epatient/api/roles"
         },
         {
             "type": "checkbox",

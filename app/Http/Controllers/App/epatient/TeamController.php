@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App\epatient;
 
 use App\User;
 use App\Team;
@@ -11,10 +11,9 @@ use App\Scenario;
 use App\TeamScenario;
 use App\TeamActivityLog;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
-class EPatientTeamController extends TeamController
+class TeamController extends \App\Http\Controllers\TeamController
 {
     public function __construct()
     {

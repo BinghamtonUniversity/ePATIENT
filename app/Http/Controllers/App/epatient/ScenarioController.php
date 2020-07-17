@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App\epatient;
 
+use App\Http\Controllers\Controller;
 use App\Scenario;
 use Illuminate\Http\Request;
 
-class EPatientScenarioController extends Controller
+class ScenarioController extends Controller
 {
     public function __construct()
     {

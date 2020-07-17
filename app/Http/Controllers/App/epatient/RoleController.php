@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App\epatient;
 
+use App\Http\Controllers\Controller;
 use App\Role;
 use Illuminate\Http\Request;
 
-class EPatientRoleController extends Controller
+class RoleController extends Controller
 {
     public function __construct()
     {

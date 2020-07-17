@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App\epatient;
+use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Team;
@@ -10,10 +11,9 @@ use App\TeamNote;
 use App\TeamScenario;
 use App\TeamActivityLog;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
-class EPatientAdminController extends AdminController {
+class AdminController extends Controller {
 
     public function admin(Request $request, $page=null) {
         if (is_null($page)) {

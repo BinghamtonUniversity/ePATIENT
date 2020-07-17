@@ -75,7 +75,7 @@ Cobler.types.uApp = function(container){
               this.bae.app.on('refetch', function(data){
                 var options;
                 if(typeof this.bae.data.user.id == 'undefined') {
-                  options =  (Lockr.get('/api/apps/instances/'+this.get().app_id+'/user_options')|| {options:{}});
+                  options =  (Lockr.get('/api/app/instances/'+this.get().app_id+'/user_options')|| {options:{}});
                 }
 
                 $.ajax({
@@ -85,7 +85,7 @@ Cobler.types.uApp = function(container){
                   contentType: "application/json",
                   success:function(data){
                       if(typeof data.user.id == 'undefined') {
-                        var url = '/api/apps/instances/'+this.get().app_id+'/user_options';
+                        var url = '/api/app/instances/'+this.get().app_id+'/user_options';
                         data.user.options = (Lockr.get(url)|| {options:{}}).options;
                       }
                     this.bae.app.update(data);

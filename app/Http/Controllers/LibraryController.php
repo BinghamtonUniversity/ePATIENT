@@ -6,7 +6,7 @@ use Storage;
 use App\Library;
 use Illuminate\Http\Request;
 
-class EPatientLibraryController extends Controller
+class LibraryController extends Controller
 {
     public function __construct()
     {

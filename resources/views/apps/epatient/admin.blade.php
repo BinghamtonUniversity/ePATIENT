@@ -94,23 +94,23 @@
 
       <ul class="nav nav-sidebar">
         @can('manage','App\Team')
-        <li class="@if($page=='teams' || $page=='members' || $page=='notes' || $page=='messages') active @endif"><a href="/apps/epatient/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
+        <li class="@if($page=='teams' || $page=='members' || $page=='notes' || $page=='messages') active @endif"><a href="/app/epatient/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
         @endcan
         @can('manage','App\Scenario')
-        <li class="@if($page=='scenarios') active @endif"><a href="/apps/epatient/admin/scenarios"><i class="fa fa-notes-medical fa-fw"></i>&nbsp; Scenarios</a></li>
+        <li class="@if($page=='scenarios') active @endif"><a href="/app/epatient/admin/scenarios"><i class="fa fa-notes-medical fa-fw"></i>&nbsp; Scenarios</a></li>
         @endcan
         @can('manage_product','App\Library')
-        <li class="@if($page=='products') active @endif"><a href="/apps/epatient/admin/products" ><i class="fa fa-pills fa-fw"></i>&nbsp; Products</a></li>
+        <li class="@if($page=='products') active @endif"><a href="/app/epatient/admin/products" ><i class="fa fa-pills fa-fw"></i>&nbsp; Products</a></li>
         @endcan
         @can('manage_prescriber','App\Library')
-        <li class="@if($page=='prescribers') active @endif"><a href="/apps/epatient/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Providers</a></li>
+        <li class="@if($page=='prescribers') active @endif"><a href="/app/epatient/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Providers</a></li>
         @endcan
         @can('manage_solution','App\Library')
-        <li class="@if($page=='solutions') active @endif"><a href="/apps/epatient/admin/solutions" ><i class="fa fa-syringe fa-fw"></i>&nbsp; Solutions</a></li>
-        <li><a href="/apps/epatient/admin/additives" ><i class="fa fa-plus fa-fw"></i>&nbsp; Solution Additives</a></li>
+        <li class="@if($page=='solutions') active @endif"><a href="/app/epatient/admin/solutions" ><i class="fa fa-syringe fa-fw"></i>&nbsp; Solutions</a></li>
+        <li><a href="/app/epatient/admin/additives" ><i class="fa fa-plus fa-fw"></i>&nbsp; Solution Additives</a></li>
         @endcan
         @can('manage_lab','App\Library')
-        <li class="@if($page=='labs') active @endif"><a href="/apps/epatient/admin/labs" ><i class="fa fa-flask fa-fw"></i>&nbsp; Labs</a></li>
+        <li class="@if($page=='labs') active @endif"><a href="/app/epatient/admin/labs" ><i class="fa fa-flask fa-fw"></i>&nbsp; Labs</a></li>
         @endcan
       </ul>
     </div>
@@ -136,7 +136,7 @@
     <script src='/assets/js/vendor/bootstrap.full.berry.js'></script> 
     <script src='/assets/js/vendor/berrytables.full.js'></script> 
     <script src="/assets/js/admin/libs.js"></script>
-    <script src="/assets/apps/js/epatient/admin.js"></script>
+    <script src="/assets/app/epatient/js/admin.js"></script>
 <script>
 
 this.app=ajax;

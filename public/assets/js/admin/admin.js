@@ -141,7 +141,7 @@ build_table = function(resource, options) {
     if(resource == 'scenarios'){
         options.events = [
             {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Configuration', callback: function(model){
-                window.open("/apps/epatient/admin/scenarios/"+model.attributes.id+"/configuration",'_blank');
+                window.open("/app/epatient/admin/scenarios/"+model.attributes.id+"/configuration",'_blank');
 			}, multiEdit: false},
 		    {'name': 'duplicate', 'label': '<i class="fa fa-copy"></i> Duplicate', callback: function(model){
                 $().berry({

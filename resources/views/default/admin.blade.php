@@ -99,7 +99,7 @@
         @can('manage','App\Team')
         <li class="@if($page=='teams' || $page=='members' || $page=='notes' || $page=='messages') active @endif"><a href="/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
         @endcan
-        <li><a href="/apps/epatient/admin"><i class="fa fa-address-book fa-fw"></i>&nbsp; ePATIENT Admin</a></li>
+        <li><a href="/app/epatient/admin"><i class="fa fa-address-book fa-fw"></i>&nbsp; ePATIENT Admin</a></li>
       </ul>
     </div>
     <div class="container-fluid" id="main-container">

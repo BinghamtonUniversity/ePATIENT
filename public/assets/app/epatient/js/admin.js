@@ -139,7 +139,7 @@ build_table = function(resource, options) {
     if(resource == 'scenarios'){
         options.events = [
             {'name': 'params', 'label': '<i class="fa fa-file-medical"></i> Configuration', callback: function(model){
-                window.open("/apps/epatient/admin/scenarios/"+model.attributes.id+"/configuration",'_blank');
+                window.open("/app/epatient/admin/scenarios/"+model.attributes.id+"/configuration",'_blank');
 			}, multiEdit: false},
 		    {'name': 'duplicate', 'label': '<i class="fa fa-copy"></i> Duplicate', callback: function(model){
                 $().berry({
@@ -160,20 +160,20 @@ build_table = function(resource, options) {
 }       
 
 ajax.resources = {
-    "roles": "/apps/epatient/api/roles{{#request.id}}/{{request.id}}{{/request.id}}",
+    "roles": "/app/epatient/api/roles{{#request.id}}/{{request.id}}{{/request.id}}",
     "teams": "/api/teams{{#request.id}}/{{request.id}}{{/request.id}}{{#request.team_id}}/{{request.team_id}}{{/request.team_id}}{{#request.resource}}/{{request.resource}}{{/request.resource}}{{#request.resource_id}}/{{request.resource_id}}{{/request.resource_id}}{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
-    "scenarios": "/apps/epatient/api/scenarios{{#request.id}}/{{request.id}}{{/request.id}}",
-    "products": "/apps/epatient/api/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
-    "prescribers": "/apps/epatient/api/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
-    "additives": "/apps/epatient/api/library/additives{{#request.id}}/{{request.id}}{{/request.id}}",
-    "solutions": "/apps/epatient/api/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
-    "labs": "/apps/epatient/api/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
-    "scenario_log": "/apps/epatient/api/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
-    "activity": "/apps/epatient/api/teams/{{request.team_id}}/activity",
+    "scenarios": "/app/epatient/api/scenarios{{#request.id}}/{{request.id}}{{/request.id}}",
+    "products": "/app/epatient/api/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
+    "prescribers": "/app/epatient/api/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
+    "additives": "/app/epatient/api/library/additives{{#request.id}}/{{request.id}}{{/request.id}}",
+    "solutions": "/app/epatient/api/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
+    "labs": "/app/epatient/api/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
+    "scenario_log": "/app/epatient/api/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
+    "activity": "/app/epatient/api/teams/{{request.team_id}}/activity",
     "update_permissions": "/api/users/{{request.user_id}}/permissions",
-    "members": "/apps/epatient/api/teams{{#request.id}}/{{request.id}}{{/request.id}}/members{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
-    "messages": "/apps/epatient/api{{#request.team_id}}/teams/{{request.team_id}}/messages/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/messages{{/request.team_id}}",
-    "notes": "/apps/epatient/api{{#request.team_id}}/teams/{{request.team_id}}/notes/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/notes{{/request.team_id}}",
+    "members": "/app/epatient/api/teams{{#request.id}}/{{request.id}}{{/request.id}}/members{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
+    "messages": "/app/epatient/api{{#request.team_id}}/teams/{{request.team_id}}/messages/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/messages{{/request.team_id}}",
+    "notes": "/app/epatient/api{{#request.team_id}}/teams/{{request.team_id}}/notes/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/notes{{/request.team_id}}",
 };
 
 toastr.options = {

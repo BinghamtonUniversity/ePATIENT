@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\App\epatient;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Library;
@@ -9,7 +10,7 @@ use App\User;
 use App\Team;
 use App\Scenario;
 
-class EPatientAppController extends Controller
+class AppController extends Controller
 {
     /**
      * Create a new controller instance.

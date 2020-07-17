@@ -12,7 +12,7 @@
                 <center><h3 style="text-align:center;">Please Select a Team / Scenario</h1></center>
                 <div class="list-group">
                 @foreach ($teams as $team)
-                    <a class="list-group-item" href="/apps/epatient/team/{{$team->id}}">{{$team->name}}: {{$team->scenario->name}}</a>
+                    <a class="list-group-item" href="/app/epatient/team/{{$team->id}}">{{$team->name}}: {{$team->scenario->name}}</a>
                 @endforeach
                 </div>
             @else

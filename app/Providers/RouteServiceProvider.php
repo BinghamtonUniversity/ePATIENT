@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider
         ], function ($router) {
             require base_path('routes/web.php');
             require base_path('routes/authentication.php');
-            require base_path('routes/apps/epatient.php');
+            require base_path('routes/app/epatient.php');
         });
     }
 
