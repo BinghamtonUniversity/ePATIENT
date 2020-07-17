@@ -1,5 +1,3 @@
-// import { request } from "https";
-
 build_table = function(resource, options) {
     var options = options || {};
     if(typeof options.add == 'undefined'){
@@ -162,21 +160,20 @@ build_table = function(resource, options) {
 }       
 
 ajax.resources = {
-    "users": "/api/users{{#request.id}}/{{request.id}}{{/request.id}}",
-    "roles": "/api/roles{{#request.id}}/{{request.id}}{{/request.id}}",
+    "roles": "/apps/epatient/api/roles{{#request.id}}/{{request.id}}{{/request.id}}",
     "teams": "/api/teams{{#request.id}}/{{request.id}}{{/request.id}}{{#request.team_id}}/{{request.team_id}}{{/request.team_id}}{{#request.resource}}/{{request.resource}}{{/request.resource}}{{#request.resource_id}}/{{request.resource_id}}{{/request.resource_id}}{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
-    "scenarios": "/api/scenarios{{#request.id}}/{{request.id}}{{/request.id}}",
-    "products": "/api/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
-    "prescribers": "/api/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
-    "additives": "/api/library/additives{{#request.id}}/{{request.id}}{{/request.id}}",
-    "solutions": "/api/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
-    "labs": "/api/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
-    "scenario_log": "/api/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
-    "activity": "/api/teams/{{request.team_id}}/activity",
+    "scenarios": "/apps/epatient/api/scenarios{{#request.id}}/{{request.id}}{{/request.id}}",
+    "products": "/apps/epatient/api/library/products{{#request.id}}/{{request.id}}{{/request.id}}",
+    "prescribers": "/apps/epatient/api/library/prescribers{{#request.id}}/{{request.id}}{{/request.id}}",
+    "additives": "/apps/epatient/api/library/additives{{#request.id}}/{{request.id}}{{/request.id}}",
+    "solutions": "/apps/epatient/api/library/solutions{{#request.id}}/{{request.id}}{{/request.id}}",
+    "labs": "/apps/epatient/api/library/labs{{#request.id}}/{{request.id}}{{/request.id}}",
+    "scenario_log": "/apps/epatient/api/teams/{{request.team_id}}/scenario_logs/{{user.unique_id}}",
+    "activity": "/apps/epatient/api/teams/{{request.team_id}}/activity",
     "update_permissions": "/api/users/{{request.user_id}}/permissions",
-    "members": "/api/teams{{#request.id}}/{{request.id}}{{/request.id}}/members{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
-    "messages": "/api/{{#request.team_id}}/teams/{{request.team_id}}/messages/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/messages{{/request.team_id}}",
-    "notes": "/api/{{#request.team_id}}/teams/{{request.team_id}}/notes/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/notes{{/request.team_id}}",
+    "members": "/apps/epatient/api/teams{{#request.id}}/{{request.id}}{{/request.id}}/members{{#request.user_id}}/{{request.user_id}}{{/request.user_id}}",
+    "messages": "/apps/epatient/api{{#request.team_id}}/teams/{{request.team_id}}/messages/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/messages{{/request.team_id}}",
+    "notes": "/apps/epatient/api{{#request.team_id}}/teams/{{request.team_id}}/notes/{{request.id}}{{/request.team_id}}{{^request.team_id}}/teams/{{request.id}}/notes{{/request.team_id}}",
 };
 
 toastr.options = {

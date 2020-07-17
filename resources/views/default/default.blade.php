@@ -37,7 +37,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/" style="background: rgb(51, 85, 136);color:white;padding: 0px 0px 0px 25px;">
-            <h3 style="color:#fff;margin-top:12px;"><i class="fa fa-address-book"></i> ePATIENT</h3>
+            <h3 style="color:#fff;margin-top:12px;"><i class="fa fa-address-book"></i> ESTO</h3>
           </a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->

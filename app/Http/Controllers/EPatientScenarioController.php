@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Scenario;
 use Illuminate\Http\Request;
 
-class ScenarioController extends Controller
+class EPatientScenarioController extends Controller
 {
     public function __construct()
     {

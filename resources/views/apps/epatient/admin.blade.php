@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0" />
     <link rel="icon"  type="image/png" href="/assets/icons/fontawesome/gray/32/address-book.png">
-    <title>Admin | ESTO </title>
+    <title>Admin | ePATIENT</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/" style="background: #d9534f;color:white;padding: 0px 0px 0px 25px;">
-            <h3 style="color:#fff;margin-top:12px;"><i class="fa fa-address-book"></i> ESTO </h3>
+            <h3 style="color:#fff;margin-top:12px;"><i class="fa fa-address-book"></i> ePATIENT</h3>
           </a>
             <ul class="nav navbar-nav  hidden-xs">
                 <li><a href="#"><h4 style="margin:0">{{$title}}</h4></a></li>
@@ -50,7 +50,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-          <li><a href="/"><h4 style="margin:0;">ESTO  Admin</h4></a>
+          <li><a href="/"><h4 style="margin:0;">ePATIENT Admin</h4></a>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle user-info" data-toggle="dropdown" role="button">
                 <img class="gravatar" src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}?d=mm" /> 
@@ -93,13 +93,25 @@
     <div class="col-sm-3 col-md-2 sidebar">
 
       <ul class="nav nav-sidebar">
-        @can('manage','App\User')
-        <li class="@if($page=='users') active @endif"><a href="/admin/users"><i class="fa fa-user fa-fw"></i>&nbsp; Users</a></li>
-        @endcan
         @can('manage','App\Team')
-        <li class="@if($page=='teams' || $page=='members' || $page=='notes' || $page=='messages') active @endif"><a href="/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
+        <li class="@if($page=='teams' || $page=='members' || $page=='notes' || $page=='messages') active @endif"><a href="/apps/epatient/admin/teams"><i class="fa fa-users fa-fw"></i>&nbsp; Teams</a></li>
         @endcan
-        <li><a href="/apps/epatient/admin"><i class="fa fa-address-book fa-fw"></i>&nbsp; ePATIENT Admin</a></li>
+        @can('manage','App\Scenario')
+        <li class="@if($page=='scenarios') active @endif"><a href="/apps/epatient/admin/scenarios"><i class="fa fa-notes-medical fa-fw"></i>&nbsp; Scenarios</a></li>
+        @endcan
+        @can('manage_product','App\Library')
+        <li class="@if($page=='products') active @endif"><a href="/apps/epatient/admin/products" ><i class="fa fa-pills fa-fw"></i>&nbsp; Products</a></li>
+        @endcan
+        @can('manage_prescriber','App\Library')
+        <li class="@if($page=='prescribers') active @endif"><a href="/apps/epatient/admin/prescribers" ><i class="fa fa-user-md fa-fw"></i>&nbsp; Providers</a></li>
+        @endcan
+        @can('manage_solution','App\Library')
+        <li class="@if($page=='solutions') active @endif"><a href="/apps/epatient/admin/solutions" ><i class="fa fa-syringe fa-fw"></i>&nbsp; Solutions</a></li>
+        <li><a href="/apps/epatient/admin/additives" ><i class="fa fa-plus fa-fw"></i>&nbsp; Solution Additives</a></li>
+        @endcan
+        @can('manage_lab','App\Library')
+        <li class="@if($page=='labs') active @endif"><a href="/apps/epatient/admin/labs" ><i class="fa fa-flask fa-fw"></i>&nbsp; Labs</a></li>
+        @endcan
       </ul>
     </div>
     <div class="container-fluid" id="main-container">
@@ -124,7 +136,7 @@
     <script src='/assets/js/vendor/bootstrap.full.berry.js'></script> 
     <script src='/assets/js/vendor/berrytables.full.js'></script> 
     <script src="/assets/js/admin/libs.js"></script>
-    <script src="/assets/js/admin/admin.js"></script>
+    <script src="/assets/apps/js/epatient/admin.js"></script>
 <script>
 
 this.app=ajax;

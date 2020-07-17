@@ -9,7 +9,7 @@ ajax.handler = function(name, data, callback_success, callback_fail, verb){
         var data_to_send = JSON.stringify(data);
     }
     send_data = {request:data}
-    url = '/api'+gform.renderString(ajax.resources[name],send_data)
+    url = gform.renderString(ajax.resources[name],send_data)
     $.ajax({
         url: url,
         type: verb,

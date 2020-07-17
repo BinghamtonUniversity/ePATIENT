@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Socialite;
 
-class Saml2Controller extends Controller
+class AuthSaml2Controller extends Controller
 {
 
     protected $saml2Auth;
@@ -28,7 +28,7 @@ class Saml2Controller extends Controller
     public function wayf() {
         if(!Auth::user()){
             $enabled_idps = explode(',',config('saml2_settings.enabled_idps'));
-            return view('wayf',['enabled_idps'=>$enabled_idps]);
+            return view('auth.wayf',['enabled_idps'=>$enabled_idps]);
         } else {
             return redirect('/');
         }  
@@ -191,7 +191,7 @@ class Saml2Controller extends Controller
         } catch (\Exception $e) {
             $full_logout = false;
         }
-        return view('logout',['full_logout' => $full_logout]);
+        return view('auth.logout',['full_logout' => $full_logout]);
     }
 
     public function idps(Request $request)

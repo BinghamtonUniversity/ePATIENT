@@ -9,7 +9,7 @@ use App\User;
 use App\Team;
 use App\Scenario;
 
-class AppController extends Controller
+class EPatientAppController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -123,7 +123,8 @@ class AppController extends Controller
         })->with(['scenario'=>function($query){
             $query->select('id','name');
         }])->get();
-        return view('home',['teams'=>$teams,'user'=>Auth::user()]);
+        // dd($teams);
+        return view('apps.epatient.home',['teams'=>$teams,'user'=>Auth::user()]);
     }
 
 }

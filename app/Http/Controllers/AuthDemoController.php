@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
-class DemoController extends Controller
+class AuthDemoController extends Controller
 {
     public function __construct() {
     }
@@ -27,10 +27,10 @@ class DemoController extends Controller
                 Auth::login($user,true);
                 return redirect('/');
             } else {
-                return view('demo_login',['error'=>'The '.$request->accountId.' guest user account is not authorized']);
+                return view('auth.demo_login',['error'=>'The '.$request->accountId.' guest user account is not authorized']);
             }
         } else {
-            return view('demo_login');
+            return view('auth.demo_login');
         }
     }
 }

@@ -49,7 +49,7 @@ Cobler.types.uApp = function(container){
                 send_data = {request:data}
                 // I'm sure there's a way better to get the app resources, but whatever
                 app_resources = apps[0].app.code.resources;
-                url = '/api'+gform.renderString(app_resources[name],send_data)
+                url = gform.renderString(app_resources[name],send_data)
                 $.ajax({
                 url: url,
                 type: verb,
