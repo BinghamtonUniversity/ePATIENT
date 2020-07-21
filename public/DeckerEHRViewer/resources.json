@@ -1,0 +1,6 @@
+{
+    "submit": "/app/deckerehr/api/results",
+    "forms": "/app/deckerehr/api/forms",
+    "templates": "/app/deckerehr/api/templates",
+    "scenarios": "/app/deckerehr/api/scenarios"
+}

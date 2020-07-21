@@ -1,0 +1,297 @@
+@import url(//fonts.googleapis.com/css?family=Dancing+Script|Lobster|Arizona);
+.main-container {
+    background-color: #fff;
+}
+.hospital-banner {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 48pt;
+}
+
+.bu-dark-green {
+    color: #274e13;
+}
+
+.bu-dark-green-background {
+    background-color: #274e13;
+}
+
+.bu-light-green {
+    color: #b6d7a8;
+}
+
+.bu-light-green-background {
+    background-color: #b6d7a8;
+}
+
+.bu-dark-green-box {
+    color: #b6d7a8;
+    background-color: #274e13;
+    font-weight: bold;
+}
+
+.bu-light-green-box {
+    color:  #274e13;
+    background-color: #b6d7a8;
+    font-weight: bold;
+}
+
+table.basic{
+
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.basic th,.basic td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 9px;
+}
+
+.handwritten {
+    font-family: Dancing_Script, Lobster, Arizona, cursive, sans-serif;
+}
+
+.disabled-link{
+    pointer-events: none;
+    color: Grey;
+}
+
+
+/*****************************************/
+
+
+/*****************************************/
+.fieldlist > div{
+    padding: 5px 0;
+
+}
+.fieldlist > div span {
+    font-weight: bold;
+}
+
+
+/*****************************************/
+#app .widget .list-group-ehr .list-group-item {
+    border-left: solid 1px;
+    border-right: solid 1px;
+}
+#app .widget .list-group-ehr a.list-group-item{
+    background-color: #b6d7a8;
+    border-color: #000;
+    font-weight: bold;
+    color:#888;
+}
+#app .widget .list-group-ehr .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+#app .widget .list-group-ehr .list-group-item:last-child{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+#app .widget .list-group-ehr a[href].list-group-item {
+    color: #274e13;
+}
+#app .widget .list-group-item {
+    padding: 9px;
+}
+
+/*****************************************/
+.header.row {margin-bottom: 15px;}
+.header.row > div{
+    border: solid 1px black;
+    padding: 10px;
+    height: 80px;
+}
+.header.row > div:first-child {    
+    color:  #274e13;
+    background-color: #b6d7a8;
+    font-size: 22px;
+    font-weight: bold;
+
+}
+.header.row > div:last-child {
+    text-align: right;
+    padding-top: 50px;    
+    color: #b6d7a8;
+    background-color: #274e13;
+    border-left:0;
+}
+
+
+/*****************************************/
+.ehrfooter.row{
+    margin-top: 15px;
+}
+.ehrfooter.row > div{
+    border: solid 1px #000;
+    padding: 10px;
+}
+.ehrfooter.row >div:first-child {    
+    background-color: #274e13;
+    color:#fff;
+}
+.ehrfooter.row >div:last-child {
+    background-color: #b6d7a8;
+    border-left:0;
+}
+
+/*****************************************/
+.section.row > div{
+    background-color: #274e13;
+    border: solid 1px #000;
+    padding: 10px;
+    color: #fff;
+    margin-left: 15px;
+    color: #b6d7a8;
+    font-weight: bold;
+}
+
+.section-divider{
+    text-align: center;
+    padding: 5px;
+    border: solid 1px;
+    margin-bottom: 10px;
+}
+
+/*****************************************/
+.demo{border-bottom: solid 1px black;margin-bottom: 15px;}
+.demo > .row{
+    background-color: #b6d7a8;
+    border: solid 1px black;
+    border-bottom:0;
+}
+.demo > .row > div{
+    padding: 5px;
+    /*font-weight: bold;*/
+}
+.demo > .row > div:first-child {    
+    color: #fff;
+    background-color: #274e13;
+    text-align: right;
+    border-right: solid 1px black;
+}
+.demo > .row > div:last-child {
+    padding-left: 15px;
+    color: #000;
+}
+
+/*****************************************/
+[data-id=berry-clear]{
+    margin-left: 20px;
+}
+
+/*****************************************/
+#lab{
+    border:solid #333 ;
+    border-width:0 1px 1px 0;
+    display: inline-block;
+}
+#lab > div {
+    display: inline-block;
+    min-width:100px;
+    float:left;
+}
+#lab .title {
+    font-size:24px;
+    /*font-weight: bold;*/
+    height:65px;
+    text-align: center;
+}
+#lab .title div{height: 20px;}
+#lab .title span{
+    font-size: 12px;
+    display:block;
+    margin: 7px 0 -2px;
+}
+#lab .title span +span{
+        margin: 0 0 -2px;
+}
+#lab > div > div{
+    text-align: center;
+    padding:5px;
+    border:solid #333 ;
+    border-width:1px 0 0 1px;
+}
+
+
+form.berry .tab-pane fieldset.tab-content > legend {
+    display: block;
+}
+form > .tab-pane > .tab-content>legend {display:none;}
+
+/*
+div.tagsinput { border:1px solid #CCC; background: #FFF; padding:5px;  overflow-y: auto;}
+div.tagsinput span.tag { border: 1px solid #a5d24a; -moz-border-radius:2px; -webkit-border-radius:2px; display: block; float: left; padding: 5px; text-decoration:none; background: #cde69c; color: #638421; margin-right: 5px; margin-bottom:5px;font-family: helvetica;  font-size:13px;}
+div.tagsinput span.tag a { font-weight: bold; color: #82ad2b; text-decoration:none; font-size: 11px;  } 
+div.tagsinput input { width:80px; margin:0px; font-family: helvetica; font-size: 13px; border:1px solid transparent; padding:5px; background: transparent; color: #000; outline:0px;  margin-right:5px; margin-bottom:5px; }
+div.tagsinput div { display:block; float: left; } 
+.tags_clear { clear: both; width: 100%; height: 0px; }
+.not_valid {background: #FBD8DB !important; color: #90111A !important;}*/
+
+
+
+
+
+/* surrounding tag container */
+.tag-editor {
+    list-style-type: none; padding: 0 5px 0 0; margin: 0; overflow: hidden; border: 1px solid #eee; cursor: text;
+    font: normal 14px sans-serif; color: #555; background: #fff; line-height: 20px;
+}
+
+/* core styles usually need no change */
+.tag-editor li { display: block; float: left; overflow: hidden; margin: 3px 0; }
+.tag-editor div { float: left; padding: 0 4px; }
+.tag-editor .placeholder { padding: 0 8px; color: #bbb; }
+.tag-editor .tag-editor-spacer { padding: 0; width: 8px; overflow: hidden; color: transparent; background: none; }
+.tag-editor input {
+    vertical-align: inherit; border: 0; outline: none; padding: 0; margin: 0; cursor: text;
+    font-family: inherit; font-weight: inherit; font-size: inherit; font-style: inherit;
+    box-shadow: none; background: none; color: #444;
+}
+/* hide original input field or textarea visually to allow tab navigation */
+.tag-editor-hidden-src { position: absolute !important; left: -99999px; }
+/* hide IE10 "clear field" X */
+.tag-editor ::-ms-clear { display: none; }
+
+/* tag style */
+.tag-editor .tag-editor-tag {
+    padding-left: 5px; color: #46799b; background: #e0eaf1; white-space: nowrap;
+    overflow: hidden; cursor: pointer; border-radius: 2px 0 0 2px;
+}
+
+/* delete icon */
+.tag-editor .tag-editor-delete { background: #e0eaf1; cursor: pointer; border-radius: 0 2px 2px 0; padding-left: 3px; padding-right: 4px; }
+.tag-editor .tag-editor-delete i { line-height: 18px; display: inline-block; }
+.tag-editor .tag-editor-delete i:before { font-size: 16px; color: #8ba7ba; content: "×"; font-style: normal; }
+.tag-editor .tag-editor-delete:hover i:before { color: #d65454; }
+.tag-editor .tag-editor-tag.active+.tag-editor-delete, .tag-editor .tag-editor-tag.active+.tag-editor-delete i { visibility: hidden; cursor: text; }
+
+.tag-editor .tag-editor-tag.active { background: none !important; }
+
+/* jQuery UI autocomplete - code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css */
+.ui-autocomplete { position: absolute; top: 0; left: 0; cursor: default; font-size: 14px; }
+.ui-front { z-index: 9999; }
+.ui-menu { list-style: none; padding: 1px; margin: 0; display: block; outline: none; }
+.ui-menu .ui-menu-item a { text-decoration: none; display: block; padding: 2px .4em; line-height: 1.4; min-height: 0; /* support: IE7 */ }
+.ui-widget-content { border: 1px solid #bbb; background: #fff; color: #555; }
+.ui-widget-content a { color: #46799b; }
+.ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { background: #e0eaf1; }
+.ui-helper-hidden-accessible { display: none; }
+
+
+.greenHeading{
+
+    display: block;
+    background: #b6d7a8;
+    padding: 4px;
+
+}
+
+.text-muted{
+    color:#ddd;
+}
+.berry .tab-pane .tab-content > legend {
+    display: block;
+}
+form.berry > .tab-pane > .tab-content>legend {display:none;}

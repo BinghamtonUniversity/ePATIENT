@@ -58,6 +58,7 @@ class RouteServiceProvider extends ServiceProvider
             require base_path('routes/web.php');
             require base_path('routes/auth.php');
             require base_path('routes/app/epatient.php');
+            require base_path('routes/app/deckerehr.php');
         });
     }
 
