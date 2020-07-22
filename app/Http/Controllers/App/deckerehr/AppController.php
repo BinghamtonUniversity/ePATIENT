@@ -17,6 +17,8 @@ class AppController extends Controller
      *
      * @return void
      */
+
+    private $app_name = 'DeckerEHRViewer';
     public function __construct() {
     }
 
@@ -25,7 +27,7 @@ class AppController extends Controller
     }
 
     private function getAppDefinition() {
-        $app_name = 'DeckerEHRViewer';
+        $app_name = $this->app_name;
         $app_data = [
             'id'=>$app_name,
             'name'=>$app_name,
@@ -57,6 +59,7 @@ class AppController extends Controller
     public function getViewer(Request $request) {
         $init_data = $this->getInitData();
         return view('uapp_engine.main',[
+            'app_name' => $this->app_name,
             'app_definition' => json_encode($this->getAppDefinition()),
             'init_data' => json_encode($init_data),
         ]);

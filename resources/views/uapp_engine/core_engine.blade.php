@@ -42,13 +42,13 @@
 </style>
 <script>
 	resource_type = "app";
-    var resource_id = "ePATIENTViewer";
+    var resource_id = "{{$app_name}}";
     var mobile_order = [];
     var apps = [{!! $app_definition !!}];
     var init_data = {!! $init_data !!};
 	var config = {"sections":[[{
         "title":"View",
-        "app_id":"ePATIENTViewer",
+        "app_id":"{{$app_name}}",
         "widgetType":"uApp",
         "container":true,
         "init_data":init_data

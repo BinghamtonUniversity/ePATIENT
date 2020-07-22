@@ -12,14 +12,9 @@ use App\Scenario;
 
 class AppController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
+    private $app_name = 'ePATIENTViewer';
+
+    public function __construct() {
     }
 
     public function getInitData() {
@@ -60,7 +55,7 @@ class AppController extends Controller
     }
 
     private function getAppDefinition() {
-        $app_name = 'ePATIENTViewer';
+        $app_name = $this->app_name;
         $app_data = [
             'id'=>$app_name,
             'name'=>$app_name,
@@ -94,6 +89,7 @@ class AppController extends Controller
         $init_data = $this->getInitData();
         $init_data['team_id'] = $team_id;
         return view('uapp_engine.main',[
+            'app_name' => $this->app_name,
             'app_definition' => json_encode($this->getAppDefinition()),
             'init_data' => json_encode($init_data),
         ]);
