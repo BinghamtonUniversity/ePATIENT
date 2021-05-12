@@ -205,4 +205,9 @@ class Saml2Controller extends Controller
         return $idps;
     }
 
+    public function health(Request $request) {
+        return response('OK',200)->header('Content-Type', 'text/plain');
+    }
+
+
 }

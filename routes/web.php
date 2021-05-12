@@ -26,6 +26,7 @@ Route::any('/idp/demo', ['uses' => 'DemoController@list']);
 Route::get('/idp/google', 'Saml2Controller@google_redirect');
 Route::get('/idp/google/callback', 'Saml2Controller@google_callback');
 Route::get('/logout', ['as' => 'saml_logout','uses' => 'Saml2Controller@logout']);
+Route::get('/health', ['as'=>'health_check','uses' => 'Saml2Controller@health']);
 /* SAML Stuff */
 Route::group(['prefix' => '/saml2','middleware' => ['saml']], function () {
     Route::get('/metadata',['as' => 'saml_metadata','uses' => 'Saml2Controller@metadata']);
